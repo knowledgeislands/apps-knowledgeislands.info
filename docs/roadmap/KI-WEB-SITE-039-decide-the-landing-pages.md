@@ -4,16 +4,13 @@ area: SITE
 title: Decide the landing pages
 kind: deliver
 project: website
-horizon: hold
-hold:
-  reason: parked
-  condition: Kris restarts website work; on return the record goes to now and is re-marked Ready through ki-plan with Steps unchanged
-status: draft
+status: cancelled
+resolution: rejected
 blocks: []
 blocked_by: []
 baseline_ref: null
 created_at: 2026-09-25T14:00:00Z
-updated_at: 2026-10-07T14:12:30Z
+updated_at: 2026-10-11T02:23:38Z
 ---
 
 ## Goal
@@ -115,6 +112,10 @@ None.
 ### Roadmap
 
 None beyond this record.
+
+## Cancelled
+
+Cancelled 2026-10-11 as rejected, approved by Kris Brown (state-of-play decisions log, Decision 38: roadmap triage approved in full). Parked since 2026-10-07 with open design questions and no owner, so Kris chose not to keep it as a work record. It is kept as a one-line idea in Arcadia's website Project note (`ki-arcadia-principal`, `Streams/Projects/website.md`). It leaves no outstanding change.
 
 ## Discussion
 

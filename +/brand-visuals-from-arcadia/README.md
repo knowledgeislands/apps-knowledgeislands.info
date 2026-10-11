@@ -10,4 +10,4 @@ Material moved here from Arcadia Principal's inbound area on 5 October 2026 as u
 
 ## Provenance
 
-The style prompt draws on the same imagery as Arcadia's island visualisation proposal (`KI-ARCADIA-MOD-003`), cancelled on 2026-10-07; `KI-WEB-SITE-001` keeps the need. Arcadia also holds a 24 August 2026 meeting note on ancient civilisations that was part of the inspiration for the archipelago metaphor. History before this move is in Arcadia's Git log under `+/`.
+The style prompt draws on the same imagery as Arcadia's island visualisation proposal (`KI-ARCADIA-MOD-003`), cancelled on 2026-10-07; Arcadia's website Project note keeps the need as an idea (it replaced `KI-WEB-SITE-001`, cancelled on 2026-10-11). Arcadia also holds a 24 August 2026 meeting note on ancient civilisations that was part of the inspiration for the archipelago metaphor. History before this move is in Arcadia's Git log under `+/`.

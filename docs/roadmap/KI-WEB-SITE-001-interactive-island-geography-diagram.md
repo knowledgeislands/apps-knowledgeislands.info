@@ -5,16 +5,13 @@ title: Interactive island diagram
 kind: deliver
 purpose: capability
 project: website
-horizon: hold
-hold:
-  reason: parked
-  condition: Kris restarts website work
-status: draft
+status: cancelled
+resolution: rejected
 blocks: []
 blocked_by: []
 baseline_ref: null
 created_at: 2026-07-29T00:11:08Z
-updated_at: 2026-10-09T21:53:46Z
+updated_at: 2026-10-11T02:23:38Z
 ---
 
 ## Goal
@@ -55,6 +52,10 @@ The geography model and an approved, web-suitable tile set are not yet available
 Parked. Return trigger: Kris restarts website work after the state-of-play roadmap review. On return, move it back to `waiting-for` unless the Arcadia condition below has already been met.
 
 No dependency. Arcadia's work in `knowledgeislands/ki-arcadia-principal` to publish the geography model and tile set, was cancelled on 2026-10-07 under decision 17 of the state-of-play design. On restart this record carries that need and re-plans how the model and tiles are sourced.
+
+## Cancelled
+
+Cancelled 2026-10-11 as rejected, approved by Kris Brown (state-of-play decisions log, Decision 38: roadmap triage approved in full). Parked with no website work planned and dependent on a geography model and tile set not yet delivered, so Kris chose not to keep it as a work record. It is kept as a one-line idea in Arcadia's website Project note (`ki-arcadia-principal`, `Streams/Projects/website.md`). It leaves no outstanding change.
 
 ## Discussion
 
