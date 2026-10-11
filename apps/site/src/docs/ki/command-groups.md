@@ -6,9 +6,9 @@ permalink: /docs/ki/command-groups/
 sources:
   - repository: knowledgeislands/tools-ki
     path: man/ki.1
-    ref: v0.4.0
+    ref: v0.10.0
     governs: 'The command groups, their scope boundaries, and the behaviour this page describes'
-    reviewed: '2026-09-22'
+    reviewed: '2026-10-11'
   - repository: knowledgeislands/tools-ki
     path: docs/decisions/ADR-KI-TOOLS-002-compatible-harness-registry-and-native-operations.md
     ref: v0.4.0
@@ -58,7 +58,7 @@ The CLI groups commands by **what they can change**, not by subject matter. The 
 
 ### One repository, or many
 
-`ki repo …` acts on repositories. Every command in the group accepts the same selectors — `--repo <path-or-pattern>`, `--agora <name>`, `--estate` — so the same operation runs against one repository or across the registered estate without a different command.
+`ki repo …` acts on repositories. Every command in the group accepts the same selectors — `--repo <path-or-pattern>`, `--territory <handle>`, `--estate` — so the same operation runs against one repository or across the registered estate without a different command.
 
 Within that group the split is again by effect. `audit`, `diag` and `roadmap list` change nothing. `conform` and `repair` apply repairs, and take `--dry-run`. `init`, `skill add` and `skill remove` change what the repository declares.
 
@@ -66,7 +66,7 @@ The important property is that `ki` does not define what an audit checks. A repo
 
 ### The estate
 
-`ki registry …`, `ki agora …` and `ki trade …` are about relationships between repositories: which roots this machine knows about, which named groups they form, and which typed routes carry work or knowledge between them. They matter once you have more than a handful of repositories and not before.
+`ki registry …`, `ki territory …` and `ki trade …` are about relationships between repositories: which roots this machine knows about, which territories they belong to, and which typed routes carry work or knowledge between them. They matter once you have more than a handful of repositories and not before.
 
 `ki acquire …` is the intake surface, pulling bounded external material into a package a repository can hold. Each adapter defines its own accepted shape; [the ChatGPT capture format](/docs/ki/chatgpt-local-capture/) documents the one that asks the most of you.
 

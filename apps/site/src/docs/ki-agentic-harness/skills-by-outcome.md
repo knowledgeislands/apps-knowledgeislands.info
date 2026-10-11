@@ -108,7 +108,7 @@ Use `ki-design-inspiration` to find visual references for a website or component
 
 ## Exchange work or knowledge across repositories
 
-- **Define an approved repository community** — use `ki-agora` for reciprocal membership and owner-selected references.
+- **Select a territory's repositories** — use `ki-repo`: the Capital's `territory_members` is the one membership roster, and territory selection runs a command across it.
 - **Define or audit the cross-repository protocol** — use `ki-trades` for routes, record identity, authority, immutable submitted projections, receipt, disposition, and retention.
 - **Operate one repository's side of a trade** — use `ki-trade` to prepare, inspect, submit, receive, release, prune, or manage routes without writing the peer checkout.
 - **Decide what the receiver does next** — use `ki-next` to record the receiver's confirmed disposition of a validated inbound trade and place accepted work in its own queue.

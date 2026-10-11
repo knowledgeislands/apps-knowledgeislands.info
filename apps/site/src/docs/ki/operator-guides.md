@@ -35,10 +35,10 @@ sources:
     governs: 'Receiver-owned subtypes and the reciprocal grant a standing import requires'
     reviewed: '2026-09-22'
   - repository: knowledgeislands/tools-ki
-    path: docs/guides/agora-references.md
-    ref: v0.4.0
-    governs: 'How an external checkout joins an Agora working set without becoming a member'
-    reviewed: '2026-09-22'
+    path: docs/guides/user/territory-selection.md
+    ref: v0.10.0
+    governs: 'How a territory or the estate is selected, narrowed and opened from the Capital''s roster'
+    reviewed: '2026-10-11'
 ---
 
 # Operator guides
@@ -99,15 +99,15 @@ The receiving repository declares a subtype it owns — a name and a description
 
 [The standing-intake procedure at `v0.4.0`](https://github.com/knowledgeislands/tools-ki/blob/v0.4.0/docs/guides/standing-knowledge-intake.md) has the declaration sequence; the command contract is specified as TRADE-009 through TRADE-011.
 
-## External Agora references
+## Territory selection
 
-**You need this if** an ordinary Git repository belongs in an Agora's working set but is not a Knowledge Islands member and should not become one.
+**You need this if** you want to run a command, or open an editor, across every repository in a territory rather than one at a time.
 
-The Agora owner declares the canonical repository identity in `references`; each machine then associates its own checkout path explicitly with `ki agora reference set`. The command verifies that the path is a physical Git checkout root whose `origin` resolves to the declared identity.
+A Capital's `territory_members` is the one membership roster. `ki territory list` shows the registered handles, `ki territory show -t ki` resolves one territory and `--estate` selects every registered repository; repeated `-f` prefixes narrow either scope by directory name. Supported repository commands take the same selectors, as in `ki repo -t ki -f tools- audit`, and `ki territory roots --null` hands other tools a buffered, NUL-delimited root list.
 
-**The boundary that matters:** the association adds no `.ki.toml`, registers nothing, and writes nothing into the referenced repository. Resolved references participate in the same ordered projection as members for `ki agora roots`, `open` and `inspect`, while `ki agora show` still labels them distinctly.
+**The boundary that matters:** selection grants nothing. A territory scope decides which checkouts a command runs in, not what it may do there, and a missing registration or unavailable selected root fails before any operation runs. `ki territory open` and the read-only `ki territory inspect` act on local editor state only.
 
-[The Agora-reference procedure at `v0.4.0`](https://github.com/knowledgeislands/tools-ki/blob/v0.4.0/docs/guides/agora-references.md) covers inspection and re-association.
+[The territory-selection procedure at `v0.10.0`](https://github.com/knowledgeislands/tools-ki/blob/v0.10.0/docs/guides/user/territory-selection.md) covers verification and recovery.
 
 ## Where these sit
 
