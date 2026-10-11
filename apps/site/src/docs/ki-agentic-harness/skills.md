@@ -6,9 +6,9 @@ order: 4
 sources:
   - repository: knowledgeislands/ki-agentic-harness
     path: skills/README.md
-    ref: 77ec746d2c16cb0e46d15bd175d8d27c35ca3285
+    ref: bd6e29b5e0d567fb5ebb83566ddd46b3f6ba778b
     governs: 'The skill domains and the generated capability inventory this page orients readers within'
-    reviewed: '2026-09-27'
+    reviewed: '2026-10-11'
 ---
 
 # Skills and journeys
@@ -118,8 +118,6 @@ ki-repo-website
 ki-repo-harness
 
 ki-repo-mcp
-
-ki-repo-plugins
 
 ki-repo-specifications
 

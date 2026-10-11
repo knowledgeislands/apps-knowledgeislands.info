@@ -2,7 +2,7 @@
 //
 // bun run --cwd apps/site sync:cli -- --ref <tag-or-commit>
 //
-// Vendored from knowledgeislands/tools-ki man/ki.1 at v0.4.0,
+// Vendored from knowledgeislands/tools-ki man/ki.1 at v0.10.1,
 // parsed out of its COMMAND GROUPS section, reconciled against its SYNOPSIS.
 //
 // The page that renders it is src/projects/ki/command-groups.md; the reason the site
@@ -12,12 +12,12 @@
   "source": {
     "repository": "knowledgeislands/tools-ki",
     "path": "man/ki.1",
-    "ref": "v0.4.0"
+    "ref": "v0.10.1"
   },
   "counts": {
-    "groups": 14,
-    "commands": 88,
-    "omittedGroups": 1
+    "groups": 16,
+    "commands": 108,
+    "omittedGroups": 0
   },
   "groups": [
     {
@@ -27,6 +27,10 @@
         {
           "command": "ki [command]",
           "description": "Run a KI command, or print root help when no command is supplied."
+        },
+        {
+          "command": "ki help [command...]",
+          "description": "Print general help or help for a command path, including nested commands."
         }
       ]
     },
@@ -50,7 +54,7 @@
       "commands": [
         {
           "command": "ki bootstrap",
-          "description": "Create the user-managed KI environment configuration from detected supported agents, install the built-in verified canonical harness, then install the core user skills — ki-bootstrap, ki-next, ki-plan, and ki-recap — into every configured agent's user skill directory. An existing agent configuration is reused without replacement. Pass --refresh to redetect every supported runtime and rebuild the user configuration's agents, installed harnesses, and KI-managed user skill links. During a refresh only, KI imports the retired [repositories].paths list into keyed records in $XDG_STATE_HOME/ki/registry.toml and removes that list from user configuration. Normal repository, trade, and Agora resolution never reads the retired path list."
+          "description": "Create the user-managed KI environment configuration from detected supported agents, install the built-in verified canonical harness, then install the core user skills — ki-bootstrap, ki-next, ki-plan, and ki-recap — into every configured agent's user skill directory. An existing agent configuration is reused without replacement. Pass --refresh to redetect every supported runtime and rebuild the user configuration's agents, installed harnesses, and KI-managed user skill links. When the canonical harness is in local development, bootstrap keeps that binding and installs the core user skills from the local checkout. If the binding cannot be kept, it prints a warning naming the reason before restoring the verified archive and re-pointing the configured canonical skills to it. During a refresh only, KI imports the retired [repositories].paths list into keyed records in $XDG_STATE_HOME/ki/registry.toml and removes that list from user configuration. Normal repository, trade, and Territory resolution never reads the retired path list."
         }
       ]
     },
@@ -59,60 +63,76 @@
       "purpose": "Use these commands to inspect the local KI installation, user configuration, and repository state without changing it.",
       "commands": [
         {
-          "command": "ki manage search <query>",
+          "command": "ki harness search <query>",
           "description": "Search only verified installed local harness capabilities. The required non-empty query matches case-insensitively against a harness identifier, capability kind, or capability name. Results are sorted by harness identifier, capability kind, and capability name. The command neither discovers a repository nor consults a registry or the network. When no capability matches, it succeeds and reports that no matching installed capabilities exist."
         },
         {
-          "command": "ki manage completion <shell>",
+          "command": "ki completion <shell>",
           "description": "Print Bash or Zsh completion source to standard output. The generated scripts follow the complete registered command tree, offer valid option names at every reachable command, complete documented closed values, and delegate repository selection, capture-directory, and output-directory values to the shell's native path completion. They do not invoke KI, consult the network, or invent dynamic identifiers."
         },
         {
-          "command": "ki manage outdated",
+          "command": "ki harness outdated",
           "description": "Report installed harnesses only when comparable newer release evidence is available; it names unavailable evidence rather than claiming freshness."
         },
         {
-          "command": "ki manage missing",
+          "command": "ki harness missing",
           "description": "Report desired user capabilities that have no installed provider."
         },
         {
-          "command": "ki manage update [--cli]",
+          "command": "ki update [--cli]",
           "description": "Refresh installed configured harnesses. The executable updates only when a verified installer receipt proves that it owns the running regular executable. Use --cli to require that executable target. Linked development and externally managed executables, including Homebrew installations, are not self-updated."
         },
         {
-          "command": "ki manage cleanup",
+          "command": "ki cleanup",
           "description": "Report only stale artefacts in a persisted, versioned KI-owned format. V1 has no such format, so this command reports that no eligible managed stale state exists and changes no files. It does not infer that cache contents, transaction-looking directories, unconfigured harnesses, links, or unknown files are stale."
         },
         {
-          "command": "ki manage diag",
-          "description": "Print the CLI version, installation mode, resolved paths, and user configuration, registry, and managed local-development state without changing state. It does not inspect repository declarations or projections."
+          "command": "ki diag [--full]",
+          "description": "Print share-safe tool/version, proven local/release/unknown installation mode, executing host platform and architecture, runtime/version, configuration and registry status, and counts without changing state. With --full, include local paths, identities, and detailed configuration diagnostics. It does not inspect repository declarations or projections. Local provenance requires a resolved development checkout matching this tool's source/package layout and a Git checkout or worktree marker. Copied source without that evidence reports unknown; a source URL alone is insufficient."
         },
         {
-          "command": "ki manage doctor",
-          "description": "Check the user configuration, configured agent skill directories, installed harnesses, and configured KI user-skill links without changing state. It also reports direct-CWD legacy .ki-meta/ and .ki/ directories, without searching for or operating on a repository. It validates a regular direct-CWD .ki.toml declaration without resolving its providers. A failing check produces a non-zero exit status after the complete report."
+          "command": "ki doctor",
+          "description": "Check the user configuration, configured agent skill directories, installed harnesses, and configured KI user-skill links without changing state. It also reports direct-CWD legacy .ki-meta/ and .ki/ directories, without searching for or operating on a repository. It validates a regular direct-CWD .ki.toml declaration without resolving its providers. A failing check produces a non-zero exit status after the complete report. Report the same context as diag, the read-only scope, verdict, and pass/warn/fail/skipped counts. Health does not imply package or release freshness."
         },
         {
-          "command": "ki manage repair [--dry-run]",
-          "description": "Reconcile configured user-skill links from their installed or active local harness sources. It creates missing links and re-points stale or dangling symbolic links, but never changes configuration, installs a harness, removes legacy repository state, or repairs repository projections. It reports unavailable sources, incompatible agents, and unsafe non-symbolic-link entries for manual resolution. With --dry-run, it reports proposed links without changing state."
+          "command": "ki repair [--apply | --dry-run]",
+          "description": "Preview repairs by default; --apply explicitly authorises changes. Reconcile configured user-skill links from their installed or active local harness sources. It creates missing links and re-points stale or dangling symbolic links. It also removes a recognised legacy schema = 1 line from valid user configuration; newly written configuration is unversioned. It never installs a harness, removes legacy repository state, or repairs repository projections. It reports unavailable sources, incompatible agents, and unsafe non-symbolic-link entries for manual resolution. With --dry-run, it reports proposed links and schema removal without changing state. Ordinary reads never rewrite configuration."
         },
         {
-          "command": "ki manage docs [topic]",
-          "description": "Print canonical documentation locations without opening a browser, fetching content, or discovering a repository. With no topic, it prints every available location with an explanatory prefix. The supported topics are overview for https://knowledgeislands.info/tooling/ki/, site for https://knowledgeislands.info/, manual for https://github.com/knowledgeislands/tools-ki/blob/main/man/ki.1 and roadmap for https://github.com/knowledgeislands/tools-ki/blob/main/ROADMAP.md. Any other topic is invalid command grammar."
+          "command": "ki docs [topic]",
+          "description": "Print canonical documentation locations without opening a browser, fetching content, or discovering a repository. With no topic, it prints every available location with an explanatory prefix. The supported topics are overview for https://knowledgeislands.info/projects/ki/, site for https://knowledgeislands.info/, manual for https://github.com/knowledgeislands/tools-ki/blob/main/man/ki.1 and roadmap for https://github.com/knowledgeislands/tools-ki/blob/main/ROADMAP.md. Any other topic is invalid command grammar."
         },
         {
-          "command": "ki manage list",
+          "command": "ki inventory",
           "description": "List verified installed harnesses and their capabilities with declared user skills and local registered repositories. The command does not fetch, discover a repository, or change state."
         },
         {
-          "command": "ki manage vscode check",
-          "description": "Compare chezmoi-managed VS Code workspaces and trusted-folder source state with the local KI repository registry. Report a source diff and exit non-zero when drift exists. This command never writes."
+          "command": "ki mcp install <owner/repository> [version] [--auth github-cli]",
+          "description": "Install and activate one governed MCP server source release from GitHub. An explicit version selects only its exact annotated v<SemVer> tag. With no version, public access resolves the latest stable GitHub Release without authentication. Private access requires deliberate --authgithub-cli, which uses the existing GitHub CLI session for release lookup and clone. KI never reads, persists, or displays its credential."
         },
         {
-          "command": "ki manage vscode sync [--write]",
+          "command": "ki mcp update <owner/repository> [version] [--auth github-cli]",
+          "description": "Require an existing source installation, build the selected release in same-filesystem staging, and atomically activate it only after provenance, locked dependency installation, build, and entry-point verification succeed. Failure leaves the prior active version unchanged. When authentication is not specified, update retains the active installation's recorded mode."
+        },
+        {
+          "command": "ki mcp rollback <owner/repository> <version>",
+          "description": "Activate one retained complete source version without network access, dependency installation, or build execution."
+        },
+        {
+          "command": "ki mcp uninstall <owner/repository>",
+          "description": "Validate and remove exactly one source installation, including every retained version. This command does not alter MCP client bindings."
+        },
+        {
+          "command": "ki mcp list [owner/repository] [--format text|json]",
+          "description": "List active and retained source versions deterministically. Text marks the active version with *. JSON emits the versioned, path-free ki/mcp-sources/v1 projection with repository, tag, full commit, package version, entry point, installation time, authentication mode, and active state. Source installations live below $KI_DATA_HOME/mcp/; complete versions remain available until explicit uninstall."
+        },
+        {
+          "command": "ki vscode check",
+          "description": "Compare chezmoi-managed VS Code workspaces and trusted-folder source state with the local KI repository registry. Explicit sources bindings join their notes workspace and trusted-client projection; legacy bindings and unbound directories are ignored. Preview removal of folder paths that no longer resolve to directories and deletion of projects with no live folders. Existing projects outside the registry and intentionally empty workspaces are preserved. Missing registered checkouts are skipped without changing the registry. Report a source diff and exit non-zero when drift exists. This command never writes."
+        },
+        {
+          "command": "ki vscode sync [--write]",
           "description": "Preview the same reconciliation. With --write, publish the reviewed changes to chezmoi source state. This command never runs chezmoi apply."
-        },
-        {
-          "command": "ki manage vscode source create <repository> [--write]",
-          "description": "Preview creation and workspace association of an opt-in OneDrive source store for one registered repository basename or absolute path. With --write, create the directory and publish corresponding chezmoi source-state changes. Ambiguous repository or legacy source-store matches fail closed."
         }
       ]
     },
@@ -139,12 +159,16 @@
           "description": "Repeat this option to select literal repository roots or patterns in supplied order. KI resolves every target physically before an operation begins and rejects unmatched patterns, invalid roots, and duplicate physical roots."
         },
         {
-          "command": "--agora <name>",
-          "description": "Select every member of one declared named Agora, or every registered canonical repository through the reserved estate selector. This option, --repo, and --estate are mutually exclusive. Each member must be a physical KI repository. With neither selector, KI checks a regular direct-CWD schema-one .mgit.toml manifest. A workspace manifest selects its configured group, recurses through child workspaces, follows standard and nested repositories, and skips bare stores. A repository manifest falls through to ordinary single-repository discovery. KI never searches ancestor directories for an mGit manifest or invokes mgit. Selection never resolves to no repository: every selector either selects at least one repository or fails with a message and a non-zero exit."
+          "command": "-t, --territory <handle>",
+          "description": "Select the Capital's declared territory through its territory_prefix, or its registry key when no prefix is declared. The registry maps every canonical member identity before filtering. This scope conflicts with --repo and --estate."
         },
         {
           "command": "--estate",
-          "description": "Select every repository in the registered estate. This is shorthand for --agora estate and is mutually exclusive with --repo and --agora."
+          "description": "Select every repository in the registered estate, conflicting with --repo and --territory. Without an explicit scope, keep the current repository or direct-CWD .mgit.toml workspace selection. KI does not invoke mgit."
+        },
+        {
+          "command": "-f, --filter <prefix>",
+          "description": "Repeat literal, case-sensitive non-empty directory-name prefixes with OR semantics to narrow any scope, including the native default. Filter before worktree expansion. Missing registration and ambiguous identity fail before filtering; unavailable selected roots or no matches fail before an operation. An excluded registered unavailable checkout does not prevent the remaining operations."
         }
       ]
     },
@@ -153,12 +177,12 @@
       "purpose": "Use these commands to inspect and maintain declared capabilities and manage their skill links. Read-only operations isolate per-target diagnostics; a later mutation failure retains earlier successful targets and returns a non-zero result.",
       "commands": [
         {
-          "command": "ki repo init [directory] --repository <https-url> --title <title> --description <description> --repo-code <code> --runtime <runtime>... --visibility <public|private>",
-          "description": "Initialize exactly one existing physical Git worktree root. With no directory, it uses the current directory; an explicit directory must be that worktree's root and must not be a symbolic link. Every identity value is required: --title, --description, a stable uppercase --repo-code, canonical HTTPS GitHub --repository, one or more --runtime values selected from claude-code and chatgpt-codex, and --visibility public|private. It atomically creates the minimal canonical ki-repo declaration and registers the physical root in $XDG_STATE_HOME/ki/registry.toml. It never runs git init, guesses identity, activates repository skills, creates a Agora, accepts repository selectors, or overwrites an existing .ki.toml."
+          "command": "ki repo init [directory] --repository <https-url> --capital <https-url> --title <title> --description <description> --repo-code <code> --runtime <runtime>... --visibility <public|private>",
+          "description": "Initialize exactly one existing physical Git worktree root. With no directory, it uses the current directory; an explicit directory must be that worktree's root and must not be a symbolic link. Every identity value is required: --title, --description, a stable uppercase --repo-code, canonical HTTPS GitHub --repository, one or more --runtime values selected from claude-code and chatgpt-codex, and --visibility public|private. It atomically creates the minimal canonical ki-repo declaration and A required --capital names the territory Capital; a Capital names itself and then also receives territory_name and territory_members in [skills.ki-repo], listing itself as the first member. Further members must be kept sorted ascending in code-point order; an unsorted list is rejected. registers the physical root in $XDG_STATE_HOME/ki/registry.toml. It never runs git init, guesses identity, activates repository skills, creates a Territory, accepts repository selectors, or overwrites an existing .ki.toml."
         },
         {
-          "command": "ki repo [repo-options] open --target <zed|vscode> [--stores|--no-stores]",
-          "description": "Open every selected canonical repository in the requested local target. By default, a Knowledge Base that declares the sources store role opens its notes root followed by its locally registered sources root. The sources binding must be a direct directory recorded with the canonical repository; it is never made an estate member or Agora participant. --no-stores opens canonical notes roots only, while --stores makes the default explicit."
+          "command": "ki repo [repo-options] open --target <zed|vscode|delta> [--stores|--no-stores]",
+          "description": "Open every selected canonical repository in the requested local target. By default, a Knowledge Base opens its notes root followed by every declared, locally bound external store in declaration order. Each binding must be a direct directory recorded with the canonical repository; it is never made an estate member or territory participant. --no-stores opens canonical notes roots only, while --stores makes the default explicit. Delta opens repository roots only; it skips stores by default and rejects --stores. Delta's documented project flow stores repository and thread data on its servers even when using a local model."
         },
         {
           "command": "ki repo [repo-options] audit [--skill <skill>] [--progress <auto|always|never>] [--progress-style <single|multi>] [--reporter-levels <levels|all>]",
@@ -169,24 +193,52 @@
           "description": "Stage the same capabilities' safe writes, then apply them and re-audit. All selected initial audits must pass before the staged conform writes are published: a blocking finding aborts before publication, leaving every proposed conform write unapplied. Output labels proposed writes separately from writes applied after that gate; a dry run validates the complete staged write set and reports writes it would apply without changing the repository. This boundary does not include independent local registry updates; it also excludes later selected repositories, subprocess conforms, and rollback after publication has started. Publication refuses unsafe, changed, duplicate, or symbolic-link targets. Conform uses the same progress controls and reporter-level vocabulary as audit, names both the target and supplier for every skill, and renders FAIL, WARN, and FIXED findings by default while retaining every terminal per-skill result. Its second rubric pass is labelled re-audit. When no write or command was staged, conform reports that no re-audit is required and stops after the initial pass. For a local invocation it records each selected canonical root in the machine-local registry before evaluating findings. Registration is an inventory action, not evidence of conformance, so a failing repository remains available for later repair and bulk maintenance."
         },
         {
-          "command": "ki repo [repo-options] roadmap list [--horizon <horizon>] [--status <status>]",
-          "description": "List canonical governed work items from every selected repository without changing their lifecycle. The framed text output names each selected repository, then groups items by horizon from now through unadopted triage and by lifecycle from done through draft, with identifiers breaking ties. --horizon and --status filter before rendering. A missing roadmap directory or malformed or unsafe item is an isolated diagnostic for that repository; other selected repositories still report, and any roadmap or trade diagnostic makes the command exit with status 1 after rendering the inventory. The command never creates, transitions, accepts, prunes, or repairs a work item. Generic promote and demote operations exclude the unadopted triage horizon."
+          "command": "ki repo [repo-options] roadmap list [--horizon <horizons>] [--status <status>] [--by <grouping>] [--format <text|json>] [--links <compact|all>]",
+          "description": "List canonical governed work items from every selected repository without changing their lifecycle. The framed text output names each selected repository, then groups items by lane: open adopted records by horizon now, next, soon, future and hold, then triage intake, then done and cancelled records last. Within a lane, items run from awaiting-review through draft, with identifiers breaking ties. The summary line counts the now lane as a signal with no cap. Records still in the old shape (a theme, a waiting-for, parked or triage horizon, waiting_on_trades or intake_disposition, or an adopted open record without kind) are listed in the lane they migrate to, marked legacy, and counted as LEGACY; they are tolerated until migration. A component must be declared in [skills.ki-work-roadmap].components. Linked items append one compact provider-qualified task key and a count of additional distinct tickets, preferring implementation links. A legend explains provider abbreviations. Use --links all to replace the suffix with nested task entries showing provider, key, and relation, each with its full URL on a further indented line. Ambiguous keys include authority, scope, and task ID on separate child lines. These options also apply to --aggregate. JSON output stays ki/roadmap/v1 and adds each record's lane, classification, hold, resolution and legacy shapes. Mappings are read locally without contacting task systems and do not imply current task status or ownership. --horizon and --status filter by lane and lifecycle before rendering; unsupported values fail with a usage error rather than an empty result. --horizon accepts a comma-separated list, such as now,next, or a repeated flag, and keeps records in any named lane. --by project groups text output by each record's project across the whole selected set, and implies --aggregate; groups from the same Project in different repositories merge, and a Project from another territory is qualified with that territory's name. Each Project group shows its registry lifecycle, such as [active]. --by initiative groups by the Initiative its Project names in the Capital's Streams/Projects/ notes, with Initiatives read from Streams/Initiatives/, found through the repository's [skills.ki-repo].capital and the local ki registry; a projectless record groups under its own initiative. Records with neither group under unassigned. An unavailable registry, the retired Streams/Projects/Initiatives.md index, an unknown slug, or an initiative that contradicts the registry is a warning that never changes the exit status. --by area groups by each record's fixed area under the title that [skills.ki-work-roadmap.areas] maps to its code; a legacy bare areas list reads without titles, and JSON output adds areaTitle. --by does not apply to JSON output. The roadmap folder's README.md index is not read as a work item. A missing roadmap directory or malformed or unsafe item is an isolated diagnostic for that repository; other selected repositories still report, and any roadmap or trade diagnostic makes the command exit with status 1 after rendering the inventory. The command never creates, transitions, accepts, prunes, or repairs a work item."
+        },
+        {
+          "command": "ki repo [repo-options] roadmap summary [--by <grouping>]",
+          "description": "Show selected repositories as rows against lane columns. Each cell shows nonzero lifecycle-status counts and a sum, such as d=1 r=2 Σ=3. The Σ column and row aggregate the same counts per repository and per lane. A legend expands t (triage), d (draft), r (ready), ip (in-progress), ar (awaiting-review), x (done), and c (cancelled). A dash means no items in that cell; a question mark means unavailable. Repositories without a roadmap are named below the table. Invalid roadmap evidence remains diagnostic and makes the command exit with status 1. Item identifiers, titles, and trade records are omitted. --by project, --by initiative or --by area replaces the repository rows with one row per group, aggregated across the selected set as for roadmap list --by, and appends any grouping warnings."
         },
         {
           "command": "ki repo [repo-options] roadmap stats [--stale-after <duration>] [--format <text|json>]",
-          "description": "Report timestamp coverage and age and inactivity metrics for selected local roadmaps. Timestamp-free compatibility records remain readable and are reported as missing coverage. Multiple selected repositories add a selected-set aggregate. A positive stale duration uses seconds, minutes, hours, or days, such as 7d. Use --format json for a versioned machine-readable report."
+          "description": "Report age and inactivity metrics for selected local roadmaps. Every valid work item requires paired canonical UTC-second creation and update timestamps; timestamp-free records are diagnostics, not compatibility records. The NOT_DONE count includes every open item, including triage records, and excludes done and cancelled ones. Multiple selected repositories add a selected-set aggregate. A positive stale duration uses seconds, minutes, hours, or days, such as 7d. Use --format json for a versioned machine-readable report."
         },
         {
-          "command": "ki repo [repo-options] roadmap prune [id]",
-          "description": "Without an ID, delete every canonical work-item record whose lifecycle status is exactly done from the selected repositories. It leaves every other lifecycle status, non-canonical file, and peer repository untouched. If no selected repository contains a completed record, it reports that no record was pruned. With an ID, require exactly one selected repository and delete only that named completed record."
+          "command": "ki repo [repo-options] roadmap prune [id] [--no-commit] [--dry-run]",
+          "description": "Without an ID, delete every canonical work-item record whose lifecycle status is done or cancelled from the selected repositories. It leaves every open lifecycle status, non-canonical file, and peer repository untouched. If no selected repository contains a terminal record, it reports that no record was pruned. With an ID, require exactly one selected repository and delete only that named done or cancelled record. By default, each repository with pruned records gets one commit that contains exactly those deletions, with the subject chore(roadmap): prune <N> done work record(s) whichever terminal state the records reached, and one - <ID> body line per record; commit hooks run. Before deleting anything, the command refuses when a selected repository is not a Git work tree, has staged changes, or holds a selected record that is untracked or modified, so each record's terminal state is committed before the prune commit. A failed commit restores that repository's records, and a commit that a hook widened with other paths is reported as an error. --no-commit only deletes the records and skips the Git checks. --dry-run makes the same selection and checks, then reports the records and planned commits without deleting or committing."
         },
         {
           "command": "ki repo [repo-options] roadmap promote <id> [horizon]",
-          "description": "Move exactly one selected repository's named work item one horizon toward now. With an optional destination horizon, move directly only toward now; the current horizon, a future-facing destination, and the now endpoint are errors. The command changes only the item's horizon frontmatter; moving from future also removes its required candidate marker."
+          "description": "Move exactly one selected repository's named work item one horizon toward now along now, next, soon, future and hold. With an optional destination horizon, move directly only toward now; the current horizon, a hold-facing destination, and the now endpoint are errors. Leaving hold re-decides the horizon, so it requires a named destination and removes the record's hold mapping. Triage records are adopted through the planning workflow, done and cancelled records have no horizon, and records still at a legacy horizon must be migrated first. The destination must be allowed for the record's status: ready records stay within now, next and hold, and in-progress and awaiting-review records within now and hold. The command changes only the item's horizon frontmatter and its update timestamp."
         },
         {
-          "command": "ki repo [repo-options] roadmap demote <id> [horizon]",
-          "description": "Move exactly one selected repository's named work item one horizon toward future. With an optional destination horizon, move directly only toward future; the current horizon, a now-facing destination, and the future endpoint are errors. The command changes only the item's horizon frontmatter; moving to future adds its required candidate marker."
+          "command": "ki repo [repo-options] roadmap demote <id> [horizon] [--reason <reason>] [--condition <text>] [--review <date>]",
+          "description": "Move exactly one selected repository's named work item one horizon toward hold. With an optional destination horizon, move directly only toward hold; the current horizon, a now-facing destination, and the hold endpoint are errors. A move into hold requires --reason (waiting-for or parked) and a --condition naming the release condition, with an optional ISO --review date; these options are rejected for any other destination. The same lifecycle and status rules as promote apply."
+        },
+        {
+          "command": "ki repo [repo-options] roadmap migrate [--apply]",
+          "description": "Preview the mechanical roadmap model migration for every selected repository, printing each changed record's removed and added frontmatter lines and the review notes it needs. The pass moves a triage horizon on a draft to status: triage; a waiting-for or parked horizon on an open record to horizon: hold with a hold reason and a condition lifted from the record prose, or a REVIEW placeholder when none is found; waiting_on_trades to hold.trades; and a done Triage intake disposition to status: cancelled with its resolution and any resolution_target, noting that a Cancelled section is still needed. It advances updated_at, never touches theme, kind, project, or purpose, and a migrated record needs no further mechanical change, so a second run reports nothing. --apply writes the records in exactly one selected repository whose roadmap has no unreadable record, and never stages or commits. Unreadable records are diagnostics that make the command exit with status 1."
+        },
+        {
+          "command": "ki repo [repo-options] store list [--format <text|json>]",
+          "description": "List every store role declared by selected Knowledge Bases. The notes role is the repository root; external roles show their explicit machine-local path or unbound state. JSON emits the versioned ki/repository-stores/v1 contract."
+        },
+        {
+          "command": "ki repo [repo-options] store scan",
+          "description": "Inspect selected repositories for direct conventional OneDrive sources-<repository-basename> directories without a matching declared sources store role. Warnings identify the repository kind and an explicit decision to declare and bind, migrate to a Knowledge Base, or retire the directory; warnings exit successfully. Unsafe paths or unreadable repository declarations remain diagnostics and cause a non-zero exit. Repository selection follows normal ki repo semantics, including --estate for every registered repository. The command never creates, binds, moves, or removes a directory."
+        },
+        {
+          "command": "ki repo [repo-options] store create sources [--write]",
+          "description": "Preview the conventional opt-in OneDrive sources-<repository-basename> directory and registry binding. With --write, create and bind it. Automatic creation is unavailable for legacy."
+        },
+        {
+          "command": "ki repo [repo-options] store bind <sources|legacy> <absolute-path> [--write]",
+          "description": "Preview an explicit binding for one declared external store. The path must be an existing absolute direct directory. With --write, publish the binding to the machine-local registry."
+        },
+        {
+          "command": "ki repo [repo-options] store unbind <sources|legacy> [--write]",
+          "description": "Preview removal of one declared external-store binding. With --write, publish the registry change without deleting or modifying store content."
         },
         {
           "command": "ki repo [repo-options] educate [--skill <skill>]",
@@ -198,7 +250,7 @@
         },
         {
           "command": "ki repo [repo-options] repair [--dry-run]",
-          "description": "Record each selected physical repository root in the local user register, then reconcile only missing, dangling, or stale KI-managed compatible projections. It never creates a declaration, adds an undeclared skill, overwrites foreign content, guesses a provider or runtime, or follows a symbolic declaration. --dry-run reports the same actions without changing disk state."
+          "description": "Record each selected physical repository root in the local user register, then reconcile only missing, dangling, or stale KI-managed compatible projections. It never creates a declaration, adds an undeclared skill, overwrites foreign content, guesses a provider or runtime, or follows a symbolic declaration. The command writes by default. --dry-run reports the same actions without creating state directories or changing disk state. Store mutations and VS Code sync instead preview by default and require --write."
         },
         {
           "command": "ki repo [repo-options] skill add <skill> [--replace]",
@@ -215,16 +267,64 @@
       ]
     },
     {
+      "name": "Batch records",
+      "purpose": "Use these commands to maintain one already-approved exact set of Ready local work records. They validate and record caller-supplied authority evidence; they do not select work, execute an agent, accept delivery, prune work, push, or release.",
+      "commands": [
+        {
+          "command": "ki repo [repo-options] batch prepare --item <id> [--item <id>...] --approved --authority-mode <reviewed-items|outcome> --expires-at <timestamp> --completion-target <awaiting-review|done> [--authority-evidence <text>]",
+          "description": "Create one current canonical exact-set batch authority record from explicit approval evidence and Ready work items in dependency order."
+        },
+        {
+          "command": "ki repo [repo-options] batch validate <record>",
+          "description": "Validate an open batch against live canonical work records and its expiry. A closed batch validates its named outcomes against the immutable close-evidence commit, so later legitimate pruning does not erase the delivery proof."
+        },
+        {
+          "command": "ki repo [repo-options] batch run <record> [--item <id> --result <awaiting-review|done|parked|stopped> --baseline <commit|—> [--result-commit <commit>] [--exception <text>]]",
+          "description": "Start the derived run or append one explicit caller-supplied item result without executing work or changing roadmap lifecycle."
+        },
+        {
+          "command": "ki repo [repo-options] batch close <record> --completion-target <awaiting-review|done> --evidence-commit <commit>",
+          "description": "Append structural closure evidence only after every named live item and the exact evidence commit contain the approved all-item target in valid dependency order."
+        }
+      ]
+    },
+    {
+      "name": "Knowledge Base search",
+      "purpose": "Index and search one explicitly registered Knowledge Base with scoped local citations.",
+      "commands": [
+        {
+          "command": "ki kb index [--kb <id>] [--daemon-url <origin>]",
+          "description": "Build a fresh private qmd generation for one explicitly assigned registry KB."
+        },
+        {
+          "command": "ki kb search <query> [--kb <id>] [--mode <query|search|vsearch>] [--limit <count>] [--zone <name>] [--path-prefix <path>]",
+          "description": "Return bounded current-source-authenticated JSON results without silent fallback."
+        },
+        {
+          "command": "ki kb status [--kb <id>]",
+          "description": "Report configured mapping and loopback endpoint reachability; health does not attest index identity."
+        }
+      ]
+    },
+    {
       "name": "Registry management",
       "purpose": "Use these root-level commands to record and list canonical KI repository roots in $XDG_STATE_HOME/ki/registry.toml. Registry membership is an inventory, not a repository-operation or conformance verdict. The repository key names each record; each record holds a canonical HTTPS GitHub repository identity and physical checkout path.",
       "commands": [
         {
-          "command": "ki registry [--repo <path-or-pattern>]... [--agora <name>] [--estate] add [--dry-run]",
-          "description": "Record selected canonical KI repository roots in $XDG_STATE_HOME/ki/registry.toml without applying repository repairs. This explicit inventory action validates the selected root's declared canonical identity and preserves existing entries. It never searches outside the supplied target selection."
+          "command": "ki registry [--repo <path-or-pattern>]... [-t|--territory <handle>] [--estate] [-f|--filter <prefix>]... add [--dry-run] [--search-boundary <id>]",
+          "description": "Record selected canonical KI repository roots in $XDG_STATE_HOME/ki/registry.toml without applying repository repairs. This explicit inventory action validates the selected root's declared canonical identity and preserves existing entries. It never searches outside the supplied target selection. The command writes by default; --dry-run reports proposed registration without creating the state directory or changing disk state."
         },
         {
-          "command": "ki registry list",
-          "description": "List physical KI repository roots explicitly registered in the machine-local registry, one absolute path per line. The command neither discovers repositories nor changes state."
+          "command": "ki registry list [--format <text|json>]",
+          "description": "List physical KI repository roots explicitly registered in the machine-local registry, one absolute path per line. The command neither discovers repositories nor changes state. With --format json, emit the versioned path-free ki/registry/v1 contract with canonical identity and declared repository metadata, including repoType as project or kb for available repositories and null for unavailable ones. An unavailable declaration remains represented without a local path and makes the command exit non-zero."
+        },
+        {
+          "command": "ki registry remove <key> [--dry-run]",
+          "description": "Remove exactly one complete registry entry by its local key. The command reports the removed key, repository identity, and stored path, and leaves every other entry unchanged."
+        },
+        {
+          "command": "ki registry --repo <path> remove [--dry-run]",
+          "description": "Remove exactly one complete registry entry by its stored path, including when the checkout no longer exists. Removal rejects bulk selectors and publishes the validated replacement atomically. Use --dry-run to inspect the write without changing registry state."
         }
       ]
     },
@@ -256,133 +356,105 @@
     },
     {
       "name": "Trades",
-      "purpose": "Use these commands with repositories that declare the portable ki-repo-trades capability and are present in the local registered repository estate. They preserve repository authority: every mutation writes only the current repository, a typed reciprocal route grants visibility rather than acceptance or retention, and no command changes a peer roadmap or knowledge.",
+      "purpose": "Use these commands with repositories that declare the portable ki-repo-trades capability and are present in the local registered repository estate. Routes and standing grants come only from the territory Capital's [skills.ki-trades.territory] policy, resolved through each repository's declared [skills.ki-repo].capital; no command edits that policy, and a member declaration carries no route table. Parent --repo, --territory, and --estate selectors scope reads; mutations require exactly one selected registered repository. Every mutation writes only the selected repository, a granted route gives visibility rather than acceptance or retention, and no command changes a peer roadmap or knowledge. A repository that declares ki-trades but whose Capital does not resolve is never dropped silently. Aggregate routes list and trade list views, and policy compare, print skipped: <identity> (<reason>) for it and add SKIPPED=n to the summary; under --format json, and for trade show, the line is written to standard error so standard output is unchanged. Selected alone, such a repository fails closed with the reason.",
       "commands": [
         {
-          "command": "ki trade routes add <repository> --direction export|import --kind work|knowledge",
-          "description": "Declare one local typed route to a canonical HTTPS GitHub repository. Repository identity remains the required repository value in the ki-repo table."
+          "command": "ki repo [repo-options] trade routes list [--incomplete] [--format text|json]",
+          "description": "List selected local typed routes with their registered-estate state. With a parent aggregate selection such as ki repo --estate trade routes list, list valid selected repository declarations as lexical repository pairs. The left and right endpoint cells span the two directional rows, which show what each repository sends with a right or left arrow; a missing direction is shown as an em dash. The table adapts to the live terminal width, preserving the same pairs in a stacked narrow view. With --incomplete, show only routes that await reciprocity or have ambiguous peers. With --format json, emit the versioned ki/trade-routes/v1 contract. JSON requires an aggregate parent repository selection. It contains canonical identities, route evidence, peer resolution, and declared map bonuses without local registry paths, declaration paths, or presentation layout values. Text remains the default renderer. Interactive visualisation is owned by Knowledge Islands Observatory rather than this command."
         },
         {
-          "command": "ki trade routes remove <repository> --direction export|import --kind work|knowledge",
-          "description": "Remove one local typed route."
+          "command": "ki repo [repo-options] trade routes check [repository] [--direction export|import] [--kind work|knowledge]",
+          "description": "Check the routes the territory Capital policy grants this repository. A route is active when its peer is registered once, declares ki-trades, and resolves the same Capital; otherwise an export awaits the receiver and an import awaits the sender."
         },
         {
-          "command": "ki trade routes list [--estate] [--incomplete] [--table|--html]",
-          "description": "List local typed routes with their registered-estate state. With --estate, list every valid registered repository declaration as lexical repository pairs. The left and right endpoint cells span the two directional rows, which show what each repository sends with a right or left arrow; a missing direction is shown as an em dash. The table adapts to the live terminal width, preserving the same pairs in a stacked narrow view. With --incomplete, show only routes that await reciprocity or have ambiguous peers. With --table, explicitly select that estate text renderer; it requires --estate. With --html, write that estate to the cache as a self-contained interactive network page and open it; it requires --estate and cannot be combined with --table. The page draws one arc per direction, so a reciprocated pair separates, and uses accessible vendored Lucide Hammer and Book Open marks for its route kinds; it opens with no network. Active typed directions determine each lane's capacity, target distance, spring, and width. Node influence combines route degree, a derived knowledgeislands/* organisation uplift, and an optional repository-declared [skills.ki-trades].map_bonus; these presentation values do not grant trade authority. Set KI_BROWSER_OPENER to override the platform opener."
+          "command": "ki repo [repo-options] trade policy show",
+          "description": "Show the trade policy of the selected repository's territory Capital: its channels, standing grants, and knowledge subtype vocabulary. The policy is resolved through the repository's declared [skills.ki-repo].capital; an unregistered Capital fails with territory policy lives in <url>, not available here."
         },
         {
-          "command": "ki trade routes check [repository] [--direction export|import] [--kind work|knowledge]",
-          "description": "Check declared routes by kind. An export awaiting local receiver registration, receiver participation, or a reciprocal import awaits receiver activation; the equivalent import awaits sender activation."
+          "command": "ki repo [repo-options] trade policy check",
+          "description": "Sweep the selected repository's territory through the local registry. Each listed member is reported conforming, warning (declares ki-trades but no channel names it), failing (registered twice, invalid, declaring another Capital, or named by a channel without declaring ki-trades), or unverifiable (not checked out here). A registered repository that claims the Capital without being listed also fails. Any failure exits 1 after rendering."
         },
         {
-          "command": "ki trade subtypes add <subtype> --description <text>",
-          "description": "Define one lower-case receiver-owned knowledge subtype in the current repository. The description records the receiver's meaning for the subtype."
+          "command": "ki repo [repo-options] trade policy compare --baseline <path>",
+          "description": "Compare the active directed routes of a saved ki/trade-routes/v1 report with the routes the current registry and Capital policies make active, listing lost and newly granted routes. The current side always sweeps the whole local registry, whatever the parent repository selection. A baseline route lacking string source and peer repositories, an export or import direction, or a known trade kind is rejected as malformed. A lost route exits 1 after rendering."
         },
         {
-          "command": "ki trade subtypes list",
-          "description": "List receiver-owned knowledge subtype definitions in the current repository."
+          "command": "ki repo [repo-options] trade standing list [--incomplete]",
+          "description": "List the standing grants the territory Capital policy gives this repository. A grant is active exactly when its ordinary knowledge route is active. With --incomplete, show only grants that are not active."
         },
         {
-          "command": "ki trade subtypes remove <subtype>",
-          "description": "Remove one receiver-owned subtype only when no local standing import still names it."
+          "command": "ki repo [repo-options] trade standing check [repository] [--direction export|import] [--subtype <subtype>]",
+          "description": "Check all Capital-granted standing grants or select one repository, direction, and subtype."
         },
         {
-          "command": "ki trade standing add <repository> --direction export|import --subtype <subtype>",
-          "description": "Declare one local standing knowledge-intake direction layered on an existing ordinary knowledge route. An import subtype must be defined by the local receiver. The declaration remains inactive until the peer publishes the exact reciprocal direction and the receiver-owned definition is available."
+          "command": "ki repo [repo-options] trade standing capture <repository> --subtype <subtype> --source-ref <commit:path#anchor> --capture <path#anchor>",
+          "description": "From the receiver repository, append one marked ki-trades/standing-intake/v1 TOML provenance block to an existing local Markdown file. The command requires an active exact standing import, a full source commit, and a source path that resolves in the locally registered source checkout. It never writes to the source repository. Standing intake grants no roadmap, publication, implementation, acceptance, completion, Territory, or peer-write authority; use an itemized knowledge trade when the exact standing contract does not fit."
         },
         {
-          "command": "ki trade standing remove <repository> --direction export|import --subtype <subtype>",
-          "description": "Remove only the current repository's standing declaration. Historical committed provenance remains local evidence, but the removed declaration no longer authorises new captures."
-        },
-        {
-          "command": "ki trade standing list [--incomplete]",
-          "description": "List local standing declarations and report whether each exact subtype relationship is active, awaiting ordinary route activation, awaiting reciprocity, ambiguous, or unknown to its receiver. With --incomplete, show only declarations that are not active."
-        },
-        {
-          "command": "ki trade standing check [repository] [--direction export|import] [--subtype <subtype>]",
-          "description": "Check all local standing declarations or select an exact repository, direction, and subtype."
-        },
-        {
-          "command": "ki trade standing capture <repository> --subtype <subtype> --source-ref <commit:path#anchor> --capture <path#anchor>",
-          "description": "From the receiver repository, append one marked ki-trades/standing-intake/v1 TOML provenance block to an existing local Markdown file. The command requires an active exact standing import, a full source commit, and a source path that resolves in the locally registered source checkout. It never writes to the source repository. Standing intake grants no roadmap, publication, implementation, acceptance, completion, Agora, or peer-write authority; use an itemized knowledge trade when the exact standing contract does not fit."
-        },
-        {
-          "command": "ki trade prepare <repository> --kind work|knowledge --observation unattended|receipt|decision|completion --title <title> --source-ref <reference> --context <text> --submission <text> --constraints <text>",
+          "command": "ki repo [repo-options] trade prepare <repository> --kind work|knowledge --observation unattended|receipt|decision|completion --title <title> --source-ref <reference> --context <text> --submission <text> --constraints <text>",
           "description": "Create one mutable preparation in the current repository when it declares the matching export route. The mandatory observation policy selects whether receipt, a terminal decision, or completion of adopted work is required before release; unattended requires no receiver follow-up beyond an observable receipt."
         },
         {
-          "command": "ki trade observe <trade-id>",
+          "command": "ki repo [repo-options] trade observe <trade-id>",
           "description": "Read one sender's committed mutable preparation without receiving or acting on it. Compare it with the commit last observed by this receiver, or show the full current contents when no usable earlier Git evidence exists."
         },
         {
-          "command": "ki trade submit <trade-id>",
+          "command": "ki repo [repo-options] trade submit <trade-id>",
           "description": "Freeze one local preparation and move it to the outbound submitted path."
         },
         {
-          "command": "ki trade abandon <trade-id> --yes",
+          "command": "ki repo [repo-options] trade abandon <trade-id> --yes",
           "description": "Remove one unsubmitted mutable preparation after explicit confirmation."
         },
         {
-          "command": "ki trade receive <trade-id> | --all [--yes]",
+          "command": "ki repo [repo-options] trade receive <trade-id> | --all [--yes]",
           "description": "Import one committed outbound submission into the current repository and record its source commit. The --all form previews every receivable submission and changes nothing unless --yes is also supplied."
         },
         {
-          "command": "ki trade list [--direction prepare|import|export] [--status <status>] [--kind work|knowledge] [--repo <repository>]",
-          "description": "Read visible preparations, imports, and exports in the registered estate, including their observation policy, delivery and decision state, and cleanup eligibility."
+          "command": "ki repo [repo-options] trade list [--direction prepare|import|export] [--status <status>] [--kind work|knowledge]",
+          "description": "Read visible preparations, imports, and exports in selected repositories, including each selected receiver's imports awaiting receipt. The parent --estate selector combines all registered repository views. Each record reports its observation policy, delivery and decision state, and cleanup eligibility. An unsupported --status decision value fails with a usage error."
         },
         {
-          "command": "ki trade show <trade-id>",
-          "description": "Show every visible copy of a trade."
+          "command": "ki repo [repo-options] trade show <trade-id>",
+          "description": "Show selected visible copies of a trade; use parent --estate to inspect all registered copies."
         },
         {
-          "command": "ki trade release <trade-id> | --eligible [--yes]",
+          "command": "ki repo [repo-options] trade release <trade-id> | --eligible [--yes]",
           "description": "Remove one current-repository outbound submission only after its observation policy is satisfied. The --eligible form previews all eligible submissions and changes nothing unless --yes is also supplied."
         },
         {
-          "command": "ki trade prune <trade-id> | --eligible [--yes]",
+          "command": "ki repo [repo-options] trade prune <trade-id> | --eligible [--yes]",
           "description": "Remove one eligible current-repository inbound copy only after sender release is observable. The --eligible form previews all eligible copies and changes nothing unless --yes is also supplied."
         }
       ]
     },
     {
-      "name": "Agora management",
-      "purpose": "Named Agoras are declared portably by registered home repositories under [skills.ki-agora.homes.<id>]. Each listed member reciprocates under [skills.ki-agora.memberships.<id>]. KI resolves only locally registered, reciprocal declarations; estate is the reserved selector for all locally registered canonical KI repositories.",
+      "name": "Territory management",
+      "purpose": "Territories derive membership from registered Capital declarations. Use the Capital's territory_prefix handle, or its registry key when no prefix exists. Exactly one of --territory and --estate is required for scoped commands. Repeated --filter values match directory basenames literally and case-sensitively.",
       "commands": [
         {
-          "command": "ki agora list",
-          "description": "List declared named Agoras and the registered estate."
+          "command": "ki territory list",
+          "description": "List registered territory handles, titles, Capitals and declared member counts."
         },
         {
-          "command": "ki agora audit [name]",
-          "description": "Audit every declared Agora, one named Agora, or the registered estate without changing repository or registry state. Exit 0 when healthy, 1 when findings are reported, and 2 for an invalid or unknown explicit selector."
+          "command": "ki territory audit (--territory <handle>|--estate) [--filter <prefix>]...",
+          "description": "Validate the complete selection and its physical checkouts without mutation."
         },
         {
-          "command": "ki agora inspect <name> --target <zed|vscode> --workspace <selector>",
-          "description": "Compare one explicitly selected local editor workspace with a resolved Agora. VS Code selectors are absolute physical .code-workspace files; Zed selectors are decimal workspace IDs. Read-only. Exit 0 for exact, 1 for drift or an unsupported source, and 2 for invalid selection or resolution."
+          "command": "ki territory inspect (--territory <handle>|--estate) [--filter <prefix>]... --target <zed|vscode> --workspace <selector>",
+          "description": "Compare selected roots with one explicit local editor projection. Exit 0 for exact state, 1 for drift or unsupported source, and 2 for invalid selection."
         },
         {
-          "command": "ki agora show <name> [--verbose]",
-          "description": "Show one declared Agora or the registered estate. The default lists member names; --verbose also shows canonical repository URLs and local paths."
+          "command": "ki territory show (--territory <handle>|--estate) [--filter <prefix>]... [--verbose]",
+          "description": "Show selected repositories, optionally with canonical identities and paths."
         },
         {
-          "command": "ki agora roots <name> [--null]",
-          "description": "Write absolute physical roots for machine consumption. The default format is newline-delimited. Use --null or -0 for pathnames that may contain line feeds."
+          "command": "ki territory roots (--territory <handle>|--estate) [--filter <prefix>]... [--null]",
+          "description": "Write deterministic absolute primary checkout roots. Use --null or -0 for NUL termination. Validate the complete selection before writing any stdout bytes."
         },
         {
-          "command": "ki agora open <name> --target <zed|vscode>",
-          "description": "Open one declared Agora or the registered estate through an explicit local target."
-        },
-        {
-          "command": "ki agora reference set <repository> <checkout> [--dry-run]",
-          "description": "Associate one owner-declared external reference with an explicitly selected absolute local Git checkout whose canonical origin matches. The operation never registers, clones, or mutates the referenced repository."
-        },
-        {
-          "command": "ki agora reference list",
-          "description": "List machine-local external Agora reference associations."
-        },
-        {
-          "command": "ki agora reference remove <repository> [--dry-run]",
-          "description": "Remove only the selected machine-local reference association."
+          "command": "ki territory open (--territory <handle>|--estate) [--filter <prefix>]... --target <zed|vscode|delta>",
+          "description": "Open the selected repositories through an explicit existing local adapter."
         }
       ]
     },
@@ -390,6 +462,10 @@
       "name": "Acquisition",
       "purpose": "Acquisition is action-first and adapter-driven. Installed Harness skills publish verified machine-readable adapter declarations; repository configuration enables them.",
       "commands": [
+        {
+          "command": "ki acquire images",
+          "description": "--adapter granola [--repo <path>] --source <uuid> --directory <path> --expected <count> [--dry-run] Verify UUID-named image exports from the Granola desktop app against an already acquired meeting. Preserve their exact bytes and a checksum manifest beside its Markdown in the receiving Knowledge Base. The expected count is observed in the desktop Images stack, not supplied by Granola MCP."
+        },
         {
           "command": "ki acquire list [--repo <path>]",
           "description": "List enabled, available, and invalid acquisition adapters with owning skill, actions, configuration, executable status, and activation guidance."
@@ -408,7 +484,45 @@
         },
         {
           "command": "ki acquire reset [--adapter <name>] [--repo <path>] [--source <identity>] [--component <name>] [--rebuild] [--confirm]",
-          "description": "Preview a local adapter, source, component, or complete-rebuild reset. Mutation requires --confirm and never authorizes provider mutation. The Granola adapter uses only allowlisted read-only MCP operations. It enumerates complete global and folder identity evidence, revalidates mutable detail, reuses verified transcripts by default, records separate detail and transcript hashes, journals interrupted work atomically, and advances the authoritative checkpoint only after the selected generation verifies. It stages meeting Markdown beneath +/_ACQUIRE/granola/. Conflicting receiver mappings fail closed; acquisition never tags, edits, archives, deletes, or moves Granola data."
+          "description": "Preview a local adapter, source, component, or complete-rebuild reset. Mutation requires --confirm and never authorizes provider mutation. The Granola adapter uses only allowlisted read-only MCP operations. It enumerates complete global and folder identity evidence, revalidates mutable detail, reuses verified transcripts by default, records separate detail and transcript hashes, journals interrupted work atomically, and advances the authoritative checkpoint only after the selected generation verifies. By default it stages meeting Markdown beneath +/_ACQUIRE/granola/. A configured capture_root and complete folder_territories table receive several folders as one package per meeting UUID, retaining every membership. Central checkpoints and journals remain in .acquire/granola/. The unfoldered and residual selectors also accept \"flag\", which reports identities without reading their details or transcripts; unmatched live folders are reported even when empty. Multiple territories or unmapped folder memberships require review. Handled checkpoints survive capture removal: unchanged source evidence remains handled, while amendments are staged for renewed review. Conflicting receiver mappings fail closed; acquisition never tags, edits, archives, deletes, or moves Granola data."
+        }
+      ]
+    },
+    {
+      "name": "Background agents",
+      "purpose": "Launch and coordinate detached background agents under the ki-delegation background-run contract. Each run lives in $KI_STATE_HOME/agents/<run>/, with a prompt, one-line status, pid, log, and report per agent. An agent writes DONE as the last line of its status when it finishes. Runtime adapters start Claude Code or Codex in their own session with standard input from /dev/null, so an interrupt of the launching session cannot stop them.",
+      "commands": [
+        {
+          "command": "ki agent launch <run> <name> <workdir> <prompt-file> [--runtime claude|codex] [--add-dir <dir>...] [--rules none|push|prune|release] [--wait-for <name>...]",
+          "description": "Launch one detached agent. The prompt gains a wait gate for each --wait-for agent, the authority footer the pinned Harness's ki-delegation skill ships for the --rules tier (default none), and the progress protocol. The status time zone follows TZ."
+        },
+        {
+          "command": "ki agent queue <run> <name> <prompt-file> [--workdir <dir>] [--runtime claude|codex] [--add-dir <dir>...] [--rules none|push|prune|release] [--wait-for <name>...]",
+          "description": "Append a ready-made agent to the run queue, copying its prompt. Queue order is priority order."
+        },
+        {
+          "command": "ki agent dispatch <run> --max <count> [--interval <seconds>]",
+          "description": "Start a detached dispatcher that keeps up to count agents running, launches the next queued agent as soon as one finishes, logs each launch to dispatch.log, and exits when the queue is empty and nothing is running."
+        },
+        {
+          "command": "ki agent wait <run> [--next] [--interval <seconds>]",
+          "description": "With --next, block until the next unseen agent finishes, print <name> finished: <last status> or that it exited without DONE, and mark it seen. A coordinator runs it in the background, reports each finish, and re-arms it. Without --next, wait for the whole run. Either form prints ALL FINISHED when nothing is left to wait for."
+        },
+        {
+          "command": "ki agent status <run>",
+          "description": "Print each agent's latest status, flag any agent whose process exited without DONE, and list the queue."
+        },
+        {
+          "command": "ki agent watch <run> [seconds]",
+          "description": "Print one line per interval (default 120 seconds) until no agent is running, ending with ALL FINISHED."
+        },
+        {
+          "command": "ki agent new <run> <name>",
+          "description": "Write a prompt skeleton from the ki-delegation run contract to <name>.draft.md."
+        },
+        {
+          "command": "ki agent decide <run> <text...> [--log <path>]",
+          "description": "Append a numbered, dated owner decision to the run's decisions.md or the named log, for prompts to cite as their authority."
         }
       ]
     },
@@ -430,32 +544,9 @@
         },
         {
           "command": "ki dev skill rubric <skill> [--write]",
-          "description": "Check or regenerate a skill's rubric catalogue."
+          "description": "Check or regenerate a skill's rubric catalogue. The skill is resolved from the installed Harnesses and never from the current directory, so every result names the resolved publication root that it answers about. With --write, publish only when that publication root and the current directory belong to the same Git working tree; any other tree, including another worktree of the same repository, is refused with both roots named."
         }
       ]
-    },
-    {
-      "name": "Batch records",
-      "purpose": "",
-      "commands": [
-        {
-          "command": "ki batch prepare --item <id> [--item <id>...] --approved --authority-mode <reviewed-items|outcome> --expires-at <timestamp> --completion-target <awaiting-review|done> [--authority-evidence <text>] [--repo <path>]",
-          "description": "Create one current canonical exact-set batch record from caller-supplied approval evidence and Ready work items in dependency order."
-        },
-        {
-          "command": "ki batch validate <record> [--repo <path>]",
-          "description": "Validate a canonical batch record, its protected payload, expiry, run binding, repository identity, and named work items without writing."
-        },
-        {
-          "command": "ki batch run <record> [--repo <path>] [--item <id> --result <awaiting-review|done|parked|stopped> --baseline <commit|—> [--result-commit <commit>] [--exception <text>]]",
-          "description": "Start the derived run or append one explicit caller-supplied item result. This command does not execute agent work or change roadmap lifecycle."
-        },
-        {
-          "command": "ki batch close <record> [--repo <path>] --completion-target <awaiting-review|done> --evidence-commit <commit>",
-          "description": "Append structural closure evidence only after every named ledger result and canonical work item matches the approved all-item target. This command does not accept work."
-        }
-      ],
-      "omittedFromReference": true
     }
   ]
 }

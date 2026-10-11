@@ -6,9 +6,9 @@ order: 9
 sources:
   - repository: knowledgeislands/ki-agentic-harness
     path: skills/README.md
-    ref: 77ec746d2c16cb0e46d15bd175d8d27c35ca3285
+    ref: bd6e29b5e0d567fb5ebb83566ddd46b3f6ba778b
     governs: 'The ki-work, ki-plan, ki-implement, and ki-accept responsibilities the request template routes through'
-    reviewed: '2026-09-27'
+    reviewed: '2026-10-11'
 ---
 
 # Plan and deliver governed work

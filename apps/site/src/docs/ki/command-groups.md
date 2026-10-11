@@ -6,7 +6,7 @@ permalink: /docs/ki/command-groups/
 sources:
   - repository: knowledgeislands/tools-ki
     path: man/ki.1
-    ref: v0.10.0
+    ref: v0.10.1
     governs: 'The command groups, their scope boundaries, and the behaviour this page describes'
     reviewed: '2026-10-11'
   - repository: knowledgeislands/tools-ki
