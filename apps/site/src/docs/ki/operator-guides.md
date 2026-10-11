@@ -103,7 +103,7 @@ The receiving repository declares a subtype it owns — a name and a description
 
 **You need this if** you want to run a command, or open an editor, across every repository in a territory rather than one at a time.
 
-A Capital's `territory_members` is the one membership roster. `ki territory list` shows the registered handles, `ki territory show -t ki` resolves one territory and `--estate` selects every registered repository; repeated `-f` prefixes narrow either scope by directory name. Supported repository commands take the same selectors, as in `ki repo -t ki -f tools- audit`, and `ki territory roots --null` hands other tools a buffered, NUL-delimited root list.
+A Capital's `territory_members` is the one membership roster. `ki territory list` shows the registered handles, `ki territory show -t knowledge-islands` resolves one territory and `--estate` selects every registered repository; repeated `-f` prefixes narrow either scope by directory name. Supported repository commands take the same selectors, as in `ki repo -t knowledge-islands -f tools- audit`, and `ki territory roots --null` hands other tools a buffered, NUL-delimited root list.
 
 **The boundary that matters:** selection grants nothing. A territory scope decides which checkouts a command runs in, not what it may do there, and a missing registration or unavailable selected root fails before any operation runs. `ki territory open` and the read-only `ki territory inspect` act on local editor state only.
 
