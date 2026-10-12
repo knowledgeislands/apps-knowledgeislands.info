@@ -68,9 +68,9 @@
     kind: 'principal',
     tagline: 'The canonical record of the Knowledge Islands philosophy and conceptual model.',
     description:
-      'Arcadia Principal is where the approach is developed and proved before anything is built on it. It holds the philosophy, the conceptual model, and the worked record that shows the model surviving contact with real knowledge work — and it does so without mandating any particular tooling implementation.',
+      'Knowledge Islands Principal is where the approach is developed and proved before anything is built on it. It holds the philosophy, the conceptual model, and the worked record that shows the model surviving contact with real knowledge work — and it does so without mandating any particular tooling implementation.',
     problem:
-      'An approach to knowledge work that lives in slide decks and habits cannot be argued with, and cannot be inherited. Arcadia Principal is the opposite arrangement: one public knowledge base where the philosophy and the conceptual model are developed in the open and kept as a living record, so anything built downstream can be traced back to a stated idea rather than to an assumption nobody wrote down.',
+      'An approach to knowledge work that lives in slide decks and habits cannot be argued with, and cannot be inherited. Knowledge Islands Principal is the opposite arrangement: one public knowledge base where the philosophy and the conceptual model are developed in the open and kept as a living record, so anything built downstream can be traced back to a stated idea rather than to an assumption nobody wrote down.',
     audience:
       'Read it if you want to understand why Knowledge Islands is shaped the way it is before deciding whether any of the tooling is worth adopting, or if you are working out how to hold your own approach explicitly. It is not a manual, and it will not tell you which command to run.',
     capabilities: [
@@ -529,7 +529,7 @@
     state:
       'Public source, developed as a product monorepo rather than released as a package. The operator command line is released separately, from tools-techne, which owns the command grammar, installer, diagnostics and manual.',
     limits:
-      'It runs work; it defines neither capability semantics nor standards. It stores no credentials and no canonical operational state, both of which stay in their own systems. Arcadia Principal\'s Engineering Practice remains the authority for the engineering architecture this implements.',
+      'It runs work; it defines neither capability semantics nor standards. It stores no credentials and no canonical operational state, both of which stay in their own systems. Knowledge Islands Principal\'s Engineering Practice remains the authority for the engineering architecture this implements.',
     role: 'Execution infrastructure. It runs work; it defines neither capabilities nor standards.',
     usage: 'Public source. Clone the repository and follow its own operating documentation to stand a fabric up.',
     repository: 'https://github.com/knowledgeislands/ki-techne-harness',
