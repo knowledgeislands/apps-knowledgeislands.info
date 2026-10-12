@@ -1,4 +1,4 @@
-# KI Website
+# Knowledge Islands Website
 
 The KI Website is the public publication for Knowledge Islands at [knowledgeislands.info](https://knowledgeislands.info). It turns selected philosophy, model, and practical tooling material into an accessible, independently deployable site.
 

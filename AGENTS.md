@@ -1,4 +1,4 @@
-# AGENTS.md — KI Website
+# AGENTS.md — Knowledge Islands Website
 
 Always-loaded orientation for an agent working in this repo, whichever runtime you are. The full picture is in [README.md](README.md); this file is the short anchor.
 
