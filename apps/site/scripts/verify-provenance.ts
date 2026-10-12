@@ -7,8 +7,8 @@
  * refuses a page that declares neither.
  *
  * Those pages live under `src/docs/`, one directory per section, having been through two moves:
- * out of a single `/guidance/` collection and under the project each described (KI-WEB-SITE-025),
- * then out from under the projects and into sections a reader works through (KI-WEB-SITE-037).
+ * out of a single `/guidance/` collection and under the project each described (KI-WEBSITE-SITE-025),
+ * then out from under the projects and into sections a reader works through (KI-WEBSITE-SITE-037).
  * Provenance did not change across either, which is the point: a page restating somebody's
  * material declares it wherever it lives, and moving a page must not be a way to shed the
  * declaration. Checking the whole tree rather than a list of directories is what makes that true
@@ -289,11 +289,11 @@ const checkDrift = async (page: string, source: Source): Promise<void> => {
   // upstream merges anything, and cannot be resolved by refreshing, because there is nothing newer
   // to refresh to. A warning in that state is permanent, and a permanent warning teaches its reader
   // to skip the whole sweep. So the question becomes the one the page can act on: is there a newer
-  // release? (KI-WEB-SITE-026)
+  // release? (KI-WEBSITE-SITE-026)
   // `releases/latest` answers with the newest non-prerelease, so it is the wrong comparand for a
   // page pinned to a prerelease: it would report an older stable tag as the refresh that is owed,
   // which is a refresh backwards. A prerelease pin falls through to the file comparison below,
-  // which asks the question that pin can act on — has the file itself moved? (KI-WEB-SITE-034)
+  // which asks the question that pin can act on — has the file itself moved? (KI-WEBSITE-SITE-034)
   if (tagPattern.test(source.ref) && !prereleasePattern.test(source.ref)) {
     const latest = await latestRelease(source.repository)
     if (latest) {
@@ -334,7 +334,7 @@ if (pages.length === 0) {
 // A declaration readers never see is not a published citation. Every page here
 // renders through the prose layout, so the layout is where that is held: the
 // check used to run per page, back when thirty-five bodies each pasted the
-// include in for themselves (KI-WEB-SITE-024).
+// include in for themselves (KI-WEBSITE-SITE-024).
 if (!readFileSync(proseLayout, 'utf-8').includes(sourcesPartial)) {
   fail(`${relative(siteRoot, proseLayout)}: does not include "${sourcesPartial}", so no page publishes its sources.`)
 }

@@ -4,7 +4,7 @@ How every published page records what it was written from, and how a refresh swe
 
 [Deciding what this site publishes](what-to-publish.md) sets out how much of another repository's material the site carries. This guide is the mechanism that makes carrying it safe: the page declares its sources in frontmatter, and a check reads that declaration rather than relying on anyone's memory.
 
-The two are easy to confuse and do different jobs. **Ownership decides what the site says; provenance decides what the site cites.** Since GDR-KI-WEB-002 made carrying the default, the site restates more of what it cites than it used to — so this declaration matters more than it did, not less.
+The two are easy to confuse and do different jobs. **Ownership decides what the site says; provenance decides what the site cites.** Since GDR-KI-WEBSITE-002 made carrying the default, the site restates more of what it cites than it used to — so this declaration matters more than it did, not less.
 
 ## The problem this solves
 
@@ -59,8 +59,8 @@ A third case sits between the two. A **vendored** page declares its `sources` in
 
 | Page | Vendors | Sync script | Record |
 | --- | --- | --- | --- |
-| `/projects/ki-agentic-harness/skill-catalogue/` | The harness's generated capability inventory, from its marker-delimited block in `skills/README.md` | `sync-skill-catalogue.ts` → `src/_data/skillCatalogue.json5` | ADR-KI-WEB-001 |
-| `/projects/ki/commands/` | The `ki` command inventory, from `man/ki.1` | `sync-cli-commands.ts` → `src/_data/cliCommands.json5` | ADR-KI-WEB-001 |
+| `/projects/ki-agentic-harness/skill-catalogue/` | The harness's generated capability inventory, from its marker-delimited block in `skills/README.md` | `sync-skill-catalogue.ts` → `src/_data/skillCatalogue.json5` | ADR-KI-WEBSITE-001 |
+| `/projects/ki/commands/` | The `ki` command inventory, from `man/ki.1` | `sync-cli-commands.ts` → `src/_data/cliCommands.json5` | ADR-KI-WEBSITE-001 |
 
 Both follow the same shape, and a third should too: fetch the upstream artefact at an immutable ref, parse it strictly, write a generated data file carrying its own provenance header, and render that file from a page whose prose is still the site's own. Regeneration replaces the inventory and never the framing around it.
 
@@ -68,7 +68,7 @@ Vendoring is the right answer only where the upstream artefact is itself an inve
 
 **The two cases are not equally safe, and the difference is worth stating.** The catalogue vendors a _specified_ interface: `ki-repo-harness` names the markers, normatively fixes the fields, and the harness's own rubric tests assert them, so the site consumes a contract someone maintains. The command reference vendors a _published_ one: `man/ki.1` ships with every release and is complete, but nothing names it an interface and no upstream test asserts its shape.
 
-Where the interface is only published, the parser carries the weight a contract would have carried. It throws on any construct it does not recognise, on a missing purpose or description, on a duplicate, and on a total below a structural floor — because an inventory that silently loses half its commands is worse than one that refuses to build, and nobody would notice the first. Where the manual's own two inventories disagree, the sync reconciles them and the page publishes the discrepancy rather than inheriting it. And the handoff asking for a real contract is recorded rather than assumed: `KI-TOOL-CLI-080` in `tools-ki`.
+Where the interface is only published, the parser carries the weight a contract would have carried. It throws on any construct it does not recognise, on a missing purpose or description, on a duplicate, and on a total below a structural floor — because an inventory that silently loses half its commands is worse than one that refuses to build, and nobody would notice the first. Where the manual's own two inventories disagree, the sync reconciles them and the page publishes the discrepancy rather than inheriting it. And the handoff asking for a real contract is recorded rather than assumed: `KI-TOOL-KI-CLI-080` in `tools-ki`.
 
 Refresh a vendored page by re-running its sync at a new ref and advancing the declared `ref` and `reviewed` in the same change:
 
@@ -93,7 +93,7 @@ which renders the `sources` list as a provenance footer, linking each repository
 
 The check requires that include, and requires it of the layout rather than of each page. A citation readers cannot see is not a citation, and a hand-written table beside the frontmatter declaration is two records that will disagree — which is the failure the whole mechanism exists to prevent. The prompting guides once carried exactly that hand-written table; it is now generated from the same declaration the sweep reads.
 
-It renders as a footer rather than as a `## Sources` heading. As a heading it was the last section of nearly every page, which made a table of links into other repositories read as the page's conclusion rather than as its provenance (KI-WEB-SITE-024). The declaration is unchanged and still complete; only its weight on the page is.
+It renders as a footer rather than as a `## Sources` heading. As a heading it was the last section of nearly every page, which made a table of links into other repositories read as the page's conclusion rather than as its provenance (KI-WEBSITE-SITE-024). The declaration is unchanged and still complete; only its weight on the page is.
 
 ## The sweep
 

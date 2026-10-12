@@ -5,7 +5,7 @@
 // released command-line tools, which are projects that happen to ship a binary
 // and therefore carry release and install fields the others leave out. Keeping
 // them in a second file preserved a split in the data that the reader could see
-// as two indistinguishable sections (KI-WEB-SITE-020).
+// as two indistinguishable sections (KI-WEBSITE-SITE-020).
 //
 // It is still a directory, not an artefact host. Each tool repository remains
 // the authority for its executable behaviour, release artefacts, checksums and
@@ -34,7 +34,7 @@
 //   accent       symbol-circle accent: gold | teal | forest
 //
 // Every entry without a `route` gets a generated page, so it must also carry
-// the five reader-facing fields that page is built from (KI-WEB-SITE-023). They
+// the five reader-facing fields that page is built from (KI-WEBSITE-SITE-023). They
 // answer, in order, the questions a reader deciding whether to adopt something
 // actually asks:
 //   problem      what problem this solves — the reason it exists at all

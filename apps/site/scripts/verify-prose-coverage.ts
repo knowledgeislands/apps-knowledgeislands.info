@@ -6,7 +6,7 @@
  * fifty-six `pre` blocks, and 1482 inline `code` elements. Those rendered as
  * browser defaults — a table with no padding, no borders and a shrink-to-fit
  * width — on the pages carrying the most material, and nothing reported it
- * because no rule was wrong. They were absent (KI-WEB-SITE-024).
+ * because no rule was wrong. They were absent (KI-WEBSITE-SITE-024).
  *
  * So this reads the selectors the stylesheet declares, walks the built output
  * for the elements that actually appear inside a `.prose-ki` container, and

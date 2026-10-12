@@ -21,7 +21,7 @@ layout: layouts/base.njk
 {%- for section in docsSections %}
   {#- Count and entry point are derived from the pages that actually carry this
       section's binding, never declared, so a card cannot claim a number the
-      section does not hold (KI-WEB-SITE-037). -#}
+      section does not hold (KI-WEBSITE-SITE-037). -#}
   {%- set pages = [] -%}
   {%- for page in allDocs %}
     {%- if page.data.section == section.slug %}{% set pages = (pages.push(page), pages) %}{% endif %}

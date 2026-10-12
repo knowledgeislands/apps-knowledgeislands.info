@@ -16,12 +16,12 @@ eleventyComputed:
   `version` is the marker: a released tool carries it along with `maturity`,
   `formula`, `installer`, `manual` and `changelog`, and everything below that
   reads those fields is guarded by it. A tool page therefore gains the install
-  material without a separate section or a second template (KI-WEB-SITE-020).
+  material without a separate section or a second template (KI-WEBSITE-SITE-020).
 
   The section order answers the five questions a reader deciding whether to
   adopt something asks, in the order they ask them: what problem, is it mine,
   what does it do and where does it stand, how do I start, what does it not do
-  (KI-WEB-SITE-023). `verify-projects.ts` holds every generated entry to the
+  (KI-WEBSITE-SITE-023). `verify-projects.ts` holds every generated entry to the
   fields those sections need.
 #}
 {%- set released = project.version is defined %}
@@ -95,10 +95,10 @@ eleventyComputed:
 
       {#
         Where the guidance about this project now lives. Its guides used to be pages under
-        `src/projects/<slug>/` and were listed here individually (KI-WEB-SITE-025). They now
+        `src/projects/<slug>/` and were listed here individually (KI-WEBSITE-SITE-025). They now
         live in a Docs section the reader works through in order, so the useful thing to offer
         is the section rather than a flat list competing with the section's own contents
-        (KI-WEB-SITE-037). A project with no section renders nothing.
+        (KI-WEBSITE-SITE-037). A project with no section renders nothing.
       #}
       {%- set docsSection = null %}
       {%- for entry in docsSections %}

@@ -12,7 +12,7 @@
  * able to say what problem it solves, who has that problem, what it does, what
  * state it is in and what it does not do. Without that gate the template would
  * render a page with empty sections, which is worse than the thin page it
- * replaced because it looks deliberate (KI-WEB-SITE-023).
+ * replaced because it looks deliberate (KI-WEBSITE-SITE-023).
  *
  * The release fields themselves — version shape, pinned refs, immutable tags —
  * are `verify-tool-routes.ts`. This file owns which entries may declare them.
@@ -181,7 +181,7 @@ const checkRegistry = (projects: Project[]): void => {
     }
 
     // Project fields render as plain text (see the registry header), so Markdown
-    // syntax would reach the reader as literal characters (KI-WEB-SITE-032).
+    // syntax would reach the reader as literal characters (KI-WEBSITE-SITE-032).
     for (const field of ['tagline', 'description', 'usage', 'capabilities', ...readerFields]) {
       const values = ([] as unknown[]).concat(record[field] ?? [])
       if (values.some((value) => typeof value === 'string' && value.includes('`'))) {

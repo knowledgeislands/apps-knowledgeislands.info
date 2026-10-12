@@ -6,7 +6,7 @@
  * repository to find out. Carrying that inventory in hand-written prose is the
  * wrong fix: eighty-four commands that change every release is exactly the
  * material that rotted the skill catalogue to 42 entries against an upstream
- * 61 with nothing noticing (KI-WEB-SITE-022).
+ * 61 with nothing noticing (KI-WEBSITE-SITE-022).
  *
  * So the site consumes the published interface instead. `man/ki.1` is the
  * manual the CLI ships and installs; its COMMAND GROUPS section is a grouped
@@ -25,7 +25,7 @@
  * published contract, so the parse asserts on structure it can check and
  * refuses anything it does not recognise rather than degrading quietly. The
  * durable fix is a machine-readable command projection from `tools-ki`; see
- * the handoff recorded against KI-WEB-SITE-022.
+ * the handoff recorded against KI-WEBSITE-SITE-022.
  *
  * Usage: bun scripts/sync-cli-commands.ts --ref <tag-or-commit>
  * See docs/guides/developer/page-provenance.md.

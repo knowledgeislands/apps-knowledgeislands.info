@@ -4,7 +4,7 @@
  * On the run that first exercised this gate, twenty-one of the thirty-three
  * published pages were reachable only by typing their URL — an entire
  * fourteen-page collection had no inbound link from outside its own subtree.
- * Nothing detected it, because nothing looked (KI-WEB-SITE-019).
+ * Nothing detected it, because nothing looked (KI-WEBSITE-SITE-019).
  *
  * So this walks the built site from `dist/index.html` the way a reader does,
  * following only `href` attributes, and fails when a published page is not on
@@ -13,9 +13,9 @@
  * `verify-provenance.ts` reports as a warning.
  *
  * The published prose has moved twice since, and the trees below are the record of where it
- * landed. `dist/guidance/` dissolved into the projects each guide belonged to (KI-WEB-SITE-025),
+ * landed. `dist/guidance/` dissolved into the projects each guide belonged to (KI-WEBSITE-SITE-025),
  * then those guides, the prompting set and the optional-tools page all gathered into
- * `dist/docs/` as sections a reader works through (KI-WEB-SITE-037). `dist/projects/` remains as
+ * `dist/docs/` as sections a reader works through (KI-WEBSITE-SITE-037). `dist/projects/` remains as
  * the catalogue of what exists. Both are held to the same standard: a page that moved must not
  * become unreachable in the move, and the index that lists a collection must itself be on the far
  * end of a link.

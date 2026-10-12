@@ -1,20 +1,20 @@
 ---
-id: ADR-KI-WEB-003
+id: ADR-KI-WEBSITE-003
 title: 'Documentation Is A Thing You Work Through'
 date: 2026-09-25
 status: current
 decision_type_url: https://knowledgeislands.info/specifications/decision-records/adr
 decision_type: architecture
-decision_depends_on: ['GDR-KI-WEB-002', 'ADR-KI-WEB-002']
+decision_depends_on: ['GDR-KI-WEBSITE-002', 'ADR-KI-WEBSITE-002']
 ---
 
-# ADR-KI-WEB-003: Documentation Is A Thing You Work Through
+# ADR-KI-WEBSITE-003: Documentation Is A Thing You Work Through
 
 ## Context
 
 The site had a top-level **Guidance** section holding thirty-five pages about how to use Knowledge Islands. It was the obvious arrangement and it produced a routing layer.
 
-Measured across the built output: seventy links into GitHub across those thirty-five pages, six of them anchors whose entire text was `The full guide`, and a `## Sources` table as the last thing a reader met on nearly every page. The reader's final impression of a guidance page was that the real material was elsewhere — precisely the outcome [GDR-KI-WEB-002](GDR-KI-WEB-002-carrying-material-for-readers.md) was written to stop. A section named for a purpose had filled with pages that served it badly, and nothing in the arrangement made that visible, because a directory named `guidance` accepts anything anyone calls guidance.
+Measured across the built output: seventy links into GitHub across those thirty-five pages, six of them anchors whose entire text was `The full guide`, and a `## Sources` table as the last thing a reader met on nearly every page. The reader's final impression of a guidance page was that the real material was elsewhere — precisely the outcome [GDR-KI-WEBSITE-002](GDR-KI-WEBSITE-002-carrying-material-for-readers.md) was written to stop. A section named for a purpose had filled with pages that served it badly, and nothing in the arrangement made that visible, because a directory named `guidance` accepts anything anyone calls guidance.
 
 The first answer was ownership: a page lives with the thing it is about. The guides went under the project each described, at `/projects/<slug>/<page>/`, and what belonged to no project went to `/prompting/` and `/optional-tools/`. That fixed the accountability problem — a page filed under `ki` answers to the reader who came to learn `ki` — and it fixed the voice, because the gate it came with refuses an anchor that names a destination.
 
@@ -43,7 +43,7 @@ The top-level navigation is three entries — **Philosophy**, **Model**, **Docs*
 - **A reader can see the shape of what they are agreeing to.** "Prompting" says nothing about whether it is an afternoon; "Prompting · 14 pages" does. The count is on the card and the contents are at the foot of every page, marking where the reader is and naming what comes next.
 - **The navigation now grows with the material rather than with the repository count.** A new project adds a catalogue entry; only a new body of teaching adds a section.
 - **Reachability and navigability became the same property.** The Docs grid links only each section's first page, so every page after it is reachable through the contents block that closes its predecessor. `verify-reachable.ts` therefore fails if the sections stop being navigable, which is a stronger claim than it used to make and the reason the contents block is a gate concern rather than a decoration.
-- **The gate still encodes the editorial judgement, so the judgement survives the author.** "No link text that hands the reader off" is the mechanical half of [GDR-KI-WEB-002](GDR-KI-WEB-002-carrying-material-for-readers.md)'s ownership test. The half a machine cannot judge — whether the prose actually carries the material — still needs a person.
+- **The gate still encodes the editorial judgement, so the judgement survives the author.** "No link text that hands the reader off" is the mechanical half of [GDR-KI-WEBSITE-002](GDR-KI-WEBSITE-002-carrying-material-for-readers.md)'s ownership test. The half a machine cannot judge — whether the prose actually carries the material — still needs a person.
 - **Reading order is a decision the build insists on**, now per section rather than per project. Eleventy sorts an unpositioned page last, so every page added without an `order` appends itself and the sequence decays toward the order things were written. The failure was silent, which is what made it worth gating. The fourteen prompting pages had no order at all under the previous arrangement and now carry one.
 - Moving a page is not a way to shed its provenance. `verify:provenance` walks `src/docs/` as a tree rather than a list of directories, so the `sources` declaration follows the page through this move and the next one.
 - **Every address published under either previous arrangement still resolves, in one hop.** `/guidance/*` redirects were repointed at the pages' new homes rather than at the intermediate ones, so a link written before the first move does not chain through two redirects to arrive.
@@ -52,7 +52,7 @@ The top-level navigation is three entries — **Philosophy**, **Model**, **Docs*
 
 ## References
 
-- [ADR-KI-WEB-002](ADR-KI-WEB-002-one-section-for-every-project.md) — one section per repository, which this leaves standing as the shape of the catalogue while moving the teaching material out of it.
-- [GDR-KI-WEB-002](GDR-KI-WEB-002-carrying-material-for-readers.md) — the ownership test whose failure in the guidance section prompted the first move.
+- [ADR-KI-WEBSITE-002](ADR-KI-WEBSITE-002-one-section-for-every-project.md) — one section per repository, which this leaves standing as the shape of the catalogue while moving the teaching material out of it.
+- [GDR-KI-WEBSITE-002](GDR-KI-WEBSITE-002-carrying-material-for-readers.md) — the ownership test whose failure in the guidance section prompted the first move.
 - Docs sections (`docs/guides/developer/docs-sections.md`) — the contract each page meets, and the gate that enforces it.
 - Page reachability (`docs/guides/developer/page-reachability.md`) — the walk that proves every published page is on the far end of a link.

@@ -1,5 +1,5 @@
 ---
-id: GDR-KI-WEB-002
+id: GDR-KI-WEBSITE-002
 title: 'Carrying Material for Readers'
 date: 2026-09-22
 status: current
@@ -7,7 +7,7 @@ decision_type_url: https://knowledgeislands.info/specifications/decision-records
 decision_type: governance
 ---
 
-# GDR-KI-WEB-002: Carrying Material for Readers
+# GDR-KI-WEBSITE-002: Carrying Material for Readers
 
 ## Context
 
@@ -35,7 +35,7 @@ This decision governs **ownership** only. Provenance — the `sources:` declarat
 
 ## Consequences
 
-- Every reader-facing page is now judged against a standard most of them currently fail. The rewriting is tracked as `KI-WEB-SITE-022` for guidance and `KI-WEB-SITE-023` for project pages.
+- Every reader-facing page is now judged against a standard most of them currently fail. The rewriting is tracked as `KI-WEBSITE-SITE-022` for guidance and `KI-WEBSITE-SITE-023` for project pages.
 - The site takes on accuracy obligations it did not have. Material it merely linked to was someone else's to keep true; material it carries is its own.
 - That obligation is bounded deliberately. Vendoring is the answer for anything release-coupled, so the hand-written surface stays restricted to material that changes slowly — what a project is for, who it suits, how the pieces relate.
 - Deferral now has to be argued rather than assumed, and a page that defers says what the reader will find and why it is not here.

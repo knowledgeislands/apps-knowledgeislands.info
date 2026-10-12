@@ -17,7 +17,7 @@ repository = "https://github.com/knowledgeislands/apps-knowledgeislands.info"
 title = "Knowledge Islands Website"
 capital = "https://github.com/knowledgeislands/ki-principal"
 description = "Public-facing portal for Knowledge Islands — shares project knowledge and links out to key resources."
-repo_code = "KI-WEB"
+repo_code = "KI-WEBSITE"
 supported_runtimes = [
   "claude-code",
   "claude-desktop",

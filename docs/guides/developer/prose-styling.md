@@ -35,7 +35,7 @@ So `verify:prose` reads the selectors the stylesheet declares, walks the built o
 
 ## What the check cannot see
 
-`verify:prose` proves an element has a rule; it cannot prove the rule looks right. The first rendered review (KI-WEB-SITE-032) found two defects that every gate passed:
+`verify:prose` proves an element has a rule; it cannot prove the rule looks right. The first rendered review (KI-WEBSITE-SITE-032) found two defects that every gate passed:
 
 - **Phone-width overflow.** A commit hash or URL in inline `code` has no break opportunity, and a provenance or inventory table sized to its content, so seventeen pages scrolled sideways at 390 px and pushed the footer off-screen. Inline `code` therefore carries `overflow-wrap: break-word`, and below the 768 px breakpoint a `.prose-ki` table becomes a block that scrolls inside itself. `pre` already scrolled and needed nothing. `overflow-wrap: anywhere` was tried first and rejected: it lowers the min-content width that auto table layout sizes columns from, so on desktop the tuning page's environment-variable names split mid-token. `break-word` breaks only what would otherwise overflow.
 - **Literal Markdown in project pages.** Project registry fields render as plain text, so backticks reached readers as backticks. `verify:projects` now rejects a backtick in any project prose field.

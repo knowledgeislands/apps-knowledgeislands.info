@@ -13,7 +13,7 @@ eleventyExcludeFromCollections: true
 
 # Retired sections.
 #
-# The specifications corpus is not yet ready to publish here (KI-WEB-SITE-021).
+# The specifications corpus is not yet ready to publish here (KI-WEBSITE-SITE-021).
 /specifications / 302
 
 # Techne Principal was retired and archived (KI-ARCADIA-ECO-008); its engineering
@@ -28,7 +28,7 @@ eleventyExcludeFromCollections: true
 # through the ki CLI or npx skills add, so its project page points to the harness.
 /projects/ki-plugins /projects/ki-agentic-harness/ 301
 
-# Tooling was merged into Projects (KI-WEB-SITE-020). A tool is a project that
+# Tooling was merged into Projects (KI-WEBSITE-SITE-020). A tool is a project that
 # ships a binary, so /tooling/<slug>/ becomes /projects/<slug>/. The two pages
 # that were task guidance filed under released tools follow the guidance move
 # below, so they point at their final home rather than at a redirect.
@@ -38,11 +38,11 @@ eleventyExcludeFromCollections: true
 {% for tool in tools %}/tooling/{{ tool.slug }} /projects/{{ tool.slug }}/ 301
 {% endfor %}/tooling / 301
 
-# Guidance dissolved into the projects that own it (KI-WEB-SITE-025). Every one of
+# Guidance dissolved into the projects that own it (KI-WEBSITE-SITE-025). Every one of
 # these URLs was published, so each gets a rule; the four pages whose material
 # merged into another page redirect to the page that now carries it. The targets
 # were /projects/<slug>/<page>/ when this block was written and were repointed at
-# /docs/<section>/<page>/ when the guides moved again (KI-WEB-SITE-037), so an
+# /docs/<section>/<page>/ when the guides moved again (KI-WEBSITE-SITE-037), so an
 # address published two moves ago still resolves in one hop rather than two.
 /guidance/cli /docs/ki/command-groups/ 301
 /guidance/cli/commands /docs/ki/commands/ 301
@@ -65,7 +65,7 @@ eleventyExcludeFromCollections: true
 /guidance/using-ki/using-skills /docs/ki-agentic-harness/using-skills/ 301
 /guidance/using-ki/recommended-tools /docs/optional-tools/ 301
 
-# What guidance had left was not a collection (KI-WEB-SITE-028). Once the project
+# What guidance had left was not a collection (KI-WEBSITE-SITE-028). Once the project
 # guides moved out, the directory held thirteen prompting guides for other vendors'
 # models, their index, and one page about a reader's own machine — two unrelated
 # things under a name that described neither, offered as a top-level section. Each
@@ -77,7 +77,7 @@ eleventyExcludeFromCollections: true
 /guidance/prompting /docs/prompting/ 301
 /guidance /docs/prompting/ 301
 
-# Guidance became Docs (KI-WEB-SITE-037). A guide is one page of a finite body of
+# Guidance became Docs (KI-WEBSITE-SITE-037). A guide is one page of a finite body of
 # material a reader works through, not a footnote to the repository it describes, so the
 # pages left the projects they were filed under and the three standalone sections joined
 # them: every address below was published and every one now resolves into /docs/.

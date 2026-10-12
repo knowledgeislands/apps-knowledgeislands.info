@@ -4,7 +4,7 @@
  * A released tool is a `kind: 'tool'` entry in `projects.json5` — a project
  * that happens to ship a binary, and therefore carries the release and install
  * fields checked here. They used to live in a registry of their own; the split
- * produced two indistinguishable sections and was merged (KI-WEB-SITE-020).
+ * produced two indistinguishable sections and was merged (KI-WEBSITE-SITE-020).
  *
  * The website is a discoverability and indirection layer: it does not own any
  * tool's executable behaviour, release artefacts or installer script. What it

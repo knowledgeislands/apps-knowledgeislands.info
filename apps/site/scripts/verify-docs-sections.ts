@@ -4,7 +4,7 @@
  * Guidance used to be a section of its own, and it read as a routing layer over
  * other repositories' work: seventy links into GitHub across thirty-five pages,
  * six of them literally `[The full guide](…/tools-ki/blob/…)`. Moving those
- * pages under the projects that own them fixed where they lived (KI-WEB-SITE-025);
+ * pages under the projects that own them fixed where they lived (KI-WEBSITE-SITE-025);
  * this fixes what they say, because a page that moved and still points at a
  * README has changed its URL and nothing else.
  *
@@ -12,7 +12,7 @@
  * once — it is one page of a finite body of material with a beginning and an
  * end — so they now live in sections under `src/docs/` rather than beneath the
  * project each describes, and a project page links to its section rather than
- * listing its pages (KI-WEB-SITE-037). This gate moved with them, and what it
+ * listing its pages (KI-WEBSITE-SITE-037). This gate moved with them, and what it
  * resolves the binding against moved too: the authority is now
  * `src/_data/docsSections.json5`, the registry the Docs landing grid is built
  * from, rather than the project registry. A section must be declared to exist
@@ -39,7 +39,7 @@
  * they have. They are still sections, still bound, and still ordered.
  *
  * A repository link is not banned and should not be. The test from
- * GDR-KI-WEB-002 is whether it survives as a fact rather than as a
+ * GDR-KI-WEBSITE-002 is whether it survives as a fact rather than as a
  * destination, and link text is the part of that a machine can judge: "the full
  * guide" names a destination, while "the installer published at v0.4.0" names a
  * fact. Provenance is `verify-provenance.ts`; this file owns voice.
@@ -197,7 +197,7 @@ for (const directory of directories) {
     // sorts unpositioned pages last, which is a reasonable default and a poor rule: every page
     // added without one appends, and the reading order decays toward chronology with nothing
     // failing. Requiring the key makes the decision explicit; requiring it to be unique stops two
-    // pages tying and falling through to a title sort nobody chose. (KI-WEB-SITE-029)
+    // pages tying and falling through to a title sort nobody chose. (KI-WEBSITE-SITE-029)
     const orderLine = frontmatter.match(/^order:[ \t]*(.*)$/m)
     if (!orderLine) {
       fail(`${page}: declares no "order"; a section is read in a chosen sequence, not the order it was written.`)

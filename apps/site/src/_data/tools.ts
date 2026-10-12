@@ -4,7 +4,7 @@
  * Tools used to live in their own `tools.json5`, which gave the site two
  * registries describing the same kind of thing and, downstream of that, two
  * indistinguishable sections. They are now `kind: 'tool'` entries in
- * `projects.json5` carrying release and install fields (KI-WEB-SITE-020).
+ * `projects.json5` carrying release and install fields (KI-WEBSITE-SITE-020).
  *
  * This view exists because several templates ask a narrower question than
  * "what are the projects" — `redirects.njk` generates one `/install/<slug>`

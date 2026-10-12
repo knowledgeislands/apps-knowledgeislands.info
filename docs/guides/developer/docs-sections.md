@@ -2,7 +2,7 @@
 
 Everything this site publishes that teaches something lives in a **Docs section** — a finite sequence of pages with a first, a last, and an order somebody chose. This guide says where a page in a section lives, what binds it there, what it has to contain, and what `verify:docs` refuses.
 
-The arrangement itself — why the teaching material is not filed under the project each page describes, and why a page's identity comes from its directory rather than from its own frontmatter — is decided by ADR-KI-WEB-003.
+The arrangement itself — why the teaching material is not filed under the project each page describes, and why a page's identity comes from its directory rather than from its own frontmatter — is decided by ADR-KI-WEBSITE-003.
 
 ## Where a page lives
 
@@ -44,7 +44,7 @@ Prose before the first `##`, saying what the reader will be able to do. At least
 
 Link text may not be a hand-off phrase: `the full guide`, `full guide`, `the full documentation`, `full documentation`, `see the README`, `see the docs`, `see the documentation`, `read more`, `more here`, `learn more`, `the guide`, or a bare `here`, `docs`, `documentation`, `README` or `this page`.
 
-A link into a repository is fine, and often right, when it cites a fact the page has already stated: _the installer is published at `v0.4.0`_. It is wrong as the place the answer lives. The test, from GDR-KI-WEB-002, is whether the sentence would still say something true and useful with the link removed.
+A link into a repository is fine, and often right, when it cites a fact the page has already stated: _the installer is published at `v0.4.0`_. It is wrong as the place the answer lives. The test, from GDR-KI-WEBSITE-002, is whether the sentence would still say something true and useful with the link removed.
 
 This rule is what the whole arrangement exists for. A page that moved out of `/guidance/` and still ends by pointing at a README has changed its URL and nothing else.
 

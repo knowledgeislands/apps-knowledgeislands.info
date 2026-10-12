@@ -207,10 +207,10 @@ export default function (eleventyConfig: UserConfig) {
   // joins its section because of where it lives rather than because someone
   // remembered a frontmatter line. This is the same rule the guides collection
   // used, generalised from `project` to `section` when guides moved out from
-  // under the projects they describe (KI-WEB-SITE-037).
+  // under the projects they describe (KI-WEBSITE-SITE-037).
   //
   // `order` is the reading order a section intends; anything without one sorts
-  // after those that have one, then by title (KI-WEB-SITE-025).
+  // after those that have one, then by title (KI-WEBSITE-SITE-025).
   eleventyConfig.addCollection('docsPages', (collectionApi: { getAll: () => DocsPage[] }) =>
     collectionApi
       .getAll()

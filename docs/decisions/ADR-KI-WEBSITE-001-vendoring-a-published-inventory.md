@@ -1,14 +1,14 @@
 ---
-id: ADR-KI-WEB-001
+id: ADR-KI-WEBSITE-001
 title: 'Vendoring a Published Inventory'
 date: 2026-09-22
 status: current
 decision_type_url: https://knowledgeislands.info/specifications/decision-records/adr
 decision_type: architecture
-decision_depends_on: ['GDR-KI-WEB-002']
+decision_depends_on: ['GDR-KI-WEBSITE-002']
 ---
 
-# ADR-KI-WEB-001: Vendoring a Published Inventory
+# ADR-KI-WEBSITE-001: Vendoring a Published Inventory
 
 ## Context
 
@@ -18,7 +18,7 @@ The skill catalogue published every harness skill as hand-written prose. It was 
 
 The `ki` command reference had the opposite symptom and the same cause. It was the shortest page on the site: 133 words and a link to `tools-ki`. A reader who wanted to know what `ki` can do had to leave. Writing the inventory out by hand was the option to reject — eighty-eight commands across fourteen groups change every release, which is exactly the material that rotted in the catalogue.
 
-[GDR-KI-WEB-002](GDR-KI-WEB-002-carrying-material-for-readers.md) requires the site to carry what a reader needs and names vendoring a published interface as the outcome for material that changes per release. This record decides how that is done, for both inventories, and what the site owes when the upstream interface is weaker.
+[GDR-KI-WEBSITE-002](GDR-KI-WEBSITE-002-carrying-material-for-readers.md) requires the site to carry what a reader needs and names vendoring a published interface as the outcome for material that changes per release. This record decides how that is done, for both inventories, and what the site owes when the upstream interface is weaker.
 
 **The two upstreams are not equally strong, and the difference is the whole of this record's second half.**
 
@@ -45,15 +45,15 @@ Four properties hold in both cases:
 
 - Neither page can describe an entry that no longer exists, or omit one that does, without the next sync failing or showing the difference. The 19 missing skills were published by the change that introduced this record.
 - **The two dependencies are not equally safe, and the difference must not be flattened.** For the catalogue, the site depends on markers and a field set that `ki-repo-harness` specifies and tests; if either changes, the sync fails loudly at the next refresh, and no handoff is owed because the interface already exists and is specified. For the command reference, the site depends on an interface nobody promised to keep stable. That is the cost, accepted knowingly: a manual restructure breaks the sync at the next ref bump, and the page keeps publishing the last good pinned snapshot until someone looks.
-- A handoff to `tools-ki` is therefore owed for the weaker case, and it is a real request rather than a formality: a machine-readable command projection, or a named and tested contract over the manual's structure, would let that parse become a consumer of a specified interface. It is recorded as `KI-TOOL-CLI-080` in `tools-ki`, which owns its priority.
+- A handoff to `tools-ki` is therefore owed for the weaker case, and it is a real request rather than a formality: a machine-readable command projection, or a named and tested contract over the manual's structure, would let that parse become a consumer of a specified interface. It is recorded as `KI-TOOL-KI-CLI-080` in `tools-ki`, which owns its priority.
 - The site now reports an upstream documentation defect to its own readers. That is the right side to err on — a reader who sees "the reference section does not carry this group" knows more than a reader who sees nothing — but it does mean site output is shaped by upstream quality in a way ordinary prose is not.
 - Provenance gains a third case alongside declared and restated. A vendored page cites a source it reproduces rather than one it rewrote, which the provenance guide states.
 - Refreshing either page is no longer a reconciliation of a long document by hand; it is one command and one ref bump.
 
 ## References
 
-- [GDR-KI-WEB-002](GDR-KI-WEB-002-carrying-material-for-readers.md) — the ownership rule that makes carrying an inventory the requirement and names vendoring as its outcome.
+- [GDR-KI-WEBSITE-002](GDR-KI-WEBSITE-002-carrying-material-for-readers.md) — the ownership rule that makes carrying an inventory the requirement and names vendoring as its outcome.
 - Page provenance (`docs/guides/developer/page-provenance.md`) — the declaration, the sweep, and the vendored case.
 - Deciding what this site publishes (`docs/guides/developer/what-to-publish.md`) — the ownership test this decision applies.
 - `ki-repo-harness`, `references/standards-compatible-harness.md` — the normative definition of the catalogue block.
-- `KI-TOOL-CLI-080` in `tools-ki` — the handoff the unspecified case raises.
+- `KI-TOOL-KI-CLI-080` in `tools-ki` — the handoff the unspecified case raises.

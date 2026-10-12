@@ -38,10 +38,10 @@ eleventyExcludeFromCollections: true
 {%- endfor %}
 {#- Every page in every Docs section, listed by where it lives rather than by hand. This loop
     used to be two: the guides collection, plus a separate `startsWith('/prompting/')` sweep
-    added because thirteen model pages were never submitted at all (KI-WEB-SITE-028). Both
+    added because thirteen model pages were never submitted at all (KI-WEBSITE-SITE-028). Both
     sets are now bound by a directory data file under `src/docs/`, so one collection covers
     them, and the landing pages for Get Started and Contribute come with them rather than
-    being three hand-written URLs that have to be remembered (KI-WEB-SITE-037). #}
+    being three hand-written URLs that have to be remembered (KI-WEBSITE-SITE-037). #}
 {%- for item in collections.docsPages %}
   <url>
     <loc>{{ site.url }}{{ item.url }}</loc>

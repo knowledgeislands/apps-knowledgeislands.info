@@ -51,6 +51,6 @@ Resist the further option of linking a page from wherever is convenient. A link 
 
 ## What it does not cover
 
-The gate proves a path exists, not that anyone would find it. A link buried in the last paragraph of a page nobody reads passes. Reachability is a floor, not a measure of navigation quality — GDR-KI-WEB-002 governs whether a page earns its place, and this check only guarantees the reader can get to the ones that do.
+The gate proves a path exists, not that anyone would find it. A link buried in the last paragraph of a page nobody reads passes. Reachability is a floor, not a measure of navigation quality — GDR-KI-WEBSITE-002 governs whether a page earns its place, and this check only guarantees the reader can get to the ones that do.
 
 It also says nothing about outbound links. A page may link to a document that has been deleted upstream; that is the provenance sweep's `--network` mode, described in [page provenance](page-provenance.md).

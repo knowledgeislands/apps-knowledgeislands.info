@@ -3,7 +3,7 @@
 // A section is a finite body of material a reader can enter, work through, and finish. The
 // grid states how many pages each holds, because "Prompting" says nothing about whether it is
 // an afternoon or a reference you dip into, while "Prompting · 14 pages" tells a reader what
-// they are agreeing to (KI-WEB-SITE-037).
+// they are agreeing to (KI-WEBSITE-SITE-037).
 //
 // Counts and first-page links are NOT declared here. They are derived at build time from the
 // pages that actually carry the matching `section` binding, so a card cannot claim a number

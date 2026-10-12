@@ -4,7 +4,7 @@ How to decide whether a piece of public explanatory writing belongs on the websi
 
 The website is where a reader meets Knowledge Islands. If they arrive wanting to understand something, decide something, or start using something, the site owes them enough to do it — not a paragraph of framing and a link to a repository.
 
-That is a change of default. An earlier version of this guide asked whether a document ages with a version, and sent anything that did back to its source repository. The question was a good one; using it to decide _whether the site says anything_ was the mistake. It is recorded, with its consequences, in GDR-KI-WEB-002.
+That is a change of default. An earlier version of this guide asked whether a document ages with a version, and sent anything that did back to its source repository. The question was a good one; using it to decide _whether the site says anything_ was the mistake. It is recorded, with its consequences, in GDR-KI-WEBSITE-002.
 
 ## The test
 
@@ -43,7 +43,7 @@ This is the case that makes the new default safe rather than reckless.
 
 Carrying material means the site now owns its accuracy, and hand-written restatements of things that move rot silently. The skill catalogue proved it: hand-written prose describing 42 skills while the harness published 61, and nothing detected the gap because nothing could.
 
-So where a page needs an inventory or a command surface that changes per release, the answer is not to write it out by hand and hope. It is to **vendor a published interface at a pinned ref** — parse it, fail loudly if its shape changes, and refresh by advancing one ref. ADR-KI-WEB-001 records how, and [Page provenance](page-provenance.md) describes the mechanism.
+So where a page needs an inventory or a command surface that changes per release, the answer is not to write it out by hand and hope. It is to **vendor a published interface at a pinned ref** — parse it, fail loudly if its shape changes, and refresh by advancing one ref. ADR-KI-WEBSITE-001 records how, and [Page provenance](page-provenance.md) describes the mechanism.
 
 Before designing a request to an upstream repository for a consumable artefact, check whether it already publishes one. The harness did, with its markers named normatively, while this site paraphrased it by hand for months.
 

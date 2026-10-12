@@ -40,7 +40,7 @@ Only public repositories appear. A private or internally operated repository is 
 
 ### Released tools are declared here too
 
-They used to have a registry of their own, and `/projects/` read it to render a sixth group linking out to `/tooling/<slug>/`. That kept the version in one place but left the site with two sections describing the same kind of thing in the same voice, which is what a reader actually saw. ADR-KI-WEB-002 merged them.
+They used to have a registry of their own, and `/projects/` read it to render a sixth group linking out to `/tooling/<slug>/`. That kept the version in one place but left the site with two sections describing the same kind of thing in the same voice, which is what a reader actually saw. ADR-KI-WEBSITE-002 merged them.
 
 So a tool is a `kind: 'tool'` entry like any other, rendered by the same template, with six release fields the other kinds must not carry. [Tool routes](tool-routes.md) owns what those fields mean and how they advance.
 
