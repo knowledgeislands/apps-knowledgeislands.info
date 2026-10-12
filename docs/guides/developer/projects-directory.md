@@ -70,7 +70,7 @@ Keeping the material true is a standing obligation rather than a one-off. These 
 
 ## Adding or amending an entry
 
-A new public repository is added by editing the registry: nothing else needs touching, because the index card, the project page, and the sitemap entry are all generated. Take the `role` sentence from GDR-KI-ARCADIA-006 where that decision covers the repository, so the site's account of authority and the ecosystem decision cannot diverge.
+A new public repository is added by editing the registry: nothing else needs touching, because the index card, the project page, and the sitemap entry are all generated. Take the `role` sentence from GDR-KI-PRINCIPAL-006 where that decision covers the repository, so the site's account of authority and the ecosystem decision cannot diverge.
 
 Two things to check before adding an entry:
 

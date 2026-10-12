@@ -63,8 +63,8 @@
 [
   // ── Principal knowledge bases ───────────────────────────────────────────
   {
-    slug: 'ki-arcadia-principal',
-    name: 'ki-arcadia-principal',
+    slug: 'ki-principal',
+    name: 'ki-principal',
     kind: 'principal',
     tagline: 'The canonical record of the Knowledge Islands philosophy and conceptual model.',
     description:
@@ -78,7 +78,7 @@
       'A Technē pillar carrying the conceptual tool-ecosystem map the implementation repositories are arranged by.',
       'An Engineering Practice pillar: the canonical engineering discipline — architecture, operating models and technology posture — adopted from the retired Techne Principal.',
       'An Aesthetics pillar holding the symbol library, logo, diagrams and visual style this website is built from.',
-      'The ecosystem decision GDR-KI-ARCADIA-006, cited across the estate, which fixes who owns what.',
+      'The ecosystem decision GDR-KI-PRINCIPAL-006, cited across the estate, which fixes who owns what.',
       'A Streams area carrying the live working record, so the reasoning is visible rather than only its conclusions.'
     ],
     state:
@@ -87,7 +87,7 @@
       'It mandates no implementation. Nothing here constrains any repository\'s code, and a change made in Arcadia obliges no tool to follow — KI Specifications exists for the cases where obligation is actually wanted. It is also not a tutorial: there is no getting-started path, because there is nothing here to install.',
     role: 'Canonical source of the philosophy and conceptual model. It informs every other repository and mandates none of their implementations.',
     usage: 'A public Markdown knowledge base. Read it in the repository, or read the distilled account under Philosophy and Model on this site.',
-    repository: 'https://github.com/knowledgeislands/ki-arcadia-principal',
+    repository: 'https://github.com/knowledgeislands/ki-principal',
     availability: 'source',
     icon: 'island',
     accent: 'gold'
