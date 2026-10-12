@@ -38,7 +38,7 @@ jobs:
           app-id: ${{ vars.KI_TOOLS_RELEASE_BOT_APP_ID }}
           private-key: ${{ secrets.KI_TOOLS_RELEASE_BOT_PRIVATE_KEY }}
           owner: knowledgeislands
-          repositories: ki-website
+          repositories: apps-knowledgeislands.info
       - uses: actions/checkout@v7
         with:
           token: ${{ steps.release-bot.outputs.token }}

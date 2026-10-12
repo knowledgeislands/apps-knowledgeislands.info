@@ -573,7 +573,7 @@
       'An autonomous publication layer. It owns the public guide prose and the routes you are reading now, and it vendors source-labelled material from the other repositories so it can build and deploy without waiting on any of them. Publication never transfers ownership: every page names the repository that is actually the authority for what it describes.',
     role: 'Public publication. It is authoritative for its own routes and prose, and for nothing else.',
     usage: 'You are using it. The source is public if you want to see how a page is generated.',
-    repository: 'https://github.com/knowledgeislands/ki-website',
+    repository: 'https://github.com/knowledgeislands/apps-knowledgeislands.info',
     availability: 'published',
     route: '/',
     icon: 'current',

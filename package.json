@@ -1,5 +1,5 @@
 {
-  "name": "@knowledgeislands/ki-website",
+  "name": "@knowledgeislands/apps-knowledgeislands.info",
   "description": "Public-facing portal for Knowledge Islands — shares project knowledge and links out to key resources.",
   "version": "1.0.0",
   "author": "kris@kris.me.uk",
@@ -22,7 +22,7 @@
   "engines": {
     "node": ">=22"
   },
-  "homepage": "https://github.com/knowledgeislands/ki-website#readme",
+  "homepage": "https://github.com/knowledgeislands/apps-knowledgeislands.info#readme",
   "keywords": [
     "arcadia",
     "bun",
@@ -44,7 +44,7 @@
   "packageManager": "bun@1.4.2",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/knowledgeislands/ki-website.git"
+    "url": "git+https://github.com/knowledgeislands/apps-knowledgeislands.info.git"
   },
   "scripts": {
     "build": "turbo run build",
