@@ -26,6 +26,7 @@ The public-facing **Knowledge Islands** website — a static site built with the
 bun install         # install deps and wire the husky pre-commit hook
 bun run ki:site:dev    # Tailwind watch + Eleventy serve on http://localhost:3000
 bun run ki:site:build  # compile the site to dist/
+bun run ki:site:clean  # run before the build after removing or renaming a route; Eleventy keeps obsolete output in dist/
 ki repo audit --skill ki-engineering --repo .  # toolchain gate: Biome, TypeScript, scripts
 ki repo audit --skill ki-authoring --repo .  # rumdl check for authored Markdown
 bun run --cwd apps/site verify:provenance -- --network  # report published pages whose upstream has moved
