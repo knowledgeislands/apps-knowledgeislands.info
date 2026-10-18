@@ -1088,11 +1088,11 @@
   }
 
   /* ─── Home: hero, the painted legend ───
-     The chosen Arcadia painting opens the page, as on /arcadia/, and the hero copy sits on a navy scrim
-     over the sea to the island's west. The copy is longer than /arcadia/'s title, so on wide screens the
-     painting is sized from the space the copy leaves and anchored right: its first fifth, open sea and the
-     outer islets, runs under the panel, and the Port and the Citadel stay clear of it. Its left edge
-     feathers into the navy. Contrast is measured against the scrimmed painting, not against plain navy. */
+     The chosen Arcadia painting opens the page, as on /arcadia/, and fills the hero edge to edge. It is
+     cropped from the right, so the island (the Port, the Citadel, the Observatory) stays in view at every
+     width, and the copy sits over the open sea to its west in a soft pool of dusk: overlapping ellipses
+     that darken around the words and fade out in every direction, with no edge or column. Contrast is
+     measured against the rendered, scrimmed painting under every line, not against plain navy. */
 
   .painted-hero {
     background: var(--color-navy);
@@ -1103,70 +1103,115 @@
   }
 
   .painted-hero-stage {
-    --hero-panel-left: max(var(--gutter), 2.5rem);
-    --hero-panel-width: clamp(23rem, 30cqw, 27.5rem);
-    /* The Port begins a fifth of the way across the painting; keep that edge right of the panel. */
-    --hero-art-width: min(1672px, calc((100cqw - var(--hero-panel-left) - var(--hero-panel-width)) / 0.8));
+    --hero-copy-left: max(var(--gutter), 4.5cqw);
+    --hero-copy-width: clamp(21rem, 30cqw, 28rem);
     position: relative;
     display: flex;
     align-items: center;
-    min-height: calc(var(--hero-art-width) * 941 / 1672);
-    padding-block: 2rem;
+    min-height: clamp(36rem, 100cqw * 941 / 1672, 58rem);
+    padding-block: 3rem;
   }
 
-  /* The scrim: solid navy behind the copy, easing off into the painting just past it (DESIGN.md 12.2). */
+  /* The ambient wash: a soft fade under the nav, so the sunset does not meet the header at a line, a
+     gentle darkening along the left edge, and a short fade into the districts strip below. */
   .painted-hero-stage::before {
     content: "";
     position: absolute;
     inset: 0;
     z-index: 1;
     pointer-events: none;
-    background: linear-gradient(
-      90deg,
-      rgb(15 36 64 / 94%) 0,
-      rgb(15 36 64 / 90%) calc(var(--hero-panel-left) + var(--hero-panel-width) - 1.5rem),
-      rgb(15 36 64 / 0%) calc(var(--hero-panel-left) + var(--hero-panel-width) + 3.5rem)
-    );
+    background:
+      linear-gradient(180deg, rgb(15 36 64 / 62%) 0, rgb(15 36 64 / 22%) 7%, rgb(15 36 64 / 0%) 16%),
+      linear-gradient(0deg, rgb(11 27 49 / 55%) 0, rgb(11 27 49 / 0%) 14%),
+      linear-gradient(90deg, rgb(15 36 64 / 45%) 0, rgb(15 36 64 / 18%) 22%, rgb(15 36 64 / 0%) 42%);
   }
 
   .hero-painting {
     position: absolute;
-    top: 50%;
-    right: calc(var(--hero-art-width) * -0.03);
-    width: var(--hero-art-width);
+    inset: 0;
     margin: 0;
-    transform: translateY(-50%);
+  }
+
+  .hero-painting picture {
+    display: block;
+    height: 100%;
   }
 
   .hero-painting img {
     display: block;
     width: 100%;
-    height: auto;
-    -webkit-mask-image:
-      linear-gradient(90deg, transparent 0, #000 16%),
-      linear-gradient(180deg, transparent 0, #000 9%, #000 91%, transparent 100%);
-    -webkit-mask-composite: source-in;
-    mask-image:
-      linear-gradient(90deg, transparent 0, #000 16%),
-      linear-gradient(180deg, transparent 0, #000 9%, #000 91%, transparent 100%);
-    mask-composite: intersect;
+    height: 100%;
+    object-fit: cover;
+    object-position: 82% 30%;
   }
 
+  /* The caption keeps its own small pool of shadow at the bottom right. */
   .hero-painting figcaption {
     position: absolute;
-    right: calc(var(--hero-art-width) * 0.03);
+    right: 0;
     bottom: 0;
-    padding: 0.5rem var(--gutter) 0.75rem 3rem;
+    z-index: 2;
+    padding: 1.75rem var(--gutter) 0.875rem 4.5rem;
     color: var(--color-parchment);
-    background: linear-gradient(90deg, rgb(15 36 64 / 0%), rgb(15 36 64 / 92%) 2.5rem);
+    background: radial-gradient(
+      ellipse farthest-side at 70% 85%,
+      rgb(11 27 49 / 86%) 0,
+      rgb(11 27 49 / 78%) 45%,
+      rgb(11 27 49 / 34%) 78%,
+      rgb(11 27 49 / 0%) 100%
+    );
   }
 
   .hero-copy {
     position: relative;
     z-index: 2;
-    width: var(--hero-panel-width);
-    margin-left: var(--hero-panel-left);
-    padding: 1.75rem 1.875rem 1.875rem;
+    width: var(--hero-copy-width);
+    margin-left: var(--hero-copy-left);
+    padding: 1.75rem 0;
+    text-shadow: 0 1px 14px rgb(11 27 49 / 55%);
+  }
+
+  /* The pool of dusk: four overlapping ellipses centred on the copy and reaching well beyond it, each
+     easing to transparent, so the sea and the islets still show around and faintly through the words.
+     The smallest deepens the pool under the gold kicker, the line with the least contrast to spare. */
+  .hero-copy::before {
+    content: "";
+    position: absolute;
+    inset: -34% -62% -34% -48%;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(
+        ellipse 30% 17% at 36% 24%,
+        rgb(15 36 64 / 62%) 0,
+        rgb(15 36 64 / 52%) 50%,
+        rgb(15 36 64 / 0%) 100%
+      ),
+      radial-gradient(
+        ellipse 46% 40% at 44% 30%,
+        rgb(15 36 64 / 46%) 0,
+        rgb(15 36 64 / 34%) 55%,
+        rgb(15 36 64 / 0%) 100%
+      ),
+      radial-gradient(
+        ellipse 44% 42% at 42% 64%,
+        rgb(15 36 64 / 40%) 0,
+        rgb(15 36 64 / 28%) 55%,
+        rgb(15 36 64 / 0%) 100%
+      ),
+      radial-gradient(
+        ellipse closest-side at 45% 50%,
+        rgb(15 36 64 / 74%) 0,
+        rgb(15 36 64 / 70%) 42%,
+        rgb(15 36 64 / 56%) 60%,
+        rgb(15 36 64 / 32%) 76%,
+        rgb(15 36 64 / 12%) 89%,
+        rgb(15 36 64 / 0%) 100%
+      );
+  }
+
+  .hero-copy .btn-brass {
+    text-shadow: none;
   }
 
   .hero-copy .display-xl {
@@ -2116,47 +2161,6 @@
     padding-block: 4rem;
   }
 
-  /* The painting takes the full width and the copy stacks below it on navy, never over it. */
-  .painted-hero-stage {
-    display: block;
-    min-height: 0;
-    padding-block: 0;
-  }
-
-  .hero-painting {
-    position: relative;
-    top: auto;
-    right: auto;
-    width: auto;
-    transform: none;
-  }
-
-  .hero-painting img {
-    -webkit-mask-image: linear-gradient(180deg, #000 92%, transparent 100%);
-    mask-image: linear-gradient(180deg, #000 92%, transparent 100%);
-  }
-
-  .hero-painting figcaption {
-    position: static;
-    background: none;
-    padding: 0.625rem var(--gutter) 0;
-    color: var(--night-muted);
-  }
-
-  .hero-copy {
-    width: auto;
-    margin: 0;
-    padding: 1.5rem var(--gutter) 3rem;
-  }
-
-  .painted-hero-stage::before {
-    display: none;
-  }
-
-  .hero-copy .display-xl {
-    font-size: clamp(2.5rem, 7cqw, 3.5rem);
-  }
-
   .districts .page-container {
     flex-direction: column;
     align-items: flex-start;
@@ -2325,12 +2329,56 @@
   }
 }
 
-/* At phone width the hero painting crops around the island rather than shrinking to a strip. */
+/* At phone width the hero stacks: the painting, cropped around the island rather than shrunk to a strip,
+   fades softly into the navy, and the copy sits below it on navy, never over it. */
 @media (max-width: 720px) {
+  .painted-hero-stage {
+    display: block;
+    min-height: 0;
+    padding-block: 0;
+  }
+
+  .painted-hero-stage::before,
+  .hero-copy::before {
+    display: none;
+  }
+
+  .hero-painting {
+    position: relative;
+    inset: auto;
+  }
+
   .hero-painting img {
+    height: auto;
     aspect-ratio: 4 / 3;
-    object-fit: cover;
     object-position: 58% 45%;
+    -webkit-mask-image: linear-gradient(
+      180deg,
+      #000 0,
+      #000 58%,
+      rgb(0 0 0 / 70%) 76%,
+      rgb(0 0 0 / 28%) 90%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(180deg, #000 0, #000 58%, rgb(0 0 0 / 70%) 76%, rgb(0 0 0 / 28%) 90%, transparent 100%);
+  }
+
+  .hero-painting figcaption {
+    position: static;
+    background: none;
+    padding: 0.625rem var(--gutter) 0;
+    color: var(--night-muted);
+  }
+
+  .hero-copy {
+    width: auto;
+    margin: 0;
+    padding: 1.5rem var(--gutter) 3rem;
+    text-shadow: none;
+  }
+
+  .hero-copy .display-xl {
+    font-size: clamp(2.5rem, 7cqw, 3.5rem);
   }
 }
 
