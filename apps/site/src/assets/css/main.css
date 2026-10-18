@@ -1095,7 +1095,12 @@
      colour of the painting's own top edge, keeps the Citadel's tower clear of the nav at every width. The
      copy sits over the open sea to its west in a soft pool of dusk: overlapping ellipses
      that darken around the words and fade out in every direction, with no edge or column. Contrast is
-     measured against the rendered, scrimmed painting under every line, not against plain navy. */
+     measured against the rendered, scrimmed painting under every line, not against plain navy.
+
+     The painting stops growing at --hero-painting-max, about 1.05 times its native 1672 px, so a very wide
+     screen neither softens it nor crops its foot. Beyond that width it is shown whole and slides right
+     until the copy, now aligned with the header, again sits 4.5% into its western sea; its open edges
+     feather into the navy, the feather growing with the margin it opens so no rectangle edge shows. */
 
   .painted-hero {
     background: var(--color-navy);
@@ -1105,14 +1110,31 @@
     container-type: inline-size;
   }
 
+  /* The geometry, from the hero's own width (100cqw). The copy keeps 4.5% of the width until the painting
+     is framed, then moves twice as fast as the screen grows until it meets the header's content edge
+     (.header-wrap's inset plus the gutter). The painting sits as far right as it must for the copy to
+     land 4.5% into it, but never past the right edge of the screen. */
   .painted-hero-stage {
-    --hero-copy-left: max(var(--gutter), 4.5cqw);
+    --hero-painting-max: 1760px;
+    --hero-painting-w: min(100cqw, var(--hero-painting-max));
+    --hero-header-inset: max(0px, (100cqw - 82rem - 2 * var(--gutter)) / 2);
+    --hero-copy-left: max(
+      var(--gutter),
+      4.5cqw,
+      min(var(--hero-header-inset) + var(--gutter), 4.5cqw + 2 * (100cqw - var(--hero-painting-max)))
+    );
+    --hero-painting-lead: calc(var(--hero-copy-left) - var(--hero-painting-w) * 0.045);
+    --hero-painting-room: calc(100cqw - var(--hero-painting-w));
+    --hero-painting-left: clamp(0px, var(--hero-painting-lead), var(--hero-painting-room));
+    --hero-painting-right: calc(100cqw - var(--hero-painting-w) - var(--hero-painting-left));
+    --hero-feather-left: min(3 * var(--hero-painting-left), 0.1 * var(--hero-painting-w));
+    --hero-feather-right: min(3 * var(--hero-painting-right), 0.1 * var(--hero-painting-w));
     --hero-copy-width: clamp(21rem, 30cqw, 28rem);
     --hero-sky: clamp(2.75rem, 2.25cqw, 4.5rem);
     position: relative;
     display: flex;
     align-items: center;
-    min-height: clamp(36rem, 100cqw * 941 / 1672 + var(--hero-sky), 64rem);
+    min-height: max(36rem, var(--hero-painting-w) * 941 / 1672 + var(--hero-sky));
     padding-block: 3rem;
   }
 
@@ -1132,7 +1154,8 @@
         rgb(15 36 64 / 0%) calc(var(--hero-sky) + 8%)
       ),
       linear-gradient(0deg, rgb(11 27 49 / 55%) 0, rgb(11 27 49 / 0%) 14%),
-      linear-gradient(90deg, rgb(15 36 64 / 45%) 0, rgb(15 36 64 / 18%) 22%, rgb(15 36 64 / 0%) 42%);
+      linear-gradient(90deg, rgb(15 36 64 / 45%) 0, rgb(15 36 64 / 18%) 22%, rgb(15 36 64 / 0%) 42%)
+      var(--hero-painting-left) 0 / var(--hero-painting-w) 100% no-repeat;
   }
 
   .hero-painting {
@@ -1148,7 +1171,9 @@
   .hero-painting picture {
     display: block;
     box-sizing: border-box;
+    width: var(--hero-painting-w);
     height: 100%;
+    margin-left: var(--hero-painting-left);
     padding-top: var(--hero-sky);
     background:
       linear-gradient(180deg, var(--color-navy) 0, rgb(15 36 64 / 62%) 40%, rgb(15 36 64 / 0%) 100%) top / 100%
@@ -1193,6 +1218,61 @@
       rgb(11 27 49 / 34%) 78%,
       rgb(11 27 49 / 0%) 100%
     );
+  }
+
+  /* Framed, the painting fades out over its open edges, the sky band with it, in an eased ramp so the
+     sunset, the sea and the cloud dissolve into the navy rather than stopping at a line. Below the
+     frame width both feathers are zero, so the rule only applies above it. */
+  @container (min-width: 1761px) {
+    .hero-painting picture {
+      --hero-feather-mask: linear-gradient(
+        90deg,
+        transparent 0,
+        rgb(0 0 0 / 12%) calc(var(--hero-feather-left) * 0.3),
+        rgb(0 0 0 / 45%) calc(var(--hero-feather-left) * 0.58),
+        rgb(0 0 0 / 82%) calc(var(--hero-feather-left) * 0.82),
+        #000 var(--hero-feather-left),
+        #000 calc(100% - var(--hero-feather-right)),
+        rgb(0 0 0 / 82%) calc(100% - var(--hero-feather-right) * 0.82),
+        rgb(0 0 0 / 45%) calc(100% - var(--hero-feather-right) * 0.58),
+        rgb(0 0 0 / 12%) calc(100% - var(--hero-feather-right) * 0.3),
+        transparent 100%
+      );
+      -webkit-mask-image: var(--hero-feather-mask);
+      mask-image: var(--hero-feather-mask);
+      /* The sampled band reaches under the whole of the longer fade below, so no seam shows through it. */
+      background-size:
+        100% var(--hero-sky),
+        100% calc(var(--hero-sky) + var(--hero-painting-w) * 0.05);
+    }
+
+    /* Over its western half the sunset rises out of the sky band through a longer fade; east of that the
+       short fade stays, so the Citadel's tower keeps its full height. The first layer is added to the
+       intersection of the other two. */
+    .hero-painting img {
+      -webkit-mask-image:
+        linear-gradient(180deg, transparent 0, rgb(0 0 0 / 40%) 3.5%, #000 8%),
+        linear-gradient(90deg, transparent 40%, #000 58%), linear-gradient(180deg, transparent 0, #000 1.25%);
+      -webkit-mask-composite: source-over, source-in, source-over;
+      mask-image:
+        linear-gradient(180deg, transparent 0, rgb(0 0 0 / 40%) 3.5%, #000 8%),
+        linear-gradient(90deg, transparent 40%, #000 58%), linear-gradient(180deg, transparent 0, #000 1.25%);
+      mask-composite: add, intersect, add;
+    }
+
+    /* Off the screen's edge, the caption's pool fades out on every side but the strip below, and its
+       words end just inside the painting's solid edge. */
+    .hero-painting figcaption {
+      right: calc(var(--hero-painting-right) + var(--hero-feather-right) - 4.5rem);
+      padding: 3rem 6rem 0.875rem;
+      background: radial-gradient(
+        ellipse 50% 100% at 50% 100%,
+        rgb(11 27 49 / 86%) 0,
+        rgb(11 27 49 / 80%) 55%,
+        rgb(11 27 49 / 40%) 80%,
+        rgb(11 27 49 / 0%) 100%
+      );
+    }
   }
 
   .hero-copy {
