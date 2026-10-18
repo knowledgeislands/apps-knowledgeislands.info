@@ -234,7 +234,8 @@ const parseSection = (roff: string, section: string, reference: boolean): CliGro
       continue
     }
 
-    if (line === '.PP' || line.trim() === '' || line.trim() === '\\&') continue
+    // A bare `.IP` continues a `.TP` description in a new paragraph; the site joins it like `.PP`.
+    if (line === '.PP' || line === '.IP' || line.trim() === '' || line.trim() === '\\&') continue
 
     if (reading === 'command') {
       if (command === null) command = [renderLine(markPlaceholders(line))]

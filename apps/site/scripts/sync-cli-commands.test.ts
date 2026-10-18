@@ -95,6 +95,18 @@ describe('parseCliManual', () => {
     assert.equal(inventory.groups[0]?.commands[0]?.description, 'Print canonical KI documentation locations.')
   })
 
+  test('joins a description continued in an indented paragraph', () => {
+    const inventory = parseWithPadding(
+      group(
+        'Agents',
+        'Use these commands to run background agents.',
+        entry('.B ki agent watch <run>', 'Print each new event.', '.IP', 'Each run keeps an event log.')
+      )
+    )
+
+    assert.equal(inventory.groups[0]?.commands[0]?.description, 'Print each new event. Each run keeps an event log.')
+  })
+
   test('continues an invocation onto a wrapped option list', () => {
     const inventory = parseWithPadding(
       group(
