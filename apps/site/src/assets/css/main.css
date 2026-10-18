@@ -1090,7 +1090,10 @@
   /* ─── Home: hero, the painted legend ───
      The chosen Arcadia painting opens the page, as on /arcadia/, and fills the hero edge to edge. It is
      cropped from the right, so the island (the Port, the Citadel, the Observatory) stays in view at every
-     width, and the copy sits over the open sea to its west in a soft pool of dusk: overlapping ellipses
+     width, and never from the top: when the hero is shorter than the painting, the sea and the clouds at
+     the bottom give way instead. A band of dusk sky above the painting, navy at the header easing into the
+     colour of the painting's own top edge, keeps the Citadel's tower clear of the nav at every width. The
+     copy sits over the open sea to its west in a soft pool of dusk: overlapping ellipses
      that darken around the words and fade out in every direction, with no edge or column. Contrast is
      measured against the rendered, scrimmed painting under every line, not against plain navy. */
 
@@ -1105,15 +1108,16 @@
   .painted-hero-stage {
     --hero-copy-left: max(var(--gutter), 4.5cqw);
     --hero-copy-width: clamp(21rem, 30cqw, 28rem);
+    --hero-sky: clamp(2.75rem, 2.25cqw, 4.5rem);
     position: relative;
     display: flex;
     align-items: center;
-    min-height: clamp(36rem, 100cqw * 941 / 1672, 58rem);
+    min-height: clamp(36rem, 100cqw * 941 / 1672 + var(--hero-sky), 64rem);
     padding-block: 3rem;
   }
 
-  /* The ambient wash: a soft fade under the nav, so the sunset does not meet the header at a line, a
-     gentle darkening along the left edge, and a short fade into the districts strip below. */
+  /* The ambient wash: a soft fade under the nav that lifts before it reaches the tower, a gentle darkening
+     along the left edge, and a short fade into the districts strip below. */
   .painted-hero-stage::before {
     content: "";
     position: absolute;
@@ -1121,7 +1125,12 @@
     z-index: 1;
     pointer-events: none;
     background:
-      linear-gradient(180deg, rgb(15 36 64 / 62%) 0, rgb(15 36 64 / 22%) 7%, rgb(15 36 64 / 0%) 16%),
+      linear-gradient(
+        180deg,
+        rgb(15 36 64 / 40%) 0,
+        rgb(15 36 64 / 14%) var(--hero-sky),
+        rgb(15 36 64 / 0%) calc(var(--hero-sky) + 8%)
+      ),
       linear-gradient(0deg, rgb(11 27 49 / 55%) 0, rgb(11 27 49 / 0%) 14%),
       linear-gradient(90deg, rgb(15 36 64 / 45%) 0, rgb(15 36 64 / 18%) 22%, rgb(15 36 64 / 0%) 42%);
   }
@@ -1132,9 +1141,31 @@
     margin: 0;
   }
 
+  /* The sky band belongs to the picture, so it dims with the painting as the hero scrolls away. Under a
+     fade from the header's navy it carries the colours of the painting's top edge, sampled across its
+     width, and runs a little under the image, which fades in over its first few pixels, well short of the
+     tower (2.1% down the painting), so the seam does not read. */
   .hero-painting picture {
     display: block;
+    box-sizing: border-box;
     height: 100%;
+    padding-top: var(--hero-sky);
+    background:
+      linear-gradient(180deg, var(--color-navy) 0, rgb(15 36 64 / 62%) 40%, rgb(15 36 64 / 0%) 100%) top / 100%
+      var(--hero-sky) no-repeat,
+      linear-gradient(
+        90deg,
+        rgb(101 98 122) 0,
+        rgb(101 99 121) 9%,
+        rgb(136 110 113) 19%,
+        rgb(120 103 118) 28%,
+        rgb(103 98 120) 35%,
+        rgb(100 97 121) 50%,
+        rgb(90 93 121) 63%,
+        rgb(85 89 117) 80%,
+        rgb(96 93 115) 100%
+      )
+      top / 100% calc(var(--hero-sky) + 1rem) no-repeat;
   }
 
   .hero-painting img {
@@ -1142,7 +1173,9 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: 82% 30%;
+    object-position: 82% 0%;
+    -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 1.25%);
+    mask-image: linear-gradient(180deg, transparent 0, #000 1.25%);
   }
 
   /* The caption keeps its own small pool of shadow at the bottom right. */
@@ -1183,8 +1216,8 @@
     background:
       radial-gradient(
         ellipse 30% 17% at 36% 24%,
-        rgb(15 36 64 / 62%) 0,
-        rgb(15 36 64 / 52%) 50%,
+        rgb(15 36 64 / 68%) 0,
+        rgb(15 36 64 / 58%) 50%,
         rgb(15 36 64 / 0%) 100%
       ),
       radial-gradient(
@@ -2333,6 +2366,7 @@
    fades softly into the navy, and the copy sits below it on navy, never over it. */
 @media (max-width: 720px) {
   .painted-hero-stage {
+    --hero-sky: 2.75rem;
     display: block;
     min-height: 0;
     padding-block: 0;
@@ -2354,13 +2388,22 @@
     object-position: 58% 45%;
     -webkit-mask-image: linear-gradient(
       180deg,
-      #000 0,
+      transparent 0,
+      #000 1.25%,
       #000 58%,
       rgb(0 0 0 / 70%) 76%,
       rgb(0 0 0 / 28%) 90%,
       transparent 100%
     );
-    mask-image: linear-gradient(180deg, #000 0, #000 58%, rgb(0 0 0 / 70%) 76%, rgb(0 0 0 / 28%) 90%, transparent 100%);
+    mask-image: linear-gradient(
+      180deg,
+      transparent 0,
+      #000 1.25%,
+      #000 58%,
+      rgb(0 0 0 / 70%) 76%,
+      rgb(0 0 0 / 28%) 90%,
+      transparent 100%
+    );
   }
 
   .hero-painting figcaption {
