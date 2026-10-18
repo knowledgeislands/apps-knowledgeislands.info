@@ -1,0 +1,19 @@
+{#
+  The chosen Arcadia painting as a responsive <picture>: AVIF, then WebP, then a JPEG fallback, all from
+  src/_data/arcadiaPainting.json5, the manifest `sync:design` writes beside the images it encodes. The
+  painting is generated reference art whose licence ki-design has yet to record (KI-DESIGN-ART-002); the
+  page that cites it, /arcadia/, carries that in its sources.
+
+  Usage: {% from "macros/painting.njk" import paintingPicture %}
+         {{ paintingPicture(arcadiaPainting, "100vw", "lazy") }}
+#}
+
+{% macro paintingPicture(painting, sizes="100vw", loading="lazy", priority="auto", className="") -%}
+  {%- set paintingAlt = "Arcadia at dusk, seen from high above. The Citadel crowns the hilltop, the Observatory's dome stands on the heights to the right and a lighthouse on the left headland, with a great tree at the heart of the forest between them. Streams fall in waterfalls towards the Port on the shore below: an airship at its mooring mast, docks, a rail shed and moored ships. Sailing ships follow a dotted sea lane past small islets, distant islands lie under the sunset, and cloud closes the right-hand edge." -%}
+  <picture{% if className %} class="{{ className }}"{% endif %}>
+    {%- for format in ["avif", "webp"] %}
+    <source type="image/{{ format }}" sizes="{{ sizes }}" srcset="{% set sep = joiner(', ') %}{% for v in painting.variants %}{% if v.format == format %}{{ sep() }}{{ v.src }} {{ v.width }}w{% endif %}{% endfor %}" />
+    {%- endfor %}
+    <img src="{{ painting.fallback }}" width="{{ painting.width }}" height="{{ painting.height }}" alt="{{ paintingAlt }}" loading="{{ loading }}" decoding="async"{% if priority != "auto" %} fetchpriority="{{ priority }}"{% endif %} />
+  </picture>
+{%- endmacro %}

@@ -37,11 +37,13 @@ const proseLayout = resolve(siteRoot, 'src/_includes/layouts/page.njk')
  * Hand-built pages that restate or vendor another repository's material. They carry their own layout, so they
  * cannot inherit the provenance footer from the prose layout; each must include it itself, and is checked for it.
  */
-const handBuiltPages = ['src/field-guide/index.njk'].map((page) => resolve(siteRoot, page))
+const handBuiltPages = ['src/field-guide/index.njk', 'src/arcadia/index.njk'].map((page) => resolve(siteRoot, page))
 /** Vendored snapshots, each held to the ref its citing page declares. */
-const vendoredData = ['src/_data/skillCatalogue.json5', 'src/_data/kiSymbols.json5'].map((file) =>
-  resolve(siteRoot, file)
-)
+const vendoredData = [
+  'src/_data/skillCatalogue.json5',
+  'src/_data/kiSymbols.json5',
+  'src/_data/arcadiaPainting.json5'
+].map((file) => resolve(siteRoot, file))
 
 const repositoryOwner = 'knowledgeislands'
 const repositoryPattern = /^knowledgeislands\/[a-z0-9]+(?:[-.][a-z0-9]+)*$/

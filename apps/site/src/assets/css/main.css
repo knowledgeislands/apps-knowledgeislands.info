@@ -1509,43 +1509,153 @@
     color: rgb(245 239 224 / 78%);
   }
 
-  /* ─── Home: Arcadia ─── */
+  /* ─── Home: Arcadia, the painted legend ───
+     The chosen ki-design painting, nearly full-bleed on navy, so the section reads as the island's
+     legendary moment while the hero keeps the engraved chart. No copy sits on the painting: the text is
+     on plain navy above it, and the painting's top and bottom edges fade into that navy. */
 
-  .arcadia-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
-    gap: 4.5rem;
-    align-items: center;
+  .arcadia-band {
+    background: var(--color-navy);
+    padding-bottom: 3.5rem;
+    border-top: 1px solid rgb(245 239 224 / 10%);
   }
 
-  .arcadia-plate {
-    padding: 0.875rem;
-  }
-
-  .arcadia-plate svg {
-    display: block;
-    width: 100%;
-    height: auto;
-    border-radius: 4px;
-  }
-
-  .plate-caption {
-    display: flex;
-    justify-content: space-between;
-    gap: 0.75rem;
-    padding: 0.75rem 0.375rem 0;
-  }
-
-  .compass-mark {
-    width: 4rem;
-    height: 4rem;
-    color: var(--color-text-gold);
-    margin-bottom: 1.25rem;
-    stroke-width: 1;
+  .arcadia-copy {
+    max-width: 50rem;
   }
 
   .arcadia-copy .lead {
     margin-bottom: 2rem;
+  }
+
+  .compass-mark {
+    display: block;
+    width: 4rem;
+    height: 4rem;
+    color: var(--color-text-gold);
+    margin: 0 auto 1.25rem;
+    stroke-width: 1;
+  }
+
+  [data-theme="night"] .compass-mark {
+    color: var(--color-gold);
+  }
+
+  .arcadia-painting,
+  .painting-frame {
+    margin: 0 auto;
+    max-width: 1672px;
+  }
+
+  .arcadia-painting {
+    margin-top: 3.5rem;
+  }
+
+  .arcadia-painting img,
+  .painting-frame img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .arcadia-painting img {
+    -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 6%, #000 94%, transparent 100%);
+    mask-image: linear-gradient(180deg, transparent 0, #000 6%, #000 94%, transparent 100%);
+  }
+
+  .arcadia-painting figcaption,
+  .painting-frame figcaption {
+    padding: 0.875rem var(--gutter) 0;
+    text-align: center;
+    color: var(--night-muted);
+  }
+
+  /* ─── /arcadia/: the legend above the map ─── */
+
+  .painting-hero {
+    background: var(--color-navy);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .painting-frame {
+    position: relative;
+  }
+
+  .painting-frame figcaption {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding: 0.5rem var(--gutter) 0.75rem;
+    color: var(--color-parchment);
+    background: linear-gradient(90deg, rgb(15 36 64 / 0%), rgb(15 36 64 / 92%) 2.5rem);
+    padding-left: 3rem;
+  }
+
+  /* The title sits on the sea at the lower left, over a navy scrim; its contrast is measured against the
+     scrimmed painting, not against plain navy. */
+  .painting-title {
+    position: absolute;
+    left: max(var(--gutter), calc((100% - 1672px) / 2 + 2.5rem));
+    bottom: 3.5rem;
+    max-width: 26rem;
+    padding: 1.5rem 1.75rem 1.625rem;
+    background: radial-gradient(120% 120% at 30% 60%, rgb(15 36 64 / 92%) 55%, rgb(15 36 64 / 84%) 100%);
+    border-radius: var(--radius-md);
+    box-shadow: 0 0 3rem 1.5rem rgb(15 36 64 / 55%);
+  }
+
+  .painting-title .display-xl {
+    color: var(--color-parchment);
+    margin: 0;
+  }
+
+  .painting-title .lead {
+    color: var(--color-parchment);
+    font-size: 1.125rem;
+    margin-top: 0.75rem;
+  }
+
+  .arcadia-onward .lead {
+    margin-bottom: 2rem;
+  }
+
+  .chart-section {
+    background: var(--color-navy);
+    padding-top: 5rem;
+    border-top: 1px solid rgb(245 239 224 / 10%);
+  }
+
+  .chart-section .section-head {
+    margin-bottom: 1.5rem;
+  }
+
+  .chart-map {
+    margin: 0 auto;
+    max-width: 82rem;
+    padding-inline: var(--gutter);
+  }
+
+  .chart-map > svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    -webkit-mask-image: radial-gradient(ellipse 72% 70% at 50% 50%, #000 72%, transparent 100%);
+    mask-image: radial-gradient(ellipse 72% 70% at 50% 50%, #000 72%, transparent 100%);
+  }
+
+  .chart-map figcaption {
+    display: flex;
+    gap: 0.625rem;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 0 2rem;
+    color: var(--night-muted);
+  }
+
+  .chart-map .ki-glyph {
+    color: var(--color-gold);
+    flex: none;
   }
 
   /* ─── Home: the journey rail ─── */
@@ -1872,6 +1982,9 @@
 
   .section-navy,
   .hero,
+  .arcadia-band,
+  .painting-hero,
+  .chart-section,
   .on-navy {
     background-color: var(--sea-deep-night);
   }
@@ -1923,6 +2036,41 @@
   .btn-ghost-light,
   .card-ki {
     transition: none;
+  }
+}
+
+/* ─── /arcadia/: a soft cross-fade from the painting to the chart ───
+   Scroll-driven, so it needs no script; where the browser has no view timelines, or the reader asks for
+   reduced motion, both stay fully drawn. The painting dims only partly, and the chart is never hidden. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .painting-frame picture {
+      animation: ki-legend-out linear both;
+      animation-timeline: view();
+      animation-range: exit 0% exit 100%;
+    }
+
+    .chart-map > svg {
+      animation: ki-chart-in linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 80%;
+    }
+  }
+}
+
+@keyframes ki-legend-out {
+  to {
+    opacity: 0.45;
+  }
+}
+
+@keyframes ki-chart-in {
+  from {
+    opacity: 0.35;
+  }
+
+  to {
+    opacity: 1;
   }
 }
 
@@ -1978,10 +2126,30 @@
     gap: 0.875rem;
   }
 
-  .home-grid,
-  .arcadia-grid {
+  .home-grid {
     grid-template-columns: 1fr;
     gap: 2.5rem;
+  }
+
+  .painting-title {
+    position: static;
+    max-width: none;
+    padding: 1.75rem var(--gutter) 2.5rem;
+    background: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .painting-frame figcaption {
+    position: static;
+    background: none;
+    padding: 0.625rem var(--gutter) 0;
+    text-align: left;
+    color: var(--night-muted);
+  }
+
+  .chart-section {
+    padding-top: 3.5rem;
   }
 
   .layers,
@@ -2115,7 +2283,8 @@
   }
 
   /* Cartouches collapse into the district list beneath the map (DESIGN.md 7.6). */
-  .hero-map .cartouches {
+  .hero-map .cartouches,
+  .chart-map .cartouches {
     display: none;
   }
 }
@@ -2150,6 +2319,17 @@
 
   .btn-row .btn {
     flex: 1 1 100%;
+  }
+
+  /* At phone width the painting crops towards the island rather than shrinking to a strip. */
+  .arcadia-painting img {
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    object-position: 62% 50%;
+  }
+
+  .arcadia-painting {
+    margin-top: 2.5rem;
   }
 
   .hero-map {

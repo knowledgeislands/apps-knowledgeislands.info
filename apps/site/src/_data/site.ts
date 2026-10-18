@@ -12,8 +12,9 @@ const site = {
   //
   // Only routes that exist are listed. The design's Voyage also names Landscapes and Create, and its
   // Atlas Specifications; none of those pages exists yet (/specifications redirects home), so they are
-  // left out rather than pointed somewhere they are not (KI-WEBSITE-SITE-044). Arcadia has no page of
-  // its own either, so it and the call to action go to the Arcadia section of the home page.
+  // left out rather than pointed somewhere they are not (KI-WEBSITE-SITE-044). Arcadia and the call to
+  // action go to /arcadia/, the painting beside the chart (KI-WEBSITE-SITE-045); the home page's Arcadia
+  // section keeps its #arcadia anchor.
   nav: {
     groups: [
       {
@@ -21,7 +22,7 @@ const site = {
         items: [
           { label: 'Philosophy', href: '/philosophy/' },
           { label: 'Model', href: '/model/' },
-          { label: 'Arcadia', href: '/#arcadia' }
+          { label: 'Arcadia', href: '/arcadia/' }
         ]
       },
       {
@@ -33,7 +34,7 @@ const site = {
         ]
       }
     ],
-    cta: { label: 'Enter Arcadia', href: '/#arcadia' }
+    cta: { label: 'Enter Arcadia', href: '/arcadia/' }
   }
 }
 

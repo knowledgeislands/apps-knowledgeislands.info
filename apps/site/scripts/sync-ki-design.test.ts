@@ -1,6 +1,15 @@
 import assert from 'node:assert/strict'
 import { describe, test } from 'node:test'
-import { buildSymbolSnapshot, extractPlate, PLATE_END, PLATE_START, type UpstreamSymbol } from './sync-ki-design.ts'
+import {
+  buildSymbolSnapshot,
+  extractPlate,
+  PAINTING,
+  PLATE_END,
+  PLATE_START,
+  paintingFallback,
+  planPainting,
+  type UpstreamSymbol
+} from './sync-ki-design.ts'
 
 const ref = '002a623d0b39d50a1222660acaffd911507f4853'
 const categories = ['geography', 'structure', 'role']
@@ -82,5 +91,33 @@ describe('extractPlate', () => {
   test('refuses a preview without the markers or without an svg between them', () => {
     assert.throws(() => extractPlate('<svg/>'), /markers were not found/)
     assert.throws(() => extractPlate(`${PLATE_START}<p>no map</p>${PLATE_END}`), /not one <svg>/)
+  })
+})
+
+describe('planPainting', () => {
+  test('plans AVIF and WebP at every width and one JPEG fallback, keeping the aspect ratio', () => {
+    const plan = planPainting(PAINTING.width, PAINTING.height)
+    assert.deepEqual(
+      plan.map((v) => `${v.format}@${v.width}x${v.height}`),
+      [
+        'avif@1672x941',
+        'avif@960x540',
+        'avif@480x270',
+        'webp@1672x941',
+        'webp@960x540',
+        'webp@480x270',
+        'jpeg@1672x941'
+      ]
+    )
+    assert.equal(paintingFallback(plan), '/assets/images/ki-design/arcadia/arcadia-painting-1672.jpg')
+  })
+
+  test('refuses to upscale a smaller source', () => {
+    assert.throws(() => planPainting(1200, 675), /would upscale/)
+  })
+
+  test('pins the painting to a commit and records its licence state', () => {
+    assert.match(PAINTING.ref, /^[0-9a-f]{40}$/)
+    assert.match(PAINTING.licence, /KI-DESIGN-ART-002/)
   })
 })

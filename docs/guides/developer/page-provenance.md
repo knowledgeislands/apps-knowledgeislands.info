@@ -55,15 +55,16 @@ This is a claim, not a default. It says someone decided the page has no source, 
 
 ### Vendored pages
 
-A third case sits between the two. A **vendored** page declares its `sources` in the ordinary way but does not restate them: it reproduces an upstream artefact and renders it. Three pages do this today.
+A third case sits between the two. A **vendored** page declares its `sources` in the ordinary way but does not restate them: it reproduces an upstream artefact and renders it. Four pages do this today.
 
 | Page | Vendors | Sync script | Record |
 | --- | --- | --- | --- |
 | `/projects/ki-agentic-harness/skill-catalogue/` | The harness's generated capability inventory, from its marker-delimited block in `skills/README.md` | `sync-skill-catalogue.ts` → `src/_data/skillCatalogue.json5` | ADR-KI-WEBSITE-001 |
 | `/projects/ki/commands/` | The `ki` command inventory, from `man/ki.1` | `sync-cli-commands.ts` → `src/_data/cliCommands.json5` | ADR-KI-WEBSITE-001 |
 | `/field-guide/` | The canon and decided entries of the `ki-design` symbol library, from `packages/symbols` | `sync-ki-design.ts` → `src/_data/kiSymbols.json5` | KI-WEBSITE-SITE-044 |
+| `/arcadia/` | The chosen Arcadia painting, from `ki-design` `docs/briefs/references/arcadia.png`, as responsive images | `sync-ki-design.ts` → `src/_data/arcadiaPainting.json5` | KI-WEBSITE-SITE-045 |
 
-The Field Guide is a hand-built Nunjucks page rather than prose, so it cannot inherit the provenance footer from the prose layout. `verify:provenance` lists it explicitly, checks its declaration like any Markdown page's, and requires it to include `partials/sources.njk` itself. The same sync also vendors the design system the whole site is drawn in — the token CSS, the glyph sprite, the drawn Arcadia and the logo — each file headed with the `ki-design` commit it came from. It reads a clean local checkout rather than fetching, because the token CSS and the sprite are build outputs of `ki-design`'s own code:
+The Field Guide and `/arcadia/` are hand-built Nunjucks pages rather than prose, so they cannot inherit the provenance footer from the prose layout. `verify:provenance` lists them explicitly, checks their declarations like any Markdown page's, and requires each to include `partials/sources.njk` itself. The same sync also vendors the design system the whole site is drawn in — the token CSS, the glyph sprite, the drawn Arcadia and the logo — each file headed with the `ki-design` commit it came from. It reads a clean local checkout rather than fetching, because the token CSS and the sprite are build outputs of `ki-design`'s own code. The Arcadia painting is the exception to taking the checkout's HEAD: it is chosen art rather than a build output, so the sync reads it from the commit it is pinned to and encodes it into AVIF, WebP and a JPEG fallback, never wider than the source. Its manifest records that the painting is generated reference art whose licence is still to be recorded:
 
 ```bash
 bun run --cwd apps/site sync:design   # reads ../ki-design beside this repository; pass --from <path> for another checkout

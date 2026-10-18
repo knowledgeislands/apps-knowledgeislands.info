@@ -105,16 +105,25 @@ export default function (eleventyConfig: UserConfig) {
   })
 
   // ── Transform: rewrite absolute links to relative ────────────────────────
-  // Ensures href/src attributes pointing at absolute internal paths are
+  // Ensures href/src/srcset attributes pointing at absolute internal paths are
   // rewritten to relative paths, making dist/ portable without a web server.
   eleventyConfig.addTransform('explicit-index-links', (content: string, outputPath: string | undefined) => {
     if (!outputPath?.endsWith('.html')) return content
-    return content.replace(
-      /(\s(?:href|src)=)(["'])([^"']+)(\2)/gi,
-      (_match, prefix: string, quote: string, url: string) => {
-        if (/^(?:https?:|mailto:|tel:|javascript:|data:|#)/i.test(url)) return `${prefix}${quote}${url}${quote}`
-        return `${prefix}${quote}${toRelativeOutputUrl(url, outputPath)}${quote}`
-      }
+    return (
+      content
+        .replace(/(\s(?:href|src)=)(["'])([^"']+)(\2)/gi, (_match, prefix: string, quote: string, url: string) => {
+          if (/^(?:https?:|mailto:|tel:|javascript:|data:|#)/i.test(url)) return `${prefix}${quote}${url}${quote}`
+          return `${prefix}${quote}${toRelativeOutputUrl(url, outputPath)}${quote}`
+        })
+        // A srcset is a list of candidates, each a URL and an optional descriptor, so each URL is rewritten
+        // on its own; a <picture>'s responsive images would otherwise stay absolute and fail from a file.
+        .replace(/(\ssrcset=)(["'])([^"']+)(\2)/gi, (_match, prefix: string, quote: string, list: string) => {
+          const candidates = list.split(',').map((candidate) => {
+            const [url = '', ...descriptor] = candidate.trim().split(/\s+/)
+            return [toRelativeOutputUrl(url, outputPath), ...descriptor].join(' ')
+          })
+          return `${prefix}${quote}${candidates.join(', ')}${quote}`
+        })
     )
   })
 

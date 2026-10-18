@@ -3,6 +3,7 @@ layout: layouts/base.njk
 description: Knowledge Islands is a model for building, governing, and evolving knowledge across individuals, teams, and generations — treating knowledge not as a filing problem but as a civilisation question.
 ---
 {% from "macros/icons.njk" import kiGlyph %}
+{% from "macros/painting.njk" import paintingPicture %}
 {#
   The Voyage home, after the ki-design site preview (examples/site-preview/index.html at 002a623).
   The copy is the site's own, in its own order; the preview's look is applied around it.
@@ -280,28 +281,23 @@ description: Knowledge Islands is a model for building, governing, and evolving 
   </div>
 </section>
 
-<!-- ═══ ARCADIA ═══ -->
-<section id="arcadia" class="section on-parchment" aria-labelledby="arcadia-title">
-  <div class="page-container arcadia-grid">
-    <figure class="deckle arcadia-plate" data-theme="light">
-      <span class="tick tl"></span><span class="tick tr"></span><span class="tick bl"></span><span class="tick br"></span>
-      {%- set plateMap %}{% include "ki-design/arcadia-plate.svg" %}{% endset %}
-      {%- for pair in liveWording %}{% set plateMap = plateMap | replace(pair[0], pair[1]) %}{% endfor %}
-      {{ plateMap | safe }}
-      <figcaption class="plate-caption meta"><span>Arcadia · Knowledge Islands Principal</span><span>Modern tile set, daylight</span></figcaption>
-    </figure>
-    <div class="arcadia-copy">
-      <svg class="compass-mark ki-glyph" viewBox="0 0 24 24" aria-hidden="true"><use href="#ki-compass"/></svg>
-      <p class="kicker">Arcadia</p>
-      <h2 id="arcadia-title" class="display-m">Arcadia is the living instance.</h2>
-      <p class="lead">The canonical Knowledge Island of Knowledge Islands — a working example of the model in practice. Every standard described here is implemented in Arcadia.</p>
-      <div class="btn-row">
-        <a href="/philosophy/" class="btn btn-brass">Start with Philosophy</a>
-        <a href="/model/" class="btn btn-outline">Explore the Model</a>
-        <a href="/projects/" class="btn btn-outline">See the Projects</a>
-      </div>
+<!-- ═══ ARCADIA: the painting is the legend; the chart in the hero is the map ═══ -->
+<section id="arcadia" class="section arcadia-band" data-theme="night" aria-labelledby="arcadia-title">
+  <div class="page-container arcadia-copy center">
+    <svg class="compass-mark ki-glyph" viewBox="0 0 24 24" aria-hidden="true"><use href="#ki-compass"/></svg>
+    <p class="kicker">Arcadia</p>
+    <h2 id="arcadia-title" class="display-m">Arcadia is the living instance.</h2>
+    <p class="lead">The canonical Knowledge Island of Knowledge Islands — a working example of the model in practice. Every standard described here is implemented in Arcadia.</p>
+    <div class="btn-row">
+      <a href="/philosophy/" class="btn btn-brass">Start with Philosophy</a>
+      <a href="/model/" class="btn btn-outline">Explore the Model</a>
+      <a href="/projects/" class="btn btn-outline">See the Projects</a>
     </div>
   </div>
+  <figure class="arcadia-painting">
+    {{ paintingPicture(arcadiaPainting, "(min-width: 1672px) 1672px, 100vw", "lazy") }}
+    <figcaption class="meta">Arcadia — painted reference, 2026</figcaption>
+  </figure>
 </section>
 
 <!-- ═══ THE VOYAGE, in order: only pages that exist ═══ -->

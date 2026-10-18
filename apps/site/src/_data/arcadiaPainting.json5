@@ -1,0 +1,74 @@
+// Vendored manifest of the chosen Arcadia painting and the responsive images made from it.
+//
+// GENERATED FILE — do not edit. Regenerate with:
+//   bun run --cwd apps/site sync:design
+//
+// Taken from knowledgeislands/ki-design docs/briefs/references/arcadia.png,
+// read at the pinned commit below rather than at the checkout's HEAD.
+// Licence: generated reference art; licence to be recorded (KI-DESIGN-ART-002).
+// The ref below must match the ref declared in the sources frontmatter of src/arcadia/index.njk;
+// verify:provenance fails the build when they disagree.
+//
+// Painting taken at c73cefe7fc9d7c0d7d6ccd6229c2d06f4d5dafba.
+{
+  "source": {
+    "repository": "knowledgeislands/ki-design",
+    "path": "docs/briefs/references/arcadia.png",
+    "ref": "c73cefe7fc9d7c0d7d6ccd6229c2d06f4d5dafba"
+  },
+  "licence": "generated reference art; licence to be recorded (KI-DESIGN-ART-002)",
+  "width": 1672,
+  "height": 941,
+  "fallback": "/assets/images/ki-design/arcadia/arcadia-painting-1672.jpg",
+  "variants": [
+    {
+      "format": "avif",
+      "width": 1672,
+      "height": 941,
+      "src": "/assets/images/ki-design/arcadia/arcadia-painting-1672.avif",
+      "bytes": 238564
+    },
+    {
+      "format": "avif",
+      "width": 960,
+      "height": 540,
+      "src": "/assets/images/ki-design/arcadia/arcadia-painting-960.avif",
+      "bytes": 102697
+    },
+    {
+      "format": "avif",
+      "width": 480,
+      "height": 270,
+      "src": "/assets/images/ki-design/arcadia/arcadia-painting-480.avif",
+      "bytes": 29321
+    },
+    {
+      "format": "webp",
+      "width": 1672,
+      "height": 941,
+      "src": "/assets/images/ki-design/arcadia/arcadia-painting-1672.webp",
+      "bytes": 423362
+    },
+    {
+      "format": "webp",
+      "width": 960,
+      "height": 540,
+      "src": "/assets/images/ki-design/arcadia/arcadia-painting-960.webp",
+      "bytes": 171466
+    },
+    {
+      "format": "webp",
+      "width": 480,
+      "height": 270,
+      "src": "/assets/images/ki-design/arcadia/arcadia-painting-480.webp",
+      "bytes": 47166
+    },
+    {
+      "format": "jpeg",
+      "width": 1672,
+      "height": 941,
+      "src": "/assets/images/ki-design/arcadia/arcadia-painting-1672.jpg",
+      "bytes": 329376
+    }
+  ]
+}

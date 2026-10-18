@@ -1,0 +1,91 @@
+---
+layout: layouts/base.njk
+title: Arcadia
+description: The canonical Knowledge Island of Knowledge Islands — a working example of the model in practice.
+permalink: /arcadia/
+sources:
+  - repository: knowledgeislands/ki-design
+    path: docs/briefs/references/arcadia.png
+    ref: c73cefe7fc9d7c0d7d6ccd6229c2d06f4d5dafba
+    governs: 'The painting, vendored as responsive images in src/_data/arcadiaPainting.json5; generated reference art; licence to be recorded (KI-DESIGN-ART-002)'
+    reviewed: '2026-10-18'
+  - repository: knowledgeislands/ki-design
+    path: examples/site-preview/hero-arcadia.svg
+    ref: 002a623d0b39d50a1222660acaffd911507f4853
+    governs: 'The chart: Arcadia drawn from its hex map in the Modern tile set, with its cartouches'
+    reviewed: '2026-10-18'
+---
+{% from "macros/icons.njk" import kiGlyph %}
+{% from "macros/painting.njk" import paintingPicture %}
+{#
+  Arcadia: the painting is the legend; the chart is the map (owner direction, 18 October 2026).
+
+  The painting is the chosen reference in ki-design (docs/briefs/arcadia-handoff.md), vendored by
+  `sync:design` as responsive images listed in src/_data/arcadiaPainting.json5. The chart is the same
+  Modern-set map the home hero draws. Every sentence here is the home page's own: the Arcadia section's
+  description, the hero note and the districts list. Nothing new is said about Arcadia.
+
+  The Tower is not yet canon, so it is dropped from the Citadel's cartouche at render time, exactly as the
+  home page does, leaving the vendored file as ki-design drew it (KI-WEBSITE-SITE-044).
+#}
+{%- set liveWording = [
+  ["Library · Council Hall · Tower<", "Library · Council Hall<"]
+] -%}
+
+<!-- ═══ THE LEGEND: the painting ═══ -->
+<section class="painting-hero" data-theme="night" aria-labelledby="arcadia-page-title">
+  <figure class="painting-frame">
+    {{ paintingPicture(arcadiaPainting, "(min-width: 1672px) 1672px, 100vw", "eager", "high") }}
+    <figcaption class="meta">Arcadia — painted reference, 2026</figcaption>
+  </figure>
+  <div class="painting-title">
+    <p class="kicker">The legend</p>
+    <h1 id="arcadia-page-title" class="display-xl">Arcadia</h1>
+    <p class="lead">The canonical Knowledge Island of Knowledge Islands — a working example of the model in practice.</p>
+  </div>
+</section>
+
+<!-- ═══ THE MAP: the chart, with its text equivalent ═══ -->
+<section class="chart-section" data-theme="night" aria-labelledby="chart-title">
+  <div class="page-container">
+    <div class="section-head center">
+      <p class="kicker">The chart</p>
+      <h2 id="chart-title" class="display-m">Districts of Arcadia</h2>
+    </div>
+  </div>
+  <figure class="chart-map">
+    {%- set chartMap %}{% include "ki-design/hero-arcadia.svg" %}{% endset %}
+    {%- for pair in liveWording %}{% set chartMap = chartMap | replace(pair[0], pair[1]) %}{% endfor %}
+    {{ chartMap | safe }}
+    <figcaption class="meta">{{ kiGlyph("compass", 20) }}<span>Arcadia, drawn from its hex map in the Modern tile set.</span></figcaption>
+  </figure>
+  <div class="districts chart-districts">
+    <div class="page-container">
+      <ul>
+        <li>{{ kiGlyph("citadel") }}<div><strong>The Citadel</strong><span>Library · Council Hall</span></div></li>
+        <li>{{ kiGlyph("port") }}<div><strong>The Port</strong><span>Capture · entry &amp; exchange</span></div></li>
+        <li>{{ kiGlyph("observatory") }}<div><strong>The Observatory</strong><span>Reflect · insight</span></div></li>
+        <li>{{ kiGlyph("streams") }}<div><strong>The Streams</strong><span>Knowledge in motion</span></div></li>
+        <li>{{ kiGlyph("ancient-forest") }}<div><strong>The Ancient Forest</strong><span>Wisdom · never built on</span></div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ONWARD ═══ -->
+<section class="section on-parchment" aria-labelledby="arcadia-onward-title">
+  <div class="page-container center arcadia-onward">
+    <h2 id="arcadia-onward-title" class="display-m">Arcadia is the living instance.</h2>
+    <p class="lead">Every standard described here is implemented in Arcadia.</p>
+    <div class="btn-row">
+      <a href="/philosophy/" class="btn btn-brass">Start with Philosophy</a>
+      <a href="/model/" class="btn btn-outline">Explore the Model</a>
+      <a href="/projects/" class="btn btn-outline">See the Projects</a>
+    </div>
+  </div>
+  <div class="page-container">
+    <div class="prose-ki" style="max-width: none;">
+      {% include "partials/sources.njk" %}
+    </div>
+  </div>
+</section>
