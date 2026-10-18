@@ -15,13 +15,9 @@ description: Knowledge Islands is a model for building, governing, and evolving 
   the painting, with the hero copy in a soft pool of dusk over the sea, and the engraved chart is drawn in the
   Arcadia section further down, so the painting appears once (KI-WEBSITE-SITE-045).
 
-  The vendored map art still names the Tower (not yet canon) in the Citadel's cartouche; the `replace`
-  filter below drops it at render time, wherever the chart is drawn, leaving the vendored files
-  byte-for-byte as ki-design drew them. Delete the filter once the Tower is enacted (KI-WEBSITE-SITE-044).
+  The Capital is the island's civic heart, holding the Library and the Council Hall (GDR-KI-PRINCIPAL-011);
+  the vendored chart names it so, and is drawn as ki-design drew it.
 #}
-{%- set liveWording = [
-  ["Library · Council Hall · Tower<", "Library · Council Hall<"]
-] -%}
 
 <!-- ═══ HERO: the painting, the legend ═══ -->
 <section class="hero painted-hero" data-theme="night" aria-labelledby="hero-title">
@@ -49,7 +45,7 @@ description: Knowledge Islands is a model for building, governing, and evolving 
   <div class="page-container">
     <h2 id="districts-title">Districts of Arcadia</h2>
     <ul>
-      <li>{{ kiGlyph("citadel") }}<div><strong>The Citadel</strong><span>Library · Council Hall</span></div></li>
+      <li>{{ kiGlyph("council-hall") }}<div><strong>The Capital</strong><span>Library · Council Hall</span></div></li>
       <li>{{ kiGlyph("port") }}<div><strong>The Port</strong><span>Capture · entry &amp; exchange</span></div></li>
       <li>{{ kiGlyph("observatory") }}<div><strong>The Observatory</strong><span>Reflect · insight</span></div></li>
       <li>{{ kiGlyph("streams") }}<div><strong>The Streams</strong><span>Knowledge in motion</span></div></li>
@@ -104,8 +100,6 @@ description: Knowledge Islands is a model for building, governing, and evolving 
       <g class="gs" aria-hidden="true">
         <svg x="456" y="66" width="48" height="48" viewBox="0 0 24 24" style="stroke:#f5efe0;stroke-width:3"><use href="#ki-library"/></svg>
         <svg x="456" y="66" width="48" height="48" viewBox="0 0 24 24" style="stroke:#1a2030;stroke-width:1.05"><use href="#ki-library"/></svg>
-        <svg x="566" y="56" width="58" height="58" viewBox="0 0 24 24" style="stroke:#f5efe0;stroke-width:3"><use href="#ki-citadel"/></svg>
-        <svg x="566" y="56" width="58" height="58" viewBox="0 0 24 24" style="stroke:#1a2030;stroke-width:1.05"><use href="#ki-citadel"/></svg>
         <svg x="690" y="68" width="46" height="46" viewBox="0 0 24 24" style="stroke:#f5efe0;stroke-width:3"><use href="#ki-council-hall"/></svg>
         <svg x="690" y="68" width="46" height="46" viewBox="0 0 24 24" style="stroke:#1a2030;stroke-width:1.05"><use href="#ki-council-hall"/></svg>
       </g>
@@ -141,7 +135,7 @@ description: Knowledge Islands is a model for building, governing, and evolving 
         <p class="aside">The terrain before it is charted.</p>
       </article>
       <article class="layer">
-        <div class="layer-tag">{{ kiGlyph("citadel", 20) }}<span class="label">inhabited land</span></div>
+        <div class="layer-tag">{{ kiGlyph("library", 20) }}<span class="label">inhabited land</span></div>
         <h3 class="display-s">Knowledge</h3>
         <p>Information interpreted and applied. It requires you — your context, your connections, your lived experience. It changes when you do.</p>
         <p class="aside">The island as it is inhabited.</p>
@@ -263,7 +257,7 @@ description: Knowledge Islands is a model for building, governing, and evolving 
         <p>A discrete, self-contained body of knowledge with defined boundaries and internal geography. Operates its own cycle independently.</p>
       </article>
       <article class="card-night">
-        <span class="roundel" aria-hidden="true">{{ kiGlyph("citadel") }}</span>
+        <span class="roundel" aria-hidden="true">{{ kiGlyph("council-hall") }}</span>
         <h3 class="display-xs">Territory</h3>
         <p>Islands organised and governed together. One island holds governance infrastructure for the whole — the Principal Island.</p>
       </article>
@@ -300,9 +294,7 @@ description: Knowledge Islands is a model for building, governing, and evolving 
     <p class="kicker">The chart</p>
   </div>
   <figure class="chart-map arcadia-chart">
-    {%- set chartMap %}{% include "ki-design/hero-arcadia.svg" %}{% endset %}
-    {%- for pair in liveWording %}{% set chartMap = chartMap | replace(pair[0], pair[1]) %}{% endfor %}
-    {{ chartMap | safe }}
+    {% include "ki-design/hero-arcadia.svg" %}
     <figcaption class="meta">{{ kiGlyph("compass", 20) }}<span>Arcadia, drawn from its hex map in the Modern tile set.</span></figcaption>
   </figure>
 </section>

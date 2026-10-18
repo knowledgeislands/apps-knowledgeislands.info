@@ -18,18 +18,18 @@ const entry = (overrides: Partial<UpstreamSymbol>): UpstreamSymbol => ({
   id: 'island',
   name: 'Island',
   meaning: 'A body of knowledge with its own shores.',
-  status: 'canon',
+  status: 'official',
   category: 'geography',
   icon: 'island',
   ...overrides
 })
 
 describe('buildSymbolSnapshot', () => {
-  test('publishes canon and decided entries and withholds every proposal', () => {
+  test('publishes official and agreed entries and withholds every proposal', () => {
     const snapshot = buildSymbolSnapshot(
       [
         entry({}),
-        entry({ id: 'port', name: 'Port', status: 'decided', category: 'structure', icon: 'port' }),
+        entry({ id: 'port', name: 'Port', status: 'agreed', category: 'structure', icon: 'port' }),
         entry({ id: 'workshop', name: 'Workshop', status: 'proposed', category: 'structure' }),
         entry({ id: 'role-steward', name: 'Steward', status: 'proposed', category: 'role' })
       ],

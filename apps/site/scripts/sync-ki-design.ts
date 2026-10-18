@@ -9,8 +9,8 @@
  * glyph sprite) are build outputs of `ki-design`'s own TypeScript, which is imported here and rendered the
  * way `ki-design` renders them. The checkout must be clean, so the recorded commit is the content copied.
  *
- * Only `canon` and `decided` symbols are vendored. A `proposed` entry is an open question in `ki-design`, and
- * the site must not publish a proposal beside canon as if it were settled; leaving it out of the snapshot
+ * Only `official` and `agreed` symbols are vendored (GDR-KI-DESIGN-002). A `proposed` entry is an open question in
+ * `ki-design`, and the site must not publish a proposal beside official entries as if it were settled; leaving it out of the snapshot
  * means no template can publish it by accident.
  *
  * The chosen Arcadia painting is the one vendored file not taken at the checkout's HEAD. It is chosen art rather
@@ -33,7 +33,7 @@ export const SOURCE_REPOSITORY = 'knowledgeislands/ki-design'
 export const SYMBOLS_PATH = 'packages/symbols/src/symbols.ts'
 
 /** The statuses the site publishes. `proposed` is withheld by design; see the header. */
-export const PUBLISHED_STATUSES = ['canon', 'decided'] as const
+export const PUBLISHED_STATUSES = ['official', 'agreed'] as const
 export type PublishedStatus = (typeof PUBLISHED_STATUSES)[number]
 
 export const PLATE_START = '<!-- arcadia:start -->'
@@ -241,7 +241,7 @@ export function buildSymbolSnapshot(
   }
 
   const published = library.length - withheldProposed
-  if (published === 0) throw new Error('no canon or decided symbols found; refusing to vendor an empty library')
+  if (published === 0) throw new Error('no official or agreed symbols found; refusing to vendor an empty library')
   return {
     source: { repository: SOURCE_REPOSITORY, path: SYMBOLS_PATH, ref },
     counts: { upstream: library.length, published, withheldProposed },
@@ -268,13 +268,13 @@ export const provenance = (path: string, ref: string, note = 'unchanged below th
 
 const renderSnapshot = (snapshot: SymbolSnapshot): string =>
   [
-    '// Vendored snapshot of the ki-design symbol library: canon and decided entries, without their notes.',
+    '// Vendored snapshot of the ki-design symbol library: official and agreed entries, without their notes.',
     '//',
     '// GENERATED FILE — do not edit. Regenerate with:',
     '//   bun run --cwd apps/site sync:design',
     '//',
     `// Taken from ${SOURCE_REPOSITORY} ${SYMBOLS_PATH}. Proposed entries are withheld: the site`,
-    '// does not publish a proposal beside canon. The ref below must match the ref declared in the sources',
+    '// does not publish a proposal beside official entries. The ref below must match the ref declared in the sources',
     '// frontmatter of src/field-guide/index.njk; verify:provenance fails the build when they disagree.',
     '//',
     `// Snapshot taken at ${snapshot.source.ref}.`,

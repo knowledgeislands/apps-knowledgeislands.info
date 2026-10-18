@@ -1,23 +1,23 @@
 ---
 layout: layouts/base.njk
 title: Field Guide
-description: Every mark on the Knowledge Islands map, once — what it is, what it means, and whether it is canon or decided.
+description: Every mark on the Knowledge Islands map, once — what it is, what it means, and whether it is official or agreed.
 permalink: /field-guide/
 sources:
   - repository: knowledgeislands/ki-principal
     path: Pillars/Aesthetics/Symbol Library/Symbol Library.md
-    ref: 25b30fec5993da2162fa21a60db0d3a8f5893133
-    governs: 'Which symbols are canon, including the Port, its modes, the Lighthouse and the Council Hall enacted by GDR-KI-PRINCIPAL-010'
+    ref: 2b394a0fd80b7474661bd5679b67a71fee5b5576
+    governs: 'Which symbols are official, including the Port, its modes, the Lighthouse and the Council Hall enacted by GDR-KI-PRINCIPAL-010, and the Capital by GDR-KI-PRINCIPAL-011'
     reviewed: '2026-10-18'
   - repository: knowledgeislands/ki-principal
     path: Pillars/Aesthetics/Visual Style/Visual Style.md
-    ref: 25b30fec5993da2162fa21a60db0d3a8f5893133
+    ref: 2b394a0fd80b7474661bd5679b67a71fee5b5576
     governs: 'The symbolic semantics the meanings are read against'
     reviewed: '2026-10-18'
   - repository: knowledgeislands/ki-design
     path: packages/symbols/src/symbols.ts
-    ref: 002a623d0b39d50a1222660acaffd911507f4853
-    governs: 'Every card: name, meaning, status and glyph, vendored in src/_data/kiSymbols.json5'
+    ref: f49c984963b98d4b8d28b767dbf4bf1e41bbb9e5
+    governs: 'Every card: name, meaning, status (Official or Agreed, GDR-KI-DESIGN-002) and glyph, vendored in src/_data/kiSymbols.json5'
     reviewed: '2026-10-18'
 ---
 {% from "macros/icons.njk" import kiGlyph %}
@@ -25,17 +25,16 @@ sources:
   The Atlas's Field Guide, after the ki-design site preview (examples/site-preview/field-guide.html).
 
   The cards are rendered from src/_data/kiSymbols.json5, a vendored snapshot of the ki-design symbol
-  library refreshed by `bun run --cwd apps/site sync:design`. The snapshot carries only canon and decided
+  library refreshed by `bun run --cwd apps/site sync:design`. The snapshot carries only official and agreed
   entries: proposed vocabulary is withheld at the sync, so no template here can publish a proposal beside
-  canon. The framing below — the group titles, their introductions and where the Voyage explains them — is
+  official entries. The framing below — the group titles, their introductions and where the Voyage explains them — is
   this site's own and survives a refresh.
 
-  `enactedCanon` lists entries Knowledge Islands Principal has enacted since the snapshot's ki-design
-  commit, which still marks them decided: the Port, its four modes, the Lighthouse and the Council Hall
-  (GDR-KI-PRINCIPAL-010). Delete an id once a refreshed snapshot carries it as canon.
+  The status chips read Official and Agreed (GDR-KI-DESIGN-002). Their styles keep the class names
+  `badge-canon` and `badge-decided` that main.css already defines, so `badgeClass` maps each status to one.
 #}
-{%- set statusLabel = { canon: "Canon", decided: "Decided" } %}
-{%- set enactedCanon = ["port", "dock", "rail-depot", "airport", "customs-house", "lighthouse", "council-hall"] %}
+{%- set statusLabel = { official: "Official", agreed: "Agreed" } %}
+{%- set badgeClass = { official: "badge-canon", agreed: "badge-decided" } %}
 {%- set groupInfo = {
   "geography": { title: "Geography", intro: "From realm to island: the shapes knowledge takes on the chart.", voyage: "The Wider Picture", href: "/#wider" },
   "zone": { title: "Zones", intro: "The places on every island.", voyage: "The Home", href: "/#home" },
@@ -53,8 +52,8 @@ sources:
     <h1 id="guide-title" class="display-l">Field Guide</h1>
     <p class="lead">Every mark on the map, once: what it is, what it means, and whether it is settled. Return here whenever the Voyage names a place you want to look up.</p>
     <div class="status-key" aria-label="Status key">
-      <div><span class="badge badge-canon">Canon</span> Ratified in Knowledge Islands Principal</div>
-      <div><span class="badge badge-decided">Decided</span> Agreed, not yet enacted into canon</div>
+      <div><span class="badge badge-canon">Official</span> Ratified in Knowledge Islands Principal</div>
+      <div><span class="badge badge-decided">Agreed</span> Agreed, not yet enacted into Knowledge Islands Principal</div>
     </div>
   </div>
 </section>
@@ -71,7 +70,7 @@ sources:
 <section class="section-parchment" aria-label="About these entries">
   <div class="page-container">
     <div class="prose-ki" style="padding-top: 3rem;">
-      <p>A decided entry has been agreed but not yet written into Knowledge Islands Principal, so the rest of this site still uses the enacted word. The Port shows how an entry becomes canon: Principal's Symbol Library once listed Harbour, an integration point, and Port, operational systems, as two symbols, and the design system decided to fold them into one Port with four modes. <a href="https://github.com/knowledgeislands/ki-principal/blob/25b30fec5993da2162fa21a60db0d3a8f5893133/Admin/Governance/Decisions/GDR-KI-PRINCIPAL-010-the-port.md">GDR-KI-PRINCIPAL-010</a> enacted it, retiring the Harbour, and split the Lighthouse, now guidance only, from the Council Hall, which means governance. Entries still under discussion are not shown here.</p>
+      <p>An agreed entry has the owner's agreement but is not yet written into Knowledge Islands Principal, so the rest of this site still uses the enacted word. The Port shows how an entry becomes official: Principal's Symbol Library once listed Harbour, an integration point, and Port, operational systems, as two symbols, and the design system agreed to fold them into one Port with four modes. <a href="https://github.com/knowledgeislands/ki-principal/blob/25b30fec5993da2162fa21a60db0d3a8f5893133/Admin/Governance/Decisions/GDR-KI-PRINCIPAL-010-the-port.md">GDR-KI-PRINCIPAL-010</a> enacted it, retiring the Harbour, and split the Lighthouse, now guidance only, from the Council Hall, which means governance. Entries still under discussion are not shown here.</p>
     </div>
   </div>
 </section>
@@ -95,8 +94,7 @@ sources:
           {%- endif %}
           <div>
             <h3 class="display-xs">{{ symbol.name }}</h3>
-            {%- set status = "canon" if symbol.id in enactedCanon else symbol.status %}
-            <div class="sym-meta"><span class="badge badge-{{ status }}">{{ statusLabel[status] }}</span><code>{{ symbol.id }}</code>{% if not symbol.icon %} <span class="meta">No glyph yet</span>{% endif %}</div>
+            <div class="sym-meta"><span class="badge {{ badgeClass[symbol.status] }}">{{ statusLabel[symbol.status] }}</span><code>{{ symbol.id }}</code>{% if not symbol.icon %} <span class="meta">No glyph yet</span>{% endif %}</div>
             <p>{{ symbol.meaning }}</p>
           </div>
         </li>

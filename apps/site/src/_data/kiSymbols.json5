@@ -1,23 +1,23 @@
-// Vendored snapshot of the ki-design symbol library: canon and decided entries, without their notes.
+// Vendored snapshot of the ki-design symbol library: official and agreed entries, without their notes.
 //
 // GENERATED FILE — do not edit. Regenerate with:
 //   bun run --cwd apps/site sync:design
 //
 // Taken from knowledgeislands/ki-design packages/symbols/src/symbols.ts. Proposed entries are withheld: the site
-// does not publish a proposal beside canon. The ref below must match the ref declared in the sources
+// does not publish a proposal beside official entries. The ref below must match the ref declared in the sources
 // frontmatter of src/field-guide/index.njk; verify:provenance fails the build when they disagree.
 //
-// Snapshot taken at 002a623d0b39d50a1222660acaffd911507f4853.
+// Snapshot taken at f49c984963b98d4b8d28b767dbf4bf1e41bbb9e5.
 {
   "source": {
     "repository": "knowledgeislands/ki-design",
     "path": "packages/symbols/src/symbols.ts",
-    "ref": "002a623d0b39d50a1222660acaffd911507f4853"
+    "ref": "f49c984963b98d4b8d28b767dbf4bf1e41bbb9e5"
   },
   "counts": {
-    "upstream": 54,
-    "published": 38,
-    "withheldProposed": 16
+    "upstream": 52,
+    "published": 39,
+    "withheldProposed": 13
   },
   "categories": [
     {
@@ -27,61 +27,61 @@
           "id": "island",
           "name": "Island",
           "meaning": "A body of knowledge with its own shores: one coherent domain, project or practice.",
-          "status": "canon",
+          "status": "official",
           "icon": "island"
         },
         {
           "id": "archipelago",
           "name": "Archipelago",
           "meaning": "A cluster of related islands that share waters and trade closely.",
-          "status": "canon",
+          "status": "official",
           "icon": "archipelago"
         },
         {
           "id": "territory",
           "name": "Territory",
           "meaning": "A region of the realm held together by purpose; its parts are mostly, though not always, adjacent.",
-          "status": "decided"
+          "status": "agreed"
         },
         {
           "id": "realm",
           "name": "Realm",
           "meaning": "The whole standard world, containing many territories laid out geographically.",
-          "status": "decided"
+          "status": "agreed"
         },
         {
           "id": "map-of-known-lands",
           "name": "Map of Known Lands",
           "meaning": "The chart of the realm: everything charted so far, often called simply Known Lands.",
-          "status": "decided",
+          "status": "agreed",
           "icon": "known-lands"
         },
         {
           "id": "terrain",
           "name": "Terrain",
           "meaning": "The character of the ground on a hex, from grassland to volcanic, set by the tile set.",
-          "status": "canon",
+          "status": "official",
           "icon": "terrain"
         },
         {
           "id": "ancient-forest",
           "name": "Ancient forest",
           "meaning": "Old, deep-rooted knowledge at the heart of an island; slow-growing and protected.",
-          "status": "canon",
+          "status": "official",
           "icon": "ancient-forest"
         },
         {
           "id": "weave",
           "name": "Weave",
           "meaning": "The fabric of cross-links that binds islands and their contents together.",
-          "status": "canon",
+          "status": "official",
           "icon": "weave"
         },
         {
           "id": "cartographic-grid",
           "name": "Cartographic grid",
           "meaning": "The hex grid every map is drawn on; the shared coordinate system of the realm.",
-          "status": "decided",
+          "status": "agreed",
           "icon": "grid"
         }
       ]
@@ -90,44 +90,50 @@
       "id": "zone",
       "symbols": [
         {
+          "id": "capital",
+          "name": "Capital",
+          "meaning": "The civic heart of an island, holding the Library and the Council Hall; drawn as a square, never a fortress.",
+          "status": "official"
+        },
+        {
           "id": "pillars",
           "name": "Pillars",
           "meaning": "The foundational principles an island or the realm rests on.",
-          "status": "canon"
+          "status": "official"
         },
         {
           "id": "calendar",
           "name": "Calendar",
           "meaning": "The zone that keeps time: rhythms, cadences and dated commitments.",
-          "status": "canon",
+          "status": "official",
           "icon": "calendar"
         },
         {
           "id": "resources",
           "name": "Resources",
           "meaning": "Reference materials, assets and supplies an island draws on.",
-          "status": "canon",
+          "status": "official",
           "icon": "resources"
         },
         {
           "id": "streams",
           "name": "Streams",
           "meaning": "Flows of incoming material that feed an island over time.",
-          "status": "canon",
+          "status": "official",
           "icon": "streams"
         },
         {
           "id": "admin-governance",
           "name": "Admin / Governance",
           "meaning": "The zone for decisions, policy and stewardship of the island itself.",
-          "status": "canon",
+          "status": "official",
           "icon": "council-hall"
         },
         {
           "id": "admin-operations",
           "name": "Admin / Operations",
           "meaning": "The zone for the running of the island: routines, upkeep and housekeeping.",
-          "status": "canon",
+          "status": "official",
           "icon": "mill"
         }
       ]
@@ -139,42 +145,42 @@
           "id": "library",
           "name": "Library",
           "meaning": "Where curated, durable knowledge is kept and can be consulted.",
-          "status": "canon",
+          "status": "official",
           "icon": "library"
         },
         {
           "id": "council-hall",
           "name": "Council Hall",
           "meaning": "Governance: where decisions are debated and made; the parliament of the realm.",
-          "status": "decided",
+          "status": "official",
           "icon": "council-hall"
         },
         {
           "id": "observatory",
           "name": "Observatory",
           "meaning": "Insight and analytics: where an island looks out and reflects.",
-          "status": "canon",
+          "status": "official",
           "icon": "observatory"
         },
         {
           "id": "lighthouse",
           "name": "Lighthouse",
           "meaning": "Guidance: standing direction that keeps travellers off the rocks.",
-          "status": "decided",
+          "status": "official",
           "icon": "lighthouse"
         },
         {
           "id": "port",
           "name": "Port",
           "meaning": "Where knowledge and work arrive and depart, by whatever mode of transport.",
-          "status": "decided",
+          "status": "official",
           "icon": "port"
         },
         {
           "id": "bridge",
           "name": "Bridge",
           "meaning": "A translation layer joining two lands so that what crosses can be understood on both sides.",
-          "status": "decided",
+          "status": "agreed",
           "icon": "bridge"
         }
       ]
@@ -186,28 +192,28 @@
           "id": "dock",
           "name": "Dock",
           "meaning": "The port mode for exchange by sea with other islands.",
-          "status": "decided",
+          "status": "official",
           "icon": "dock"
         },
         {
           "id": "rail-depot",
           "name": "Rail depot",
           "meaning": "The port mode for scheduled, high-volume flows along fixed lines.",
-          "status": "decided",
+          "status": "official",
           "icon": "rail-depot"
         },
         {
           "id": "airport",
           "name": "Airport",
           "meaning": "The port mode for fast, long-range connections to distant lands.",
-          "status": "decided",
+          "status": "official",
           "icon": "airport"
         },
         {
           "id": "customs-house",
           "name": "Customs house",
           "meaning": "The border crossing: where what enters or leaves is inspected and declared.",
-          "status": "decided",
+          "status": "official",
           "icon": "customs-house"
         }
       ]
@@ -219,28 +225,28 @@
           "id": "incoming",
           "name": "Incoming (+)",
           "meaning": "Something has arrived and awaits attention.",
-          "status": "canon",
+          "status": "official",
           "icon": "inbound"
         },
         {
           "id": "outbound",
           "name": "Outbound (-)",
           "meaning": "Something is leaving or has been sent on.",
-          "status": "canon",
+          "status": "official",
           "icon": "outbound"
         },
         {
           "id": "lantern",
           "name": "Lantern",
           "meaning": "Attention: a light left burning where someone should look.",
-          "status": "canon",
+          "status": "official",
           "icon": "lantern"
         },
         {
           "id": "storm",
           "name": "Storm",
           "meaning": "A blocking risk: work cannot safely proceed until it passes.",
-          "status": "canon"
+          "status": "official"
         }
       ]
     },
@@ -251,25 +257,25 @@
           "id": "thriving",
           "name": "Thriving",
           "meaning": "Actively tended and in good health.",
-          "status": "canon"
+          "status": "official"
         },
         {
           "id": "quiet",
           "name": "Quiet",
           "meaning": "Sound but little visited lately.",
-          "status": "canon"
+          "status": "official"
         },
         {
           "id": "weathered",
           "name": "Weathered",
           "meaning": "Showing neglect: needs upkeep before it can be relied upon.",
-          "status": "canon"
+          "status": "official"
         },
         {
           "id": "ruined",
           "name": "Ruined",
           "meaning": "No longer usable as it stands; retire or rebuild.",
-          "status": "canon",
+          "status": "official",
           "icon": "ruins"
         }
       ]
@@ -281,35 +287,35 @@
           "id": "route",
           "name": "Route",
           "meaning": "A charted way between two places.",
-          "status": "canon",
+          "status": "official",
           "icon": "route"
         },
         {
           "id": "trade-route",
           "name": "Trade route",
           "meaning": "A regular route along which knowledge and work are exchanged between islands.",
-          "status": "canon",
+          "status": "official",
           "icon": "trade-route"
         },
         {
           "id": "current",
           "name": "Current",
           "meaning": "A prevailing flow that carries things along whether or not anyone steers.",
-          "status": "canon",
+          "status": "official",
           "icon": "current"
         },
         {
           "id": "reef",
           "name": "Reef",
           "meaning": "A hidden hazard beneath the surface.",
-          "status": "canon",
+          "status": "official",
           "icon": "reef"
         },
         {
           "id": "celestial-guide",
           "name": "Celestial guide",
           "meaning": "A fixed point to navigate by: enduring values above the day-to-day.",
-          "status": "canon",
+          "status": "official",
           "icon": "celestial-guide"
         }
       ]

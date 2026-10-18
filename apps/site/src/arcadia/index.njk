@@ -11,7 +11,7 @@ sources:
     reviewed: '2026-10-18'
   - repository: knowledgeislands/ki-design
     path: examples/site-preview/hero-arcadia.svg
-    ref: 002a623d0b39d50a1222660acaffd911507f4853
+    ref: f49c984963b98d4b8d28b767dbf4bf1e41bbb9e5
     governs: 'The chart: Arcadia drawn from its hex map in the Modern tile set, with its cartouches'
     reviewed: '2026-10-18'
 ---
@@ -25,12 +25,8 @@ sources:
   Modern-set map the home hero draws. Every sentence here is the home page's own: the Arcadia section's
   description, the hero note and the districts list. Nothing new is said about Arcadia.
 
-  The Tower is not yet canon, so it is dropped from the Citadel's cartouche at render time, exactly as the
-  home page does, leaving the vendored file as ki-design drew it (KI-WEBSITE-SITE-044).
+  The chart's cartouche names the Capital, holding the Library and the Council Hall (GDR-KI-PRINCIPAL-011).
 #}
-{%- set liveWording = [
-  ["Library · Council Hall · Tower<", "Library · Council Hall<"]
-] -%}
 
 <!-- ═══ THE LEGEND: the painting ═══ -->
 <section class="painting-hero" data-theme="night" aria-labelledby="arcadia-page-title">
@@ -54,15 +50,13 @@ sources:
     </div>
   </div>
   <figure class="chart-map">
-    {%- set chartMap %}{% include "ki-design/hero-arcadia.svg" %}{% endset %}
-    {%- for pair in liveWording %}{% set chartMap = chartMap | replace(pair[0], pair[1]) %}{% endfor %}
-    {{ chartMap | safe }}
+    {% include "ki-design/hero-arcadia.svg" %}
     <figcaption class="meta">{{ kiGlyph("compass", 20) }}<span>Arcadia, drawn from its hex map in the Modern tile set.</span></figcaption>
   </figure>
   <div class="districts chart-districts">
     <div class="page-container">
       <ul>
-        <li>{{ kiGlyph("citadel") }}<div><strong>The Citadel</strong><span>Library · Council Hall</span></div></li>
+        <li>{{ kiGlyph("council-hall") }}<div><strong>The Capital</strong><span>Library · Council Hall</span></div></li>
         <li>{{ kiGlyph("port") }}<div><strong>The Port</strong><span>Capture · entry &amp; exchange</span></div></li>
         <li>{{ kiGlyph("observatory") }}<div><strong>The Observatory</strong><span>Reflect · insight</span></div></li>
         <li>{{ kiGlyph("streams") }}<div><strong>The Streams</strong><span>Knowledge in motion</span></div></li>
