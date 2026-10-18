@@ -11,7 +11,7 @@ sources:
     reviewed: '2026-10-18'
   - repository: knowledgeislands/ki-design
     path: examples/site-preview/hero-arcadia.svg
-    ref: f49c984963b98d4b8d28b767dbf4bf1e41bbb9e5
+    ref: cf250cb89436c3a40b258675817a02c32af91780
     governs: 'The chart: Arcadia drawn from its hex map in the Modern tile set, with its cartouches'
     reviewed: '2026-10-18'
 ---
@@ -25,7 +25,8 @@ sources:
   Modern-set map the home hero draws. Every sentence here is the home page's own: the Arcadia section's
   description, the hero note and the districts list. Nothing new is said about Arcadia.
 
-  The chart's cartouche names the Capital, holding the Library and the Council Hall (GDR-KI-PRINCIPAL-011).
+  The chart's cartouche names the Capital, holding the Library and the Council Hall (GDR-KI-PRINCIPAL-011), and
+  draws it with ki-design's own `capital` glyph.
 #}
 
 <!-- ═══ THE LEGEND: the painting ═══ -->
@@ -56,7 +57,7 @@ sources:
   <div class="districts chart-districts">
     <div class="page-container">
       <ul>
-        <li>{{ kiGlyph("council-hall") }}<div><strong>The Capital</strong><span>Library · Council Hall</span></div></li>
+        <li>{{ kiGlyph("capital") }}<div><strong>The Capital</strong><span>Library · Council Hall</span></div></li>
         <li>{{ kiGlyph("port") }}<div><strong>The Port</strong><span>Capture · entry &amp; exchange</span></div></li>
         <li>{{ kiGlyph("observatory") }}<div><strong>The Observatory</strong><span>Reflect · insight</span></div></li>
         <li>{{ kiGlyph("streams") }}<div><strong>The Streams</strong><span>Knowledge in motion</span></div></li>
