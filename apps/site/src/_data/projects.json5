@@ -171,7 +171,7 @@
       'skill add and repo skill add: activate a capability for you, or for a repository, in an explicit scope that is never implied.',
       'repo educate, audit and conform: explain what the declared skills expect, check it read-only, then apply the repairs.',
       'manage doctor, diag, outdated and repair: what is installed, what is behind, what is broken, and what to do about it.',
-      'Eighty-eight commands across fourteen groups in total, listed in full on this site rather than left to the manual.'
+      'A hundred and nineteen commands across eighteen groups in total, listed in full on this site rather than left to the manual.'
     ],
     state:
       'Published and labelled preview. The command surface is settled enough to build habits on — bootstrap, skill activation and the audit loop have been stable for several releases — and the version number is the honest signal that it is still moving.',

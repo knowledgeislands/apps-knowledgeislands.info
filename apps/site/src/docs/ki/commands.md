@@ -6,9 +6,9 @@ order: 4
 sources:
   - repository: knowledgeislands/tools-ki
     path: man/ki.1
-    ref: v0.10.1
+    ref: v0.11.0
     governs: 'The whole inventory below, vendored from the manual''s COMMAND GROUPS and SYNOPSIS sections rather than restated'
-    reviewed: '2026-10-11'
+    reviewed: '2026-10-18'
 ---
 
 # Every `ki` command

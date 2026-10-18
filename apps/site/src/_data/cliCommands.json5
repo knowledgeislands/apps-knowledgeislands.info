@@ -2,7 +2,7 @@
 //
 // bun run --cwd apps/site sync:cli -- --ref <tag-or-commit>
 //
-// Vendored from knowledgeislands/tools-ki man/ki.1 at v0.10.1,
+// Vendored from knowledgeislands/tools-ki man/ki.1 at v0.11.0,
 // parsed out of its COMMAND GROUPS section, reconciled against its SYNOPSIS.
 //
 // The page that renders it is src/projects/ki/command-groups.md; the reason the site
@@ -12,11 +12,11 @@
   "source": {
     "repository": "knowledgeislands/tools-ki",
     "path": "man/ki.1",
-    "ref": "v0.10.1"
+    "ref": "v0.11.0"
   },
   "counts": {
-    "groups": 16,
-    "commands": 108,
+    "groups": 18,
+    "commands": 119,
     "omittedGroups": 0
   },
   "groups": [
@@ -107,6 +107,10 @@
           "description": "List verified installed harnesses and their capabilities with declared user skills and local registered repositories. The command does not fetch, discover a repository, or change state."
         },
         {
+          "command": "ki link <identifier...>",
+          "description": "Print one Markdown link per roadmap work-record identifier, such as KI-TOOL-KI-CLI-127, so an owner report or checkpoint links a record in one call. The registered repository whose declared repo_code scopes the identifier is searched first, under docs/roadmap/ or Streams/Roadmap/; with no scope match every registered repository is walked. A live record prints [<identifier>](<absolutepath>). A record no longer on disk whose number is within its area's high-water mark in _ISSUES.md prints [<identifier> (pruned)](<repository>/blob/<last revision>/<path>) on the registered canonical repository, where the last revision is the first parent of the newest commit that deleted it. An identifier that resolves to nothing is never given an invented link: the command prints every link it can, then exits 1 naming each reason. It does not fetch or change state."
+        },
+        {
           "command": "ki mcp install <owner/repository> [version] [--auth github-cli]",
           "description": "Install and activate one governed MCP server source release from GitHub. An explicit version selects only its exact annotated v<SemVer> tag. With no version, public access resolves the latest stable GitHub Release without authentication. Private access requires deliberate --authgithub-cli, which uses the existing GitHub CLI session for release lookup and clone. KI never reads, persists, or displays its credential."
         },
@@ -160,11 +164,15 @@
         },
         {
           "command": "-t, --territory <handle>",
-          "description": "Select the Capital's declared territory through its territory_prefix, or its registry key when no prefix is declared. The registry maps every canonical member identity before filtering. This scope conflicts with --repo and --estate."
+          "description": "Select the Capital's declared territory through its territory_prefix, or its registry key when no prefix is declared, or through any of its declared territory_aliases. The registry maps every canonical member identity before filtering. This scope conflicts with --repo, --estate and --principals."
         },
         {
           "command": "--estate",
-          "description": "Select every repository in the registered estate, conflicting with --repo and --territory. Without an explicit scope, keep the current repository or direct-CWD .mgit.toml workspace selection. KI does not invoke mgit."
+          "description": "Select every repository in the registered estate, conflicting with --repo, --territory and --principals."
+        },
+        {
+          "command": "--principals",
+          "description": "Select every registered territory Capital, ranked territories first, then the system Capital and the rest by territory name, conflicting with --repo, --territory and --estate. Without an explicit scope, keep the current repository or direct-CWD .mgit.toml workspace selection. KI does not invoke mgit."
         },
         {
           "command": "-f, --filter <prefix>",
@@ -185,8 +193,8 @@
           "description": "Open every selected canonical repository in the requested local target. By default, a Knowledge Base opens its notes root followed by every declared, locally bound external store in declaration order. Each binding must be a direct directory recorded with the canonical repository; it is never made an estate member or territory participant. --no-stores opens canonical notes roots only, while --stores makes the default explicit. Delta opens repository roots only; it skips stores by default and rejects --stores. Delta's documented project flow stores repository and thread data on its servers even when using a local model."
         },
         {
-          "command": "ki repo [repo-options] audit [--skill <skill>] [--progress <auto|always|never>] [--progress-style <single|multi>] [--reporter-levels <levels|all>]",
-          "description": "Run the native read-only operations registered by each selected repository's declared capabilities. The host verifies every selected harness inventory and integrity-covered operation before importing it in process; it never dispatches repository-vendored runners. Progress defaults to auto, which follows the output stream's TTY state; always also renders deterministic progress in redirected output, and never suppresses it. On a terminal, progress is a compact receipt stream with one mutable activity row. Its moving bar means work is active; it does not estimate completion from item count or declared cost. Evidence-ready skills appear once with a full bar, then collapse to one timed evidence receipt before rubric results begin. Loading and the operation also finish as timed receipts, with total elapsed time on the operation receipt. Queued skills are not printed. Use --progress-style single to suppress temporary per-skill evidence receipts. Redirected --progress always output defaults to that single-row form. Progress also names the span in which a skill gathers its evidence, before any criterion runs, together with whatever stages and steps that skill reports inside it; a span of unknown extent shows activity and an elapsed clock rather than a completion estimate. Per-skill result rows name the assessed repository first and its supplying harness skill in brackets, and appear only for WARN, FAIL, or FIXED outcomes. Audit renders FAIL and WARN findings by default; --reporter-levels accepts a case-insensitive comma-separated selection from FAIL, WARN, FIXED, INFO, NOT_APPLICABLE, and PASS, or all. A clean repository summary reports PASS with its skill count. Diagnostic counters remain for WARN, FAIL, and FIXED outcomes."
+          "command": "ki repo [repo-options] audit [--skill <skill>] [--progress <auto|always|never>] [--progress-style <single|multi>] [--reporter-levels <levels|all>] [--staged] [--paths <path...>]",
+          "description": "Run the native read-only operations registered by each selected repository's declared capabilities. The host verifies every selected harness inventory and integrity-covered operation before importing it in process; it never dispatches repository-vendored runners. Progress defaults to auto, which follows the output stream's TTY state; always also renders deterministic progress in redirected output, and never suppresses it. On a terminal, progress is a compact receipt stream with one mutable activity row. Its moving bar means work is active; it does not estimate completion from item count or declared cost. Evidence-ready skills appear once with a full bar, then collapse to one timed evidence receipt before rubric results begin. Loading and the operation also finish as timed receipts, with total elapsed time on the operation receipt. Queued skills are not printed. Use --progress-style single to suppress temporary per-skill evidence receipts. Redirected --progress always output defaults to that single-row form. Progress also names the span in which a skill gathers its evidence, before any criterion runs, together with whatever stages and steps that skill reports inside it; a span of unknown extent shows activity and an elapsed clock rather than a completion estimate. Per-skill result rows name the assessed repository first and its supplying harness skill in brackets, and appear only for WARN, FAIL, or FIXED outcomes. Audit renders FAIL and WARN findings by default; --reporter-levels accepts a case-insensitive comma-separated selection from FAIL, WARN, FIXED, INFO, NOT_APPLICABLE, and PASS, or all. A clean repository summary reports PASS with its skill count. Diagnostic counters remain for WARN, FAIL, and FIXED outcomes. --staged and --paths narrow the verdict without narrowing the evaluation: every item still runs against the whole repository and every finding is still rendered, but only a FAIL finding whose subject names a scoped path, a path under a scoped directory, or a directory containing a scoped path makes the audit fail. --staged reads the paths staged in the repository's Git index, deletions included, and fails before auditing when the index cannot be read; --paths takes repository-relative or absolute paths inside the repository and the two combine into one scope. A finding with no subject is outside the scope, and a local registration failure blocks whatever the scope. The frame names the scope, a finding outside it carries (outside scope) after its subject, and the summary leads with the scoped verdict and its SCOPE: counts before the whole-tree counts. A Knowledge Base pre-commit hook uses --staged so a commit is refused only for a finding it causes, while CI keeps the whole-tree verdict."
         },
         {
           "command": "ki repo [repo-options] conform [--skill <skill>] [--dry-run] [--progress <auto|always|never>] [--progress-style <single|multi>] [--reporter-levels <levels|all>]",
@@ -194,11 +202,11 @@
         },
         {
           "command": "ki repo [repo-options] roadmap list [--horizon <horizons>] [--status <status>] [--by <grouping>] [--format <text|json>] [--links <compact|all>]",
-          "description": "List canonical governed work items from every selected repository without changing their lifecycle. The framed text output names each selected repository, then groups items by lane: open adopted records by horizon now, next, soon, future and hold, then triage intake, then done and cancelled records last. Within a lane, items run from awaiting-review through draft, with identifiers breaking ties. The summary line counts the now lane as a signal with no cap. Records still in the old shape (a theme, a waiting-for, parked or triage horizon, waiting_on_trades or intake_disposition, or an adopted open record without kind) are listed in the lane they migrate to, marked legacy, and counted as LEGACY; they are tolerated until migration. A component must be declared in [skills.ki-work-roadmap].components. Linked items append one compact provider-qualified task key and a count of additional distinct tickets, preferring implementation links. A legend explains provider abbreviations. Use --links all to replace the suffix with nested task entries showing provider, key, and relation, each with its full URL on a further indented line. Ambiguous keys include authority, scope, and task ID on separate child lines. These options also apply to --aggregate. JSON output stays ki/roadmap/v1 and adds each record's lane, classification, hold, resolution and legacy shapes. Mappings are read locally without contacting task systems and do not imply current task status or ownership. --horizon and --status filter by lane and lifecycle before rendering; unsupported values fail with a usage error rather than an empty result. --horizon accepts a comma-separated list, such as now,next, or a repeated flag, and keeps records in any named lane. --by project groups text output by each record's project across the whole selected set, and implies --aggregate; groups from the same Project in different repositories merge, and a Project from another territory is qualified with that territory's name. Each Project group shows its registry lifecycle, such as [active]. --by initiative groups by the Initiative its Project names in the Capital's Streams/Projects/ notes, with Initiatives read from Streams/Initiatives/, found through the repository's [skills.ki-repo].capital and the local ki registry; a projectless record groups under its own initiative. Records with neither group under unassigned. An unavailable registry, the retired Streams/Projects/Initiatives.md index, an unknown slug, or an initiative that contradicts the registry is a warning that never changes the exit status. --by area groups by each record's fixed area under the title that [skills.ki-work-roadmap.areas] maps to its code; a legacy bare areas list reads without titles, and JSON output adds areaTitle. --by does not apply to JSON output. The roadmap folder's README.md index is not read as a work item. A missing roadmap directory or malformed or unsafe item is an isolated diagnostic for that repository; other selected repositories still report, and any roadmap or trade diagnostic makes the command exit with status 1 after rendering the inventory. The command never creates, transitions, accepts, prunes, or repairs a work item."
+          "description": "List canonical governed work items from every selected repository without changing their lifecycle. The framed text output names each selected repository, then groups items by lane: open adopted records by horizon now, next, soon, future and hold, then triage intake, then done and cancelled records last. Within a lane, items run from awaiting-review through draft, with identifiers breaking ties. The summary line counts the now lane as a signal with no cap. Records still in the old shape (an initiative, a waiting-for, parked or triage horizon, waiting_on_trades or intake_disposition, or an adopted open record without kind) are listed in the lane they migrate to, marked legacy, and counted as LEGACY; they are tolerated until migration. A component must be declared in [skills.ki-work-roadmap].components. Linked items append one compact provider-qualified task key and a count of additional distinct tickets, preferring implementation links. A legend explains provider abbreviations. Use --links all to replace the suffix with nested task entries showing provider, key, and relation, each with its full URL on a further indented line. Ambiguous keys include authority, scope, and task ID on separate child lines. These options also apply to --aggregate. JSON output stays ki/roadmap/v1 and adds each record's lane, classification, hold, resolution and legacy shapes. Mappings are read locally without contacting task systems and do not imply current task status or ownership. --horizon and --status filter by lane and lifecycle before rendering; unsupported values fail with a usage error rather than an empty result. --horizon accepts a comma-separated list, such as now,next, or a repeated flag, and keeps records in any named lane. --by project groups text output by each record's project across the whole selected set, and implies --aggregate; groups from the same Project in different repositories merge, and a Project from another territory is qualified with that territory's name. Each Project group shows its registry lifecycle, such as [active]. --by theme groups by the theme its Project names in the Capital's Streams/Projects/ notes, with themes read from Streams/Themes/, found through the repository's [skills.ki-repo].capital and the local ki registry; a projectless record groups under its own theme. Records with neither group under unassigned. An unavailable registry, an unknown slug, or a theme that contradicts the registry is a warning that never changes the exit status. Through the work model's tolerance window the thread-model shapes still read, each with a warning naming its new home: Streams/Initiatives/, Project folder notes Streams/Projects/<slug>/<slug>.md, a Project's initiative, the retired Streams/Projects/Initiatives.md index, and a record's initiative, which groups as its theme. A record naming both theme and initiative is invalid. --by area groups by each record's fixed area under the title that [skills.ki-work-roadmap.areas] maps to its code; a legacy bare areas list reads without titles, and JSON output adds areaTitle. --by does not apply to JSON output. The roadmap folder's README.md index is not read as a work item. A KB Streams record field outside the shared record model and the ki-repo-kb note fields is a warning naming the file and field, such as KBS-001-x.md: unknown field owner; for priority it adds that horizon is the only priority signal. The warning never changes the exit status, and JSON output lists it under the repository's warnings. The roadmap adapter still rejects such a field. A missing roadmap directory or malformed or unsafe item is an isolated diagnostic for that repository; other selected repositories still report, and any roadmap or trade diagnostic makes the command exit with status 1 after rendering the inventory. The command never creates, transitions, accepts, prunes, or repairs a work item."
         },
         {
           "command": "ki repo [repo-options] roadmap summary [--by <grouping>]",
-          "description": "Show selected repositories as rows against lane columns. Each cell shows nonzero lifecycle-status counts and a sum, such as d=1 r=2 Σ=3. The Σ column and row aggregate the same counts per repository and per lane. A legend expands t (triage), d (draft), r (ready), ip (in-progress), ar (awaiting-review), x (done), and c (cancelled). A dash means no items in that cell; a question mark means unavailable. Repositories without a roadmap are named below the table. Invalid roadmap evidence remains diagnostic and makes the command exit with status 1. Item identifiers, titles, and trade records are omitted. --by project, --by initiative or --by area replaces the repository rows with one row per group, aggregated across the selected set as for roadmap list --by, and appends any grouping warnings."
+          "description": "Show selected repositories as rows against lane columns. Each cell shows nonzero lifecycle-status counts and a sum, such as d=1 r=2 Σ=3. The Σ column and row aggregate the same counts per repository and per lane. A legend expands t (triage), d (draft), r (ready), ip (in-progress), ar (awaiting-review), x (done), and c (cancelled). A dash means no items in that cell; a question mark means unavailable. Repositories without a roadmap are named below the table. Invalid roadmap evidence remains diagnostic and makes the command exit with status 1. Item identifiers, titles, and trade records are omitted. --by project, --by theme or --by area replaces the repository rows with one row per group, aggregated across the selected set as for roadmap list --by, and appends any grouping warnings. Unknown KB Streams record fields are listed under the same warnings."
         },
         {
           "command": "ki repo [repo-options] roadmap stats [--stale-after <duration>] [--format <text|json>]",
@@ -226,11 +234,11 @@
         },
         {
           "command": "ki repo [repo-options] store scan",
-          "description": "Inspect selected repositories for direct conventional OneDrive sources-<repository-basename> directories without a matching declared sources store role. Warnings identify the repository kind and an explicit decision to declare and bind, migrate to a Knowledge Base, or retire the directory; warnings exit successfully. Unsafe paths or unreadable repository declarations remain diagnostics and cause a non-zero exit. Repository selection follows normal ki repo semantics, including --estate for every registered repository. The command never creates, binds, moves, or removes a directory."
+          "description": "Inspect selected repositories for direct conventional OneDrive sources-<name> directories without a matching declared sources store role. Warnings identify the repository kind and an explicit decision to declare and bind, migrate to a Knowledge Base, or retire the directory; warnings exit successfully. Unsafe paths or unreadable repository declarations remain diagnostics and cause a non-zero exit. A territory Capital is checked under both its canonical handle and its historical basename, and malformed Capital territory metadata is a diagnostic. Repository selection follows normal ki repo semantics, including --estate for every registered repository. The command never creates, binds, moves, or removes a directory."
         },
         {
           "command": "ki repo [repo-options] store create sources [--write]",
-          "description": "Preview the conventional opt-in OneDrive sources-<repository-basename> directory and registry binding. With --write, create and bind it. Automatic creation is unavailable for legacy."
+          "description": "Preview the conventional opt-in OneDrive sources-<name> directory and registry binding. The name is the repository basename, or a territory Capital's canonical handle: its territory_prefix, else its registry key. A Capital with neither fails. With --write, create and bind it. Automatic creation is unavailable for legacy."
         },
         {
           "command": "ki repo [repo-options] store bind <sources|legacy> <absolute-path> [--write]",
@@ -311,7 +319,7 @@
       "purpose": "Use these root-level commands to record and list canonical KI repository roots in $XDG_STATE_HOME/ki/registry.toml. Registry membership is an inventory, not a repository-operation or conformance verdict. The repository key names each record; each record holds a canonical HTTPS GitHub repository identity and physical checkout path.",
       "commands": [
         {
-          "command": "ki registry [--repo <path-or-pattern>]... [-t|--territory <handle>] [--estate] [-f|--filter <prefix>]... add [--dry-run] [--search-boundary <id>]",
+          "command": "ki registry [--repo <path-or-pattern>]... [-t|--territory <handle>] [--estate] [--principals] [-f|--filter <prefix>]... add [--dry-run] [--search-boundary <id>]",
           "description": "Record selected canonical KI repository roots in $XDG_STATE_HOME/ki/registry.toml without applying repository repairs. This explicit inventory action validates the selected root's declared canonical identity and preserves existing entries. It never searches outside the supplied target selection. The command writes by default; --dry-run reports proposed registration without creating the state directory or changing disk state."
         },
         {
@@ -356,7 +364,7 @@
     },
     {
       "name": "Trades",
-      "purpose": "Use these commands with repositories that declare the portable ki-repo-trades capability and are present in the local registered repository estate. Routes and standing grants come only from the territory Capital's [skills.ki-trades.territory] policy, resolved through each repository's declared [skills.ki-repo].capital; no command edits that policy, and a member declaration carries no route table. Parent --repo, --territory, and --estate selectors scope reads; mutations require exactly one selected registered repository. Every mutation writes only the selected repository, a granted route gives visibility rather than acceptance or retention, and no command changes a peer roadmap or knowledge. A repository that declares ki-trades but whose Capital does not resolve is never dropped silently. Aggregate routes list and trade list views, and policy compare, print skipped: <identity> (<reason>) for it and add SKIPPED=n to the summary; under --format json, and for trade show, the line is written to standard error so standard output is unchanged. Selected alone, such a repository fails closed with the reason.",
+      "purpose": "Use these commands with repositories that declare the portable ki-repo-trades capability and are present in the local registered repository estate. Routes and standing grants come only from the territory Capital's [skills.ki-trades.territory] policy, resolved through each repository's declared [skills.ki-repo].capital; no command edits that policy, and a member declaration carries no route table. Parent --repo, --territory, --estate and --principals selectors scope reads; mutations require exactly one selected registered repository. Every mutation writes only the selected repository, a granted route gives visibility rather than acceptance or retention, and no command changes a peer roadmap or knowledge. A repository that declares ki-trades but whose Capital does not resolve is never dropped silently. Aggregate routes list and trade list views, and policy compare, print skipped: <identity> (<reason>) for it and add SKIPPED=n to the summary; under --format json, and for trade show, the line is written to standard error so standard output is unchanged. Selected alone, such a repository fails closed with the reason.",
       "commands": [
         {
           "command": "ki repo [repo-options] trade routes list [--incomplete] [--format text|json]",
@@ -430,31 +438,31 @@
     },
     {
       "name": "Territory management",
-      "purpose": "Territories derive membership from registered Capital declarations. Use the Capital's territory_prefix handle, or its registry key when no prefix exists. Exactly one of --territory and --estate is required for scoped commands. Repeated --filter values match directory basenames literally and case-sensitively.",
+      "purpose": "Territories derive membership from registered Capital declarations. Use the Capital's territory_prefix handle, or its registry key when no prefix exists; a declared territory_aliases entry selects the same territory. Exactly one of --territory, --estate and --principals is required for scoped commands. --principals selects only the registered Capitals: first the system Capital, whose territory includes knowledgeislands/ki-agentic-harness, then the rest by territory name. A territories.ranking list of handles in config.toml puts ranked territories first, in that order, for --principals, territory list and --estate; the estate groups roots by their ranked territory. Repeated --filter values match directory basenames literally and case-sensitively.",
       "commands": [
         {
           "command": "ki territory list",
-          "description": "List registered territory handles, titles, Capitals and declared member counts."
+          "description": "List registered territory handles, titles, Capitals and declared member counts, in territory order."
         },
         {
-          "command": "ki territory audit (--territory <handle>|--estate) [--filter <prefix>]...",
+          "command": "ki territory audit (--territory <handle>|--estate|--principals) [--filter <prefix>]...",
           "description": "Validate the complete selection and its physical checkouts without mutation."
         },
         {
-          "command": "ki territory inspect (--territory <handle>|--estate) [--filter <prefix>]... --target <zed|vscode> --workspace <selector>",
+          "command": "ki territory inspect (--territory <handle>|--estate|--principals) [--filter <prefix>]... --target <zed|vscode> --workspace <selector>",
           "description": "Compare selected roots with one explicit local editor projection. Exit 0 for exact state, 1 for drift or unsupported source, and 2 for invalid selection."
         },
         {
-          "command": "ki territory show (--territory <handle>|--estate) [--filter <prefix>]... [--verbose]",
+          "command": "ki territory show (--territory <handle>|--estate|--principals) [--filter <prefix>]... [--verbose]",
           "description": "Show selected repositories, optionally with canonical identities and paths."
         },
         {
-          "command": "ki territory roots (--territory <handle>|--estate) [--filter <prefix>]... [--null]",
+          "command": "ki territory roots (--territory <handle>|--estate|--principals) [--filter <prefix>]... [--null]",
           "description": "Write deterministic absolute primary checkout roots. Use --null or -0 for NUL termination. Validate the complete selection before writing any stdout bytes."
         },
         {
-          "command": "ki territory open (--territory <handle>|--estate) [--filter <prefix>]... --target <zed|vscode|delta>",
-          "description": "Open the selected repositories through an explicit existing local adapter."
+          "command": "ki territory open (--territory <handle>|--estate|--principals) [--filter <prefix>]... --target <zed|vscode|delta>",
+          "description": "Open the selected repositories through an explicit existing local adapter. Each target's project list follows the selection order; Zed, which prepends each folder, is opened in reverse."
         }
       ]
     },
@@ -472,7 +480,11 @@
         },
         {
           "command": "ki acquire import [--adapter <name>|--all] [--repo <path>] [--since <date>] [--until <date>] [--dry-run]",
-          "description": "Run one selected adapter, every applicable enabled adapter, or infer the sole enabled adapter. Adapter-specific invocation properties require explicit --adapter. ChatGPT accepts --capture and --output. Granola accepts --refresh-transcripts."
+          "description": "Run one selected adapter, every applicable enabled adapter, or infer the sole enabled adapter. Adapter-specific invocation properties require explicit --adapter. ChatGPT accepts --capture and --output. Granola accepts --refresh-transcripts and --refresh-acquired."
+        },
+        {
+          "command": "ki acquire mark",
+          "description": "--adapter granola [--repo <path>] [--since <date>] [--until <date>] [--source <UUID...>] [--confirm] Preview notes eligible for the configured private Acquired folder. With --confirm add only that membership after verifying committed local captures, complete transcripts, fresh source hashes, and screenshot UUIDs and bytes. Preserve all original folders and read back the result. Exceptions remain unmarked. A progress marker grants no source retirement or reconciliation authority."
         },
         {
           "command": "ki acquire status [--adapter <name>|--all] [--repo <path>]",
@@ -484,45 +496,85 @@
         },
         {
           "command": "ki acquire reset [--adapter <name>] [--repo <path>] [--source <identity>] [--component <name>] [--rebuild] [--confirm]",
-          "description": "Preview a local adapter, source, component, or complete-rebuild reset. Mutation requires --confirm and never authorizes provider mutation. The Granola adapter uses only allowlisted read-only MCP operations. It enumerates complete global and folder identity evidence, revalidates mutable detail, reuses verified transcripts by default, records separate detail and transcript hashes, journals interrupted work atomically, and advances the authoritative checkpoint only after the selected generation verifies. By default it stages meeting Markdown beneath +/_ACQUIRE/granola/. A configured capture_root and complete folder_territories table receive several folders as one package per meeting UUID, retaining every membership. Central checkpoints and journals remain in .acquire/granola/. The unfoldered and residual selectors also accept \"flag\", which reports identities without reading their details or transcripts; unmatched live folders are reported even when empty. Multiple territories or unmapped folder memberships require review. Handled checkpoints survive capture removal: unchanged source evidence remains handled, while amendments are staged for renewed review. Conflicting receiver mappings fail closed; acquisition never tags, edits, archives, deletes, or moves Granola data."
+          "description": "Preview a local adapter, source, component, or complete-rebuild reset. Mutation requires --confirm and never authorizes provider mutation. Granola import uses only allowlisted read-only MCP operations. It enumerates complete global and folder identity evidence, revalidates mutable detail, reuses verified transcripts by default, records separate detail and transcript hashes, journals interrupted work atomically, and advances the authoritative checkpoint only after the selected generation verifies. By default it stages meeting Markdown beneath +/_ACQUIRE/granola/. A configured capture_root and complete folder_territories table receive several folders as one package per meeting UUID, retaining every membership. Central checkpoints and journals remain in .acquire/granola/. The unfoldered and residual selectors also accept \"flag\", which reports identities without reading their details or transcripts; unmatched live folders are reported even when empty. Multiple territories or unmapped folder memberships require review. Handled checkpoints survive capture removal: unchanged source evidence remains handled, while amendments are staged for renewed review. MCP screenshots are decoded, identity-checked and retained as exact returned bytes with checksum manifests, including verified zero-image inventories. A configured acquired_folder_id is progress metadata distinct from routing. Routine imports skip marked notes only after committed preservation proof; --refresh-acquired deliberately reads them again for amendment checks. Conflicting receiver mappings fail closed. Only the separate confirmed mark action adds membership; import never mutates Granola. No action edits notes, removes folders, archives, deletes, or switches accounts or workspaces."
         }
       ]
     },
     {
       "name": "Background agents",
-      "purpose": "Launch and coordinate detached background agents under the ki-delegation background-run contract. Each run lives in $KI_STATE_HOME/agents/<run>/, with a prompt, one-line status, pid, log, and report per agent. An agent writes DONE as the last line of its status when it finishes. Runtime adapters start Claude Code or Codex in their own session with standard input from /dev/null, so an interrupt of the launching session cannot stop them.",
+      "purpose": "Launch and coordinate detached background agents under the ki-delegation background-run contract. A run's runtime files live in $KI_STATE_HOME/agents/<run>/: a prompt, one-line status, pid, and log per agent, the queue, and thread.json, which records the run's thread home. Its knowledge files, the decisions.md log and each agent's <name>.report.md, live in the owning repository's tracked work folder +/_WORK/<id>/, or through the work model's tolerance window its thread folder +/_THREADS/<run>/, so the state folder can go without losing them. ki is their only writer, so no thread copies them by hand, and never commits them; the thread commits them with its other work. The first launch, queue, new or decide for a run fixes the home as the Git top level of the working directory, or of --repo <dir>: the one work folder whose slug, its id with each dot written as a hyphen, is the run's name, else the thread folder. Later commands read it, and a disagreeing --repo is an error. Outside a repository the command refuses with exit 2. An agent writes DONE as the last line of its status when it finishes. Runtime adapters start Claude Code or Codex in their own session with standard input from /dev/null, so an interrupt of the launching session cannot stop them.",
       "commands": [
         {
-          "command": "ki agent launch <run> <name> <workdir> <prompt-file> [--runtime claude|codex] [--add-dir <dir>...] [--rules none|push|prune|release] [--wait-for <name>...]",
-          "description": "Launch one detached agent. The prompt gains a wait gate for each --wait-for agent, the authority footer the pinned Harness's ki-delegation skill ships for the --rules tier (default none), and the progress protocol. The status time zone follows TZ."
+          "command": "ki agent launch <run> <name> <workdir> <prompt-file> [--runtime claude|codex] [--add-dir <dir>...] [--rules none|push|prune|release] [--wait-for <name>...] [--model <model>] [--effort low|medium|high|xhigh|max] [--relaunch] [--repo <dir>]",
+          "description": "Launch one detached agent. The prompt gains the authority footer the pinned Harness's ki-delegation skill ships for the --rules tier (default none) and the progress protocol. The status time zone follows TZ. Until every --wait-for agent has written DONE, a detached hold process keeps the agent held, checking every 30 seconds, and then starts it. When a named agent exits without DONE, the launch fails, or a held agent ends with a gate cannot open status. --model names the runtime's model and is passed through verbatim; --effort sets its reasoning effort, which the runtime may still reject for that model. Claude Code receives --model and --effort; Codex receives -m and -c model_reasoning_effort=. Omitted, each uses the runtime's own default. <name>.launch.json records the runtime, model, and effort. The progress protocol names the agent's report path in the thread folder, and the owning repository is added to the agent's writable directories when the working directory lies outside it. Names are unique within a run: a name that has already run, shown by its .pid, .status, .prompt.md, .launch.json or .report.md in the state folder or its report in the thread folder, is refused with the first free <name>-<n> suggestion and nothing changes; a .queued.md or .draft.md does not take a name. --relaunch starts it again deliberately: the earlier state-folder packet, log included, moves into the first free <name>.prev-<n>/ and nothing is deleted, but the relaunch is refused while the thread-folder report has uncommitted changes."
         },
         {
-          "command": "ki agent queue <run> <name> <prompt-file> [--workdir <dir>] [--runtime claude|codex] [--add-dir <dir>...] [--rules none|push|prune|release] [--wait-for <name>...]",
-          "description": "Append a ready-made agent to the run queue, copying its prompt. Queue order is priority order."
+          "command": "ki agent queue <run> <name> <prompt-file> [--workdir <dir>] [--runtime claude|codex] [--add-dir <dir>...] [--rules none|push|prune|release] [--wait-for <name>...] [--model <model>] [--effort low|medium|high|xhigh|max] [--relaunch] [--repo <dir>]",
+          "description": "Append a ready-made agent to the run queue, copying its prompt. A name already queued or already run is refused as for launch; --relaunch rides the queue to the dispatcher's launch. Queue order is priority order. The dispatcher launches it with the queued --model and --effort."
         },
         {
           "command": "ki agent dispatch <run> --max <count> [--interval <seconds>]",
-          "description": "Start a detached dispatcher that keeps up to count agents running, launches the next queued agent as soon as one finishes, logs each launch to dispatch.log, and exits when the queue is empty and nothing is running."
+          "description": "Start a detached dispatcher that keeps up to count agents running, launches the first queued agent whose --wait-for gate is open as soon as one finishes, logs each launch to dispatch.log, drops a queued agent whose gate cannot open, and exits when the queue is empty and nothing is running."
         },
         {
           "command": "ki agent wait <run> [--next] [--interval <seconds>]",
-          "description": "With --next, block until the next unseen agent finishes, print <name> finished: <last status> or that it exited without DONE, and mark it seen. A coordinator runs it in the background, reports each finish, and re-arms it. Without --next, wait for the whole run. Either form prints ALL FINISHED when nothing is left to wait for."
+          "description": "With --next, block until the run has an event the coordinator has not yet seen, print it as <name> <kind>: <text>, and move the run's events.seen cursor past it. The kinds returned are done (DONE and a report), failed (an exit without DONE, DONE with no report, or a failed: status line), blocked (a gate that cannot open, a dispatcher drop, or a blocked: status line) and needs-owner (one per ### <TAG> - <title> query in the report, or per <TAG> - <title> heading under an older ## Outstanding queries). Events are returned in the order they happened, never in name order. A coordinator runs it in the background, reports each event, and re-arms it. Without --next, wait for the whole run. Either form prints ALL FINISHED when nothing is left to wait for."
         },
         {
-          "command": "ki agent status <run>",
-          "description": "Print each agent's latest status, flag any agent whose process exited without DONE, and list the queue."
+          "command": "ki agent status [<run>] [--all]",
+          "description": "Print each agent's latest status, flag any agent whose process exited without DONE, list the queue, and print each inbox: line sent since the run's last status. With no run, list every run on this machine with an agent running or held or a non-empty queue: a <run> (<thread home>) line, then one - [running] <agent> - <status> or - [queued] <agent> - position <n> line per live item, in the form the ki-pmo banner quotes. A run that predates its thread home shows (no thread home). --all adds the runs at rest, marked - [at rest]; archived runs are never listed, and the listing writes nothing."
+        },
+        {
+          "command": "ki agent send <run> <line...> [--from <run>]",
+          "description": "Append <UTC time> from <sender>: <line> to inbox.md in the receiving run's state folder, refusing a run with no agent running or held and an empty queue. The sender is KI_AGENT_RUN when set, else --from, else the one run whose thread lives in the working directory's repository. The receiving thread sees each line once, in its next ki agent status <run>, which keeps its place in inbox.seen."
         },
         {
           "command": "ki agent watch <run> [seconds]",
-          "description": "Print one line per interval (default 120 seconds) until no agent is running, ending with ALL FINISHED."
+          "description": "Print each new event as HH:MM TZ | <name> <kind>: <text>, including launch, held and progress, then one status line, per interval (default 120 seconds) until no agent is running, ending with ALL FINISHED. Each run keeps an append-only events.jsonl in its state folder, one JSON object per line with seq, at, run, agent, attempt, kind and text, and tag for a query. The launcher appends launches, holds and closed gates; status, watch and wait derive the rest from each agent's status file, pid and report under the run's events.lock. The progress protocol offers the status-line forms HH:MM <zone> - milestone: <text>, which becomes a progress event, and the blocked: and failed: forms; any other status line stays local. An unchanged line or query is never reported twice, and a relaunched agent's events carry the next attempt."
         },
         {
-          "command": "ki agent new <run> <name>",
-          "description": "Write a prompt skeleton from the ki-delegation run contract to <name>.draft.md."
+          "command": "ki agent home <run> [--work <id>] [--repo <dir>]",
+          "description": "Print the run's thread home, resolving it as the first command would without recording it. With --work, record +/_WORK/<id>/ as the home, for a new run or one homed elsewhere, once that folder holds work.md; it moves no file, so move the thread folder's contents first."
         },
         {
-          "command": "ki agent decide <run> <text...> [--log <path>]",
-          "description": "Append a numbered, dated owner decision to the run's decisions.md or the named log, for prompts to cite as their authority."
+          "command": "ki agent new <run> <name> [--repo <dir>]",
+          "description": "Write a prompt skeleton from the ki-delegation run contract to <name>.draft.md, with the thread's decisions log and report paths filled in."
+        },
+        {
+          "command": "ki agent decide <run> <text...> [--log <path>] [--home <path-or-id>] [--class <class>] [--repo <dir>]",
+          "description": "Append a numbered owner decision, timestamped in UTC, to the thread's tracked decisions.md or the named log, for prompts to cite as their authority. Writing the thread's own log, it first moves any decisions.md and <name>.report.md a run predating the tracked home kept in its state folder into the thread folder, where no copy exists and Git has never held one, and names them, so the tracked log continues the old numbering and a report the thread has retired stays retired. <TAG> - <letter> text, an owner's bare option letter, is logged as that option's <letter>) <wording> from the newest *.report.md in the thread folder carrying a <TAG> query, with a source: line naming that report; a letter with no tag, a tag no report carries, or a letter that report lacks is refused and nothing is written. --home names where the decision now lives durably: a committed path, optionally with a #fragment or a work-record identifier such as KI-TOOL-KI-CLI-124. --class writes the entry's ki-pmo class, operational, rule, standalone or held, on a class: line beside home:."
+        },
+        {
+          "command": "ki agent reconcile <run> <number> [<home>] [--class <class>]",
+          "description": "Write or replace the home: line, the class: line given by --class, or both, of one decision in the thread's tracked log."
+        },
+        {
+          "command": "ki agent close <run> [--delete] [--compress] [--accept-exited <name>...] [--reconciled] [--repo <dir>]",
+          "description": "Retire a finished run's state folder. The reconcile gate prints one line per check and must pass whole: every agent finished with DONE or named in --accept-exited, no dispatcher running, the queue and worktrees/ empty, every decision in the tracked log housed in a tracked path or a roadmap record of a registered repository, and the thread folder committed and clean. An operational decision with no home is its own home, and a held decision whose home is a _CHECKPOINTS/ file passes once that file exists, tracked or not; any other class, or none, needs a tracked path or a record. It first moves into the thread folder any decisions.md or <name>.report.md that a run predating the tracked home kept in its state folder, printing an ok line for each, so the folder then needs committing; a copy the thread folder holds, or has ever held in Git, supersedes the state folder's, which is archived with the run. Beyond that move, on any blocker the command prints every line, exits 1 and changes nothing. --reconciled waives the decision check and the close note records the waiver. When the gate passes the state folder moves to $KI_STATE_HOME/agents/_archive/<run>/ with a close.md note of the gate and each decision's home; with --compress it becomes _archive/<run>.tar.gz, and with --delete it is removed, each with the note at _archive/<run>.close.md."
+        }
+      ]
+    },
+    {
+      "name": "Work model",
+      "purpose": "Read the work model: each piece of work's file, its state and whose move it is, under the ki-checkpoint work-file standard. These commands change nothing.",
+      "commands": [
+        {
+          "command": "ki work status [--repo <dir>] [--format text|json]",
+          "description": "Read every +/_WORK/<id>/work.md in the repository, default the working directory's KI repository, and show it in five views: with you (held by owner, oldest first), stuck (with the worker and silent for more than ten minutes), blocked (marked blocking or in handoff), moving (the rest) and on hold (a paused hold older than 31 days flagged). Finished work is in no view. The holder, and whether it is the worker or the supervisor, is derived from the state, never stored. Each detached run whose thread home is a +/_WORK/<id>/ folder adds one item per running agent, dated by its status file, which counts as stuck after ten silent minutes. +/_WORK_REVIEW/ is shown only as an awaiting-review count, and an unreadable work file is a warning that leaves the rest listed. Through the work model's tolerance window each ki-checkpoint in +/_CHECKPOINTS/ still reads as one work file, with a warning naming its new home: its Status word maps rest, busy and hold to with-supervisor, with-worker and a paused hold, and its id takes the territory alias from the first work file, else the Capital's territory_aliases, else its territory_prefix, else the folder name. --format json writes the versioned ki/work-status/v1 report, one entry per work file with its id, level, title, theme, worker, supervisor, state, hold, holder, role, target, blocking, since, received, beat, path and items, and sends the warnings to standard error."
+        }
+      ]
+    },
+    {
+      "name": "Estate convergence",
+      "purpose": "These commands reshape this machine's checkouts to match a tracked estate targets manifest. They preview by default, are idempotent, never delete a repository, never touch working-tree contents, and make no network call except an explicitly requested clone.",
+      "commands": [
+        {
+          "command": "ki estate converge <manifest> [--apply] [--clone] [--allow-busy <path>]...",
+          "description": "Discover each checkout by its normalised origin remote, matched against the manifest's from or to identity, under ~/workspaces, the chezmoi source and every registered path. For each checkout that must change, check that tracked files are clean, the target is free and no process is working inside it, then move the folder, set origin to the target identity keeping its scheme, repair linked worktrees including Paperclip worktrees, update the local registry entry and its key, and rename Claude project folders and ~/.claude.json project keys without merging. Untracked symlinks under ~/workspaces and OneDrive sources-* stores are rewritten; tracked symlinks and leftover former parents are only reported, and empty former parents are removed. Registered targets without a checkout are reported and cloned only with --clone. Repeat --allow-busy to accept a busy checkout. Every run ends with a report-only sweep of configuration files for remaining old paths and renamed identities, printing file and line but never line text. --apply writes a JSON log and backups of registry.toml and ~/.claude.json under $KI_STATE_HOME/converge/."
+        },
+        {
+          "command": "ki estate converge --rollback <log> [--apply]",
+          "description": "Reverse the actions recorded in a convergence log, newest first, refusing any step whose recorded state has since changed. Cloned checkouts are retained."
         }
       ]
     },
@@ -541,6 +593,10 @@
         {
           "command": "ki dev local off [harness-id]",
           "description": "Remove each selected recognised local Harness root, reinstall its verified archive, retain its entry below [locals], and reconcile its managed user-skill links to the restored archive. An explicit Harness ID selects one source; omitting it selects all remembered sources."
+        },
+        {
+          "command": "ki dev skill generate <skill> [--write]",
+          "description": "Check or regenerate the surfaces a skill's scripts/generate/index.ts module renders below its Harness root, such as files the skill's standard is the one source of. The module renders and never writes. Without --write, every missing or stale surface is named and the command fails; with --write, only those surfaces are published, an existing file keeping its permission bits, under the same development-link and working-tree guard as ki dev skill rubric."
         },
         {
           "command": "ki dev skill rubric <skill> [--write]",
