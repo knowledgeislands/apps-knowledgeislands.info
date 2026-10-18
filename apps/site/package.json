@@ -19,6 +19,7 @@
     "ki:site:dev:serve": "bun node_modules/@11ty/eleventy/cmd.cjs --config=eleventy.config.ts --serve --port 3000",
     "preview": "bun run build && bunx wrangler dev",
     "sync:cli": "bun scripts/sync-cli-commands.ts",
+    "sync:design": "bun scripts/sync-ki-design.ts",
     "sync:skills": "bun scripts/sync-skill-catalogue.ts",
     "test": "bun test scripts",
     "typecheck": "bunx tsc --noEmit -p tsconfig.json",

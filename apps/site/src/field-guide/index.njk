@@ -1,0 +1,108 @@
+---
+layout: layouts/base.njk
+title: Field Guide
+description: Every mark on the Knowledge Islands map, once — what it is, what it means, and whether it is canon or decided.
+permalink: /field-guide/
+sources:
+  - repository: knowledgeislands/ki-principal
+    path: Pillars/Aesthetics/Symbol Library/Symbol Library.md
+    ref: a573243792deab881e0ba27ef08dbf069b6ec39d
+    governs: 'Which symbols are canon, and the Harbour and Port entries the note above the groups reconciles'
+    reviewed: '2026-10-18'
+  - repository: knowledgeislands/ki-principal
+    path: Pillars/Aesthetics/Visual Style/Visual Style.md
+    ref: a573243792deab881e0ba27ef08dbf069b6ec39d
+    governs: 'The symbolic semantics the meanings are read against'
+    reviewed: '2026-10-18'
+  - repository: knowledgeislands/ki-design
+    path: packages/symbols/src/symbols.ts
+    ref: 002a623d0b39d50a1222660acaffd911507f4853
+    governs: 'Every card: name, meaning, status and glyph, vendored in src/_data/kiSymbols.json5'
+    reviewed: '2026-10-18'
+---
+{% from "macros/icons.njk" import kiGlyph %}
+{#
+  The Atlas's Field Guide, after the ki-design site preview (examples/site-preview/field-guide.html).
+
+  The cards are rendered from src/_data/kiSymbols.json5, a vendored snapshot of the ki-design symbol
+  library refreshed by `bun run --cwd apps/site sync:design`. The snapshot carries only canon and decided
+  entries: proposed vocabulary is withheld at the sync, so no template here can publish a proposal beside
+  canon. The framing below — the group titles, their introductions and where the Voyage explains them — is
+  this site's own and survives a refresh.
+#}
+{%- set statusLabel = { canon: "Canon", decided: "Decided" } %}
+{%- set groupInfo = {
+  "geography": { title: "Geography", intro: "From realm to island: the shapes knowledge takes on the chart.", voyage: "The Wider Picture", href: "/#wider" },
+  "zone": { title: "Zones", intro: "The places on every island.", voyage: "The Home", href: "/#home" },
+  "structure": { title: "Structures", intro: "Buildings that stand for what an island does.", voyage: "The Home", href: "/#home" },
+  "port-mode": { title: "Port modes", intro: "The ways knowledge could reach an island once the Harbour becomes a Port. All decided; none enacted yet.", voyage: "The Cycle", href: "/#cycle" },
+  "signal": { title: "Signals", intro: "Marks that ask for attention. Every signal has a shape and a word, never colour alone.", voyage: "The Cycle", href: "/#cycle" },
+  "condition": { title: "Condition", intro: "How well a place is tended, from the freshness of its evidence. Never a score.", voyage: "The Foundation", href: "/#foundation" },
+  "sea": { title: "The sea", intro: "Routes, currents and hazards between the islands.", voyage: "The Cycle", href: "/#cycle" }
+} %}
+
+<section class="page-head lattice-bg" data-theme="night" aria-labelledby="guide-title" style="background-color: var(--color-navy);">
+  <div class="page-container">
+    <p class="crumbs"><a href="/">Knowledge Islands</a> · The Atlas</p>
+    <p class="kicker">The Atlas</p>
+    <h1 id="guide-title" class="display-l">Field Guide</h1>
+    <p class="lead">Every mark on the map, once: what it is, what it means, and whether it is settled. Return here whenever the Voyage names a place you want to look up.</p>
+    <div class="status-key" aria-label="Status key">
+      <div><span class="badge badge-canon">Canon</span> Ratified in Knowledge Islands Principal</div>
+      <div><span class="badge badge-decided">Decided</span> Agreed, not yet enacted into canon</div>
+    </div>
+  </div>
+</section>
+
+<nav class="guide-filters" aria-label="Filter symbols by group" hidden>
+  <div class="page-container">
+    <button class="chip" type="button" data-filter="all" aria-pressed="true">All<span class="n">{{ kiSymbols.counts.published }}</span></button>
+    {%- for group in kiSymbols.categories %}
+    <button class="chip" type="button" data-filter="{{ group.id }}" aria-pressed="false">{{ groupInfo[group.id].title or group.id }}<span class="n">{{ group.symbols | length }}</span></button>
+    {%- endfor %}
+  </div>
+</nav>
+
+<section class="section-parchment" aria-label="About these entries">
+  <div class="page-container">
+    <div class="prose-ki" style="padding-top: 3rem;">
+      <p>A decided entry has been agreed but not yet written into Knowledge Islands Principal, so the rest of this site still uses the enacted word. The clearest case is the Harbour: Principal's Symbol Library lists Harbour, an integration point, and Port, operational systems, as two canon symbols, and the design system has decided to fold them into one Port with several modes. Until Principal enacts that, the Voyage says Harbour and draws it with the port glyph. Entries still under discussion are not shown here.</p>
+    </div>
+  </div>
+</section>
+
+<div class="section-parchment">
+  {%- for group in kiSymbols.categories %}
+  {%- set info = groupInfo[group.id] %}
+  <section class="guide-section" data-category="{{ group.id }}" aria-labelledby="group-{{ group.id }}">
+    <div class="page-container">
+      <header>
+        <h2 id="group-{{ group.id }}" class="display-m">{{ info.title or group.id }}</h2>
+        <p>{{ info.intro }}{% if info.href %} <a href="{{ info.href }}">Explained in the Voyage: {{ info.voyage }}</a>{% endif %}</p>
+      </header>
+      <ul class="sym-grid">
+        {%- for symbol in group.symbols %}
+        <li class="sym" id="sym-{{ symbol.id }}">
+          {%- if symbol.icon %}
+          <span class="roundel" aria-hidden="true">{{ kiGlyph(symbol.icon) }}</span>
+          {%- else %}
+          <span class="roundel empty" aria-hidden="true"><svg class="ki-glyph" width="24" height="24" viewBox="0 0 24 24"><path d="M12 4 L18.9 8 V16 L12 20 L5.1 16 V8 Z" stroke-dasharray="2 2.4"/></svg></span>
+          {%- endif %}
+          <div>
+            <h3 class="display-xs">{{ symbol.name }}</h3>
+            <div class="sym-meta"><span class="badge badge-{{ symbol.status }}">{{ statusLabel[symbol.status] }}</span><code>{{ symbol.id }}</code>{% if not symbol.icon %} <span class="meta">No glyph yet</span>{% endif %}</div>
+            <p>{{ symbol.meaning }}</p>
+          </div>
+        </li>
+        {%- endfor %}
+      </ul>
+    </div>
+  </section>
+  {%- endfor %}
+
+  <div class="page-container">
+    <div class="prose-ki" style="max-width: none; padding-bottom: 4rem;">
+      {% include "partials/sources.njk" %}
+    </div>
+  </div>
+</div>

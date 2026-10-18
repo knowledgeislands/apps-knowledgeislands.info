@@ -55,12 +55,19 @@ This is a claim, not a default. It says someone decided the page has no source, 
 
 ### Vendored pages
 
-A third case sits between the two. A **vendored** page declares its `sources` in the ordinary way but does not restate them: it reproduces an upstream artefact and renders it. Two pages do this today.
+A third case sits between the two. A **vendored** page declares its `sources` in the ordinary way but does not restate them: it reproduces an upstream artefact and renders it. Three pages do this today.
 
 | Page | Vendors | Sync script | Record |
 | --- | --- | --- | --- |
 | `/projects/ki-agentic-harness/skill-catalogue/` | The harness's generated capability inventory, from its marker-delimited block in `skills/README.md` | `sync-skill-catalogue.ts` → `src/_data/skillCatalogue.json5` | ADR-KI-WEBSITE-001 |
 | `/projects/ki/commands/` | The `ki` command inventory, from `man/ki.1` | `sync-cli-commands.ts` → `src/_data/cliCommands.json5` | ADR-KI-WEBSITE-001 |
+| `/field-guide/` | The canon and decided entries of the `ki-design` symbol library, from `packages/symbols` | `sync-ki-design.ts` → `src/_data/kiSymbols.json5` | KI-WEBSITE-SITE-044 |
+
+The Field Guide is a hand-built Nunjucks page rather than prose, so it cannot inherit the provenance footer from the prose layout. `verify:provenance` lists it explicitly, checks its declaration like any Markdown page's, and requires it to include `partials/sources.njk` itself. The same sync also vendors the design system the whole site is drawn in — the token CSS, the glyph sprite, the drawn Arcadia and the logo — each file headed with the `ki-design` commit it came from. It reads a clean local checkout rather than fetching, because the token CSS and the sprite are build outputs of `ki-design`'s own code:
+
+```bash
+bun run --cwd apps/site sync:design   # reads ../ki-design beside this repository; pass --from <path> for another checkout
+```
 
 Both follow the same shape, and a third should too: fetch the upstream artefact at an immutable ref, parse it strictly, write a generated data file carrying its own provenance header, and render that file from a page whose prose is still the site's own. Regeneration replaces the inventory and never the framing around it.
 

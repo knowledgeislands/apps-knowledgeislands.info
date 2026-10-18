@@ -1,37 +1,30 @@
 /* Knowledge Islands design tokens.
-   Templates and custom CSS use var(--color-*) directly.
-   Tailwind utilities (bg-ocean, text-forest, font-heading, etc.) come from @theme inline. */
 
-@layer base {
-  :root {
-    --radius: 0.5rem;
-    --radius-lg: 1rem;
-  }
-}
+   The values are the ki-design token build, vendored verbatim under ./ki-design/ (see the header of each
+   file for the commit it came from). This file holds only the site's own aliases on top of them, so a token
+   refresh replaces ./ki-design/ and never this file.
+
+   Templates and custom CSS use var(--color-*) directly; Tailwind utilities (bg-ocean, text-text-gold,
+   font-display, etc.) come from the @theme blocks. The palette names this site has always used (ocean, navy,
+   forest, moss, sandstone, parchment, teal, gold, mist, ink, ink-light, border, border-light) are all
+   defined by the vendored build; ink and teal are theme-aware there, following the night roles in dark mode. */
+
+@import "./ki-design/theme.css";
 
 @theme inline {
-  /* Colour palette */
-  --color-ocean: #1b3a5c;
-  --color-navy: #0f2440;
-  --color-forest: #2d5a3d;
-  --color-moss: #4a7a5a;
-  --color-sandstone: #c4a882;
-  --color-parchment: #f5efe0;
-  --color-teal: #317070;
-  --color-gold: #c8963c;
-  --color-mist: #eef1f5;
-  --color-ink: #1a2030;
-  --color-ink-light: #4a5568;
-  --color-border: #d4c9b4;
-  --color-border-light: #e8e0d0;
+  /* The site's historical name for the display face. Cormorant Garamond is for display sizes only
+     (24 px and up); smaller headings take the body face. */
+  --font-heading: var(--font-display);
+}
 
-  /* Typography */
-  --font-heading: "Playfair Display", Georgia, serif;
-  --font-body: "Inter", system-ui, sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+/* The site's card ground. The design system has no white cards: a card is a faint paper wash with a
+   hairline, so it reads as a printed panel in light and as a lifted one in dark. */
+:root {
+  --color-surface: rgb(255 255 255 / 40%);
+}
 
-  /* Shape */
-  --radius-sm: 0.25rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 1rem;
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-surface: rgb(245 239 224 / 5%);
+  }
 }

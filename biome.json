@@ -6,7 +6,15 @@
     "useIgnoreFile": true
   },
   "files": {
-    "includes": ["src/**", "apps/**", "*.ts", "*.json", "!.claude/skills", "!.agents/skills"],
+    "includes": [
+      "src/**",
+      "apps/**",
+      "*.ts",
+      "*.json",
+      "!.claude/skills",
+      "!.agents/skills",
+      "!apps/site/src/assets/css/ki-design"
+    ],
     "ignoreUnknown": true
   },
   "formatter": {

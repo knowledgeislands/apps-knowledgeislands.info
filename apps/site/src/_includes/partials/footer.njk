@@ -1,44 +1,33 @@
-<footer style="background-color: var(--color-navy); border-top: 1px solid rgb(255 255 255 / 8%); padding: 3rem 0;">
+<footer class="site-footer" data-theme="night">
   <div class="page-container">
-    <div class="grid-3col" style="gap: 2rem; margin-bottom: 2.5rem;">
-
+    <div class="foot-grid">
       <div>
-        <p style="font-family: var(--font-heading); font-size: 1rem; color: var(--color-parchment); margin-bottom: 0.5rem;">Knowledge Islands</p>
-        <p style="font-size: 0.875rem; color: rgb(245 239 224 / 65%); line-height: 1.6;">
-          A model for building, governing, and evolving knowledge across individuals, teams, and generations.
-        </p>
+        <a class="brand" href="/">
+          <img src="/assets/images/ki-design/logo-roundel.png" width="44" height="44" alt="" />
+          <span>Knowledge Islands</span>
+        </a>
+        <p>A model for building, governing, and evolving knowledge across individuals, teams, and generations.</p>
+        <p class="foot-meta">Conventions · Processes · Activities · Agents · Tools</p>
       </div>
 
-      <div>
-        <p style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: rgb(245 239 224 / 45%); margin-bottom: 0.75rem;">Explore</p>
-        <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem;">
-          {% for item in site.nav %}
-            <li>
-              <a href="{{ item.href }}" style="font-size: 0.875rem; color: rgb(245 239 224 / 70%); text-decoration: none;"
-                onmouseover="this.style.color='var(--color-parchment)'" onmouseout="this.style.color='rgb(245 239 224 / 70%)'">
-                {{ item.label }}
-              </a>
-            </li>
-          {% endfor %}
+      {%- for group in site.nav.groups %}
+      <nav aria-labelledby="foot-{{ group.label | lower }}">
+        <h2 id="foot-{{ group.label | lower }}">The {{ group.label }}</h2>
+        <ul>
+          {%- if loop.first %}
+          <li><a href="/">Home</a></li>
+          {%- endif %}
+          {%- for item in group.items %}
+          <li><a href="{{ item.href }}">{{ item.label }}</a></li>
+          {%- endfor %}
         </ul>
-      </div>
-
-      <div>
-        <p style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: rgb(245 239 224 / 45%); margin-bottom: 0.75rem;">The Model</p>
-        <p style="font-size: 0.875rem; color: rgb(245 239 224 / 65%); line-height: 1.6;">
-          Conventions · Processes · Activities · Agents · Tools
-        </p>
-      </div>
-
+      </nav>
+      {%- endfor %}
     </div>
 
-    <div class="footer-bottom" style="border-top: 1px solid rgb(255 255 255 / 10%); padding-top: 1.5rem; display: flex; align-items: center; justify-content: space-between;">
-      <p style="font-size: 0.8125rem; color: rgb(245 239 224 / 40%); margin: 0;">
-        © {{ site.title }}
-      </p>
-      <p style="font-size: 0.8125rem; color: rgb(245 239 224 / 40%); margin: 0; font-style: italic;">
-        Knowledge as a civilisation question.
-      </p>
+    <div class="foot-base">
+      <p>© {{ site.title }}</p>
+      <p class="foot-tagline">{{ site.tagline }}</p>
     </div>
   </div>
 </footer>

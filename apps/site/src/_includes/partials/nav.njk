@@ -1,34 +1,45 @@
-<header class="site-header" style="background-color: var(--color-navy); border-bottom: 1px solid rgb(255 255 255 / 8%);">
-  <div class="page-container site-header-inner" style="display: flex; justify-content: space-between; padding-top: 1rem; padding-bottom: 1rem;">
-    <a href="/" style="display: flex; align-items: center; gap: 0.625rem; text-decoration: none;">
-      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <!-- Island silhouette: water, landmass, lighthouse beam -->
-        <ellipse cx="16" cy="26" rx="14" ry="3.5" fill="#3d8a8a" opacity="0.4"/>
-        <ellipse cx="16" cy="26" rx="10" ry="2.5" fill="#3d8a8a" opacity="0.6"/>
-        <!-- Landmass -->
-        <path d="M8 24 Q10 18 13 16 Q15 14 16 12 Q17 14 19 16 Q22 18 24 24 Z" fill="#4a7a5a"/>
-        <path d="M10 24 Q12 20 14 18 Q15.5 16.5 16 15 Q16.5 16.5 18 18 Q20 20 22 24 Z" fill="#2d5a3d"/>
-        <!-- Lighthouse -->
-        <rect x="15" y="8" width="2" height="6" fill="#c4a882" rx="0.5"/>
-        <polygon points="14,8 18,8 17,6 15,6" fill="#c4a882"/>
-        <!-- Light beam -->
-        <line x1="16" y1="7" x2="24" y2="3" stroke="#c8963c" stroke-width="1" opacity="0.8"/>
-        <line x1="16" y1="7" x2="8" y2="3" stroke="#c8963c" stroke-width="1" opacity="0.8"/>
-      </svg>
-      <span style="font-family: var(--font-heading); font-size: 1.125rem; font-weight: 600; color: var(--color-parchment); letter-spacing: -0.01em;">Knowledge Islands</span>
+{#
+  The site header: the logo roundel and wordmark, the Voyage and Atlas groups from `site.nav`, and the
+  one brass call to action. Below 1100 px the groups fold into a Menu disclosure, a <details>, so it
+  opens without JavaScript; assets/js/site.js only adds Escape-to-close.
+#}
+{% from "macros/icons.njk" import kiGlyph %}
+<header class="site-header" data-theme="night">
+  <div class="header-wrap">
+    <a class="brand" href="/">
+      <img src="/assets/images/ki-design/logo-roundel.png" width="44" height="44" alt="" />
+      <span>Knowledge Islands</span>
     </a>
 
     <nav class="site-nav" aria-label="Main navigation">
-      <ul class="site-nav-list" style="display: flex; align-items: center; list-style: none; margin: 0; padding: 0;">
-        {% for item in site.nav %}
-          <li>
-            <a href="{{ item.href }}" style="color: rgb(245 239 224 / 80%); text-decoration: none; transition: color 0.15s ease;"
-              onmouseover="this.style.color='var(--color-parchment)'" onmouseout="this.style.color='rgb(245 239 224 / 80%)'">
-              {{ item.label }}
-            </a>
-          </li>
-        {% endfor %}
-      </ul>
+      {%- for group in site.nav.groups %}
+      <div class="nav-group">
+        <span class="nav-label" id="nav-{{ group.label | lower }}">{{ group.label }}</span>
+        <ul aria-labelledby="nav-{{ group.label | lower }}">
+          {%- for item in group.items %}
+          <li><a href="{{ item.href }}"{% if page.url == item.href %} aria-current="page"{% endif %}>{{ item.label }}</a></li>
+          {%- endfor %}
+        </ul>
+      </div>
+      {%- endfor %}
     </nav>
+    <a class="btn btn-brass header-cta" href="{{ site.nav.cta.href }}">{{ site.nav.cta.label }}</a>
+
+    <details class="nav-menu">
+      <summary>{{ kiGlyph("menu", 20) }}Menu</summary>
+      <nav class="menu-panel" aria-label="Main navigation, compact">
+        {%- for group in site.nav.groups %}
+        <div>
+          <span class="nav-label">{{ group.label }}</span>
+          <ul>
+            {%- for item in group.items %}
+            <li><a href="{{ item.href }}"{% if page.url == item.href %} aria-current="page"{% endif %}>{{ item.label }}</a></li>
+            {%- endfor %}
+          </ul>
+        </div>
+        {%- endfor %}
+        <a class="btn btn-brass" href="{{ site.nav.cta.href }}">{{ site.nav.cta.label }}</a>
+      </nav>
+    </details>
   </div>
 </header>

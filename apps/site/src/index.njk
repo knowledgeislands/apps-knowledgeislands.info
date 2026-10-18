@@ -2,323 +2,344 @@
 layout: layouts/base.njk
 description: Knowledge Islands is a model for building, governing, and evolving knowledge across individuals, teams, and generations — treating knowledge not as a filing problem but as a civilisation question.
 ---
-{% from "macros/icons.njk" import kiIcon %}
+{% from "macros/icons.njk" import kiGlyph %}
+{#
+  The Voyage home, after the ki-design site preview (examples/site-preview/index.html at 002a623).
+  The copy is the site's own, in its own order; the preview's look is applied around it.
+
+  Harbour, not Port. The design system records Port replacing Harbour as decided, but the rename is not
+  yet enacted in Knowledge Islands Principal, so the live copy keeps "Harbour" and only the port glyph is
+  used as its icon. The vendored map art labels the district "The Port", and names the Tower (still a
+  proposal) in the Citadel's cartouche; the `replace` filters below restore the live wording at render
+  time, leaving the vendored files byte-for-byte as ki-design drew them. When the rename is enacted,
+  delete the filters and the Harbour wording together (KI-WEBSITE-SITE-044).
+#}
+{%- set liveWording = [
+  [">The Port<", ">The Harbour<"],
+  ["the Port on the south coast", "the Harbour on the south coast"],
+  ["Library · Council Hall · Tower<", "Library · Council Hall<"]
+] -%}
 
 <!-- ═══ HERO ═══ -->
-<section class="section-navy hero-section hero-section-tall" style="position: relative; overflow: hidden;">
-  <!-- Subtle cartographic grid overlay -->
-  <div aria-hidden="true" style="position: absolute; inset: 0; background-image: radial-gradient(circle at 1px 1px, rgb(245 239 224 / 4%) 1px, transparent 0); background-size: 32px 32px; pointer-events: none;"></div>
-
-  <div class="page-container" style="position: relative; text-align: center;">
-    <p class="overline-gold" style="margin-bottom: 1.5rem;">Knowledge Islands</p>
-
-    <h1 class="heading-display-light" style="font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; line-height: 1.1; margin-bottom: 1.5rem; max-width: 18ch; margin-inline: auto;">
-      Knowledge is a civilisation&nbsp;question.
-    </h1>
-
-    <p style="font-size: 1.125rem; color: rgb(245 239 224 / 75%); max-width: 52ch; margin-inline: auto; line-height: 1.7; margin-bottom: 2.5rem;">
-      Not a filing problem. Not a search problem. Not a productivity hack. Knowledge Islands is a model for building, governing, and evolving knowledge — across individuals, teams, and generations.
-    </p>
-
-    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-      <a href="/philosophy/" class="btn-primary">Explore the Philosophy</a>
-      <a href="/model/" class="btn-ghost-light">See the Model</a>
-      <a href="/docs/get-started/" class="btn-ghost-light">Get Started</a>
+<section class="hero" data-theme="night" aria-labelledby="hero-title">
+  <div class="hero-grid">
+    <div class="hero-copy">
+      <p class="kicker">Knowledge Islands</p>
+      <h1 id="hero-title" class="display-xl">Knowledge is a civilisation question.</h1>
+      <hr class="brass-rule" />
+      <p class="lead">Not a filing problem. Not a search problem. Not a productivity hack. Knowledge Islands is a model for building, governing, and evolving knowledge — across individuals, teams, and generations.</p>
+      <div class="btn-row">
+        <a href="/philosophy/" class="btn btn-brass">Explore the Philosophy</a>
+        <a href="/model/" class="btn btn-outline">See the Model</a>
+        <a href="/docs/get-started/" class="btn btn-outline">Get Started</a>
+      </div>
+      <p class="hero-note">{{ kiGlyph("compass", 20) }}<span>Arcadia, drawn from its hex map in the Modern tile set.</span></p>
     </div>
-
-    <!-- Decorative island SVG -->
-    <div aria-hidden="true" style="margin-top: 4rem; opacity: 0.15;">
-      <svg width="480" height="120" viewBox="0 0 480 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="max-width: 100%;">
-        <!-- Ocean surface -->
-        <path d="M0 80 Q60 70 120 80 Q180 90 240 80 Q300 70 360 80 Q420 90 480 80 L480 120 L0 120 Z" fill="#3d8a8a" opacity="0.5"/>
-        <path d="M0 88 Q60 78 120 88 Q180 98 240 88 Q300 78 360 88 Q420 98 480 88 L480 120 L0 120 Z" fill="#3d8a8a" opacity="0.3"/>
-        <!-- Main island -->
-        <path d="M160 80 Q180 50 200 40 Q220 28 240 24 Q260 28 280 40 Q300 50 320 80 Z" fill="#4a7a5a"/>
-        <path d="M175 80 Q195 55 210 45 Q225 36 240 32 Q255 36 270 45 Q285 55 305 80 Z" fill="#2d5a3d"/>
-        <!-- Hills -->
-        <path d="M185 80 Q200 62 215 58 Q225 54 235 52 Q245 54 255 58 Q270 62 285 80 Z" fill="#3d6b4a" opacity="0.7"/>
-        <!-- Lighthouse -->
-        <rect x="238" y="14" width="4" height="12" fill="#c4a882" rx="1"/>
-        <polygon points="236,14 244,14 242,10 240,10" fill="#c4a882"/>
-        <rect x="237" y="20" width="6" height="2" fill="#c8963c" rx="0.5"/>
-        <!-- Light rays -->
-        <line x1="240" y1="12" x2="270" y2="2" stroke="#c8963c" stroke-width="1.5" opacity="0.6"/>
-        <line x1="240" y1="12" x2="210" y2="2" stroke="#c8963c" stroke-width="1.5" opacity="0.6"/>
-        <!-- Small island right -->
-        <ellipse cx="390" cy="82" rx="40" ry="8" fill="#4a7a5a" opacity="0.6"/>
-        <path d="M368 80 Q380 66 390 62 Q400 66 412 80 Z" fill="#2d5a3d" opacity="0.7"/>
-        <!-- Small island left -->
-        <ellipse cx="90" cy="84" rx="30" ry="6" fill="#4a7a5a" opacity="0.5"/>
-        <path d="M72 82 Q82 70 90 66 Q98 70 108 82 Z" fill="#2d5a3d" opacity="0.6"/>
-        <!-- Route between islands -->
-        <path d="M130 82 Q180 75 240 80 Q300 75 350 82" stroke="#c8963c" stroke-width="1" stroke-dasharray="6 4" opacity="0.4" fill="none"/>
-      </svg>
+    <div class="hero-map">
+      {%- set heroMap %}{% include "ki-design/hero-arcadia.svg" %}{% endset %}
+      {%- for pair in liveWording %}{% set heroMap = heroMap | replace(pair[0], pair[1]) %}{% endfor %}
+      {{ heroMap | safe }}
     </div>
   </div>
 </section>
 
-<!-- ═══ THE THREE LAYERS ═══ -->
-<section class="section-parchment section-pad">
+<!-- The map's text equivalent, and the phone-width form of its cartouches. -->
+<section class="districts" data-theme="night" aria-labelledby="districts-title">
   <div class="page-container">
-    <div style="text-align: center; max-width: 52ch; margin-inline: auto; margin-bottom: 3.5rem;">
-      <p class="overline">The Foundation</p>
-      <h2 style="font-size: clamp(1.75rem, 3vw, 2.5rem); margin-bottom: 1rem;">Three layers. One journey.</h2>
-      <p class="text-muted">Knowledge Islands distinguishes carefully between information, knowledge, and wisdom — because the work of moving between them is precisely what islands are for.</p>
+    <h2 id="districts-title">Districts of Arcadia</h2>
+    <ul>
+      <li>{{ kiGlyph("citadel") }}<div><strong>The Citadel</strong><span>Library · Council Hall</span></div></li>
+      <li>{{ kiGlyph("port") }}<div><strong>The Harbour</strong><span>Capture · entry &amp; exchange</span></div></li>
+      <li>{{ kiGlyph("observatory") }}<div><strong>The Observatory</strong><span>Reflect · insight</span></div></li>
+      <li>{{ kiGlyph("streams") }}<div><strong>The Streams</strong><span>Knowledge in motion</span></div></li>
+      <li>{{ kiGlyph("ancient-forest") }}<div><strong>The Ancient Forest</strong><span>Wisdom · never built on</span></div></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══ THE THREE LAYERS, drawn as depth ═══ -->
+<section id="foundation" class="section on-parchment" aria-labelledby="foundation-title">
+  <div class="page-container">
+    <div class="section-head center">
+      <p class="kicker">The Foundation</p>
+      <h2 id="foundation-title" class="display-m">Three layers. One journey.</h2>
+      <p class="lead">Knowledge Islands distinguishes carefully between information, knowledge, and wisdom — because the work of moving between them is precisely what islands are for.</p>
     </div>
 
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+    <svg class="profile" viewBox="0 -34 1200 270" role="img" aria-labelledby="profile-t">
+      <title id="profile-t">An island in cross-section, rising from the shallows through inhabited land to the ancient forest on the high ground: information, knowledge, wisdom.</title>
+      <defs>
+        <pattern id="strata" width="40" height="13" patternUnits="userSpaceOnUse"><path d="M0 12.5 H40" stroke="#1a2030" stroke-opacity="0.16" stroke-width="1"/></pattern>
+      </defs>
+      <svg class="gs" x="1150" y="-32" width="30" height="30" viewBox="0 0 24 24" style="color:#8a5a12" aria-hidden="true"><use href="#ki-celestial-guide"/></svg>
 
-      <!-- Information -->
-      <div class="card-ki">
-        <div class="symbol-circle">
-          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.5"/>
-            <rect x="12" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.5"/>
-            <rect x="3" y="12" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.5"/>
-            <rect x="12" y="12" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.5"/>
-          </svg>
-        </div>
-        <div class="divider-gold"></div>
-        <h3 style="font-size: 1.375rem; margin-bottom: 0.75rem;">Information</h3>
-        <p class="text-muted" style="margin-bottom: 1rem;">Organised data. It exists independently of the reader — databases, documents, feeds, records. Structure without meaning.</p>
-        <p style="font-style: italic; color: var(--color-sandstone); font-family: var(--font-heading); font-size: 0.9375rem;">The terrain before it is charted.</p>
-      </div>
+      <!-- Terrace 3: ancient forest and high stone (wisdom) -->
+      <polygon points="806,64 1182,64 1196,52 820,52" fill="#4f7a57"/>
+      <polygon points="806,64 1182,64 1196,52 820,52" fill="#f5efe0" fill-opacity="0.18"/>
+      <rect x="806" y="64" width="376" height="150" fill="#8f7f68"/>
+      <rect x="806" y="64" width="376" height="150" fill="url(#strata)"/>
+      <rect x="806" y="64" width="376" height="7" fill="#3d6346"/>
+      <polygon points="1182,64 1196,52 1196,202 1182,214" fill="#6e6152"/>
+      <path d="M806 64 H1182 V214 H806 Z M1182 64 L1196 52 V202 L1182 214" fill="none" stroke="#1a2030" stroke-opacity="0.55" stroke-width="1"/>
+      <polygon points="1040,52 1090,-2 1140,52" fill="#a8a196"/><polygon points="1090,-2 1140,52 1100,52" fill="#6f695e"/>
+      <polygon points="1080,10 1090,-2 1100,10 1094,8 1088,13" fill="#f5efe0"/>
+      <polygon points="1040,52 1090,-2 1140,52" fill="none" stroke="#1a2030" stroke-opacity="0.6"/>
+      <g stroke="#1a2030" stroke-opacity="0.6" stroke-width="0.8" stroke-linejoin="round">
+        <polygon points="842,58 852,34 862,58" fill="#355c40"/><polygon points="862,60 874,30 886,60" fill="#3d6a49"/>
+        <polygon points="1132,58 1142,36 1152,58" fill="#355c40"/><polygon points="1150,60 1161,34 1172,60" fill="#3d6a49"/>
+        <polygon points="1008,60 1018,40 1028,60" fill="#355c40"/>
+      </g>
+      <svg x="900" y="-14" width="96" height="96" viewBox="0 0 24 24" class="gs" aria-hidden="true" style="stroke:#f5efe0;stroke-width:3"><use href="#ki-ancient-forest"/></svg>
+      <svg x="900" y="-14" width="96" height="96" viewBox="0 0 24 24" class="gs" aria-hidden="true" style="stroke:#1a2030;stroke-width:0.85"><use href="#ki-ancient-forest"/></svg>
 
-      <!-- Knowledge -->
-      <div class="card-ki" style="border-color: var(--color-teal); box-shadow: 0 1px 4px rgb(61 138 138 / 12%);">
-        <div class="symbol-circle symbol-circle-teal">
-          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <circle cx="7" cy="11" r="3" stroke="currentColor" stroke-width="1.5"/>
-            <circle cx="15" cy="11" r="3" stroke="currentColor" stroke-width="1.5"/>
-            <path d="M10 11 L12 11" stroke="currentColor" stroke-width="1.5"/>
-            <path d="M4 7 Q11 3 18 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/>
-            <path d="M4 15 Q11 19 18 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/>
-          </svg>
-        </div>
-        <div class="divider-gold"></div>
-        <h3 style="font-size: 1.375rem; margin-bottom: 0.75rem;">Knowledge</h3>
-        <p class="text-muted" style="margin-bottom: 1rem;">Information interpreted and applied. It requires you — your context, your connections, your lived experience. It changes when you do.</p>
-        <p style="font-style: italic; color: var(--color-sandstone); font-family: var(--font-heading); font-size: 0.9375rem;">The island as it is inhabited.</p>
-      </div>
+      <!-- Terrace 2: inhabited land (knowledge) -->
+      <polygon points="404,122 812,122 826,110 418,110" fill="#a9b97c"/>
+      <polygon points="404,122 812,122 826,110 418,110" fill="#f5efe0" fill-opacity="0.18"/>
+      <rect x="404" y="122" width="408" height="96" fill="#9d8c72"/>
+      <rect x="404" y="122" width="408" height="96" fill="url(#strata)"/>
+      <rect x="404" y="122" width="408" height="7" fill="#7f8c5c"/>
+      <path d="M404 122 H812 V218 H404 Z" fill="none" stroke="#1a2030" stroke-opacity="0.55"/>
+      <path d="M430 116 C 520 108, 640 120, 790 112" fill="none" stroke="#8a5a12" stroke-width="1.6" stroke-dasharray="0.1 5" stroke-linecap="round"/>
+      <g class="gs" aria-hidden="true">
+        <svg x="456" y="66" width="48" height="48" viewBox="0 0 24 24" style="stroke:#f5efe0;stroke-width:3"><use href="#ki-library"/></svg>
+        <svg x="456" y="66" width="48" height="48" viewBox="0 0 24 24" style="stroke:#1a2030;stroke-width:1.05"><use href="#ki-library"/></svg>
+        <svg x="566" y="56" width="58" height="58" viewBox="0 0 24 24" style="stroke:#f5efe0;stroke-width:3"><use href="#ki-citadel"/></svg>
+        <svg x="566" y="56" width="58" height="58" viewBox="0 0 24 24" style="stroke:#1a2030;stroke-width:1.05"><use href="#ki-citadel"/></svg>
+        <svg x="690" y="68" width="46" height="46" viewBox="0 0 24 24" style="stroke:#f5efe0;stroke-width:3"><use href="#ki-council-hall"/></svg>
+        <svg x="690" y="68" width="46" height="46" viewBox="0 0 24 24" style="stroke:#1a2030;stroke-width:1.05"><use href="#ki-council-hall"/></svg>
+      </g>
+      <g fill="#c8963c"><circle cx="530" cy="112" r="2.4"/><circle cx="650" cy="116" r="2.4"/><circle cx="760" cy="113" r="2.4"/></g>
 
-      <!-- Wisdom -->
-      <div class="card-ki">
-        <div class="symbol-circle symbol-circle-forest">
-          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="1.5"/>
-            <path d="M11 3 L11 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            <path d="M11 16 L11 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            <path d="M3 11 L6 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            <path d="M16 11 L19 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            <circle cx="11" cy="11" r="2" fill="currentColor"/>
-          </svg>
-        </div>
-        <div class="divider-gold"></div>
-        <h3 style="font-size: 1.375rem; margin-bottom: 0.75rem;">Wisdom</h3>
-        <p class="text-muted" style="margin-bottom: 1rem;">Knowledge used well. It is distinctly human, and it outlives you. It emerges through reflection over time — and across generations.</p>
-        <p style="font-style: italic; color: var(--color-sandstone); font-family: var(--font-heading); font-size: 0.9375rem;">The ancient forest at the island's heart.</p>
-      </div>
+      <!-- Terrace 1: coast and shallows (information) -->
+      <polygon points="40,176 418,176 432,166 54,166" fill="#e4d4a6"/>
+      <polygon points="40,176 418,176 432,166 54,166" fill="#f5efe0" fill-opacity="0.2"/>
+      <rect x="40" y="176" width="378" height="44" fill="#a99a80"/>
+      <rect x="40" y="176" width="378" height="44" fill="url(#strata)"/>
+      <rect x="40" y="176" width="378" height="6" fill="#bfae84"/>
+      <path d="M40 176 H418 V220 H40 Z" fill="none" stroke="#1a2030" stroke-opacity="0.55"/>
+      <g fill="#1a2030" fill-opacity="0.4"><circle cx="120" cy="171" r="1"/><circle cx="160" cy="169" r="1"/><circle cx="210" cy="172" r="1"/><circle cx="300" cy="170" r="1"/><circle cx="350" cy="172" r="1"/><circle cx="250" cy="168" r="1"/></g>
+      <g aria-hidden="true">
+        <svg x="200" y="122" width="44" height="44" viewBox="0 0 24 24" class="gs" style="stroke:#f5efe0;stroke-width:3"><use href="#ki-port"/></svg>
+        <svg x="200" y="122" width="44" height="44" viewBox="0 0 24 24" class="gs" style="stroke:#1a2030;stroke-width:1.05"><use href="#ki-port"/></svg>
+      </g>
+      <path d="M4 180 H54 M12 180 V214 M28 180 V214 M44 180 V214" stroke="#5e5142" stroke-width="2"/>
+      <svg x="-6" y="190" width="26" height="26" viewBox="0 0 24 24" class="gs" aria-hidden="true" style="stroke:#1a2030;stroke-width:1.5"><use href="#ki-vessel"/></svg>
+      <g fill="#c8963c"><circle cx="270" cy="168" r="2.4"/><circle cx="90" cy="170" r="2.4"/></g>
 
+      <!-- the sea, and data beneath it -->
+      <rect x="0" y="206" width="1200" height="30" fill="#d6e3e1"/>
+      <path d="M0 206 H1200" stroke="#317070" stroke-opacity="0.5"/>
+      <g fill="none" stroke="#1b3a5c" stroke-opacity="0.35" stroke-linecap="round"><path d="M70 220 q6 -3 12 0"/><path d="M180 226 q6 -3 12 0"/><path d="M330 218 q6 -3 12 0"/><path d="M520 226 q6 -3 12 0"/><path d="M690 220 q6 -3 12 0"/><path d="M880 228 q6 -3 12 0"/><path d="M1040 219 q6 -3 12 0"/><path d="M1150 227 q6 -3 12 0"/></g>
+    </svg>
+
+    <div class="layers">
+      <article class="layer">
+        <div class="layer-tag">{{ kiGlyph("port", 20) }}<span class="label">coast and shallows</span></div>
+        <h3 class="display-s">Information</h3>
+        <p>Organised data. It exists independently of the reader — databases, documents, feeds, records. Structure without meaning.</p>
+        <p class="aside">The terrain before it is charted.</p>
+      </article>
+      <article class="layer">
+        <div class="layer-tag">{{ kiGlyph("citadel", 20) }}<span class="label">inhabited land</span></div>
+        <h3 class="display-s">Knowledge</h3>
+        <p>Information interpreted and applied. It requires you — your context, your connections, your lived experience. It changes when you do.</p>
+        <p class="aside">The island as it is inhabited.</p>
+      </article>
+      <article class="layer">
+        <div class="layer-tag">{{ kiGlyph("ancient-forest", 20) }}<span class="label">ancient forest and high stone</span></div>
+        <h3 class="display-s">Wisdom</h3>
+        <p>Knowledge used well. It is distinctly human, and it outlives you. It emerges through reflection over time — and across generations.</p>
+        <p class="aside">The ancient forest at the island's heart.</p>
+      </article>
     </div>
   </div>
 </section>
 
-<!-- ═══ THE CYCLE ═══ -->
-<section class="section-mist section-pad">
+<!-- ═══ THE CYCLE, on a tide loop ═══ -->
+<section id="cycle" class="section on-mist rule-top" aria-labelledby="cycle-title">
   <div class="page-container">
-    <div style="text-align: center; max-width: 52ch; margin-inline: auto; margin-bottom: 3.5rem;">
-      <p class="overline">The Cycle</p>
-      <h2 style="font-size: clamp(1.75rem, 3vw, 2.5rem); margin-bottom: 1rem;">Knowledge needs tending.</h2>
-      <p class="text-muted">Information doesn't become knowledge by itself. Islands stay alive through a continuous cycle — running at different cadences, in parallel.</p>
+    <div class="section-head center">
+      <p class="kicker">The Cycle</p>
+      <h2 id="cycle-title" class="display-m">Knowledge needs tending.</h2>
+      <p class="lead">Information doesn't become knowledge by itself. Islands stay alive through a continuous cycle — running at different cadences, in parallel.</p>
     </div>
 
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 0; border: 1px solid var(--color-border); border-radius: var(--radius-lg); overflow: hidden;">
+    <svg class="tide" viewBox="0 0 1200 190" aria-hidden="true">
+      <g fill="none" stroke="#317070" stroke-linecap="round">
+        <path d="M187 44 H1013 A56 56 0 0 1 1013 156 H187 A56 56 0 0 1 187 44 Z" stroke-width="1.5"/>
+        <path d="M187 52 H1013 A48 48 0 0 1 1013 148 H187 A48 48 0 0 1 187 52 Z" stroke-width="1" stroke-opacity="0.35" stroke-dasharray="2 6"/>
+        <path d="M388 38 l10 6 l-10 6 M802 38 l10 6 l-10 6" stroke-width="1.5"/>
+        <path d="M612 150 l-10 6 l10 6" stroke-width="1.5"/>
+        <path d="M1063 94 l6 10 l6 -10" stroke-width="1.5"/>
+        <path d="M137 106 l-6 -10 l-6 10" stroke-width="1.5"/>
+      </g>
+      <g>
+        <circle cx="187" cy="44" r="28" fill="#eef1f5" stroke="#c8963c"/>
+        <svg x="175" y="32" width="24" height="24" viewBox="0 0 24 24" class="gs" style="color:#1a2030"><use href="#ki-port"/></svg>
+        <circle cx="600" cy="44" r="28" fill="#eef1f5" stroke="#c8963c"/>
+        <svg x="588" y="32" width="24" height="24" viewBox="0 0 24 24" class="gs" style="color:#1a2030"><use href="#ki-route"/></svg>
+        <circle cx="1013" cy="44" r="28" fill="#eef1f5" stroke="#c8963c"/>
+        <svg x="1001" y="32" width="24" height="24" viewBox="0 0 24 24" class="gs" style="color:#1a2030"><use href="#ki-observatory"/></svg>
+      </g>
+      <text x="600" y="184" text-anchor="middle" font-family="'Cormorant SC', Georgia, serif" font-size="16" font-weight="600" letter-spacing="2.4" fill="#317070">and the tide returns to the harbour</text>
+    </svg>
 
-      <div style="padding: 2.5rem; background: white; border-right: 1px solid var(--color-border);">
-        <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.25rem;">
-          <span style="font-family: var(--font-heading); font-size: 2.5rem; font-weight: 700; color: var(--color-border); line-height: 1;">01</span>
-          <div>
-            <p style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-teal);">The Harbour</p>
-            <h3 style="font-size: 1.25rem; margin: 0;">Capture</h3>
-          </div>
+    <ol class="cycle">
+      <li>
+        <span class="roundel" aria-hidden="true">{{ kiGlyph("port") }}</span>
+        <div>
+          <p class="step-place"><span class="step-num">01</span><span class="label">The Harbour</span></p>
+          <h3 class="display-s">Capture</h3>
+          <p>Information arrives without immediate judgment. The harbour receives everything before the library decides what belongs. No filtering at the gate — only routing.</p>
         </div>
-        <p class="text-muted">Information arrives without immediate judgment. The harbour receives everything before the library decides what belongs. No filtering at the gate — only routing.</p>
-      </div>
-
-      <div style="padding: 2.5rem; background: white; border-right: 1px solid var(--color-border);">
-        <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.25rem;">
-          <span style="font-family: var(--font-heading); font-size: 2.5rem; font-weight: 700; color: var(--color-border); line-height: 1;">02</span>
-          <div>
-            <p style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-teal);">The Routes</p>
-            <h3 style="font-size: 1.25rem; margin: 0;">Connect</h3>
-          </div>
+      </li>
+      <li>
+        <span class="roundel" aria-hidden="true">{{ kiGlyph("route") }}</span>
+        <div>
+          <p class="step-place"><span class="step-num">02</span><span class="label">The Routes</span></p>
+          <h3 class="display-s">Connect</h3>
+          <p>Material is contextualised and linked to existing knowledge. This is the transformation step — where received information becomes owned knowledge. Links form. Meaning emerges.</p>
         </div>
-        <p class="text-muted">Material is contextualised and linked to existing knowledge. This is the transformation step — where received information becomes owned knowledge. Links form. Meaning emerges.</p>
-      </div>
-
-      <div style="padding: 2.5rem; background: white;">
-        <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.25rem;">
-          <span style="font-family: var(--font-heading); font-size: 2.5rem; font-weight: 700; color: var(--color-border); line-height: 1;">03</span>
-          <div>
-            <p style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-teal);">The Observatory</p>
-            <h3 style="font-size: 1.25rem; margin: 0;">Reflect</h3>
-          </div>
+      </li>
+      <li>
+        <span class="roundel" aria-hidden="true">{{ kiGlyph("observatory") }}</span>
+        <div>
+          <p class="step-place"><span class="step-num">03</span><span class="label">The Observatory</span></p>
+          <h3 class="display-s">Reflect</h3>
+          <p>Periodic review surfaces what's stale, updates what's changed, retires what's obsolete. Reflection is how the island stays honest — about what it knows and what it no longer does.</p>
         </div>
-        <p class="text-muted">Periodic review surfaces what's stale, updates what's changed, retires what's obsolete. Reflection is how the island stays honest — about what it knows and what it no longer does.</p>
-      </div>
-
-    </div>
+      </li>
+    </ol>
   </div>
 </section>
 
-<!-- ═══ THE GEOGRAPHY ═══ -->
-<section class="section-parchment section-pad">
-  <div class="page-container">
-    <div class="grid-2col" style="gap: 5rem; align-items: start;">
-
-      <div>
-        <p class="overline">The Home</p>
-        <h2 style="font-size: clamp(1.75rem, 3vw, 2.5rem); margin-bottom: 1.25rem;">An island has structure.</h2>
-        <p class="text-muted" style="margin-bottom: 1.5rem;">
-          A Knowledge Island isn't a folder. It has a <strong>Capital</strong> — a civic centre with a Library at its heart and a Council Hall for governance. Knowledge enters through the <strong>Harbour</strong>, moves through <strong>Streams</strong> while it's in motion, and settles into the Library when it's canonical.
-        </p>
-        <div class="accent-gold" style="margin-bottom: 1.5rem;">
-          <p style="color: var(--color-ink); font-style: italic; font-family: var(--font-heading);">"The structure is not bureaucracy. It's cartography — a map that tells you where you are."</p>
-        </div>
-        <a href="/philosophy/" style="font-size: 0.9375rem; color: var(--color-forest); font-weight: 500; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;">
-          Read the full philosophy
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M3 8 L13 8 M9 4 L13 8 L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </a>
-      </div>
-
-      <!-- Geography diagram -->
-      <div>
-        <div style="background: white; border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 2rem; box-shadow: 0 2px 12px rgb(26 32 48 / 6%);">
-
-          <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--color-border-light);">
-            <div style="width: 10px; height: 10px; background: var(--color-gold); border-radius: 50%;"></div>
-            <span style="font-family: var(--font-heading); font-size: 1rem; color: var(--color-ocean);">The Capital</span>
-          </div>
-
-          <!-- Library -->
-          <div style="background: var(--color-mist); border-radius: 0.5rem; padding: 1.25rem; margin-bottom: 1rem;">
-            <p style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-ocean); margin-bottom: 0.75rem;">Library</p>
-            <div class="grid-3col" style="gap: 0.5rem;">
-              <div style="background: white; border: 1px solid var(--color-border-light); border-radius: 0.375rem; padding: 0.5rem 0.625rem; text-align: center;">
-                <p style="font-size: 0.75rem; color: var(--color-teal); margin-bottom: 0.125rem;">📅</p>
-                <p style="font-size: 0.6875rem; font-weight: 600; color: var(--color-ink);">Calendar</p>
-                <p style="font-size: 0.625rem; color: var(--color-ink-light);">Time-bound</p>
-              </div>
-              <div style="background: white; border: 1px solid var(--color-border-light); border-radius: 0.375rem; padding: 0.5rem 0.625rem; text-align: center;">
-                <p style="margin-bottom: 0.125rem; color: var(--color-ocean);">{{ kiIcon("compass", 14) }}</p>
-                <p style="font-size: 0.6875rem; font-weight: 600; color: var(--color-ink);">Pillars</p>
-                <p style="font-size: 0.625rem; color: var(--color-ink-light);">Owned knowledge</p>
-              </div>
-              <div style="background: white; border: 1px solid var(--color-border-light); border-radius: 0.375rem; padding: 0.5rem 0.625rem; text-align: center;">
-                <p style="margin-bottom: 0.125rem; color: var(--color-forest);">{{ kiIcon("route", 14) }}</p>
-                <p style="font-size: 0.6875rem; font-weight: 600; color: var(--color-ink);">Resources</p>
-                <p style="font-size: 0.625rem; color: var(--color-ink-light);">External reference</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Council Hall -->
-          <div style="background: var(--color-mist); border-radius: 0.5rem; padding: 0.875rem 1.25rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem;">
-            <span style="color: var(--color-ocean);">{{ kiIcon("lighthouse", 16) }}</span>
-            <div>
-              <p style="font-size: 0.8125rem; font-weight: 600; color: var(--color-ink);">Council Hall</p>
-              <p style="font-size: 0.6875rem; color: var(--color-ink-light);">Governance space — decisions, not storage</p>
-            </div>
-          </div>
-
-          <!-- Divider -->
-          <div style="border-top: 2px dashed var(--color-border); margin: 1.25rem 0;"></div>
-
-          <!-- Streams + Harbour -->
-          <div class="grid-2col" style="gap: 0.75rem;">
-            <div style="border: 1px solid var(--color-border-light); border-radius: 0.5rem; padding: 0.875rem; background: white;">
-              <p style="margin-bottom: 0.25rem; color: var(--color-teal);">{{ kiIcon("current", 14) }}</p>
-              <p style="font-size: 0.8125rem; font-weight: 600; color: var(--color-ink);">Streams</p>
-              <p style="font-size: 0.6875rem; color: var(--color-ink-light);">Knowledge in motion</p>
-            </div>
-            <div style="border: 1px solid var(--color-border-light); border-radius: 0.5rem; padding: 0.875rem; background: white;">
-              <p style="margin-bottom: 0.25rem; color: var(--color-teal);">{{ kiIcon("harbour", 14) }}</p>
-              <p style="font-size: 0.8125rem; font-weight: 600; color: var(--color-ink);">Harbour</p>
-              <p style="font-size: 0.6875rem; color: var(--color-ink-light);">Port of entry</p>
-            </div>
-          </div>
-
-        </div>
-      </div>
+<!-- ═══ THE HOME: the Capital as a plate ═══ -->
+<section id="home" class="section on-parchment rule-top" aria-labelledby="home-title">
+  <div class="page-container home-grid">
+    <div class="home-copy">
+      <p class="kicker">The Home</p>
+      <h2 id="home-title" class="display-m" style="margin-bottom: 1.5rem;">An island has structure.</h2>
+      <p>A Knowledge Island isn't a folder. It has a <strong>Capital</strong> — a civic centre with a Library at its heart and a Council Hall for governance. Knowledge enters through the <strong>Harbour</strong>, moves through <strong>Streams</strong> while it's in motion, and settles into the Library when it's canonical.</p>
+      <blockquote class="quote"><p>"The structure is not bureaucracy. It's cartography — a map that tells you where you are."</p></blockquote>
+      <a class="link-arrow" href="/philosophy/">Read the full philosophy {{ kiGlyph("arrow", 20) }}</a>
     </div>
+
+    <figure class="deckle" data-theme="light" aria-labelledby="capital-cap">
+      <span class="tick tl"></span><span class="tick tr"></span><span class="tick bl"></span><span class="tick br"></span>
+      <div class="plate-head"><span class="dot" aria-hidden="true"></span><span class="display-xs" id="capital-cap">The Capital</span><span class="meta">Plate I</span></div>
+
+      <p class="zone-group-label">Library</p>
+      <div class="zone-row">
+        <div class="zone">{{ kiGlyph("calendar", 20) }}<div><strong>Calendar</strong><span>Time-bound</span></div></div>
+        <div class="zone">{{ kiGlyph("library", 20) }}<div><strong>Pillars</strong><span>Owned knowledge</span></div></div>
+        <div class="zone">{{ kiGlyph("resources", 20) }}<div><strong>Resources</strong><span>External reference</span></div></div>
+      </div>
+      <div class="zone">{{ kiGlyph("council-hall", 20) }}<div><strong>Council Hall</strong><span>Governance space — decisions, not storage</span></div></div>
+
+      <hr class="dash-divide" />
+
+      <div class="zone-row zone-row-2">
+        <div class="zone">{{ kiGlyph("streams", 20) }}<div><strong>Streams</strong><span>Knowledge in motion</span></div></div>
+        <div class="zone">{{ kiGlyph("port", 20) }}<div><strong>Harbour</strong><span>Port of entry</span></div></div>
+      </div>
+    </figure>
   </div>
 </section>
 
 <!-- ═══ TERRITORIES & AGENTS ═══ -->
-<section class="section-ocean section-pad">
+<section id="wider" class="section lattice-bg" data-theme="night" aria-labelledby="wider-title">
   <div class="page-container">
-    <div style="text-align: center; max-width: 52ch; margin-inline: auto; margin-bottom: 3.5rem;">
-      <p class="overline-gold">The Wider Picture</p>
-      <h2 class="heading-display-light" style="font-size: clamp(1.75rem, 3vw, 2.5rem); margin-bottom: 1rem;">Islands don't stand alone.</h2>
-      <p style="color: rgb(245 239 224 / 75%); line-height: 1.7;">Islands in proximity form archipelagos. Islands under shared governance form territories. And within each island, humans and artificial agents work together — through different interfaces, with different roles, but in the same cycle.</p>
+    <div class="section-head center">
+      <p class="kicker">The Wider Picture</p>
+      <h2 id="wider-title" class="display-m">Islands don't stand alone.</h2>
+      <p class="lead">Islands in proximity form archipelagos. Islands under shared governance form territories. And within each island, humans and artificial agents work together — through different interfaces, with different roles, but in the same cycle.</p>
     </div>
 
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-bottom: 3rem;">
-
-      <div style="border: 1px solid rgb(245 239 224 / 15%); border-radius: var(--radius-lg); padding: 2rem; background: rgb(245 239 224 / 4%);">
-        <div style="margin-bottom: 1rem; color: var(--color-parchment);">{{ kiIcon("island", 28) }}</div>
-        <h3 class="heading-display-light" style="font-size: 1.25rem; margin-bottom: 0.625rem;">Island</h3>
-        <p style="color: rgb(245 239 224 / 65%); font-size: 0.9375rem; line-height: 1.6;">A discrete, self-contained body of knowledge with defined boundaries and internal geography. Operates its own cycle independently.</p>
-      </div>
-
-      <div style="border: 1px solid rgb(245 239 224 / 15%); border-radius: var(--radius-lg); padding: 2rem; background: rgb(245 239 224 / 4%);">
-        <div style="margin-bottom: 1rem; color: var(--color-parchment);">{{ kiIcon("archipelago", 28) }}</div>
-        <h3 class="heading-display-light" style="font-size: 1.25rem; margin-bottom: 0.625rem;">Territory</h3>
-        <p style="color: rgb(245 239 224 / 65%); font-size: 0.9375rem; line-height: 1.6;">Islands organised and governed together. One island holds governance infrastructure for the whole — the Principal Island.</p>
-      </div>
-
-      <div style="border: 1px solid rgb(245 239 224 / 15%); border-radius: var(--radius-lg); padding: 2rem; background: rgb(245 239 224 / 4%);">
-        <div style="margin-bottom: 1rem; color: var(--color-sandstone);">{{ kiIcon("compass", 28) }}</div>
-        <h3 class="heading-display-light" style="font-size: 1.25rem; margin-bottom: 0.625rem;">Archipelago</h3>
-        <p style="color: rgb(245 239 224 / 65%); font-size: 0.9375rem; line-height: 1.6;">A geographic grouping of islands by proximity or shared character. Distinct from territory — geography and governance are orthogonal structures that overlap without being the same.</p>
-      </div>
-
-      <div style="border: 1px solid rgb(245 239 224 / 15%); border-radius: var(--radius-lg); padding: 2rem; background: rgb(245 239 224 / 4%);">
-        <div style="margin-bottom: 1rem; color: var(--color-parchment);">{{ kiIcon("route", 28) }}</div>
-        <h3 class="heading-display-light" style="font-size: 1.25rem; margin-bottom: 0.625rem;">Agents</h3>
-        <p style="color: rgb(245 239 224 / 65%); font-size: 0.9375rem; line-height: 1.6;">Human agents originate meaning and hold ratification authority. AI agents extend scale and recall. Both work in the same cycle — through different interfaces.</p>
-      </div>
-
+    <div class="cards-4">
+      <article class="card-night">
+        <span class="roundel" aria-hidden="true">{{ kiGlyph("island") }}</span>
+        <h3 class="display-xs">Island</h3>
+        <p>A discrete, self-contained body of knowledge with defined boundaries and internal geography. Operates its own cycle independently.</p>
+      </article>
+      <article class="card-night">
+        <span class="roundel" aria-hidden="true">{{ kiGlyph("citadel") }}</span>
+        <h3 class="display-xs">Territory</h3>
+        <p>Islands organised and governed together. One island holds governance infrastructure for the whole — the Principal Island.</p>
+      </article>
+      <article class="card-night">
+        <span class="roundel" aria-hidden="true">{{ kiGlyph("archipelago") }}</span>
+        <h3 class="display-xs">Archipelago</h3>
+        <p>A geographic grouping of islands by proximity or shared character. Distinct from territory — geography and governance are orthogonal structures that overlap without being the same.</p>
+      </article>
+      <article class="card-night">
+        <span class="roundel" aria-hidden="true">{{ kiGlyph("route") }}</span>
+        <h3 class="display-xs">Agents</h3>
+        <p>Human agents originate meaning and hold ratification authority. AI agents extend scale and recall. Both work in the same cycle — through different interfaces.</p>
+      </article>
     </div>
 
-    <div style="text-align: center;">
-      <a href="/model/" class="btn-ghost-light">Explore the Model</a>
-    </div>
-
+    <div class="center"><a href="/model/" class="btn btn-outline">Explore the Model</a></div>
   </div>
 </section>
 
-<!-- ═══ ARCADIA CTA ═══ -->
-<section class="section-parchment section-pad">
-  <div class="page-container" style="text-align: center; max-width: 52ch; margin-inline: auto;">
-    <div style="display: inline-block; background: var(--color-mist); border: 1px solid var(--color-border); border-radius: 50%; width: 4rem; height: 4rem; display: flex; align-items: center; justify-content: center; margin-inline: auto; margin-bottom: 1.5rem;">
-      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M14 3 L14 7" stroke="var(--color-ocean)" stroke-width="1.5" stroke-linecap="round"/>
-        <circle cx="14" cy="14" r="9" stroke="var(--color-ocean)" stroke-width="1.5"/>
-        <path d="M8 14 Q11 10 14 14 Q17 18 20 14" stroke="var(--color-teal)" stroke-width="1.5" stroke-linecap="round" fill="none"/>
-        <circle cx="14" cy="14" r="2" fill="var(--color-gold)"/>
-      </svg>
+<!-- ═══ ARCADIA ═══ -->
+<section id="arcadia" class="section on-parchment" aria-labelledby="arcadia-title">
+  <div class="page-container arcadia-grid">
+    <figure class="deckle arcadia-plate" data-theme="light">
+      <span class="tick tl"></span><span class="tick tr"></span><span class="tick bl"></span><span class="tick br"></span>
+      {%- set plateMap %}{% include "ki-design/arcadia-plate.svg" %}{% endset %}
+      {%- for pair in liveWording %}{% set plateMap = plateMap | replace(pair[0], pair[1]) %}{% endfor %}
+      {{ plateMap | safe }}
+      <figcaption class="plate-caption meta"><span>Arcadia · Knowledge Islands Principal</span><span>Modern tile set, daylight</span></figcaption>
+    </figure>
+    <div class="arcadia-copy">
+      <svg class="compass-mark ki-glyph" viewBox="0 0 24 24" aria-hidden="true"><use href="#ki-compass"/></svg>
+      <p class="kicker">Arcadia</p>
+      <h2 id="arcadia-title" class="display-m">Arcadia is the living instance.</h2>
+      <p class="lead">The canonical Knowledge Island of Knowledge Islands — a working example of the model in practice. Every standard described here is implemented in Arcadia.</p>
+      <div class="btn-row">
+        <a href="/philosophy/" class="btn btn-brass">Start with Philosophy</a>
+        <a href="/model/" class="btn btn-outline">Explore the Model</a>
+        <a href="/projects/" class="btn btn-outline">See the Projects</a>
+      </div>
     </div>
-    <h2 style="font-size: clamp(1.75rem, 3vw, 2.25rem); margin-bottom: 1rem;">Arcadia is the living instance.</h2>
-    <p class="text-muted" style="margin-bottom: 2rem;">
-      The canonical Knowledge Island of Knowledge Islands — a working example of the model in practice. Every standard described here is implemented in Arcadia.
-    </p>
-    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-      <a href="/philosophy/" class="btn-primary">Start with Philosophy</a>
-      <a href="/model/" class="btn-ghost">Explore the Model</a>
-      <a href="/projects/" class="btn-ghost">See the Projects</a>
+  </div>
+</section>
+
+<!-- ═══ THE VOYAGE, in order: only pages that exist ═══ -->
+<section id="journey" class="section on-parchment rule-top" aria-labelledby="journey-title">
+  <div class="page-container">
+    <div class="section-head center">
+      <p class="kicker">The Voyage</p>
+      <h2 id="journey-title" class="display-m">Three steps, in order.</h2>
     </div>
+    {%- set voyage = [
+      { href: "/philosophy/", glyph: "celestial-guide", title: "The Philosophy", d: "The three layers, the cycle, and the geography of knowledge." },
+      { href: "/model/", glyph: "island", title: "The Model", d: "Conventions, Processes, Activities, Agents, and Tools." },
+      { href: "/docs/get-started/", glyph: "compass", title: "Get Started", d: "Stand up your own island: the harness, the repositories, and the first thing worth doing with them." }
+    ] %}
+    <ol class="rail" style="--rail-steps: {{ voyage | length }};">
+      {%- for step in voyage %}
+      <li{% if loop.first %} class="current"{% endif %}>
+        <a href="{{ step.href }}">
+          <span class="hexbadge">
+            <svg class="hexframe" viewBox="0 0 56 64" aria-hidden="true">
+              {%- if loop.first %}
+              <polygon points="28,1.5 54.5,16.75 54.5,47.25 28,62.5 1.5,47.25 1.5,16.75" fill="#0f2440" stroke="#c8963c" stroke-width="2"/>
+              <polygon points="28,6.5 50,19.25 50,44.75 28,57.5 6,44.75 6,19.25" fill="none" stroke="#c8963c" stroke-opacity="0.45" stroke-width="1"/>
+              {%- else %}
+              <polygon points="28,1.5 54.5,16.75 54.5,47.25 28,62.5 1.5,47.25 1.5,16.75" style="fill: var(--color-paper);" stroke="#c8963c" stroke-width="1"/>
+              {%- endif %}
+            </svg>
+            {{ kiGlyph(step.glyph) }}
+          </span>
+          <span class="rail-num">0{{ loop.index }}</span>
+          <strong>{{ step.title }}</strong>
+          <span class="rail-d">{{ step.d }}</span>
+          {%- if loop.first %}<span class="here">Start here</span>{% endif %}
+        </a>
+      </li>
+      {%- endfor %}
+    </ol>
   </div>
 </section>

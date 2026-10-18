@@ -4,7 +4,17 @@
   Usage: {% from "macros/icons.njk" import kiIcon %}
          {{ kiIcon("lighthouse", 24) }}
   All icons: island, lighthouse, compass, tree, route, anchor, archipelago, harbour, stellar, book, weave
+
+  kiGlyph draws one of the ki-design line glyphs from the sprite base.njk inlines
+  (_includes/ki-design/glyphs.svg, vendored by sync:design). Prefer it for new work: the
+  glyphs are the design system's, drawn on one grid, and carry the symbol library's meanings.
+  Usage: {{ kiGlyph("port") }}  ·  {{ kiGlyph("library", 20) }}  ·  {{ kiGlyph("tower", 24, "Tower") }}
+  Decorative unless a label is given.
 #}
+
+{% macro kiGlyph(name, size=24, label="") -%}
+  <svg class="ki-glyph" width="{{ size }}" height="{{ size }}" viewBox="0 0 24 24"{% if label %} role="img" aria-label="{{ label }}"{% else %} aria-hidden="true" focusable="false"{% endif %}><use href="#ki-{{ name }}"/></svg>
+{%- endmacro %}
 
 {% macro kiIcon(name, size=20) %}
   {%- if name == "island" -%}

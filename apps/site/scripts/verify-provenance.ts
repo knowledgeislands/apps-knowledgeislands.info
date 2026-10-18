@@ -33,7 +33,15 @@ const siteRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const publishedDirs = ['src/docs'].map((dir) => resolve(siteRoot, dir))
 const sourcesPartial = 'partials/sources.njk'
 const proseLayout = resolve(siteRoot, 'src/_includes/layouts/page.njk')
-const vendoredData = resolve(siteRoot, 'src/_data/skillCatalogue.json5')
+/**
+ * Hand-built pages that restate or vendor another repository's material. They carry their own layout, so they
+ * cannot inherit the provenance footer from the prose layout; each must include it itself, and is checked for it.
+ */
+const handBuiltPages = ['src/field-guide/index.njk'].map((page) => resolve(siteRoot, page))
+/** Vendored snapshots, each held to the ref its citing page declares. */
+const vendoredData = ['src/_data/skillCatalogue.json5', 'src/_data/kiSymbols.json5'].map((file) =>
+  resolve(siteRoot, file)
+)
 
 const repositoryOwner = 'knowledgeislands'
 const repositoryPattern = /^knowledgeislands\/[a-z0-9]+(?:[-.][a-z0-9]+)*$/
@@ -325,7 +333,7 @@ const checkDrift = async (page: string, source: Source): Promise<void> => {
 }
 
 const network = process.argv.includes('--network')
-const pages = publishedDirs.flatMap(markdownFiles).sort()
+const pages = [...publishedDirs.flatMap(markdownFiles).sort(), ...handBuiltPages]
 
 if (pages.length === 0) {
   fail('No published pages found; expected Markdown below src/docs/.')
@@ -337,6 +345,11 @@ if (pages.length === 0) {
 // include in for themselves (KI-WEBSITE-SITE-024).
 if (!readFileSync(proseLayout, 'utf-8').includes(sourcesPartial)) {
   fail(`${relative(siteRoot, proseLayout)}: does not include "${sourcesPartial}", so no page publishes its sources.`)
+}
+for (const page of handBuiltPages) {
+  if (!readFileSync(page, 'utf-8').includes(sourcesPartial)) {
+    fail(`${relative(siteRoot, page)}: does not include "${sourcesPartial}", so it does not publish its sources.`)
+  }
 }
 
 const repositorySources: { page: string; source: Source }[] = []
@@ -385,18 +398,18 @@ for (const file of pages) {
  * the two refs drift apart the page cites a document it is not showing, which is a local
  * inconsistency rather than upstream movement — so unlike drift, this fails, and fails offline.
  */
-const checkVendoredSnapshot = (): void => {
+const checkVendoredSnapshot = (vendored: string): void => {
   let snapshot: { source?: Source }
   try {
-    snapshot = JSON5.parse(readFileSync(vendoredData, 'utf-8'))
+    snapshot = JSON5.parse(readFileSync(vendored, 'utf-8'))
   } catch (error) {
-    fail(`${relative(siteRoot, vendoredData)}: could not be read (${(error as Error).message}).`)
+    fail(`${relative(siteRoot, vendored)}: could not be read (${(error as Error).message}).`)
     return
   }
 
   const { repository, path, ref } = snapshot.source ?? {}
   if (!repository || !path || !ref) {
-    fail(`${relative(siteRoot, vendoredData)}: must declare the repository, path, and ref it was taken from.`)
+    fail(`${relative(siteRoot, vendored)}: must declare the repository, path, and ref it was taken from.`)
     return
   }
 
@@ -405,7 +418,7 @@ const checkVendoredSnapshot = (): void => {
   )
   if (citing.length === 0) {
     fail(
-      `${relative(siteRoot, vendoredData)}: vendors ${repository}/${path}, but no published page declares it as a source. A vendored snapshot nobody cites is an undeclared copy.`
+      `${relative(siteRoot, vendored)}: vendors ${repository}/${path}, but no published page declares it as a source. A vendored snapshot nobody cites is an undeclared copy.`
     )
     return
   }
@@ -413,13 +426,13 @@ const checkVendoredSnapshot = (): void => {
   for (const { page, source } of citing) {
     if (source.ref !== ref) {
       fail(
-        `${page}: cites ${repository}/${path} at ${source.ref}, but the vendored snapshot was taken at ${ref}. Re-run sync:skills at the cited ref, or advance the citation.`
+        `${page}: cites ${repository}/${path} at ${source.ref}, but the vendored snapshot was taken at ${ref}. Re-run its sync at the cited ref, or advance the citation.`
       )
     }
   }
 }
 
-checkVendoredSnapshot()
+for (const vendored of vendoredData) checkVendoredSnapshot(vendored)
 
 if (network && failures.length === 0) {
   for (const { page, source } of repositorySources) {

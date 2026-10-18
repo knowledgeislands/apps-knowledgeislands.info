@@ -1,41 +1,611 @@
 @import "tailwindcss";
 @import "./tokens.css";
 
+/* The Chart dialect of the ki-design system (DESIGN.md 6, 7, 12.2): parchment, mist and navy surfaces
+   with hairlines rather than white cards and shadows; Cormorant Garamond at display sizes, Cormorant SC
+   for labels, Inter for reading. Values come from tokens.css; this file only composes them.
+
+   Navy surfaces carry data-theme="night" in the templates, so the night roles (ink = parchment,
+   muted = #a9b4c4, accent = #9fbbd8) apply inside them in either colour scheme. A printed plate
+   carries data-theme="light" for the same reason the other way round. */
+
 @layer base {
+  :root {
+    --gutter: 1.5rem;
+    --ease: cubic-bezier(0.4, 0, 0.2, 1);
+    --sea-deep-night: #0b1b31;
+    --night-muted: #a9b4c4;
+  }
+
+  /* The vendored aliases (--color-ink: var(--ink), …) are declared on :root, so they resolve there and
+     inherit as fixed values. Re-declaring them on a themed surface makes them follow its roles. */
+  [data-theme] {
+    --color-paper: var(--paper);
+    --color-ink: var(--ink);
+    --color-muted: var(--muted);
+    --color-accent: var(--accent);
+    --color-ok: var(--ok);
+    --color-teal: var(--teal);
+    --color-warn: var(--warn);
+    --color-bad: var(--bad);
+    --color-rule: var(--rule);
+    --color-boundary: var(--boundary);
+    --color-wash-ok: var(--wash-ok);
+    --color-wash-warn: var(--wash-warn);
+    --color-wash-bad: var(--wash-bad);
+    color: var(--ink);
+  }
+
   html {
     font-family: var(--font-body);
     background-color: var(--color-parchment);
     color: var(--color-ink);
     -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: clip;
   }
 
   h1,
   h2,
   h3,
   h4 {
-    font-family: var(--font-heading);
-    color: var(--color-ocean);
+    font-family: var(--font-display);
+    font-weight: 500;
+    color: var(--color-ink);
     line-height: 1.15;
+    text-wrap: balance;
+  }
+
+  /* Cormorant is a display face, for 24 px and up. Hand-built pages size their h3 and h4 below that, so
+     those take the body face unless a display class asks otherwise. */
+  h3,
+  h4 {
+    font-family: var(--font-body);
+    font-weight: 600;
+    line-height: 1.3;
   }
 
   a {
-    color: var(--color-teal);
+    color: var(--color-accent);
     text-decoration: none;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
   }
 
   a:hover {
-    color: var(--color-forest);
+    color: var(--color-accent);
     text-decoration: underline;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: 2px;
   }
 }
 
 @layer components {
-  /* Section backgrounds */
-  .section-parchment {
+  .site-main {
+    flex: 1;
+  }
+
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: -4rem;
+    z-index: 20;
+    background: var(--color-gold);
+    color: var(--color-navy);
+    padding: 0.625rem 1rem;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+  }
+
+  .skip-link:focus {
+    top: 0.75rem;
+    color: var(--color-navy);
+  }
+
+  /* ─── Line glyphs (ki-design packages/icons, through the inlined sprite) ─── */
+
+  .ki-glyph {
+    display: inline-block;
+    flex: none;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    vertical-align: middle;
+  }
+
+  /* Glyphs nested inside an illustration: stroke rules only, sized by their own attributes. */
+  .gs {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    overflow: visible;
+  }
+
+  .roundel {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 999px;
+    border: 1px solid var(--color-gold);
+    display: grid;
+    place-items: center;
+    color: var(--color-ink);
+    background: var(--color-paper);
+    flex: none;
+  }
+
+  /* ─── Type ─── */
+
+  .display-xl,
+  .display-l,
+  .display-m,
+  .display-s,
+  .display-xs {
+    font-family: var(--font-display);
+    font-weight: 500;
+    color: var(--color-ink);
+    margin: 0;
+    text-wrap: balance;
+  }
+
+  .display-xl {
+    font-size: clamp(2.75rem, 5.4vw, 4.5rem);
+    line-height: 1.04;
+    letter-spacing: -0.01em;
+  }
+
+  .display-l {
+    font-size: clamp(2.25rem, 4vw, 3rem);
+    line-height: 1.1;
+  }
+
+  .display-m {
+    font-size: clamp(1.875rem, 3.4vw, 2.5rem);
+    line-height: 1.12;
+  }
+
+  .display-s {
+    font-size: 1.75rem;
+    line-height: 1.2;
+    font-weight: 600;
+  }
+
+  .display-xs {
+    font-size: 1.5rem;
+    line-height: 1.25;
+    font-weight: 600;
+  }
+
+  /* Eyebrow: Cormorant SC over a short brass rule. Brass text on parchment is text-gold (#8a5a12, 5.15:1);
+     on navy it is the brighter gold. */
+  .kicker {
+    font-family: var(--font-smallcaps);
+    font-weight: 600;
+    font-size: 1.125rem;
+    letter-spacing: 0.14em;
+    line-height: 1.3;
+    text-transform: lowercase;
+    color: var(--color-text-gold);
+    margin: 0 0 0.875rem;
+    display: inline-block;
+  }
+
+  .kicker::after {
+    content: "";
+    display: block;
+    width: 2.5rem;
+    height: 1px;
+    margin-top: 0.5rem;
+    background: var(--color-gold);
+  }
+
+  .center .kicker::after {
+    margin-inline: auto;
+  }
+
+  [data-theme="night"] .kicker {
+    color: var(--color-gold);
+  }
+
+  .label {
+    font-family: var(--font-smallcaps);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    letter-spacing: 0.16em;
+    text-transform: lowercase;
+  }
+
+  .lead {
+    font-size: 1.25rem;
+    line-height: 1.55;
+    color: var(--color-muted);
+    margin: 1rem 0 0;
+    max-width: 60ch;
+  }
+
+  .center {
+    text-align: center;
+  }
+
+  .center .lead {
+    margin-inline: auto;
+  }
+
+  [data-theme="night"] .lead {
+    color: rgb(245 239 224 / 80%);
+  }
+
+  .aside {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.5rem;
+    line-height: 1.25;
+    color: var(--color-text-gold);
+    margin: 0;
+  }
+
+  .meta {
+    font-size: 0.8125rem;
+    line-height: 1.45;
+    font-weight: 500;
+    color: var(--color-muted);
+  }
+
+  /* ─── Buttons ─── */
+
+  .btn,
+  .btn-primary,
+  .btn-ghost,
+  .btn-ghost-light {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 3rem;
+    padding: 0.75rem 1.375rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid transparent;
+    font: 600 0.9375rem / 1.2 var(--font-body);
+    letter-spacing: 0.01em;
+    text-decoration: none;
+    cursor: pointer;
+    transition:
+      background-color 160ms var(--ease),
+      border-color 160ms var(--ease),
+      color 160ms var(--ease);
+  }
+
+  .btn:hover,
+  .btn-primary:hover,
+  .btn-ghost:hover,
+  .btn-ghost-light:hover {
+    text-decoration: none;
+  }
+
+  /* The one brass action. Navy text on gold is 6.1:1. */
+  .btn-brass,
+  .btn-primary {
+    background: var(--color-gold);
+    color: var(--color-navy);
+  }
+
+  .btn-brass:hover,
+  .btn-primary:hover {
+    background: #d4a650;
+    color: var(--color-navy);
+  }
+
+  .btn-brass:focus-visible,
+  .btn-primary:focus-visible {
+    outline-color: var(--color-ink);
+  }
+
+  .btn-outline,
+  .btn-ghost {
+    border-color: var(--color-boundary);
+    color: var(--color-ink);
+    background: transparent;
+  }
+
+  .btn-outline:hover,
+  .btn-ghost:hover {
+    border-color: var(--color-ink);
+    color: var(--color-ink);
+  }
+
+  .btn-ghost-light {
+    border-color: rgb(245 239 224 / 45%);
+    color: var(--color-parchment);
+    background: transparent;
+  }
+
+  .btn-ghost-light:hover {
+    border-color: var(--color-parchment);
+    color: var(--color-parchment);
+  }
+
+  .btn-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .center .btn-row {
+    justify-content: center;
+  }
+
+  .link-arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 2.75rem;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    color: var(--color-accent);
+  }
+
+  /* ─── Header ─── */
+
+  .site-header {
+    background: var(--color-navy);
+    color: var(--color-ink);
+    border-bottom: 1px solid rgb(245 239 224 / 10%);
+    position: relative;
+    z-index: 5;
+  }
+
+  .header-wrap {
+    max-width: calc(82rem + 2 * var(--gutter));
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+    display: flex;
+    align-items: center;
+    gap: 1.75rem;
+    min-height: 4.75rem;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--color-parchment);
+    margin-right: auto;
+    flex: none;
+  }
+
+  .brand:hover {
+    color: var(--color-parchment);
+    text-decoration: none;
+  }
+
+  .brand img {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
+  .brand span {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.5rem;
+    line-height: 1;
+  }
+
+  .site-nav {
+    display: flex;
+    align-items: center;
+    gap: 1.375rem;
+  }
+
+  .nav-group {
+    display: flex;
+    align-items: center;
+    gap: 1.125rem;
+  }
+
+  .nav-group + .nav-group {
+    padding-left: 1.375rem;
+    border-left: 1px solid rgb(245 239 224 / 16%);
+  }
+
+  .nav-label {
+    font-family: var(--font-smallcaps);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: lowercase;
+    color: var(--color-gold);
+  }
+
+  .site-nav ul,
+  .menu-panel ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .site-nav ul {
+    display: flex;
+    gap: 1.125rem;
+  }
+
+  .site-nav a {
+    display: inline-block;
+    color: rgb(245 239 224 / 82%);
+    font-size: 0.90625rem;
+    font-weight: 500;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid transparent;
+  }
+
+  .site-nav a:where(:hover, [aria-current="page"]) {
+    color: var(--color-parchment);
+    text-decoration: none;
+    border-bottom-color: var(--color-gold);
+  }
+
+  .header-cta.btn {
+    flex: none;
+    min-height: 2.75rem;
+    padding: 0.625rem 1.125rem;
+  }
+
+  .nav-menu {
+    display: none;
+    position: relative;
+  }
+
+  .nav-menu summary {
+    list-style: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 2.75rem;
+    padding: 0.5rem 0.875rem;
+    border: 1px solid var(--color-boundary);
+    border-radius: var(--radius-sm);
+    color: var(--color-parchment);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .nav-menu summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .nav-menu[open] summary {
+    border-color: var(--color-gold);
+  }
+
+  .menu-panel {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 0.75rem);
+    width: min(20rem, calc(100vw - 2rem));
+    background: var(--color-navy);
+    border: 1px solid rgb(200 150 60 / 55%);
+    border-radius: var(--radius-md);
+    padding: 1.25rem;
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .menu-panel ul {
+    margin-top: 0.5rem;
+    display: grid;
+  }
+
+  .menu-panel a:where(:not(.btn)) {
+    display: block;
+    padding: 0.625rem 0;
+    color: var(--color-parchment);
+    border-bottom: 1px solid rgb(245 239 224 / 10%);
+  }
+
+  .menu-panel .btn {
+    width: 100%;
+  }
+
+  /* ─── Footer ─── */
+
+  .site-footer {
+    background: var(--sea-deep-night);
+    color: var(--color-ink);
+    padding-block: 4rem 2.5rem;
+    font-size: 0.9375rem;
+  }
+
+  .foot-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) repeat(2, minmax(0, 1fr));
+    gap: 3rem;
+  }
+
+  .site-footer .brand {
+    margin-bottom: 1rem;
+  }
+
+  .site-footer p {
+    color: rgb(245 239 224 / 72%);
+    margin: 0 0 0.75rem;
+    max-width: 44ch;
+  }
+
+  .site-footer .foot-meta {
+    color: var(--night-muted);
+    font-size: 0.8125rem;
+  }
+
+  .site-footer h2 {
+    font-family: var(--font-smallcaps);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    letter-spacing: 0.16em;
+    text-transform: lowercase;
+    color: var(--color-gold);
+    margin: 0 0 0.5rem;
+  }
+
+  .site-footer ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .site-footer :where(li) a {
+    display: inline-block;
+    padding: 0.4375rem 0;
+    color: var(--color-parchment);
+  }
+
+  .site-footer :where(li) a:where(:hover) {
+    color: var(--color-parchment);
+  }
+
+  .foot-base {
+    margin-top: 3rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgb(245 239 224 / 10%);
+    display: flex;
+    justify-content: space-between;
+    gap: 0.375rem 1rem;
+    flex-wrap: wrap;
+  }
+
+  .site-footer :where(.foot-base) p {
+    color: var(--night-muted);
+    font-size: 0.8125rem;
+    margin: 0;
+  }
+
+  .site-footer .foot-tagline {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1rem;
+  }
+
+  /* ─── Surfaces ─── */
+
+  .section-parchment,
+  .on-parchment {
     background-color: var(--color-parchment);
   }
 
-  .section-mist {
+  .section-mist,
+  .on-mist {
     background-color: var(--color-mist);
   }
 
@@ -44,19 +614,101 @@
     color: var(--color-parchment);
   }
 
-  .section-navy {
+  .section-navy,
+  .on-navy {
     background-color: var(--color-navy);
     color: var(--color-parchment);
   }
 
-  /* Typography utilities */
+  .section-ocean :is(h1, h2, h3, h4),
+  .section-navy :is(h1, h2, h3, h4) {
+    color: var(--color-parchment);
+  }
+
+  .rule-top {
+    border-top: 1px solid var(--color-rule);
+  }
+
+  /* A faint hex lattice on ocean, for the wider picture (DESIGN.md 7.2). */
+  .lattice-bg {
+    background-color: var(--color-ocean);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='55.43' height='96' viewBox='0 0 55.43 96'%3E%3Cpath d='M27.71 0 L55.43 16 L55.43 48 L27.71 64 L0 48 L0 16 Z M27.71 64 V96' fill='none' stroke='%23f5efe0' stroke-opacity='0.05'/%3E%3C/svg%3E");
+    background-position: center top;
+  }
+
+  .section {
+    padding-block: 6rem;
+    position: relative;
+  }
+
+  .section-head {
+    max-width: 62ch;
+    margin: 0 auto 3.5rem;
+  }
+
+  /* Deckled hairline frame: the printed-atlas plate (DESIGN.md 7.3). */
+  .deckle {
+    position: relative;
+    margin: 0;
+    border: 1px solid var(--color-rule);
+    border-radius: var(--radius-md);
+    background: var(--color-parchment);
+    padding: 1.75rem;
+  }
+
+  .deckle::before {
+    content: "";
+    position: absolute;
+    inset: 4px;
+    border: 1px solid var(--color-rule);
+    border-radius: 5px;
+    pointer-events: none;
+  }
+
+  .deckle > .tick {
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    border: 0 solid var(--color-gold);
+  }
+
+  .tick.tl {
+    top: -1px;
+    left: -1px;
+    border-top-width: 1px;
+    border-left-width: 1px;
+  }
+
+  .tick.tr {
+    top: -1px;
+    right: -1px;
+    border-top-width: 1px;
+    border-right-width: 1px;
+  }
+
+  .tick.bl {
+    bottom: -1px;
+    left: -1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+  }
+
+  .tick.br {
+    bottom: -1px;
+    right: -1px;
+    border-bottom-width: 1px;
+    border-right-width: 1px;
+  }
+
+  /* ─── Legacy component names, restyled ─── */
+
   .heading-display {
-    font-family: var(--font-heading);
-    color: var(--color-ocean);
+    font-family: var(--font-display);
+    color: var(--color-ink);
   }
 
   .heading-display-light {
-    font-family: var(--font-heading);
+    font-family: var(--font-display);
     color: var(--color-parchment);
   }
 
@@ -68,146 +720,42 @@
 
   .text-body-light {
     font-family: var(--font-body);
-    color: var(--color-parchment);
-    opacity: 0.85;
+    color: rgb(245 239 224 / 85%);
     line-height: 1.75;
   }
 
-  /* Cards */
+  /* No white cards and no drop shadows: a hairline on a faint paper wash. */
   .card-ki {
-    background-color: white;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
+    background-color: rgb(255 255 255 / 35%);
+    border: 1px solid var(--color-rule);
+    border-radius: var(--radius-md);
     padding: 2rem;
-    box-shadow: 0 1px 4px rgb(26 32 48 / 6%);
-    transition: box-shadow 0.2s ease;
+    transition: border-color 160ms var(--ease);
   }
 
   .card-ki:hover {
-    box-shadow: 0 4px 16px rgb(26 32 48 / 10%);
+    border-color: var(--color-boundary);
   }
 
   .card-ocean {
     background-color: var(--color-ocean);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-md);
     padding: 2rem;
     color: var(--color-parchment);
   }
 
-  /* Gold accent line used for pull quotes and dividers */
   .accent-gold {
-    border-left: 3px solid var(--color-gold);
+    border-left: 2px solid var(--color-gold);
     padding-left: 1.25rem;
   }
 
-  /* Button styles */
-  .btn-primary {
-    display: inline-block;
-    background-color: var(--color-forest);
-    color: var(--color-parchment);
-    font-family: var(--font-body);
-    font-size: 0.9375rem;
-    font-weight: 500;
-    padding: 0.75rem 1.75rem;
-    border-radius: var(--radius-md);
-    text-decoration: none;
-    transition:
-      background-color 0.15s ease,
-      transform 0.1s ease;
+  .divider-gold {
+    width: 2.5rem;
+    height: 1px;
+    background-color: var(--color-gold);
+    margin: 1.5rem 0;
   }
 
-  .btn-primary:hover {
-    background-color: var(--color-moss);
-    color: var(--color-parchment);
-    text-decoration: none;
-    transform: translateY(-1px);
-  }
-
-  .btn-ghost {
-    display: inline-block;
-    background-color: transparent;
-    color: var(--color-ocean);
-    font-family: var(--font-body);
-    font-size: 0.9375rem;
-    font-weight: 500;
-    padding: 0.75rem 1.75rem;
-    border-radius: var(--radius-md);
-    border: 1.5px solid var(--color-ocean);
-    text-decoration: none;
-    transition:
-      background-color 0.15s ease,
-      color 0.15s ease,
-      transform 0.1s ease;
-  }
-
-  .btn-ghost:hover {
-    background-color: var(--color-ocean);
-    color: var(--color-parchment);
-    text-decoration: none;
-    transform: translateY(-1px);
-  }
-
-  .btn-ghost-light {
-    display: inline-block;
-    background-color: transparent;
-    color: var(--color-parchment);
-    font-family: var(--font-body);
-    font-size: 0.9375rem;
-    font-weight: 500;
-    padding: 0.75rem 1.75rem;
-    border-radius: var(--radius-md);
-    border: 1.5px solid rgb(245 239 224 / 50%);
-    text-decoration: none;
-    transition:
-      background-color 0.15s ease,
-      border-color 0.15s ease;
-  }
-
-  .btn-ghost-light:hover {
-    background-color: rgb(245 239 224 / 10%);
-    border-color: var(--color-parchment);
-    text-decoration: none;
-  }
-
-  /* Site header and navigation. These declarations live here rather than
-     inline on partials/nav.njk so the narrow-viewport rules below can override
-     them through the cascade instead of !important. */
-  .site-header-inner {
-    align-items: center;
-  }
-
-  .site-nav-list {
-    gap: 2rem;
-  }
-
-  .site-nav-list a {
-    font-size: 0.9375rem;
-  }
-
-  /* Keep the shared navigation within narrow viewports. */
-  @media (max-width: 700px) {
-    .site-header-inner {
-      align-items: flex-start;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-
-    .site-nav,
-    .site-nav-list {
-      width: 100%;
-    }
-
-    .site-nav-list {
-      flex-wrap: wrap;
-      gap: 0.625rem 1rem;
-    }
-
-    .site-nav-list a {
-      font-size: 0.8125rem;
-    }
-  }
-
-  /* Icon symbol containers */
   .symbol-circle {
     display: flex;
     align-items: center;
@@ -215,61 +763,166 @@
     width: 3rem;
     height: 3rem;
     border-radius: 50%;
-    background-color: var(--color-mist);
-    color: var(--color-ocean);
+    border: 1px solid var(--color-gold);
+    background-color: var(--color-paper);
+    color: var(--color-ink);
     margin-bottom: 1rem;
   }
 
   .symbol-circle-forest {
-    background-color: rgb(45 90 61 / 12%);
-    color: var(--color-forest);
+    color: var(--color-ok);
   }
 
   .symbol-circle-gold {
-    background-color: rgb(200 150 60 / 15%);
-    color: var(--color-gold);
+    color: var(--color-text-gold);
   }
 
   .symbol-circle-teal {
-    background-color: rgb(61 138 138 / 12%);
     color: var(--color-teal);
   }
 
-  /* Divider */
-  .divider-gold {
-    width: 3rem;
-    height: 2px;
-    background-color: var(--color-gold);
-    margin: 1.5rem 0;
-  }
-
-  /* Page container */
   .page-container {
     max-width: 72rem;
     margin-inline: auto;
-    padding-inline: 1.5rem;
+    padding-inline: var(--gutter);
   }
 
-  /* Prose for content pages */
+  /* Overline labels: small capitals in text gold, the site's eyebrow. */
+  .overline,
+  .overline-gold {
+    font-family: var(--font-smallcaps);
+    font-size: 1.0625rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: lowercase;
+    line-height: 1.3;
+    color: var(--color-text-gold);
+    margin-bottom: 1rem;
+  }
+
+  .overline-gold {
+    color: var(--color-gold);
+  }
+
+  /* Gold on ocean is 4.36:1, under the text floor; the lighter brass is 5.19:1. */
+  .lattice-bg .kicker,
+  .section-ocean .overline-gold {
+    color: #d4a650;
+  }
+
+  .text-muted {
+    color: var(--color-ink-light);
+    line-height: 1.7;
+  }
+
+  .section-pad {
+    padding: 5rem 0;
+  }
+
+  .hero-section-tall {
+    padding: 6rem 0 5rem;
+  }
+
+  .hero-section-standard {
+    padding: 4.5rem 0 4rem;
+  }
+
+  /* The section heroes on inner pages: navy with the faint lattice, like the home page's wider picture. */
+  .hero-section.section-navy,
+  .hero-section.section-ocean {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='55.43' height='96' viewBox='0 0 55.43 96'%3E%3Cpath d='M27.71 0 L55.43 16 L55.43 48 L27.71 64 L0 48 L0 16 Z M27.71 64 V96' fill='none' stroke='%23f5efe0' stroke-opacity='0.045'/%3E%3C/svg%3E");
+    background-position: center top;
+  }
+
+  .hero-section :is(h1) {
+    font-weight: 500;
+  }
+
+  .grid-2col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .grid-3col {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .grid-sidebar {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+  }
+
+  .grid-5col {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .grid-label-row {
+    display: grid;
+    grid-template-columns: 8rem 1fr;
+  }
+
+  /* Philosophy diagrams use presentation tokens to retain their structure in both colour schemes. */
+  .philosophy-diagram {
+    --diagram-surface: #fbf8f0;
+    --diagram-subtle-surface: #f7f2e6;
+    --diagram-ring: var(--color-border);
+    --diagram-muted: #6b6455;
+    --diagram-soft: #9a8f7a;
+    --diagram-faint: #d8cfbd;
+    --diagram-gold: var(--color-gold);
+    --diagram-ocean: var(--color-ocean);
+    --diagram-teal: var(--color-teal);
+    --diagram-forest: var(--color-forest);
+    --diagram-node-ink: var(--color-parchment);
+  }
+
+  /* ─── Prose for content pages ─── */
+
   .prose-ki {
     font-family: var(--font-body);
+    font-size: 1.0625rem;
     color: var(--color-ink);
-    line-height: 1.8;
+    line-height: 1.7;
     max-width: 65ch;
   }
 
+  .prose-ki a {
+    text-decoration: underline;
+    text-decoration-color: rgb(27 58 92 / 35%);
+  }
+
+  .prose-ki a:where(:hover) {
+    text-decoration-color: currentColor;
+  }
+
+  /* A Markdown page's own title. Preflight leaves a bare h1 at body size, which read as a label. */
+  .prose-ki h1 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    color: var(--color-ink);
+    font-size: clamp(2.25rem, 4vw, 3rem);
+    line-height: 1.1;
+    margin: 0 0 1.25rem;
+  }
+
   .prose-ki h2 {
-    font-family: var(--font-heading);
-    color: var(--color-ocean);
-    font-size: 1.75rem;
+    font-family: var(--font-display);
+    font-weight: 500;
+    color: var(--color-ink);
+    font-size: 2.25rem;
+    line-height: 1.15;
     margin-top: 3rem;
     margin-bottom: 1rem;
   }
 
   .prose-ki h3 {
-    font-family: var(--font-heading);
-    color: var(--color-ocean);
-    font-size: 1.25rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--color-ink);
+    font-size: 1.5rem;
+    line-height: 1.25;
     margin-top: 2rem;
     margin-bottom: 0.5rem;
   }
@@ -294,6 +947,10 @@
     margin-bottom: 0.5rem;
   }
 
+  .prose-ki li::marker {
+    color: var(--color-text-gold);
+  }
+
   .prose-ki h4 {
     font-family: var(--font-body);
     color: var(--color-ink);
@@ -305,12 +962,12 @@
 
   .prose-ki strong {
     font-weight: 600;
-    color: var(--color-ocean);
+    color: var(--color-ink);
   }
 
   .prose-ki hr {
     border: 0;
-    border-top: 1px solid var(--color-border-light);
+    border-top: 1px solid var(--color-rule);
     margin: 2.5rem 0;
   }
 
@@ -321,27 +978,18 @@
     margin-bottom: 1.25rem;
   }
 
-  /* Overline labels — small uppercase section/component tags */
-  .overline {
-    font-size: 0.8125rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--color-teal);
-    margin-bottom: 1rem;
-  }
-
   /* Where a page's sources are declared, they are provenance rather than the
      page's conclusion — see partials/sources.njk. */
   .prose-provenance {
     margin-top: 3.5rem;
     padding-top: 1.25rem;
-    border-top: 1px solid var(--color-border-light);
+    border-top: 1px solid var(--color-rule);
     color: var(--color-ink-light);
     font-size: 0.8125rem;
   }
 
   .prose-provenance .overline {
+    font-size: 0.9375rem;
     margin-bottom: 0.625rem;
   }
 
@@ -373,10 +1021,10 @@
   .prose-ki th {
     font-family: var(--font-body);
     font-weight: 600;
-    color: var(--color-ocean);
+    color: var(--color-ink);
     text-align: left;
     padding: 0.625rem 0.875rem 0.625rem 0;
-    border-bottom: 2px solid var(--color-border);
+    border-bottom: 1px solid var(--color-boundary);
   }
 
   .prose-ki td {
@@ -393,7 +1041,7 @@
     background: var(--color-navy);
     color: var(--color-parchment);
     border-radius: var(--radius-md);
-    padding: 1rem;
+    padding: 1rem 1.125rem;
     margin-bottom: 1.5rem;
     overflow-x: auto;
     font-size: 0.8125rem;
@@ -402,10 +1050,10 @@
 
   /* Inline code only. `pre > code` inherits the block above and must not gain a
      second ground on top of it. */
-  .prose-ki :not(pre) > code {
+  .prose-ki :where(:not(pre)) > code {
     font-family: var(--font-mono);
     font-size: 0.875em;
-    background: var(--color-mist);
+    background: rgb(255 255 255 / 45%);
     border: 1px solid var(--color-border-light);
     border-radius: var(--radius-sm);
     padding: 0.1em 0.35em;
@@ -416,7 +1064,7 @@
     overflow-wrap: break-word;
   }
 
-  .prose-ki pre code {
+  .prose-ki :where(pre) code {
     font-family: var(--font-mono);
     font-size: inherit;
     background: none;
@@ -425,7 +1073,7 @@
   }
 
   .prose-ki blockquote {
-    border-left: 3px solid var(--color-gold);
+    border-left: 2px solid var(--color-gold);
     padding-left: 1.25rem;
     margin-bottom: 1.25rem;
     color: var(--color-ink-light);
@@ -439,197 +1087,995 @@
     opacity: 0.65;
   }
 
-  .overline-gold {
+  /* ─── Home: hero ─── */
+
+  .hero {
+    background: var(--color-navy);
+    color: var(--color-ink);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(var(--gutter), 1fr) minmax(0, 29rem) minmax(0, 45.5rem) minmax(var(--gutter), 1fr);
+    align-items: center;
+    min-height: 42.5rem;
+  }
+
+  .hero-copy {
+    grid-column: 2;
+    padding-block: 5.5rem 4.5rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-copy .display-xl {
+    color: var(--color-parchment);
+    max-width: 12ch;
+  }
+
+  .brass-rule {
+    width: 4rem;
+    height: 1px;
+    background: var(--color-gold);
+    margin: 1.75rem 0 1.5rem;
+    border: 0;
+  }
+
+  .hero-copy .lead {
+    margin: 0 0 2.25rem;
+    font-size: 1.1875rem;
+  }
+
+  .hero-note {
+    margin-top: 2.5rem;
+    display: flex;
+    gap: 0.625rem;
+    align-items: flex-start;
+    color: var(--night-muted);
     font-size: 0.8125rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
+    line-height: 1.5;
+    max-width: 44ch;
+  }
+
+  .hero-note .ki-glyph {
     color: var(--color-gold);
-    margin-bottom: 1rem;
   }
 
-  /* Muted body text — ink-light colour with comfortable leading */
-  .text-muted {
-    color: var(--color-ink-light);
-    line-height: 1.7;
+  .hero-map {
+    grid-column: 3 / 5;
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    margin-left: -2.5rem;
+    position: relative;
   }
 
-  /* Default section vertical padding */
-  .section-pad {
-    padding: 5rem 0;
+  .hero-map svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    min-width: 0;
+    -webkit-mask-image: radial-gradient(ellipse 72% 70% at 52% 50%, #000 72%, transparent 100%);
+    mask-image: radial-gradient(ellipse 72% 70% at 52% 50%, #000 72%, transparent 100%);
   }
 
-  /* Hero vertical padding. The home hero is taller than the section heroes. */
-  .hero-section-tall {
-    padding: 6rem 0 5rem;
+  /* Fade the map into the navy behind the headline (DESIGN.md 12.2: scrim from the left). */
+  .hero-map::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 3.75rem;
+    background: linear-gradient(90deg, var(--color-navy), rgb(15 36 64 / 0%));
+    z-index: 1;
+    pointer-events: none;
   }
 
-  .hero-section-standard {
-    padding: 4rem 0 3.5rem;
+  /* Lamps flicker on the shared 8-frame loop (12 fps; DESIGN.md 11). Frame 0 under reduced motion. */
+  .lamp {
+    animation: ki-lamp 667ms steps(8) infinite;
   }
 
-  /* Responsive grid layouts — class replaces inline grid-template-columns */
-  .grid-2col {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+  .lamp.p1 {
+    animation-delay: -222ms;
   }
 
-  .grid-3col {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+  .lamp.p2 {
+    animation-delay: -444ms;
   }
 
-  .grid-sidebar {
-    display: grid;
-    grid-template-columns: 1fr 3fr;
+  @keyframes ki-lamp {
+    0%,
+    100% {
+      opacity: 1;
+    }
+
+    50% {
+      opacity: 0.78;
+    }
   }
 
-  .grid-5col {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-  }
-
-  .grid-label-row {
-    display: grid;
-    grid-template-columns: 8rem 1fr;
-  }
-
-  /* Philosophy diagrams use presentation tokens to retain their structure in both colour schemes. */
-  .philosophy-diagram {
-    --diagram-surface: white;
-    --diagram-subtle-surface: #faf8f2;
-    --diagram-ring: #d4c9b4;
-    --diagram-muted: #6b7280;
-    --diagram-soft: #9ca3af;
-    --diagram-faint: #d1d5db;
-    --diagram-gold: #c4a882;
-    --diagram-ocean: #1b3a5c;
-    --diagram-teal: #3d8a8a;
-    --diagram-forest: #2d5a3d;
-    --diagram-node-ink: white;
-  }
-}
-
-/* ─── Dark mode ─────────────────────────────────────────────────── */
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* Override light surface tokens */
-    --color-mist: #1a2235;
-    /* Ink and border tokens */
-    --color-ink: #ddd6c6;
-    --color-ink-light: #8a99b0;
-    --color-border: #2a3850;
-    --color-border-light: #1e2d42;
-    /* Slightly brightened accent tokens so they stay visible */
-    --color-teal: #52b8b8;
-    --color-gold: #d9a840;
-  }
-
-  /* Page background */
-  html {
-    background-color: #141c28;
+  /* The map's text equivalent, and the phone-width form of its cartouches (DESIGN.md 7.6, 13.5). */
+  .districts {
+    border-top: 1px solid rgb(245 239 224 / 10%);
+    background: var(--sea-deep-night);
     color: var(--color-ink);
   }
 
-  /* Swap light surfaces to dark; dark sections stay unchanged */
-  .section-parchment {
-    background-color: #141c28;
+  .districts .page-container {
+    max-width: 82rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding-block: 1.25rem;
   }
 
-  /* .section-mist already pulls var(--color-mist) which is now dark ✓ */
-
-  /* Headings — ocean (#1b3a5c) is invisible on dark bg; use a lighter tint */
-  h1,
-  h2,
-  h3,
-  h4,
-  .heading-display {
-    color: #7ab0d8;
+  .districts h2 {
+    font-family: var(--font-smallcaps);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: lowercase;
+    color: var(--color-gold);
+    margin: 0;
+    flex: none;
   }
 
-  /* Restore parchment headings inside already-dark sections */
-  .section-ocean h1,
-  .section-ocean h2,
-  .section-ocean h3,
-  .section-ocean h4,
-  .section-ocean .heading-display,
-  .section-navy h1,
-  .section-navy h2,
-  .section-navy h3,
-  .section-navy h4,
-  .section-navy .heading-display {
+  .districts ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+    gap: 1.25rem;
+  }
+
+  .districts li {
+    display: flex;
+    gap: 0.625rem;
+    align-items: center;
+    min-width: 0;
+  }
+
+  .districts :where(li) .ki-glyph {
     color: var(--color-parchment);
   }
 
-  /* Cards: white bg → dark surface */
-  .card-ki {
-    background-color: #1c2840;
-    border-color: var(--color-border);
+  .districts strong {
+    display: block;
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: var(--color-parchment);
   }
 
-  .card-ki:hover {
-    box-shadow: 0 4px 16px rgb(0 0 0 / 30%);
+  .districts span {
+    display: block;
+    font-size: 0.78125rem;
+    color: var(--night-muted);
   }
 
-  /* Symbol circles: mist bg → dark; icon color override for teal variant */
-  .symbol-circle {
-    background-color: #1e2d42;
+  /* ─── Home: the foundation, drawn as depth ─── */
+
+  .profile {
+    display: block;
+    margin: 0 auto 0.5rem;
+    width: 100%;
+    height: auto;
+  }
+
+  .layers {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--color-rule);
+  }
+
+  .layer {
+    padding: 2rem 2rem 0.5rem;
+    border-left: 1px solid var(--color-rule);
+  }
+
+  .layer:first-child {
+    border-left: 0;
+    padding-left: 0;
+  }
+
+  .layer:last-child {
+    padding-right: 0;
+  }
+
+  .layer-tag {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    color: var(--color-muted);
+    margin-bottom: 0.875rem;
+  }
+
+  .layer-tag .label {
+    font-size: 0.8125rem;
+    letter-spacing: 0.18em;
+  }
+
+  .layer h3 {
+    margin-bottom: 0.75rem;
+  }
+
+  .layer p {
+    margin: 0 0 1.125rem;
+    color: var(--color-muted);
+  }
+
+  .layer .aside {
+    color: var(--color-text-gold);
+  }
+
+  /* ─── Home: the cycle ─── */
+
+  .tide {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-bottom: 1.75rem;
+  }
+
+  .cycle {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+  }
+
+  .step-place {
+    display: flex;
+    gap: 0.75rem;
+    align-items: baseline;
     color: var(--color-teal);
+    margin: 0 0 0.25rem;
   }
 
-  .symbol-circle-forest {
-    background-color: rgb(45 90 61 / 20%);
+  .step-num {
+    font-family: var(--font-smallcaps);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    letter-spacing: 0.16em;
+    color: var(--color-muted);
+    font-variant-numeric: tabular-nums lining-nums;
   }
 
-  .symbol-circle-gold {
-    background-color: rgb(200 150 60 / 20%);
+  .cycle h3 {
+    margin-bottom: 0.75rem;
   }
 
-  .symbol-circle-teal {
-    background-color: rgb(61 138 138 / 20%);
+  .cycle p:where(:not(.step-place)) {
+    margin: 0;
+    color: var(--color-muted);
   }
 
-  /* Prose */
-  .prose-ki {
+  .cycle .roundel {
+    display: none;
+  }
+
+  /* ─── Home: the Capital ─── */
+
+  .home-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .home-copy p {
+    color: var(--color-muted);
+    margin: 0 0 1.5rem;
+  }
+
+  .home-copy strong {
+    color: var(--color-ink);
+    font-weight: 600;
+  }
+
+  blockquote.quote {
+    margin: 0 0 1.5rem;
+    padding: 0.25rem 0 0.25rem 1.25rem;
+    border-left: 2px solid var(--color-gold);
+  }
+
+  .home-copy :where(blockquote.quote) p {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.625rem;
+    line-height: 1.3;
+    color: var(--color-ink);
+    margin: 0;
+  }
+
+  .plate-head {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding-bottom: 1rem;
+    margin-bottom: 1.25rem;
+    border-bottom: 1px solid var(--color-border-light);
+  }
+
+  .plate-head .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 99px;
+    background: var(--color-gold);
+  }
+
+  .plate-head .display-xs {
+    color: var(--color-accent);
+  }
+
+  .plate-head .meta {
+    margin-left: auto;
+  }
+
+  .zone-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.625rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .zone {
+    border: 1px solid var(--color-border-light);
+    background: rgb(255 255 255 / 35%);
+    border-radius: var(--radius-sm);
+    padding: 0.75rem;
+    display: flex;
+    gap: 0.625rem;
+    align-items: flex-start;
+  }
+
+  .zone .ki-glyph {
+    color: var(--color-accent);
+    margin-top: 1px;
+  }
+
+  .zone strong {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .zone span {
+    display: block;
+    font-size: 0.8125rem;
+    color: var(--color-muted);
+    line-height: 1.35;
+  }
+
+  .zone-group-label {
+    font-family: var(--font-smallcaps);
+    font-size: 0.8125rem;
+    letter-spacing: 0.18em;
+    font-weight: 600;
+    text-transform: lowercase;
+    color: var(--color-accent);
+    margin: 0 0 0.5rem;
+  }
+
+  .dash-divide {
+    border: 0;
+    border-top: 1px dashed var(--color-boundary);
+    margin: 1.125rem 0;
+    opacity: 0.7;
+  }
+
+  .zone-row-2 {
+    grid-template-columns: repeat(2, 1fr);
+    margin-bottom: 0;
+  }
+
+  /* ─── Home: the wider picture ─── */
+
+  .cards-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+    margin-bottom: 3rem;
+  }
+
+  .card-night {
+    border: 1px solid rgb(245 239 224 / 16%);
+    border-radius: var(--radius-lg);
+    padding: 1.75rem;
+    background: rgb(15 36 64 / 55%);
+  }
+
+  .card-night .roundel {
+    background: transparent;
+    color: var(--color-parchment);
+    margin-bottom: 1.25rem;
+  }
+
+  .card-night h3 {
+    color: var(--color-parchment);
+    margin-bottom: 0.625rem;
+  }
+
+  .card-night p {
+    margin: 0;
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: rgb(245 239 224 / 78%);
+  }
+
+  /* ─── Home: Arcadia ─── */
+
+  .arcadia-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+    gap: 4.5rem;
+    align-items: center;
+  }
+
+  .arcadia-plate {
+    padding: 0.875rem;
+  }
+
+  .arcadia-plate svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+  }
+
+  .plate-caption {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.75rem 0.375rem 0;
+  }
+
+  .compass-mark {
+    width: 4rem;
+    height: 4rem;
+    color: var(--color-text-gold);
+    margin-bottom: 1.25rem;
+    stroke-width: 1;
+  }
+
+  .arcadia-copy .lead {
+    margin-bottom: 2rem;
+  }
+
+  /* ─── Home: the journey rail ─── */
+
+  .rail {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(var(--rail-steps, 6), 1fr);
+    position: relative;
+  }
+
+  .rail::before {
+    content: "";
+    position: absolute;
+    top: 31px;
+    left: calc(100% / (2 * var(--rail-steps, 6)));
+    right: calc(100% / (2 * var(--rail-steps, 6)));
+    height: 1px;
+    background: var(--color-boundary);
+    opacity: 0.6;
+  }
+
+  .rail li {
+    text-align: center;
+    position: relative;
+    padding-inline: 0.5rem;
+  }
+
+  .rail a {
+    display: block;
+    color: inherit;
+    border-radius: var(--radius-md);
+    padding: 0 0.25rem 0.5rem;
+  }
+
+  .rail a:where(:hover) {
+    text-decoration: none;
+  }
+
+  .hexbadge {
+    width: 56px;
+    height: 64px;
+    margin: 0 auto 0.875rem;
+    position: relative;
+    display: grid;
+    place-items: center;
     color: var(--color-ink);
   }
 
-  .prose-ki h2,
-  .prose-ki h3,
-  .prose-ki th,
-  .prose-ki strong {
-    color: #7ab0d8;
+  .hexbadge .hexframe {
+    position: absolute;
+    inset: 0;
+    width: 56px;
+    height: 64px;
+  }
+
+  .hexbadge .ki-glyph {
+    position: relative;
+  }
+
+  .rail .current .hexbadge {
+    color: var(--color-parchment);
+  }
+
+  .rail-num {
+    font-family: var(--font-smallcaps);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    letter-spacing: 0.16em;
+    color: var(--color-text-gold);
+    display: block;
+    font-variant-numeric: tabular-nums lining-nums;
+  }
+
+  .rail strong {
+    display: block;
+    font-weight: 600;
+    font-size: 1rem;
+    margin: 0.125rem 0 0.25rem;
+  }
+
+  .rail .rail-d {
+    display: block;
+    font-size: 0.875rem;
+    line-height: 1.45;
+    color: var(--color-muted);
+  }
+
+  .rail a:hover strong {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .rail .here {
+    display: inline-block;
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-text-gold);
+    border: 1px solid var(--color-boundary);
+    border-radius: var(--radius-sm);
+    padding: 1px 0.5rem;
+  }
+
+  /* ─── Field Guide ─── */
+
+  .page-head {
+    padding-block: 4.5rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .page-head .display-l {
+    color: var(--color-parchment);
+  }
+
+  .crumbs {
+    font-size: 0.8125rem;
+    color: var(--night-muted);
+    margin: 0 0 1.25rem;
+  }
+
+  .crumbs a {
+    color: var(--color-parchment);
+    text-decoration: underline;
+    text-decoration-color: rgb(245 239 224 / 40%);
+  }
+
+  .status-key {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.25rem;
+    margin-top: 2rem;
+    font-size: 0.875rem;
+    color: rgb(245 239 224 / 80%);
+  }
+
+  .status-key div {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .guide-filters {
+    position: sticky;
+    top: 0;
+    z-index: 4;
+    background: var(--color-parchment);
+    border-bottom: 1px solid var(--color-rule);
+  }
+
+  .guide-filters .page-container {
+    display: flex;
+    gap: 0.5rem;
+    padding-block: 0.75rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .chip {
+    flex: none;
+    min-height: 2.5rem;
+    padding: 0.5rem 0.875rem;
+    border: 1px solid var(--color-boundary);
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: var(--color-ink);
+    font: 500 0.875rem / 1.2 var(--font-body);
+    cursor: pointer;
+  }
+
+  .chip[aria-pressed="true"] {
+    background: var(--color-navy);
+    border-color: var(--color-navy);
+    color: var(--color-parchment);
+  }
+
+  .chip .n {
+    color: var(--color-muted);
+    margin-left: 0.25rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .chip[aria-pressed="true"] .n {
+    color: var(--night-muted);
+  }
+
+  .guide-section {
+    padding-block: 3.5rem 0.5rem;
+  }
+
+  .guide-section + .guide-section {
+    border-top: 1px solid var(--color-rule);
+  }
+
+  .guide-section header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem 1rem;
+    margin-bottom: 1.75rem;
+    flex-wrap: wrap;
+  }
+
+  .guide-section :where(header) p {
+    margin: 0;
+    max-width: 60ch;
+    color: var(--color-muted);
+  }
+
+  .sym-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(21rem, 1fr));
+    gap: 1rem;
+    list-style: none;
+    margin: 0 0 3rem;
+    padding: 0;
+  }
+
+  .sym {
+    border: 1px solid var(--color-rule);
+    border-radius: var(--radius-md);
+    padding: 1.25rem;
+    display: grid;
+    grid-template-columns: 3.5rem 1fr;
+    gap: 1rem;
+    align-items: start;
+    background: rgb(255 255 255 / 28%);
+  }
+
+  .sym .roundel.empty {
+    border-style: dashed;
+    border-color: var(--color-boundary);
+    color: var(--color-muted);
+  }
+
+  .sym h3 {
+    margin: 0 0 0.375rem;
+  }
+
+  .sym p {
+    margin: 0;
+    font-size: 0.9375rem;
+    line-height: 1.55;
+    color: var(--color-muted);
+  }
+
+  .sym-meta {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 0.625rem;
+  }
+
+  .sym code {
+    font-family: var(--font-mono);
+    font-size: 0.78125rem;
+    color: var(--color-muted);
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1;
+    padding: 5px 8px;
+    border-radius: var(--radius-sm);
+    letter-spacing: 0.02em;
+  }
+
+  .badge-canon {
+    background: var(--color-wash-ok);
+    color: var(--color-ok);
+  }
+
+  .badge-decided {
+    background: var(--color-mist);
+    color: var(--color-accent);
+  }
+
+  [data-theme="night"] .badge-decided {
+    background: rgb(159 187 216 / 14%);
+  }
+
+  .backlink {
+    font-size: 0.875rem;
+  }
+}
+
+/* ─── Dark mode ─────────────────────────────────────────────────────
+   The vendored tokens already switch the theme-aware roles (ink, muted, accent, teal, rule…) to their
+   night values. What remains is the site's static palette names used as surfaces and secondary text. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-mist: #132b4a;
+    --color-ink-light: var(--muted);
+    --color-border: var(--rule);
+    --color-border-light: #1b385c;
+    --color-text-gold: #c8963c;
+  }
+
+  /* A printed plate stays printed: restore the light values of the static names inside it. */
+  [data-theme="light"] {
+    --color-mist: #eef1f5;
+    --color-ink-light: #4a5568;
+    --color-border: #d4c9b4;
+    --color-border-light: #e8e0d0;
+    --color-text-gold: #8a5a12;
+  }
+
+  html {
+    background-color: var(--color-paper);
+  }
+
+  .section-parchment,
+  .on-parchment,
+  .guide-filters {
+    background-color: var(--color-paper);
+  }
+
+  .section-navy,
+  .hero,
+  .on-navy {
+    background-color: var(--sea-deep-night);
+  }
+
+  .card-ki,
+  .zone,
+  .sym {
+    background-color: rgb(245 239 224 / 4%);
+  }
+
+  .prose-ki a {
+    text-decoration-color: rgb(159 187 216 / 40%);
+  }
+
+  .prose-ki :where(:not(pre)) > code {
+    background: rgb(245 239 224 / 6%);
   }
 
   /* The light scheme sets a navy block against parchment. Against the dark page
      that ground all but disappears, so it goes darker still and takes an edge. */
   .prose-ki pre {
-    background: #0a1524;
+    background: var(--sea-deep-night);
     border: 1px solid var(--color-border);
   }
 
-  /* Links: teal is already brightened via token override above */
-
-  /* Accent quote / border */
-  .accent-gold {
-    border-left-color: var(--color-gold);
-  }
-
   .philosophy-diagram {
-    --diagram-surface: #1c2840;
-    --diagram-subtle-surface: #1e2d42;
-    --diagram-ring: #667791;
+    --diagram-surface: #17345a;
+    --diagram-subtle-surface: #132b4a;
+    --diagram-ring: #5f7896;
     --diagram-muted: #bac6d8;
     --diagram-soft: #9eafc4;
-    --diagram-faint: #71809a;
+    --diagram-faint: #4a6283;
     --diagram-gold: #e0bd8c;
-    --diagram-ocean: #7ab0d8;
+    --diagram-ocean: #9fbbd8;
     --diagram-teal: var(--color-teal);
-    --diagram-forest: #78b487;
+    --diagram-forest: #8fc4a0;
   }
 }
 
-/* ─── Mobile breakpoints ──────────────────────────────────────── */
+/* ─── Reduced motion ─────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .lamp {
+    animation: none;
+  }
+
+  .btn,
+  .btn-primary,
+  .btn-ghost,
+  .btn-ghost-light,
+  .card-ki {
+    transition: none;
+  }
+}
+
+/* ─── Breakpoints ─────────────────────────────────────────────────── */
+@media (max-width: 1100px) {
+  .site-nav,
+  .header-cta {
+    display: none;
+  }
+
+  .nav-menu {
+    display: block;
+  }
+
+  .districts ul {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 1rem 1.75rem;
+  }
+
+  .cards-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .section {
+    padding-block: 4rem;
+  }
+
+  .hero-grid {
+    grid-template-columns: var(--gutter) minmax(0, 1fr) var(--gutter);
+    min-height: 0;
+  }
+
+  .hero-copy {
+    grid-column: 2;
+    padding-block: 3.5rem 0.5rem;
+  }
+
+  .hero-map {
+    grid-column: 1 / -1;
+    margin: 0;
+  }
+
+  .hero-map::before {
+    display: none;
+  }
+
+  .districts .page-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.875rem;
+  }
+
+  .home-grid,
+  .arcadia-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .layers,
+  .cycle {
+    grid-template-columns: 1fr;
+  }
+
+  .layers {
+    border-top: 0;
+  }
+
+  .layer,
+  .layer:first-child,
+  .layer:last-child {
+    padding: 1.75rem 0 0.5rem;
+    border-left: 0;
+    border-top: 1px solid var(--color-rule);
+  }
+
+  .tide {
+    display: none;
+  }
+
+  .cycle {
+    gap: 0;
+  }
+
+  .cycle li {
+    display: grid;
+    grid-template-columns: 3.5rem 1fr;
+    gap: 1rem;
+    padding-bottom: 1.75rem;
+    position: relative;
+  }
+
+  .cycle li:not(:last-child)::before {
+    content: "";
+    position: absolute;
+    left: 1.75rem;
+    top: 3.75rem;
+    bottom: 0.25rem;
+    border-left: 1px dashed var(--color-teal);
+  }
+
+  .cycle .roundel {
+    display: grid;
+    background: var(--color-mist);
+  }
+
+  .rail {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+
+  .rail::before {
+    left: 28px;
+    right: auto;
+    top: 32px;
+    bottom: 32px;
+    width: 1px;
+    height: auto;
+  }
+
+  .rail li {
+    text-align: left;
+    padding: 0;
+  }
+
+  .rail a {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    column-gap: 1rem;
+    padding: 0.375rem 0 0.625rem;
+  }
+
+  .hexbadge {
+    margin: 0;
+    grid-row: 1 / span 4;
+  }
+
+  .rail .here {
+    justify-self: start;
+    width: max-content;
+  }
+
+  .foot-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .foot-grid > :first-child {
+    grid-column: 1 / -1;
+  }
+}
+
 @media (max-width: 768px) {
   .grid-2col,
   .grid-3col,
@@ -659,12 +2105,6 @@
     overflow-x: auto;
   }
 
-  /* Tighter horizontal padding on small screens */
-  .page-container {
-    padding-inline: 1rem;
-  }
-
-  /* Reduce hero/section vertical padding */
   .hero-section {
     padding-top: 3.5rem;
     padding-bottom: 3rem;
@@ -674,9 +2114,76 @@
     padding: 3rem 0;
   }
 
-  /* Footer bottom row: wrap on narrow screens */
-  .footer-bottom {
-    flex-wrap: wrap;
-    gap: 0.375rem;
+  /* Cartouches collapse into the district list beneath the map (DESIGN.md 7.6). */
+  .hero-map .cartouches {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  :root {
+    --gutter: 1rem;
+  }
+
+  .lead,
+  .hero-copy .lead {
+    font-size: 1.125rem;
+  }
+
+  .section-head {
+    margin-bottom: 2.25rem;
+  }
+
+  .brand span {
+    font-size: 1.375rem;
+  }
+
+  .brand img {
+    width: 2.375rem;
+    height: 2.375rem;
+  }
+
+  .header-wrap {
+    gap: 0.75rem;
+    min-height: 4rem;
+  }
+
+  .btn-row .btn {
+    flex: 1 1 100%;
+  }
+
+  .hero-map {
+    /* Crop towards the Citadel and the harbour at phone width. */
+    overflow: hidden;
+  }
+
+  .hero-map svg {
+    width: 190%;
+    flex: none;
+    max-width: none;
+    margin-left: -45%;
+    -webkit-mask-image: radial-gradient(ellipse 50% 48% at 50% 50%, #000 70%, transparent 100%);
+    mask-image: radial-gradient(ellipse 50% 48% at 50% 50%, #000 70%, transparent 100%);
+  }
+
+  .districts ul {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .cards-4,
+  .zone-row,
+  .zone-row-2,
+  .sym-grid,
+  .foot-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .deckle {
+    padding: 1.25rem 1.125rem;
+  }
+
+  .home-copy :where(blockquote.quote) p {
+    font-size: 1.5rem;
   }
 }
