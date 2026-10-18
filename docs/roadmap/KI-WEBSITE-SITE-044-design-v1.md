@@ -11,7 +11,7 @@ blocks: []
 blocked_by: []
 baseline_ref: 05af1ad46153e4d1986a5ad7b3aa3efad564776b
 created_at: 2026-10-18T09:00:00Z
-updated_at: 2026-10-18T10:00:00Z
+updated_at: 2026-10-18T10:30:00Z
 ---
 
 ## Goal
@@ -38,7 +38,7 @@ What changed:
 
 Not included: pages for Arcadia, Landscapes, Create or Specifications, which the design names but which do not exist. The navigation leaves them out rather than pointing somewhere they are not. Arcadia and the call to action go to the Arcadia section of the home page.
 
-Not included: the Port rename. The design system records Port replacing Harbour as decided, but Knowledge Islands Principal has not enacted it, so the live copy keeps Harbour and uses the port glyph only as its icon. The vendored map art says "The Port", and the home page relabels it at render time, leaving the vendored files as drawn. The same applies to the Tower, still a proposal, in the Citadel's cartouche, and to the cycle's "The Observatory".
+Not included at first: the Port rename. The design system recorded Port replacing Harbour as decided before Knowledge Islands Principal enacted it, so the live copy kept Harbour and the home page relabelled the vendored map art at render time. Principal has since enacted the Port (see Dependencies / blocks), and the site now says Port throughout. The Tower, still not canon, stays dropped from the Citadel's cartouche at render time, and the cycle's "The Observatory" keeps its live wording.
 
 Not included: the preview's copy changes and additions. These are the Archipelago card's revised reading, the tags under the wider-picture cards, "Agents, human or AI, are workers.", the Citadel flower and its paragraph, the six canon principles, the closing banner, and the Field Guide's "How the map works" panels. Each adds or replaces copy the narrative does not yet carry.
 
@@ -85,7 +85,7 @@ Then look at the home page, an inner page and the Field Guide at 1440 and 390 px
 
 ## Dependencies / blocks
 
-Knowledge Islands Principal owns the Port rename. The site waits on it and does not block it. When Principal enacts Port in place of Harbour, the site follows in one change: delete the `liveWording` filters in `apps/site/src/index.njk`, change the Harbour wording on the home page to Port, and refresh `sync:design`. That handoff is for Principal to schedule and does not block anything here.
+Knowledge Islands Principal owns the Port rename. It enacted it on 2026-10-18 in GDR-KI-PRINCIPAL-010, at `ki-principal` commit `25b30fe`, and the handoff is done: the Port filters in `apps/site/src/index.njk` are deleted, and the home page, Philosophy, Get Started and Field Guide copy say Port. The Field Guide cites the new commit and marks the Port, its four modes, the Lighthouse and the Council Hall as canon through its `enactedCanon` list, because `ki-design` at `002a623` still marks them decided; once `ki-design` marks them canon, `sync:design` refreshes the snapshot and the list is deleted. The Tower filter stays until the Tower is enacted.
 
 `ki-design` is the upstream for every vendored file. It is not yet public, so the Field Guide's citation of `packages/symbols/src/symbols.ts` cannot be opened by readers until it is; see Discussion.
 
@@ -105,7 +105,7 @@ None. No behaviour-level contract changes.
 
 ### Roadmap
 
-The Arcadia, Landscapes, Create and Specifications pages, the Port rename and the preview's additional copy are follow-on work, to be recorded when each is picked up.
+The Arcadia, Landscapes, Create and Specifications pages and the preview's additional copy are follow-on work, to be recorded when each is picked up.
 
 ## Discussion
 
@@ -115,7 +115,7 @@ The page-provenance guide says a page must not cite a source no reader can open,
 
 ### Harbour and Port in canon
 
-Principal's Symbol Library lists Harbour (integration point) and Port (operational systems) as two canon symbols. `ki-design` records Port as decided and carries no Harbour entry. The Field Guide says this in its opening note rather than inheriting the gap silently.
+Principal's Symbol Library listed Harbour (integration point) and Port (operational systems) as two canon symbols, while `ki-design` recorded Port as decided and carried no Harbour entry. GDR-KI-PRINCIPAL-010 closed the gap; the Field Guide's opening note now cites it.
 
 ### Why the map art is inlined
 

@@ -6,12 +6,12 @@ permalink: /field-guide/
 sources:
   - repository: knowledgeislands/ki-principal
     path: Pillars/Aesthetics/Symbol Library/Symbol Library.md
-    ref: a573243792deab881e0ba27ef08dbf069b6ec39d
-    governs: 'Which symbols are canon, and the Harbour and Port entries the note above the groups reconciles'
+    ref: 25b30fec5993da2162fa21a60db0d3a8f5893133
+    governs: 'Which symbols are canon, including the Port, its modes, the Lighthouse and the Council Hall enacted by GDR-KI-PRINCIPAL-010'
     reviewed: '2026-10-18'
   - repository: knowledgeislands/ki-principal
     path: Pillars/Aesthetics/Visual Style/Visual Style.md
-    ref: a573243792deab881e0ba27ef08dbf069b6ec39d
+    ref: 25b30fec5993da2162fa21a60db0d3a8f5893133
     governs: 'The symbolic semantics the meanings are read against'
     reviewed: '2026-10-18'
   - repository: knowledgeislands/ki-design
@@ -29,13 +29,18 @@ sources:
   entries: proposed vocabulary is withheld at the sync, so no template here can publish a proposal beside
   canon. The framing below — the group titles, their introductions and where the Voyage explains them — is
   this site's own and survives a refresh.
+
+  `enactedCanon` lists entries Knowledge Islands Principal has enacted since the snapshot's ki-design
+  commit, which still marks them decided: the Port, its four modes, the Lighthouse and the Council Hall
+  (GDR-KI-PRINCIPAL-010). Delete an id once a refreshed snapshot carries it as canon.
 #}
 {%- set statusLabel = { canon: "Canon", decided: "Decided" } %}
+{%- set enactedCanon = ["port", "dock", "rail-depot", "airport", "customs-house", "lighthouse", "council-hall"] %}
 {%- set groupInfo = {
   "geography": { title: "Geography", intro: "From realm to island: the shapes knowledge takes on the chart.", voyage: "The Wider Picture", href: "/#wider" },
   "zone": { title: "Zones", intro: "The places on every island.", voyage: "The Home", href: "/#home" },
   "structure": { title: "Structures", intro: "Buildings that stand for what an island does.", voyage: "The Home", href: "/#home" },
-  "port-mode": { title: "Port modes", intro: "The ways knowledge could reach an island once the Harbour becomes a Port. All decided; none enacted yet.", voyage: "The Cycle", href: "/#cycle" },
+  "port-mode": { title: "Port modes", intro: "The ways knowledge reaches and leaves an island: the districts of one Port.", voyage: "The Cycle", href: "/#cycle" },
   "signal": { title: "Signals", intro: "Marks that ask for attention. Every signal has a shape and a word, never colour alone.", voyage: "The Cycle", href: "/#cycle" },
   "condition": { title: "Condition", intro: "How well a place is tended, from the freshness of its evidence. Never a score.", voyage: "The Foundation", href: "/#foundation" },
   "sea": { title: "The sea", intro: "Routes, currents and hazards between the islands.", voyage: "The Cycle", href: "/#cycle" }
@@ -66,7 +71,7 @@ sources:
 <section class="section-parchment" aria-label="About these entries">
   <div class="page-container">
     <div class="prose-ki" style="padding-top: 3rem;">
-      <p>A decided entry has been agreed but not yet written into Knowledge Islands Principal, so the rest of this site still uses the enacted word. The clearest case is the Harbour: Principal's Symbol Library lists Harbour, an integration point, and Port, operational systems, as two canon symbols, and the design system has decided to fold them into one Port with several modes. Until Principal enacts that, the Voyage says Harbour and draws it with the port glyph. Entries still under discussion are not shown here.</p>
+      <p>A decided entry has been agreed but not yet written into Knowledge Islands Principal, so the rest of this site still uses the enacted word. The Port shows how an entry becomes canon: Principal's Symbol Library once listed Harbour, an integration point, and Port, operational systems, as two symbols, and the design system decided to fold them into one Port with four modes. <a href="https://github.com/knowledgeislands/ki-principal/blob/25b30fec5993da2162fa21a60db0d3a8f5893133/Admin/Governance/Decisions/GDR-KI-PRINCIPAL-010-the-port.md">GDR-KI-PRINCIPAL-010</a> enacted it, retiring the Harbour, and split the Lighthouse, now guidance only, from the Council Hall, which means governance. Entries still under discussion are not shown here.</p>
     </div>
   </div>
 </section>
@@ -90,7 +95,8 @@ sources:
           {%- endif %}
           <div>
             <h3 class="display-xs">{{ symbol.name }}</h3>
-            <div class="sym-meta"><span class="badge badge-{{ symbol.status }}">{{ statusLabel[symbol.status] }}</span><code>{{ symbol.id }}</code>{% if not symbol.icon %} <span class="meta">No glyph yet</span>{% endif %}</div>
+            {%- set status = "canon" if symbol.id in enactedCanon else symbol.status %}
+            <div class="sym-meta"><span class="badge badge-{{ status }}">{{ statusLabel[status] }}</span><code>{{ symbol.id }}</code>{% if not symbol.icon %} <span class="meta">No glyph yet</span>{% endif %}</div>
             <p>{{ symbol.meaning }}</p>
           </div>
         </li>

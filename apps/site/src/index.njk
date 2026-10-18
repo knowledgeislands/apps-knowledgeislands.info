@@ -7,16 +7,14 @@ description: Knowledge Islands is a model for building, governing, and evolving 
   The Voyage home, after the ki-design site preview (examples/site-preview/index.html at 002a623).
   The copy is the site's own, in its own order; the preview's look is applied around it.
 
-  Harbour, not Port. The design system records Port replacing Harbour as decided, but the rename is not
-  yet enacted in Knowledge Islands Principal, so the live copy keeps "Harbour" and only the port glyph is
-  used as its icon. The vendored map art labels the district "The Port", and names the Tower (still a
-  proposal) in the Citadel's cartouche; the `replace` filters below restore the live wording at render
-  time, leaving the vendored files byte-for-byte as ki-design drew them. When the rename is enacted,
-  delete the filters and the Harbour wording together (KI-WEBSITE-SITE-044).
+  The Port, not the Harbour: Knowledge Islands Principal enacted the Port as the island's point of entry
+  and exit in GDR-KI-PRINCIPAL-010, so the copy and the vendored map art now agree.
+
+  The vendored map art still names the Tower (not yet canon) in the Citadel's cartouche; the `replace`
+  filter below drops it at render time, leaving the vendored files byte-for-byte as ki-design drew them.
+  Delete the filter once the Tower is enacted (KI-WEBSITE-SITE-044).
 #}
 {%- set liveWording = [
-  [">The Port<", ">The Harbour<"],
-  ["the Port on the south coast", "the Harbour on the south coast"],
   ["Library · Council Hall · Tower<", "Library · Council Hall<"]
 ] -%}
 
@@ -49,7 +47,7 @@ description: Knowledge Islands is a model for building, governing, and evolving 
     <h2 id="districts-title">Districts of Arcadia</h2>
     <ul>
       <li>{{ kiGlyph("citadel") }}<div><strong>The Citadel</strong><span>Library · Council Hall</span></div></li>
-      <li>{{ kiGlyph("port") }}<div><strong>The Harbour</strong><span>Capture · entry &amp; exchange</span></div></li>
+      <li>{{ kiGlyph("port") }}<div><strong>The Port</strong><span>Capture · entry &amp; exchange</span></div></li>
       <li>{{ kiGlyph("observatory") }}<div><strong>The Observatory</strong><span>Reflect · insight</span></div></li>
       <li>{{ kiGlyph("streams") }}<div><strong>The Streams</strong><span>Knowledge in motion</span></div></li>
       <li>{{ kiGlyph("ancient-forest") }}<div><strong>The Ancient Forest</strong><span>Wisdom · never built on</span></div></li>
@@ -181,16 +179,16 @@ description: Knowledge Islands is a model for building, governing, and evolving 
         <circle cx="1013" cy="44" r="28" fill="#eef1f5" stroke="#c8963c"/>
         <svg x="1001" y="32" width="24" height="24" viewBox="0 0 24 24" class="gs" style="color:#1a2030"><use href="#ki-observatory"/></svg>
       </g>
-      <text x="600" y="184" text-anchor="middle" font-family="'Cormorant SC', Georgia, serif" font-size="16" font-weight="600" letter-spacing="2.4" fill="#317070">and the tide returns to the harbour</text>
+      <text x="600" y="184" text-anchor="middle" font-family="'Cormorant SC', Georgia, serif" font-size="16" font-weight="600" letter-spacing="2.4" fill="#317070">and the tide returns to the port</text>
     </svg>
 
     <ol class="cycle">
       <li>
         <span class="roundel" aria-hidden="true">{{ kiGlyph("port") }}</span>
         <div>
-          <p class="step-place"><span class="step-num">01</span><span class="label">The Harbour</span></p>
+          <p class="step-place"><span class="step-num">01</span><span class="label">The Port</span></p>
           <h3 class="display-s">Capture</h3>
-          <p>Information arrives without immediate judgment. The harbour receives everything before the library decides what belongs. No filtering at the gate — only routing.</p>
+          <p>Information arrives without immediate judgment. The Port receives everything before the Library decides what belongs. No filtering at the gate — only routing.</p>
         </div>
       </li>
       <li>
@@ -219,7 +217,7 @@ description: Knowledge Islands is a model for building, governing, and evolving 
     <div class="home-copy">
       <p class="kicker">The Home</p>
       <h2 id="home-title" class="display-m" style="margin-bottom: 1.5rem;">An island has structure.</h2>
-      <p>A Knowledge Island isn't a folder. It has a <strong>Capital</strong> — a civic centre with a Library at its heart and a Council Hall for governance. Knowledge enters through the <strong>Harbour</strong>, moves through <strong>Streams</strong> while it's in motion, and settles into the Library when it's canonical.</p>
+      <p>A Knowledge Island isn't a folder. It has a <strong>Capital</strong> — a civic centre with a Library at its heart and a Council Hall for governance. Knowledge enters and leaves through the <strong>Port</strong>, moves through <strong>Streams</strong> while it's in motion, and settles into the Library when it's canonical.</p>
       <blockquote class="quote"><p>"The structure is not bureaucracy. It's cartography — a map that tells you where you are."</p></blockquote>
       <a class="link-arrow" href="/philosophy/">Read the full philosophy {{ kiGlyph("arrow", 20) }}</a>
     </div>
@@ -240,7 +238,7 @@ description: Knowledge Islands is a model for building, governing, and evolving 
 
       <div class="zone-row zone-row-2">
         <div class="zone">{{ kiGlyph("streams", 20) }}<div><strong>Streams</strong><span>Knowledge in motion</span></div></div>
-        <div class="zone">{{ kiGlyph("port", 20) }}<div><strong>Harbour</strong><span>Port of entry</span></div></div>
+        <div class="zone">{{ kiGlyph("port", 20) }}<div><strong>Port</strong><span>Entry and exit</span></div></div>
       </div>
     </figure>
   </div>
