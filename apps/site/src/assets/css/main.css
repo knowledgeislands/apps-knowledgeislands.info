@@ -858,6 +858,19 @@
     grid-template-columns: repeat(5, 1fr);
   }
 
+  /* The Model's index cells: the grid's 1px gaps draw their rules, and a cell lightens on hover. */
+  .model-index-cell {
+    padding: 1.5rem;
+    background: var(--color-surface);
+    text-align: center;
+    text-decoration: none;
+    transition: background 0.15s ease;
+  }
+
+  .model-index-cell:hover {
+    background: var(--color-mist);
+  }
+
   .grid-label-row {
     display: grid;
     grid-template-columns: 8rem 1fr;
@@ -2175,6 +2188,16 @@
   .zone,
   .sym {
     background-color: rgb(245 239 224 / 4%);
+  }
+
+  /* The translucent surface would let the rule colour behind the grid show through and dim the
+     captions, so the cells sit on the section's own mist. */
+  .model-index-cell {
+    background: linear-gradient(rgb(245 239 224 / 5%), rgb(245 239 224 / 5%)), var(--color-mist);
+  }
+
+  .model-index-cell:hover {
+    background: linear-gradient(rgb(245 239 224 / 10%), rgb(245 239 224 / 10%)), var(--color-mist);
   }
 
   .prose-ki a {
