@@ -30,11 +30,10 @@ sources:
   official entries. The framing below — the group titles, their introductions and where the Voyage explains them — is
   this site's own and survives a refresh.
 
-  The status chips read Official and Agreed (GDR-KI-DESIGN-002). Their styles keep the class names
-  `badge-canon` and `badge-decided` that main.css already defines, so `badgeClass` maps each status to one.
+  The status chips read Official and Agreed (GDR-KI-DESIGN-002), styled by `badge-official` and
+  `badge-agreed` in main.css, so each card's chip takes its class straight from the symbol's status.
 #}
 {%- set statusLabel = { official: "Official", agreed: "Agreed" } %}
-{%- set badgeClass = { official: "badge-canon", agreed: "badge-decided" } %}
 {%- set groupInfo = {
   "geography": { title: "Geography", intro: "From realm to island: the shapes knowledge takes on the chart.", voyage: "The Wider Picture", href: "/#wider" },
   "zone": { title: "Zones", intro: "The places on every island.", voyage: "The Home", href: "/#home" },
@@ -52,8 +51,8 @@ sources:
     <h1 id="guide-title" class="display-l">Field Guide</h1>
     <p class="lead">Every mark on the map, once: what it is, what it means, and whether it is settled. Return here whenever the Voyage names a place you want to look up.</p>
     <div class="status-key" aria-label="Status key">
-      <div><span class="badge badge-canon">Official</span> Ratified in Knowledge Islands Principal</div>
-      <div><span class="badge badge-decided">Agreed</span> Agreed, not yet enacted into Knowledge Islands Principal</div>
+      <div><span class="badge badge-official">Official</span> Ratified in Knowledge Islands Principal</div>
+      <div><span class="badge badge-agreed">Agreed</span> Agreed, not yet enacted into Knowledge Islands Principal</div>
     </div>
   </div>
 </section>
@@ -94,7 +93,7 @@ sources:
           {%- endif %}
           <div>
             <h3 class="display-xs">{{ symbol.name }}</h3>
-            <div class="sym-meta"><span class="badge {{ badgeClass[symbol.status] }}">{{ statusLabel[symbol.status] }}</span><code>{{ symbol.id }}</code>{% if not symbol.icon %} <span class="meta">No glyph yet</span>{% endif %}</div>
+            <div class="sym-meta"><span class="badge badge-{{ symbol.status }}">{{ statusLabel[symbol.status] }}</span><code>{{ symbol.id }}</code>{% if not symbol.icon %} <span class="meta">No glyph yet</span>{% endif %}</div>
             <p>{{ symbol.meaning }}</p>
           </div>
         </li>

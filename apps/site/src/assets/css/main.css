@@ -2112,17 +2112,17 @@
     letter-spacing: 0.02em;
   }
 
-  .badge-canon {
+  .badge-official {
     background: var(--color-wash-ok);
     color: var(--color-ok);
   }
 
-  .badge-decided {
+  .badge-agreed {
     background: var(--color-mist);
     color: var(--color-accent);
   }
 
-  [data-theme="night"] .badge-decided {
+  [data-theme="night"] .badge-agreed {
     background: rgb(159 187 216 / 14%);
   }
 
