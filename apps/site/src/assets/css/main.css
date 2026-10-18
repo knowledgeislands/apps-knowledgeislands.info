@@ -1286,7 +1286,9 @@
 
   /* The pool of dusk: four overlapping ellipses centred on the copy and reaching well beyond it, each
      easing to transparent, so the sea and the islets still show around and faintly through the words.
-     The smallest deepens the pool under the gold kicker, the line with the least contrast to spare. */
+     The smallest deepens the pool under the gold kicker, the line with the least contrast to spare, and
+     reaches a little west of its first letter, where the brightest sea shows through; it holds the kicker
+     above 5:1 at every width from 900 px up. */
   .hero-copy::before {
     content: "";
     position: absolute;
@@ -1295,9 +1297,9 @@
     pointer-events: none;
     background:
       radial-gradient(
-        ellipse 30% 17% at 36% 24%,
-        rgb(15 36 64 / 68%) 0,
-        rgb(15 36 64 / 58%) 50%,
+        ellipse 32% 17% at 34% 24%,
+        rgb(15 36 64 / 82%) 0,
+        rgb(15 36 64 / 76%) 50%,
         rgb(15 36 64 / 0%) 100%
       ),
       radial-gradient(
