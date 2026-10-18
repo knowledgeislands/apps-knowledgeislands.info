@@ -1087,89 +1087,107 @@
     opacity: 0.65;
   }
 
-  /* ─── Home: hero ─── */
+  /* ─── Home: hero, the painted legend ───
+     The chosen Arcadia painting opens the page, as on /arcadia/, and the hero copy sits on a navy scrim
+     over the sea to the island's west. The copy is longer than /arcadia/'s title, so on wide screens the
+     painting is sized from the space the copy leaves and anchored right: its first fifth, open sea and the
+     outer islets, runs under the panel, and the Port and the Citadel stay clear of it. Its left edge
+     feathers into the navy. Contrast is measured against the scrimmed painting, not against plain navy. */
 
-  .hero {
+  .painted-hero {
     background: var(--color-navy);
     color: var(--color-ink);
     position: relative;
     overflow: hidden;
+    container-type: inline-size;
   }
 
-  .hero-grid {
-    display: grid;
-    grid-template-columns: minmax(var(--gutter), 1fr) minmax(0, 29rem) minmax(0, 45.5rem) minmax(var(--gutter), 1fr);
+  .painted-hero-stage {
+    --hero-panel-left: max(var(--gutter), 2.5rem);
+    --hero-panel-width: clamp(23rem, 30cqw, 27.5rem);
+    /* The Port begins a fifth of the way across the painting; keep that edge right of the panel. */
+    --hero-art-width: min(1672px, calc((100cqw - var(--hero-panel-left) - var(--hero-panel-width)) / 0.8));
+    position: relative;
+    display: flex;
     align-items: center;
-    min-height: 42.5rem;
+    min-height: calc(var(--hero-art-width) * 941 / 1672);
+    padding-block: 2rem;
+  }
+
+  /* The scrim: solid navy behind the copy, easing off into the painting just past it (DESIGN.md 12.2). */
+  .painted-hero-stage::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(
+      90deg,
+      rgb(15 36 64 / 94%) 0,
+      rgb(15 36 64 / 90%) calc(var(--hero-panel-left) + var(--hero-panel-width) - 1.5rem),
+      rgb(15 36 64 / 0%) calc(var(--hero-panel-left) + var(--hero-panel-width) + 3.5rem)
+    );
+  }
+
+  .hero-painting {
+    position: absolute;
+    top: 50%;
+    right: calc(var(--hero-art-width) * -0.03);
+    width: var(--hero-art-width);
+    margin: 0;
+    transform: translateY(-50%);
+  }
+
+  .hero-painting img {
+    display: block;
+    width: 100%;
+    height: auto;
+    -webkit-mask-image:
+      linear-gradient(90deg, transparent 0, #000 16%),
+      linear-gradient(180deg, transparent 0, #000 9%, #000 91%, transparent 100%);
+    -webkit-mask-composite: source-in;
+    mask-image:
+      linear-gradient(90deg, transparent 0, #000 16%),
+      linear-gradient(180deg, transparent 0, #000 9%, #000 91%, transparent 100%);
+    mask-composite: intersect;
+  }
+
+  .hero-painting figcaption {
+    position: absolute;
+    right: calc(var(--hero-art-width) * 0.03);
+    bottom: 0;
+    padding: 0.5rem var(--gutter) 0.75rem 3rem;
+    color: var(--color-parchment);
+    background: linear-gradient(90deg, rgb(15 36 64 / 0%), rgb(15 36 64 / 92%) 2.5rem);
   }
 
   .hero-copy {
-    grid-column: 2;
-    padding-block: 5.5rem 4.5rem;
     position: relative;
     z-index: 2;
+    width: var(--hero-panel-width);
+    margin-left: var(--hero-panel-left);
+    padding: 1.75rem 1.875rem 1.875rem;
   }
 
   .hero-copy .display-xl {
     color: var(--color-parchment);
-    max-width: 12ch;
+    font-size: clamp(2.5rem, 3.5cqw, 3.5rem);
+    line-height: 1.06;
+    margin: 0;
   }
 
   .brass-rule {
     width: 4rem;
     height: 1px;
     background: var(--color-gold);
-    margin: 1.75rem 0 1.5rem;
+    margin: 1.25rem 0 1.125rem;
     border: 0;
   }
 
   .hero-copy .lead {
-    margin: 0 0 2.25rem;
-    font-size: 1.1875rem;
-  }
-
-  .hero-note {
-    margin-top: 2.5rem;
-    display: flex;
-    gap: 0.625rem;
-    align-items: flex-start;
-    color: var(--night-muted);
-    font-size: 0.8125rem;
-    line-height: 1.5;
-    max-width: 44ch;
-  }
-
-  .hero-note .ki-glyph {
-    color: var(--color-gold);
-  }
-
-  .hero-map {
-    grid-column: 3 / 5;
-    align-self: stretch;
-    display: flex;
-    align-items: center;
-    margin-left: -2.5rem;
-    position: relative;
-  }
-
-  .hero-map svg {
-    display: block;
-    width: 100%;
-    height: auto;
-    min-width: 0;
-    -webkit-mask-image: radial-gradient(ellipse 72% 70% at 52% 50%, #000 72%, transparent 100%);
-    mask-image: radial-gradient(ellipse 72% 70% at 52% 50%, #000 72%, transparent 100%);
-  }
-
-  /* Fade the map into the navy behind the headline (DESIGN.md 12.2: scrim from the left). */
-  .hero-map::before {
-    content: "";
-    position: absolute;
-    inset: 0 auto 0 0;
-    width: 3.75rem;
-    background: linear-gradient(90deg, var(--color-navy), rgb(15 36 64 / 0%));
-    z-index: 1;
-    pointer-events: none;
+    margin: 0 0 1.5rem;
+    font-size: 1.0625rem;
+    color: var(--color-parchment);
   }
 
   /* Lamps flicker on the shared 8-frame loop (12 fps; DESIGN.md 11). Frame 0 under reduced motion. */
@@ -1509,10 +1527,9 @@
     color: rgb(245 239 224 / 78%);
   }
 
-  /* ─── Home: Arcadia, the painted legend ───
-     The chosen ki-design painting, nearly full-bleed on navy, so the section reads as the island's
-     legendary moment while the hero keeps the engraved chart. No copy sits on the painting: the text is
-     on plain navy above it, and the painting's top and bottom edges fade into that navy. */
+  /* ─── Home: Arcadia, the chart ───
+     The section's copy on plain navy, then the engraved chart with its cartouches: the painting above is
+     the legend, and this is the map. */
 
   .arcadia-band {
     background: var(--color-navy);
@@ -1541,33 +1558,30 @@
     color: var(--color-gold);
   }
 
-  .arcadia-painting,
   .painting-frame {
     margin: 0 auto;
     max-width: 1672px;
   }
 
-  .arcadia-painting {
-    margin-top: 3.5rem;
-  }
-
-  .arcadia-painting img,
   .painting-frame img {
     display: block;
     width: 100%;
     height: auto;
   }
 
-  .arcadia-painting img {
-    -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 6%, #000 94%, transparent 100%);
-    mask-image: linear-gradient(180deg, transparent 0, #000 6%, #000 94%, transparent 100%);
-  }
-
-  .arcadia-painting figcaption,
   .painting-frame figcaption {
     padding: 0.875rem var(--gutter) 0;
     text-align: center;
     color: var(--night-muted);
+  }
+
+  /* The home Arcadia section draws the chart, the map, below its copy; the painting is the hero above. */
+  .chart-kicker {
+    margin-top: 3.5rem;
+  }
+
+  .arcadia-chart figcaption {
+    padding-bottom: 0;
   }
 
   /* ─── /arcadia/: the legend above the map ─── */
@@ -2039,12 +2053,13 @@
   }
 }
 
-/* ─── /arcadia/: a soft cross-fade from the painting to the chart ───
+/* ─── /arcadia/ and home: a soft cross-fade from the painting to the chart ───
    Scroll-driven, so it needs no script; where the browser has no view timelines, or the reader asks for
    reduced motion, both stay fully drawn. The painting dims only partly, and the chart is never hidden. */
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
-    .painting-frame picture {
+    .painting-frame picture,
+    .hero-painting picture {
       animation: ki-legend-out linear both;
       animation-timeline: view();
       animation-range: exit 0% exit 100%;
@@ -2101,23 +2116,45 @@
     padding-block: 4rem;
   }
 
-  .hero-grid {
-    grid-template-columns: var(--gutter) minmax(0, 1fr) var(--gutter);
+  /* The painting takes the full width and the copy stacks below it on navy, never over it. */
+  .painted-hero-stage {
+    display: block;
     min-height: 0;
+    padding-block: 0;
+  }
+
+  .hero-painting {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: auto;
+    transform: none;
+  }
+
+  .hero-painting img {
+    -webkit-mask-image: linear-gradient(180deg, #000 92%, transparent 100%);
+    mask-image: linear-gradient(180deg, #000 92%, transparent 100%);
+  }
+
+  .hero-painting figcaption {
+    position: static;
+    background: none;
+    padding: 0.625rem var(--gutter) 0;
+    color: var(--night-muted);
   }
 
   .hero-copy {
-    grid-column: 2;
-    padding-block: 3.5rem 0.5rem;
-  }
-
-  .hero-map {
-    grid-column: 1 / -1;
+    width: auto;
     margin: 0;
+    padding: 1.5rem var(--gutter) 3rem;
   }
 
-  .hero-map::before {
+  .painted-hero-stage::before {
     display: none;
+  }
+
+  .hero-copy .display-xl {
+    font-size: clamp(2.5rem, 7cqw, 3.5rem);
   }
 
   .districts .page-container {
@@ -2283,9 +2320,17 @@
   }
 
   /* Cartouches collapse into the district list beneath the map (DESIGN.md 7.6). */
-  .hero-map .cartouches,
   .chart-map .cartouches {
     display: none;
+  }
+}
+
+/* At phone width the hero painting crops around the island rather than shrinking to a strip. */
+@media (max-width: 720px) {
+  .hero-painting img {
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    object-position: 58% 45%;
   }
 }
 
@@ -2321,29 +2366,26 @@
     flex: 1 1 100%;
   }
 
-  /* At phone width the painting crops towards the island rather than shrinking to a strip. */
-  .arcadia-painting img {
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
-    object-position: 62% 50%;
-  }
-
-  .arcadia-painting {
-    margin-top: 2.5rem;
-  }
-
-  .hero-map {
-    /* Crop towards the Citadel and the Port at phone width. */
+  /* The chart crops towards the Citadel and the Port at phone width. */
+  .arcadia-chart {
     overflow: hidden;
+    padding-inline: 0;
   }
 
-  .hero-map svg {
+  .arcadia-chart > svg {
     width: 190%;
-    flex: none;
     max-width: none;
     margin-left: -45%;
     -webkit-mask-image: radial-gradient(ellipse 50% 48% at 50% 50%, #000 70%, transparent 100%);
     mask-image: radial-gradient(ellipse 50% 48% at 50% 50%, #000 70%, transparent 100%);
+  }
+
+  .arcadia-chart figcaption {
+    padding-inline: var(--gutter);
+  }
+
+  .chart-kicker {
+    margin-top: 2.5rem;
   }
 
   .districts ul {

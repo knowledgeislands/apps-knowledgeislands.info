@@ -11,12 +11,12 @@ blocks: []
 blocked_by: []
 baseline_ref: bc6dbdfbd4880773d5021d75864e8c2db05c18fc
 created_at: 2026-10-18T11:00:00Z
-updated_at: 2026-10-18T12:00:00Z
+updated_at: 2026-10-18T13:00:00Z
 ---
 
 ## Goal
 
-The chosen Arcadia painting appears on the site wherever Arcadia is the subject: large in the home page's Arcadia section, and as the hero of a new `/arcadia/` page that sets it above the drawn map. The owner's direction is that the painting is the legend and the chart is the map, so the engraved isometric chart stays as the home hero.
+The chosen Arcadia painting appears on the site wherever Arcadia is the subject: large in the home page's Arcadia section, and as the hero of a new `/arcadia/` page that sets it above the drawn map. The owner's direction is that the painting is the legend and the chart is the map, so the engraved isometric chart stays as the home hero. Revised the same day at the owner's direction: the painting became the home hero and the chart moved into the home Arcadia section, so the home page also reads legend first and map second.
 
 ## Context
 
@@ -30,6 +30,7 @@ What changed:
 - **Home.** The Arcadia section moves to navy, keeps its copy and buttons, and shows the painting nearly full-bleed below them, lazy-loaded through `<picture>` with the caption "Arcadia — painted reference, 2026". No copy sits on the painting. The hero is unchanged.
 - **`/arcadia/`.** A full-bleed painting hero carries a short title block, "Arcadia" and the home section's one-line description, on a navy scrim over the sea. Below it the chart, the vendored `hero-arcadia.svg`, is captioned with the hero note and followed by the districts list. A short closing block reuses the section's remaining sentence and buttons, and the page publishes its sources. A scroll-driven cross-fade dims the painting as it leaves and brings the chart up as it arrives. It needs no script and is skipped under reduced motion or without view timelines.
 - **Navigation.** Voyage → Arcadia and Enter Arcadia go to `/arcadia/`. The home section keeps its `#arcadia` anchor.
+- **Home, revised.** After seeing `/arcadia/`, the owner asked for the home page to open the same way (18 October 2026). The painting is now the home hero, eager-loaded, with the existing hero copy and buttons on a navy scrim over the sea to the island's west. On wide screens the painting is sized from the space the copy leaves and anchored right, so the Port and the Citadel stay clear; at 900 px and below the copy stacks under it, and at 720 px and below the painting crops around the island. The districts strip still follows the hero. The Arcadia section keeps its copy and buttons and now draws the chart, labelled "The chart" and captioned with the former hero note, with the Tower dropped from its cartouche at render time as before. The painting appears once.
 - **Gates.** `verify:provenance` lists `/arcadia/` as a hand-built page and holds the painting manifest to the ref the page cites. The portable-`dist/` transform now rewrites `srcset` candidates as well as `href` and `src`.
 
 ## Boundary
@@ -53,6 +54,7 @@ Done. Every gate passes, and the change is committed and pushed to `main`.
 - [x] Extend `verify:provenance` and the `srcset` rewrite.
 - [x] Check contrast against the scrimmed painting, phone width without horizontal scroll, reduced motion, and an unchanged hero.
 - [x] Commit the ledger advance on its own, then this change.
+- [x] Make the painting the home hero and move the chart into the home Arcadia section (owner direction).
 
 ## Files touched
 
@@ -74,7 +76,7 @@ bunx @biomejs/biome check
 bunx rumdl check docs
 ```
 
-Then look at the home page and `/arcadia/` at 1440 and 390 px. The hero should match the previous build pixel for pixel. At 390 px nothing should scroll sideways, and on `/arcadia/` every line of text over the painting should meet 4.5:1 against the scrimmed image.
+Then look at the home page and `/arcadia/` at 1440, 1280, 1024 and 390 px. On the home hero the copy should leave the Port and the Citadel clear, and every line of text over the painting should meet 4.5:1 against the scrimmed image. At 390 px nothing should scroll sideways, and on `/arcadia/` every line of text over the painting should meet 4.5:1 against the scrimmed image.
 
 ## Dependencies / blocks
 

@@ -11,17 +11,25 @@ description: Knowledge Islands is a model for building, governing, and evolving 
   The Port, not the Harbour: Knowledge Islands Principal enacted the Port as the island's point of entry
   and exit in GDR-KI-PRINCIPAL-010, so the copy and the vendored map art now agree.
 
+  The painting is the legend and the chart is the map (owner direction, 18 October 2026): the page opens on
+  the painting, with the hero copy on a navy scrim over the sea, and the engraved chart is drawn in the
+  Arcadia section further down, so the painting appears once (KI-WEBSITE-SITE-045).
+
   The vendored map art still names the Tower (not yet canon) in the Citadel's cartouche; the `replace`
-  filter below drops it at render time, leaving the vendored files byte-for-byte as ki-design drew them.
-  Delete the filter once the Tower is enacted (KI-WEBSITE-SITE-044).
+  filter below drops it at render time, wherever the chart is drawn, leaving the vendored files
+  byte-for-byte as ki-design drew them. Delete the filter once the Tower is enacted (KI-WEBSITE-SITE-044).
 #}
 {%- set liveWording = [
   ["Library · Council Hall · Tower<", "Library · Council Hall<"]
 ] -%}
 
-<!-- ═══ HERO ═══ -->
-<section class="hero" data-theme="night" aria-labelledby="hero-title">
-  <div class="hero-grid">
+<!-- ═══ HERO: the painting, the legend ═══ -->
+<section class="hero painted-hero" data-theme="night" aria-labelledby="hero-title">
+  <div class="painted-hero-stage">
+    <figure class="hero-painting">
+      {{ paintingPicture(arcadiaPainting, "(max-width: 720px) 134vw, (min-width: 1672px) 1672px, 100vw", "eager", "high") }}
+      <figcaption class="meta">Arcadia — painted reference, 2026</figcaption>
+    </figure>
     <div class="hero-copy">
       <p class="kicker">Knowledge Islands</p>
       <h1 id="hero-title" class="display-xl">Knowledge is a civilisation question.</h1>
@@ -32,17 +40,11 @@ description: Knowledge Islands is a model for building, governing, and evolving 
         <a href="/model/" class="btn btn-outline">See the Model</a>
         <a href="/docs/get-started/" class="btn btn-outline">Get Started</a>
       </div>
-      <p class="hero-note">{{ kiGlyph("compass", 20) }}<span>Arcadia, drawn from its hex map in the Modern tile set.</span></p>
-    </div>
-    <div class="hero-map">
-      {%- set heroMap %}{% include "ki-design/hero-arcadia.svg" %}{% endset %}
-      {%- for pair in liveWording %}{% set heroMap = heroMap | replace(pair[0], pair[1]) %}{% endfor %}
-      {{ heroMap | safe }}
     </div>
   </div>
 </section>
 
-<!-- The map's text equivalent, and the phone-width form of its cartouches. -->
+<!-- The text equivalent of the painting and the chart, and the phone-width form of the chart's cartouches. -->
 <section class="districts" data-theme="night" aria-labelledby="districts-title">
   <div class="page-container">
     <h2 id="districts-title">Districts of Arcadia</h2>
@@ -281,7 +283,7 @@ description: Knowledge Islands is a model for building, governing, and evolving 
   </div>
 </section>
 
-<!-- ═══ ARCADIA: the painting is the legend; the chart in the hero is the map ═══ -->
+<!-- ═══ ARCADIA: the painting in the hero is the legend; the chart here is the map ═══ -->
 <section id="arcadia" class="section arcadia-band" data-theme="night" aria-labelledby="arcadia-title">
   <div class="page-container arcadia-copy center">
     <svg class="compass-mark ki-glyph" viewBox="0 0 24 24" aria-hidden="true"><use href="#ki-compass"/></svg>
@@ -294,9 +296,14 @@ description: Knowledge Islands is a model for building, governing, and evolving 
       <a href="/projects/" class="btn btn-outline">See the Projects</a>
     </div>
   </div>
-  <figure class="arcadia-painting">
-    {{ paintingPicture(arcadiaPainting, "(min-width: 1672px) 1672px, 100vw", "lazy") }}
-    <figcaption class="meta">Arcadia — painted reference, 2026</figcaption>
+  <div class="page-container center chart-kicker">
+    <p class="kicker">The chart</p>
+  </div>
+  <figure class="chart-map arcadia-chart">
+    {%- set chartMap %}{% include "ki-design/hero-arcadia.svg" %}{% endset %}
+    {%- for pair in liveWording %}{% set chartMap = chartMap | replace(pair[0], pair[1]) %}{% endfor %}
+    {{ chartMap | safe }}
+    <figcaption class="meta">{{ kiGlyph("compass", 20) }}<span>Arcadia, drawn from its hex map in the Modern tile set.</span></figcaption>
   </figure>
 </section>
 
