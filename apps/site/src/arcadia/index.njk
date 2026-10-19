@@ -14,6 +14,16 @@ sources:
     ref: 50e6bd12ea8c8aa5ac916bdbe0d50f8701a8433a
     governs: 'The chart: Arcadia drawn from its hex map in the Modern tile set, with its cartouches'
     reviewed: '2026-10-19'
+  - repository: knowledgeislands/ki-principal
+    path: Admin/Governance/Known Lands.md
+    ref: df270aa2f24c95be72205403c94d3d6b63e20602
+    governs: 'The islands under the chart: each public island and its role and owned concern, charted as the dated snapshot in src/_data/arcadiaSnapshot.json5 (GDR-KI-DESIGN-031)'
+    reviewed: '2026-10-19'
+  - repository: knowledgeislands/ki-principal
+    path: .ki.toml
+    ref: df270aa2f24c95be72205403c94d3d6b63e20602
+    governs: 'Which repositories are islands of the territory, in roster order, and which is the Capital'
+    reviewed: '2026-10-19'
 ---
 {% from "macros/icons.njk" import kiGlyph %}
 {% from "macros/painting.njk" import paintingPicture %}
@@ -27,6 +37,11 @@ sources:
 
   The chart's cartouche names the Capital, holding the Library and the Council Hall (GDR-KI-PRINCIPAL-011), and
   draws it with ki-design's own `capital` glyph.
+
+  Under the chart, the islands: a dated snapshot of the territory's public repositories, their roles and the
+  concerns they own, charted from Knowledge Islands Principal by `sync:arcadia` into src/_data/arcadiaSnapshot.json5
+  and stamped with the date it was charted, never claiming to be live (GDR-KI-DESIGN-031). Private repositories
+  never reach the snapshot. The labels are Known Lands' own; the only new words are the heading and the stamp.
 #}
 
 <!-- ═══ THE LEGEND: the painting ═══ -->
@@ -61,6 +76,19 @@ sources:
         <li>{{ kiGlyph("observatory") }}<div><strong>The Observatory</strong><span>Reflect · insight</span></div></li>
         <li>{{ kiGlyph("streams") }}<div><strong>The Streams</strong><span>Knowledge in motion</span></div></li>
         <li>{{ kiGlyph("ancient-forest") }}<div><strong>The Ancient Forest</strong><span>Wisdom · never built on</span></div></li>
+      </ul>
+    </div>
+  </div>
+  <div class="chart-islands">
+    <div class="page-container">
+      <div class="chart-islands-head">
+        <h3 id="islands-title">The islands</h3>
+        <p class="charted"><time datetime="{{ arcadiaSnapshot.charted }}">Charted {{ arcadiaSnapshot.charted }}</time></p>
+      </div>
+      <ul aria-labelledby="islands-title">
+        {%- for island in arcadiaSnapshot.islands %}
+        <li>{{ kiGlyph("capital" if island.role == "Capital" else "island") }}<div><a href="{{ island.repository }}">{{ island.name }}</a><span>{{ island.role }} · {{ island.concern }}</span></div></li>
+        {%- endfor %}
       </ul>
     </div>
   </div>

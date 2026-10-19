@@ -42,7 +42,8 @@ const handBuiltPages = ['src/field-guide/index.njk', 'src/arcadia/index.njk'].ma
 const vendoredData = [
   'src/_data/skillCatalogue.json5',
   'src/_data/kiSymbols.json5',
-  'src/_data/arcadiaPainting.json5'
+  'src/_data/arcadiaPainting.json5',
+  'src/_data/arcadiaSnapshot.json5'
 ].map((file) => resolve(siteRoot, file))
 
 const repositoryOwner = 'knowledgeislands'
@@ -401,7 +402,7 @@ for (const file of pages) {
  * inconsistency rather than upstream movement — so unlike drift, this fails, and fails offline.
  */
 const checkVendoredSnapshot = (vendored: string): void => {
-  let snapshot: { source?: Source }
+  let snapshot: { source?: Source & { roster?: string }; charted?: unknown }
   try {
     snapshot = JSON5.parse(readFileSync(vendored, 'utf-8'))
   } catch (error) {
@@ -409,27 +410,41 @@ const checkVendoredSnapshot = (vendored: string): void => {
     return
   }
 
-  const { repository, path, ref } = snapshot.source ?? {}
+  const { repository, path, ref, roster } = snapshot.source ?? {}
   if (!repository || !path || !ref) {
     fail(`${relative(siteRoot, vendored)}: must declare the repository, path, and ref it was taken from.`)
     return
   }
 
-  const citing = repositorySources.filter(
-    (entry) => entry.source.repository === repository && entry.source.path === path
-  )
-  if (citing.length === 0) {
-    fail(
-      `${relative(siteRoot, vendored)}: vendors ${repository}/${path}, but no published page declares it as a source. A vendored snapshot nobody cites is an undeclared copy.`
-    )
-    return
+  // A dated snapshot (GDR-KI-DESIGN-031) publishes its date as a stamp, so the date is held like `reviewed`.
+  if (snapshot.charted !== undefined) {
+    const charted = String(snapshot.charted)
+    if (!datePattern.test(charted) || Number.isNaN(Date.parse(charted))) {
+      fail(`${relative(siteRoot, vendored)}: charted "${charted}" is not an ISO date.`)
+    } else if (charted > today) {
+      fail(`${relative(siteRoot, vendored)}: charted date "${charted}" is in the future.`)
+    }
   }
 
-  for (const { page, source } of citing) {
-    if (source.ref !== ref) {
+  // A snapshot drawn from two files of one repository at one commit names the second as its `roster`, and
+  // both must be cited at that commit.
+  for (const vendoredPath of roster ? [path, roster] : [path]) {
+    const citing = repositorySources.filter(
+      (entry) => entry.source.repository === repository && entry.source.path === vendoredPath
+    )
+    if (citing.length === 0) {
       fail(
-        `${page}: cites ${repository}/${path} at ${source.ref}, but the vendored snapshot was taken at ${ref}. Re-run its sync at the cited ref, or advance the citation.`
+        `${relative(siteRoot, vendored)}: vendors ${repository}/${vendoredPath}, but no published page declares it as a source. A vendored snapshot nobody cites is an undeclared copy.`
       )
+      continue
+    }
+
+    for (const { page, source } of citing) {
+      if (source.ref !== ref) {
+        fail(
+          `${page}: cites ${repository}/${vendoredPath} at ${source.ref}, but the vendored snapshot was taken at ${ref}. Re-run its sync at the cited ref, or advance the citation.`
+        )
+      }
     }
   }
 }

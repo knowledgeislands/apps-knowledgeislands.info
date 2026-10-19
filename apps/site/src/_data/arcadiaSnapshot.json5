@@ -1,0 +1,136 @@
+// Dated snapshot of Arcadia's public islands, charted from Knowledge Islands Principal (GDR-KI-DESIGN-031).
+//
+// GENERATED FILE — do not edit. Regenerate with:
+//   bun run --cwd apps/site sync:arcadia
+//
+// Taken from knowledgeislands/ki-principal Admin/Governance/Known Lands.md (roles) and .ki.toml (the roster),
+// which must agree. Only repositories GitHub shows to an anonymous visitor are kept; nothing about the others
+// is recorded. The ref below must match the ref declared for both files in the sources frontmatter of
+// src/arcadia/index.njk; verify:provenance fails the build when they disagree.
+//
+// Charted 2026-10-19 at df270aa2f24c95be72205403c94d3d6b63e20602.
+{
+  "source": {
+    "repository": "knowledgeislands/ki-principal",
+    "path": "Admin/Governance/Known Lands.md",
+    "roster": ".ki.toml",
+    "ref": "df270aa2f24c95be72205403c94d3d6b63e20602"
+  },
+  "charted": "2026-10-19",
+  "islands": [
+    {
+      "name": "ki-principal",
+      "repository": "https://github.com/knowledgeislands/ki-principal",
+      "role": "Capital",
+      "concern": "KI governance, model and engineering practice"
+    },
+    {
+      "name": "apps-knowledgeislands.info",
+      "repository": "https://github.com/knowledgeislands/apps-knowledgeislands.info",
+      "role": "Publication",
+      "concern": "Public source-labelled website"
+    },
+    {
+      "name": "homebrew-tap",
+      "repository": "https://github.com/knowledgeislands/homebrew-tap",
+      "role": "Delivery",
+      "concern": "Homebrew distribution"
+    },
+    {
+      "name": "ki-agentic-harness",
+      "repository": "https://github.com/knowledgeislands/ki-agentic-harness",
+      "role": "Capability",
+      "concern": "Reusable agentic contracts"
+    },
+    {
+      "name": "ki-design",
+      "repository": "https://github.com/knowledgeislands/ki-design",
+      "role": "Capability",
+      "concern": "Shared design system"
+    },
+    {
+      "name": "ki-specifications",
+      "repository": "https://github.com/knowledgeislands/ki-specifications",
+      "role": "Standards",
+      "concern": "Portable contracts after V1"
+    },
+    {
+      "name": "ki-techne-harness",
+      "repository": "https://github.com/knowledgeislands/ki-techne-harness",
+      "role": "Product",
+      "concern": "Controller and execution fabric"
+    },
+    {
+      "name": "mcp-git-audit",
+      "repository": "https://github.com/knowledgeislands/mcp-git-audit",
+      "role": "MCP",
+      "concern": "Repository inspection"
+    },
+    {
+      "name": "mcp-gsuite",
+      "repository": "https://github.com/knowledgeislands/mcp-gsuite",
+      "role": "MCP",
+      "concern": "Google Workspace integration"
+    },
+    {
+      "name": "mcp-housekeeping-chatgpt",
+      "repository": "https://github.com/knowledgeislands/mcp-housekeeping-chatgpt",
+      "role": "MCP",
+      "concern": "ChatGPT housekeeping"
+    },
+    {
+      "name": "mcp-housekeeping-claude",
+      "repository": "https://github.com/knowledgeislands/mcp-housekeeping-claude",
+      "role": "MCP",
+      "concern": "Claude housekeeping"
+    },
+    {
+      "name": "mcp-ki-kb-fs",
+      "repository": "https://github.com/knowledgeislands/mcp-ki-kb-fs",
+      "role": "MCP",
+      "concern": "Knowledge Base filesystem"
+    },
+    {
+      "name": "mcp-ki-kb-notion-mirror",
+      "repository": "https://github.com/knowledgeislands/mcp-ki-kb-notion-mirror",
+      "role": "MCP",
+      "concern": "Knowledge Base Notion mirror"
+    },
+    {
+      "name": "mcp-m365",
+      "repository": "https://github.com/knowledgeislands/mcp-m365",
+      "role": "MCP",
+      "concern": "Microsoft 365 integration"
+    },
+    {
+      "name": "tools-git-almanac",
+      "repository": "https://github.com/knowledgeislands/tools-git-almanac",
+      "role": "Tool",
+      "concern": "Git chronology"
+    },
+    {
+      "name": "tools-ki",
+      "repository": "https://github.com/knowledgeislands/tools-ki",
+      "role": "Tool",
+      "concern": "KI governance host"
+    },
+    {
+      "name": "tools-mgit",
+      "repository": "https://github.com/knowledgeislands/tools-mgit",
+      "role": "Tool",
+      "concern": "Repository operations"
+    },
+    {
+      "name": "tools-rig",
+      "repository": "https://github.com/knowledgeislands/tools-rig",
+      "role": "Tool",
+      "concern": "Local environment tooling"
+    },
+    {
+      "name": "tools-techne",
+      "repository": "https://github.com/knowledgeislands/tools-techne",
+      "role": "Tool",
+      "concern": "Techné operator command"
+    }
+  ]
+}

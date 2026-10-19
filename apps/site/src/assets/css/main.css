@@ -1492,6 +1492,90 @@
     color: var(--night-muted);
   }
 
+  /* /arcadia/: the islands under the chart, from the dated snapshot (GDR-KI-DESIGN-031). The heading takes
+     the districts label's small capitals; the stamp sits beside it so the date reads as part of the title. */
+  .chart-islands {
+    border-top: 1px solid rgb(245 239 224 / 10%);
+    background: var(--sea-deep-night);
+    color: var(--color-ink);
+  }
+
+  .chart-islands .page-container {
+    max-width: 82rem;
+    padding-block: 1.75rem 2.5rem;
+  }
+
+  .chart-islands-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.25rem 1rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .chart-islands :where(h3) {
+    font-family: var(--font-smallcaps);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: lowercase;
+    color: var(--color-gold);
+    margin: 0;
+  }
+
+  .chart-islands .charted {
+    margin: 0;
+    font-size: 0.8125rem;
+    letter-spacing: 0.04em;
+    color: var(--night-muted);
+  }
+
+  .chart-islands :where(ul) {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
+    gap: 1rem 1.75rem;
+  }
+
+  .chart-islands :where(li) {
+    display: flex;
+    gap: 0.625rem;
+    align-items: flex-start;
+    min-width: 0;
+  }
+
+  .chart-islands :where(li) .ki-glyph {
+    flex: none;
+    color: var(--color-parchment);
+  }
+
+  .chart-islands :where(li div) {
+    min-width: 0;
+  }
+
+  .chart-islands :where(a) {
+    display: block;
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: var(--color-parchment);
+    overflow-wrap: anywhere;
+    text-decoration: underline;
+    text-decoration-color: rgb(245 239 224 / 35%);
+    text-underline-offset: 0.2em;
+  }
+
+  .chart-islands :where(a:hover) {
+    text-decoration-color: currentcolor;
+  }
+
+  .chart-islands :where(span) {
+    display: block;
+    font-size: 0.78125rem;
+    color: var(--night-muted);
+  }
+
   /* ─── Home: the foundation, drawn as depth ─── */
 
   .profile {

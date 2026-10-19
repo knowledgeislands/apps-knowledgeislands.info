@@ -19,6 +19,7 @@
     "ki:site:dev:css": "bunx tailwindcss -i src/assets/css/main.css -o ./dist/assets/css/main.css --watch",
     "ki:site:dev:serve": "bun node_modules/@11ty/eleventy/cmd.cjs --config=eleventy.config.ts --serve --port 3000",
     "preview": "bun run build && bunx wrangler dev",
+    "sync:arcadia": "bun scripts/sync-arcadia-snapshot.ts",
     "sync:cli": "bun scripts/sync-cli-commands.ts",
     "sync:design": "bun scripts/sync-ki-design.ts",
     "sync:skills": "bun scripts/sync-skill-catalogue.ts",
