@@ -29,7 +29,7 @@ layout: layouts/base.njk
   {%- if pages.length %}
       <a href="{{ pages[0].url }}" class="card-ki tool-card" style="color: inherit; text-decoration: none;">
         <p class="overline">{{ pages.length }} page{% if pages.length != 1 %}s{% endif %}</p>
-        <h3 style="font-size: 1.25rem; margin-bottom: 0.625rem;">{{ section.title }}</h3>
+        <h2 class="card-title">{{ section.title }}</h2>
         <p class="text-muted" style="font-size: 0.9375rem; margin: 0;">{{ section.description }}</p>
         <p class="text-muted" style="font-size: 0.8125rem; margin: 0.625rem 0 0;">Start at {{ pages[0].data.title }} →</p>
       </a>
