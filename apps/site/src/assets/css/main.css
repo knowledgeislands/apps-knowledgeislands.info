@@ -15,6 +15,7 @@
     --ease: cubic-bezier(0.4, 0, 0.2, 1);
     --sea-deep-night: #0b1b31;
     --night-muted: #a9b4c4;
+    --night-strong: rgb(245 239 224 / 85%);
   }
 
   /* The vendored aliases (--color-ink: var(--ink), …) are declared on :root, so they resolve there and
@@ -1773,6 +1774,18 @@
 
   .arcadia-chart figcaption {
     padding-bottom: 0;
+  }
+
+  /* The chart's cartouches are vendored from ki-design and drawn at the SVG's scale, so at laptop widths
+     the subtitle renders near 10 px. Each line already clears AA (title 12.4:1, subtitle 6.8:1 at worst),
+     but the grey subtitle and the translucent panel read faint over the terrain. The panel goes nearly
+     opaque and the subtitle takes the stronger night text (about 10:1), on both pages that inline the chart. */
+  .chart-map .cartouche rect {
+    fill-opacity: 0.95;
+  }
+
+  .chart-map .cartouche text + text {
+    fill: var(--night-strong);
   }
 
   /* ─── /arcadia/: the legend above the map ─── */
