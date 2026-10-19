@@ -6,12 +6,12 @@ kind: deliver
 purpose: capability
 project: website
 horizon: now
-status: in-progress
+status: awaiting-review
 blocks: []
 blocked_by: []
 baseline_ref: 05af1ad46153e4d1986a5ad7b3aa3efad564776b
 created_at: 2026-10-18T09:00:00Z
-updated_at: 2026-10-18T10:30:00Z
+updated_at: 2026-10-19T23:16:29Z
 ---
 
 ## Goal
@@ -46,7 +46,7 @@ Not included: proposed symbols and every symbol's upstream notes. Both are withh
 
 ## Current state
 
-The work is in the working tree on `feat/design-v1`, uncommitted, with every gate passing.
+Delivered on `main`: the ledger advance in `3f9e38f`, the design adoption in `5370af7` and the Port switch in `bc6dbdf`. Awaiting review.
 
 ## Steps
 
@@ -57,7 +57,7 @@ The work is in the working tree on `feat/design-v1`, uncommitted, with every gat
 - [x] Add the Field Guide from a vendored canon-and-decided symbol snapshot, and extend `verify:provenance` to cover it.
 - [x] Restyle the shared chrome, prose and hand-built card grounds; meet 4.5:1 for text, no horizontal scroll at 390 px, and reduced motion.
 - [x] Add `sync:design` and its tests.
-- [ ] Commit the ledger advance on its own, then this change.
+- [x] Commit the ledger advance on its own, then this change.
 
 ## Files touched
 
@@ -106,6 +106,43 @@ None. No behaviour-level contract changes.
 ### Roadmap
 
 The Arcadia, Landscapes, Create and Specifications pages and the preview's additional copy are follow-on work, to be recorded when each is picked up.
+
+## Review
+
+### Delivered
+
+The approved boundary held: tokens, type, Voyage and Atlas navigation, the restyled home page, the Field Guide, the shared chrome and `sync:design`, with the exclusions in Boundary left out. The baseline is `05af1ad`. The ledger advance landed on its own in `3f9e38f`, the adoption in `5370af7`, and the Port switch that followed GDR-KI-PRINCIPAL-010 in `bc6dbdf`. All three are on `main`, and `feat/design-v1` is fully merged into it.
+
+### Change Summary
+
+`5370af7` changed the 29 files listed under Files touched, apart from `docs/roadmap/_ISSUES.md`, which landed in `3f9e38f`. `bc6dbdf` changed `main.css`, `index.njk`, `field-guide/index.njk`, `philosophy/index.njk`, `docs/get-started/index.njk` and this record, deleting the Port filters and saying Port throughout. The one approved deviation is the Port rename, which moved from excluded to done once Principal enacted it, as Boundary and Dependencies / blocks record.
+
+### Verification
+
+Run on `main` at `783effb`, after `bun install --frozen-lockfile`, on 2026-10-20:
+
+- `bun run ki:site:clean && bun run ki:site:build` passed, with every `verify:*` gate.
+- `bun run --cwd apps/site test` passed, 72 tests and none failing.
+- `bun run self:typecheck` passed.
+- `bunx @biomejs/biome check` passed.
+- `bunx rumdl check docs/roadmap` passed.
+- `ki repo audit --skill ki-work-roadmap --repo .` passed with no failures and one warning: this record declares no `size`, which the migration window allows.
+
+The visual check at 1440 and 390 px in both colour schemes was not repeated for this update.
+
+### Outstanding concerns
+
+- The Field Guide cites `ki-design`, which is not yet public, so readers cannot open that citation; see Discussion. The reviewer decides whether to ship it as it stands.
+- `enactedCanon` and the Tower filter stay until `ki-design` marks the Port family canon and the Tower is enacted.
+- `ki repo audit --skill ki-engineering --repo .` fails DESIGN-2 on `.dependency-cruiser.ts`. This record did not touch the boundary configuration, so the failure is outside its scope.
+
+### Post-change review
+
+The goal is met: the site uses `ki-design`'s palette, type, glyphs and drawn Arcadia, with Voyage and Atlas navigation and a Field Guide. Scope matched the plan, plus the approved Port switch. Later work, such as the Arcadia chart in KI-WEBSITE-SITE-047, builds on this look and its gates still pass, so the regression risk is low. The record is ready for acceptance, once the reviewer has decided about the private-upstream citation.
+
+### Mini recap
+
+Design v1 is delivered on `main` in `5370af7` and `bc6dbdf`, after the ledger advance in `3f9e38f`, and every gate in Verify passes. The open concerns are the private `ki-design` citation and the engineering audit's boundary failure, which is outside this record. Proposed learning route: none.
 
 ## Discussion
 
