@@ -1,13 +1,19 @@
 import assert from 'node:assert/strict'
 import { describe, test } from 'node:test'
+import type { ArcadiaSnapshot } from './sync-arcadia-snapshot.ts'
 import {
+  ARCHIPELAGO,
+  archipelagoFromSnapshot,
   buildSymbolSnapshot,
   extractPlate,
+  ISLAND_GLYPHS,
+  islandGlyph,
   PAINTING,
   PLATE_END,
   PLATE_START,
   paintingFallback,
   planPainting,
+  renderArchipelagoManifest,
   type UpstreamSymbol
 } from './sync-ki-design.ts'
 
@@ -119,5 +125,67 @@ describe('planPainting', () => {
   test('pins the painting to a commit and records its licence state', () => {
     assert.match(PAINTING.ref, /^[0-9a-f]{40}$/)
     assert.match(PAINTING.licence, /KI-DESIGN-ART-002/)
+  })
+})
+
+const snapshot = (roles: string[]): ArcadiaSnapshot => ({
+  source: {
+    repository: 'knowledgeislands/ki-principal',
+    path: 'Admin/Governance/Known Lands.md',
+    roster: '.ki.toml',
+    ref: 'df270aa2f24c95be72205403c94d3d6b63e20602'
+  },
+  charted: '2026-10-19',
+  islands: roles.map((role, i) => ({
+    name: `island-${i}`,
+    repository: `https://github.com/knowledgeislands/island-${i}`,
+    role,
+    concern: `Concern ${i}`
+  }))
+})
+
+describe('archipelagoFromSnapshot', () => {
+  test('links every island to its repository, titled with its role and concern, in snapshot order', () => {
+    const archipelago = archipelagoFromSnapshot(snapshot(['Capital', 'Tool', 'MCP', 'Capability']))
+    assert.equal(archipelago.name, 'The islands of Arcadia, charted 2026-10-19')
+    assert.deepEqual(
+      archipelago.islands.map((i) => [i.id, i.href, i.glyph, i.title, i.capital ?? false]),
+      [
+        ['island-0', 'https://github.com/knowledgeislands/island-0', 'capital', 'island-0 — Capital · Concern 0', true],
+        ['island-1', 'https://github.com/knowledgeislands/island-1', 'workshop', 'island-1 — Tool · Concern 1', false],
+        ['island-2', 'https://github.com/knowledgeislands/island-2', 'causeway', 'island-2 — MCP · Concern 2', false],
+        [
+          'island-3',
+          'https://github.com/knowledgeislands/island-3',
+          'island',
+          'island-3 — Capability · Concern 3',
+          false
+        ]
+      ]
+    )
+  })
+
+  test('refuses a snapshot without exactly one Capital', () => {
+    assert.throws(() => archipelagoFromSnapshot(snapshot(['Tool'])), /0 Capitals/)
+    assert.throws(() => archipelagoFromSnapshot(snapshot(['Capital', 'Capital'])), /2 Capitals/)
+  })
+
+  test('types an island by role, falling back to the island glyph', () => {
+    assert.equal(islandGlyph('Capital'), 'capital')
+    assert.equal(islandGlyph('Standards'), ISLAND_GLYPHS.default)
+  })
+})
+
+describe('renderArchipelagoManifest', () => {
+  test('is a generated JSON5 file naming the renderer, the snapshot and the ref', () => {
+    const text = renderArchipelagoManifest({
+      source: { repository: 'knowledgeislands/ki-design', path: ARCHIPELAGO.renderer, ref },
+      drawnFrom: { path: ARCHIPELAGO.snapshot, ref, charted: '2026-10-19', islands: ['a'] },
+      glyphs: ISLAND_GLYPHS,
+      files: { wide: ARCHIPELAGO.layouts.wide.file, tall: ARCHIPELAGO.layouts.tall.file }
+    })
+    assert.match(text, /GENERATED FILE/)
+    assert.match(text, new RegExp(`Drawn at ${ref}\\.`))
+    assert.equal(JSON.parse(text.slice(text.indexOf('{'))).source.path, 'packages/hexmap/src/archipelago.ts')
   })
 })

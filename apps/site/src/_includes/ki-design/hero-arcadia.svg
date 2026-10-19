@@ -1,4 +1,4 @@
-<!-- Vendored from knowledgeislands/ki-design at 50e6bd12ea8c8aa5ac916bdbe0d50f8701a8433a: examples/site-preview/hero-arcadia.svg, unchanged below this comment. Do not edit here; refresh with `bun run --cwd apps/site sync:design` (GDR-KI-WEBSITE-002, ADR-KI-WEBSITE-001). -->
+<!-- Vendored from knowledgeislands/ki-design at 481ebeffe44a45e0323f832dd428e07408a8d318: examples/site-preview/hero-arcadia.svg, unchanged below this comment. Do not edit here; refresh with `bun run --cwd apps/site sync:design` (GDR-KI-WEBSITE-002, ADR-KI-WEBSITE-001). -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="-542 -228.62 1182 472.13" role="img" aria-labelledby="hero-t hero-d" class="iso-map">
 <title id="hero-t">Arcadia, drawn in the Modern tile set</title>
 <desc id="hero-d">An isometric hex map of Arcadia: the Capital on the central hills above the river, the Port on the south coast, the Observatory and Lighthouse on the eastern heights, the ancient forest in the west, ruins on the north-west ridge.</desc>

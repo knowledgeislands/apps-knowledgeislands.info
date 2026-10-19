@@ -1555,7 +1555,7 @@
     min-width: 0;
   }
 
-  .chart-islands :where(a) {
+  .chart-islands :where(li a) {
     display: block;
     font-weight: 600;
     font-size: 0.875rem;
@@ -1566,7 +1566,7 @@
     text-underline-offset: 0.2em;
   }
 
-  .chart-islands :where(a:hover) {
+  .chart-islands :where(li a:hover) {
     text-decoration-color: currentcolor;
   }
 
@@ -1574,6 +1574,40 @@
     display: block;
     font-size: 0.78125rem;
     color: var(--night-muted);
+  }
+
+  /* The islands chart above the list: ki-design's archipelago drawing of the same snapshot, in two layouts. Its
+     colours follow this navy surface through its own token-keyed custom properties; the frame is left out so the
+     section shows through. The round cluster is capped where its labels reach reading size, and a phone gets the
+     tall layout instead of a shrunken round one. */
+  .islands-chart {
+    margin: 0 auto 2rem;
+    max-width: 60rem;
+  }
+
+  .islands-chart > svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  .islands-chart > .ki-archipelago-arcadia-tall {
+    display: none;
+  }
+
+  @media (max-width: 47.99rem) {
+    .islands-chart {
+      max-width: 26rem;
+    }
+
+    .islands-chart > .ki-archipelago-arcadia-wide {
+      display: none;
+    }
+
+    .islands-chart > .ki-archipelago-arcadia-tall {
+      display: block;
+    }
   }
 
   /* ─── Home: the foundation, drawn as depth ─── */

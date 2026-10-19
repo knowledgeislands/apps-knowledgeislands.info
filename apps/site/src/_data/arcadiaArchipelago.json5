@@ -1,0 +1,53 @@
+// Vendored manifest of the islands chart on /arcadia/: Arcadia's public islands drawn as an archipelago.
+//
+// GENERATED FILE — do not edit. Regenerate with:
+//   bun run --cwd apps/site sync:design
+//
+// Drawn by knowledgeislands/ki-design packages/hexmap/src/archipelago.ts from src/_data/arcadiaSnapshot.json5.
+// The source ref must match the ref declared in the sources frontmatter of src/arcadia/index.njk, and
+// drawnFrom must match the snapshot; verify:provenance fails the build when either disagrees.
+//
+// Drawn at 481ebeffe44a45e0323f832dd428e07408a8d318.
+{
+  "source": {
+    "repository": "knowledgeislands/ki-design",
+    "path": "packages/hexmap/src/archipelago.ts",
+    "ref": "481ebeffe44a45e0323f832dd428e07408a8d318"
+  },
+  "drawnFrom": {
+    "path": "src/_data/arcadiaSnapshot.json5",
+    "ref": "df270aa2f24c95be72205403c94d3d6b63e20602",
+    "charted": "2026-10-19",
+    "islands": [
+      "ki-principal",
+      "apps-knowledgeislands.info",
+      "homebrew-tap",
+      "ki-agentic-harness",
+      "ki-design",
+      "ki-specifications",
+      "ki-techne-harness",
+      "mcp-git-audit",
+      "mcp-gsuite",
+      "mcp-housekeeping-chatgpt",
+      "mcp-housekeeping-claude",
+      "mcp-ki-kb-fs",
+      "mcp-ki-kb-notion-mirror",
+      "mcp-m365",
+      "tools-git-almanac",
+      "tools-ki",
+      "tools-mgit",
+      "tools-rig",
+      "tools-techne"
+    ]
+  },
+  "glyphs": {
+    "Capital": "capital",
+    "Tool": "workshop",
+    "MCP": "causeway",
+    "default": "island"
+  },
+  "files": {
+    "wide": "src/_includes/ki-design/arcadia-archipelago.svg",
+    "tall": "src/_includes/ki-design/arcadia-archipelago-tall.svg"
+  }
+}

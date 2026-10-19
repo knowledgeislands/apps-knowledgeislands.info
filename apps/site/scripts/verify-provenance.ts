@@ -21,7 +21,7 @@
  * site's build. See docs/guides/developer/page-provenance.md.
  */
 
-import { readFileSync } from 'node:fs'
+import { existsSync, readFileSync } from 'node:fs'
 import { dirname, relative, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import JSON5 from 'json5'
@@ -43,7 +43,8 @@ const vendoredData = [
   'src/_data/skillCatalogue.json5',
   'src/_data/kiSymbols.json5',
   'src/_data/arcadiaPainting.json5',
-  'src/_data/arcadiaSnapshot.json5'
+  'src/_data/arcadiaSnapshot.json5',
+  'src/_data/arcadiaArchipelago.json5'
 ].map((file) => resolve(siteRoot, file))
 
 const repositoryOwner = 'knowledgeislands'
@@ -450,6 +451,68 @@ const checkVendoredSnapshot = (vendored: string): void => {
 }
 
 for (const vendored of vendoredData) checkVendoredSnapshot(vendored)
+
+/**
+ * Holds the islands chart on /arcadia/ to the snapshot it draws (GDR-KI-DESIGN-031).
+ *
+ * The chart is `ki-design`'s renderer run over this site's own snapshot at sync time, so it can fall behind
+ * the snapshot it sits beside: `sync:arcadia` re-charts the islands and the chart still shows the old ones.
+ * The manifest records what it drew, so a stale or hand-edited chart fails here rather than publishing a
+ * different set of islands from the list under it.
+ */
+const checkArchipelago = (): void => {
+  const manifestPath = resolve(siteRoot, 'src/_data/arcadiaArchipelago.json5')
+  const snapshotPath = resolve(siteRoot, 'src/_data/arcadiaSnapshot.json5')
+  const where = relative(siteRoot, manifestPath)
+  let manifest: {
+    source?: Source
+    drawnFrom?: { path?: string; ref?: string; charted?: string; islands?: string[] }
+    files?: Record<string, string>
+  }
+  let snapshot: { source?: Source; charted?: string; islands?: { name: string }[] }
+  try {
+    manifest = JSON5.parse(readFileSync(manifestPath, 'utf-8'))
+    snapshot = JSON5.parse(readFileSync(snapshotPath, 'utf-8'))
+  } catch (error) {
+    fail(`${where}: could not be read with its snapshot (${(error as Error).message}).`)
+    return
+  }
+
+  const drawn = manifest.drawnFrom ?? {}
+  const names = (snapshot.islands ?? []).map((island) => island.name)
+  if (drawn.path !== relative(siteRoot, snapshotPath)) {
+    fail(`${where}: drawnFrom.path must name ${relative(siteRoot, snapshotPath)}.`)
+  }
+  if (drawn.ref !== snapshot.source?.ref || drawn.charted !== snapshot.charted) {
+    fail(
+      `${where}: drew the snapshot taken at ${drawn.ref} on ${drawn.charted}, but the snapshot is ${snapshot.source?.ref} on ${snapshot.charted}. Re-run sync:design after sync:arcadia.`
+    )
+  }
+  if (JSON.stringify(drawn.islands) !== JSON.stringify(names)) {
+    fail(`${where}: drew islands ${JSON.stringify(drawn.islands)}, but the snapshot lists ${JSON.stringify(names)}.`)
+  }
+
+  const files = Object.values(manifest.files ?? {})
+  if (files.length === 0) fail(`${where}: lists no chart files.`)
+  for (const file of files) {
+    const path = resolve(siteRoot, file)
+    if (!existsSync(path)) {
+      fail(`${where}: lists ${file}, which does not exist.`)
+      continue
+    }
+    const svg = readFileSync(path, 'utf-8')
+    const header = svg.slice(0, svg.indexOf('-->'))
+    if (!header.includes(`at ${manifest.source?.ref}:`) || !header.includes(`at ${snapshot.source?.ref},`)) {
+      fail(`${file}: its provenance header does not name the renderer ref and snapshot ref the manifest records.`)
+    }
+    const drawnIslands = [...svg.matchAll(/ data-island="([^"]*)"/g)].map((match) => match[1])
+    if (JSON.stringify([...drawnIslands].sort()) !== JSON.stringify([...names].sort())) {
+      fail(`${file}: draws islands ${JSON.stringify(drawnIslands)}, not the snapshot's ${JSON.stringify(names)}.`)
+    }
+  }
+}
+
+checkArchipelago()
 
 if (network && failures.length === 0) {
   for (const { page, source } of repositorySources) {

@@ -7,12 +7,12 @@
 // does not publish a proposal beside official entries. The ref below must match the ref declared in the sources
 // frontmatter of src/field-guide/index.njk; verify:provenance fails the build when they disagree.
 //
-// Snapshot taken at 50e6bd12ea8c8aa5ac916bdbe0d50f8701a8433a.
+// Snapshot taken at 481ebeffe44a45e0323f832dd428e07408a8d318.
 {
   "source": {
     "repository": "knowledgeislands/ki-design",
     "path": "packages/symbols/src/symbols.ts",
-    "ref": "50e6bd12ea8c8aa5ac916bdbe0d50f8701a8433a"
+    "ref": "481ebeffe44a45e0323f832dd428e07408a8d318"
   },
   "counts": {
     "upstream": 50,

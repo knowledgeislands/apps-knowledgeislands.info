@@ -13,7 +13,8 @@
       "*.json",
       "!.claude/skills",
       "!.agents/skills",
-      "!apps/site/src/assets/css/ki-design"
+      "!apps/site/src/assets/css/ki-design",
+      "!apps/site/src/_includes/ki-design"
     ],
     "ignoreUnknown": true
   },

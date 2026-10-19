@@ -19,6 +19,12 @@
  * advancing the painting is a deliberate edit of that ref. Its manifest, `src/_data/arcadiaPainting.json5`,
  * records the source and every variant, and `verify:provenance` holds it to the ref /arcadia/ cites.
  *
+ * The islands chart on /arcadia/ is the one vendored file drawn from this site's own data. `ki-design`'s archipelago
+ * renderer (`packages/hexmap`) draws the committed dated snapshot, `src/_data/arcadiaSnapshot.json5`
+ * (GDR-KI-DESIGN-031), here at sync time, so the build stays offline and needs no `ki-design`. Its manifest,
+ * `src/_data/arcadiaArchipelago.json5`, records the renderer's commit and the snapshot it drew, and
+ * `verify:provenance` fails the build when the chart and the snapshot disagree. After `sync:arcadia`, re-run this.
+ *
  * Usage: bun scripts/sync-ki-design.ts [--from <path-to-ki-design>]   (default: ../ki-design beside this repo)
  * See docs/guides/developer/page-provenance.md.
  */
@@ -27,7 +33,9 @@ import { execFileSync } from 'node:child_process'
 import { copyFile, mkdir, readFile, writeFile } from 'node:fs/promises'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
+import JSON5 from 'json5'
 import sharp from 'sharp'
+import type { ArcadiaSnapshot } from './sync-arcadia-snapshot.ts'
 
 export const SOURCE_REPOSITORY = 'knowledgeislands/ki-design'
 export const SYMBOLS_PATH = 'packages/symbols/src/symbols.ts'
@@ -261,6 +269,131 @@ export function extractPlate(html: string): string {
   return svg
 }
 
+/**
+ * The islands chart on /arcadia/: Arcadia's public islands drawn as an archipelago (GDR-KI-DESIGN-015) by
+ * `ki-design`'s renderer, from the committed snapshot. Two layouts of one chart: a round cluster, and a tall one
+ * a phone can read. The page shows one by width; the list beside them is the text equivalent (GDR-KI-DESIGN-032).
+ */
+export const ARCHIPELAGO = {
+  renderer: 'packages/hexmap/src/archipelago.ts',
+  snapshot: 'src/_data/arcadiaSnapshot.json5',
+  manifest: 'src/_data/arcadiaArchipelago.json5',
+  layouts: {
+    wide: { file: 'src/_includes/ki-design/arcadia-archipelago.svg', aspect: 1, labelSize: 0.6 },
+    tall: { file: 'src/_includes/ki-design/arcadia-archipelago-tall.svg', aspect: 0.5, labelSize: 0.8 }
+  }
+} as const
+
+export type ArchipelagoLayoutName = keyof typeof ARCHIPELAGO.layouts
+
+/**
+ * A single-purpose repository is a small isle typed by its dominant building (ki-design docs/spec/maps.md, "How
+ * islands are typed"): the Capital's own civic glyph, the Workshop for a tool, the Causeway for an MCP server. Every
+ * other role keeps the island glyph.
+ */
+export const ISLAND_GLYPHS: Readonly<Record<string, string>> = {
+  Capital: 'capital',
+  Tool: 'workshop',
+  MCP: 'causeway',
+  default: 'island'
+}
+
+export const islandGlyph = (role: string): string => ISLAND_GLYPHS[role] ?? (ISLAND_GLYPHS.default as string)
+
+/** The renderer's input, as `@knowledgeislands/hexmap` types it. */
+export interface ArchipelagoInput {
+  id: string
+  name: string
+  islands: { id: string; role: string; href: string; glyph: string; title: string; capital?: true }[]
+}
+
+/** The snapshot as an archipelago: each island linked to its repository, titled with its role and concern. */
+export function archipelagoFromSnapshot(snapshot: ArcadiaSnapshot): ArchipelagoInput {
+  const capitals = snapshot.islands.filter((island) => island.role === 'Capital')
+  if (capitals.length !== 1) throw new Error(`the snapshot names ${capitals.length} Capitals, not one`)
+  return {
+    id: 'arcadia',
+    name: `The islands of Arcadia, charted ${snapshot.charted}`,
+    islands: snapshot.islands.map((island) => ({
+      id: island.name,
+      role: island.role,
+      href: island.repository,
+      glyph: islandGlyph(island.role),
+      title: `${island.name} — ${island.role} · ${island.concern}`,
+      ...(island.role === 'Capital' ? { capital: true as const } : {})
+    }))
+  }
+}
+
+export interface ArchipelagoManifest {
+  source: { repository: string; path: string; ref: string }
+  drawnFrom: { path: string; ref: string; charted: string; islands: string[] }
+  glyphs: Readonly<Record<string, string>>
+  files: Record<ArchipelagoLayoutName, string>
+}
+
+export const renderArchipelagoManifest = (manifest: ArchipelagoManifest): string =>
+  [
+    "// Vendored manifest of the islands chart on /arcadia/: Arcadia's public islands drawn as an archipelago.",
+    '//',
+    '// GENERATED FILE — do not edit. Regenerate with:',
+    '//   bun run --cwd apps/site sync:design',
+    '//',
+    `// Drawn by ${SOURCE_REPOSITORY} ${ARCHIPELAGO.renderer} from ${ARCHIPELAGO.snapshot}.`,
+    '// The source ref must match the ref declared in the sources frontmatter of src/arcadia/index.njk, and',
+    '// drawnFrom must match the snapshot; verify:provenance fails the build when either disagrees.',
+    '//',
+    `// Drawn at ${manifest.source.ref}.`,
+    JSON.stringify(manifest, null, 2),
+    ''
+  ].join('\n')
+
+interface Hexmap {
+  renderArchipelagoSvg: (archipelago: ArchipelagoInput, options: Record<string, unknown>) => string
+}
+
+/** Draws the snapshot in every layout and writes the SVGs and their manifest. */
+export async function vendorArchipelago(
+  hexmap: Hexmap,
+  glyph: (id: string) => string | undefined,
+  ref: string,
+  out: (path: string) => string
+): Promise<ArchipelagoManifest> {
+  const snapshot = JSON5.parse(await readFile(out(ARCHIPELAGO.snapshot), 'utf-8')) as ArcadiaSnapshot
+  const archipelago = archipelagoFromSnapshot(snapshot)
+  const files = {} as Record<ArchipelagoLayoutName, string>
+  for (const [name, layout] of Object.entries(ARCHIPELAGO.layouts) as [
+    ArchipelagoLayoutName,
+    (typeof ARCHIPELAGO.layouts)[ArchipelagoLayoutName]
+  ][]) {
+    const svg = hexmap.renderArchipelagoSvg(archipelago, {
+      theme: 'auto',
+      frame: false,
+      glyph,
+      variant: name,
+      aspect: layout.aspect,
+      labelSize: layout.labelSize,
+      margin: 1
+    })
+    const note = `renderArchipelagoSvg drawing ${ARCHIPELAGO.snapshot} (${snapshot.source.repository} at ${snapshot.source.ref}, charted ${snapshot.charted}), unchanged below this comment`
+    await writeFile(out(layout.file), `<!-- ${provenance(ARCHIPELAGO.renderer, ref, note)} -->\n${svg}`)
+    files[name] = layout.file
+  }
+  const manifest: ArchipelagoManifest = {
+    source: { repository: SOURCE_REPOSITORY, path: ARCHIPELAGO.renderer, ref },
+    drawnFrom: {
+      path: ARCHIPELAGO.snapshot,
+      ref: snapshot.source.ref,
+      charted: snapshot.charted,
+      islands: snapshot.islands.map((island) => island.name)
+    },
+    glyphs: ISLAND_GLYPHS,
+    files
+  }
+  await writeFile(out(ARCHIPELAGO.manifest), renderArchipelagoManifest(manifest))
+  return manifest
+}
+
 /** The provenance line every vendored file carries, in the comment syntax of its own format. */
 export const provenance = (path: string, ref: string, note = 'unchanged below this comment'): string =>
   `Vendored from ${SOURCE_REPOSITORY} at ${ref}: ${path}, ${note}. Do not edit here; refresh with ` +
@@ -301,7 +434,12 @@ async function main(): Promise<void> {
 
   const load = async <T>(path: string): Promise<T> => (await import(pathToFileURL(resolve(from, path)).href)) as T
   const css = await load<{ renderCss: () => string; renderTailwindTheme: () => string }>('packages/tokens/src/css.ts')
-  const icons = await load<{ sprite: () => string }>('packages/icons/src/index.ts')
+  const icons = await load<{
+    sprite: () => string
+    iconBodies: Record<string, string>
+    isIconName: (id: string) => boolean
+  }>('packages/icons/src/index.ts')
+  const hexmap = await load<Hexmap>('packages/hexmap/src/index.ts')
   const library = await load<{ symbols: readonly UpstreamSymbol[]; symbolCategories: readonly string[] }>(
     'packages/symbols/src/index.ts'
   )
@@ -346,6 +484,12 @@ async function main(): Promise<void> {
     writeFile(out('src/_data/kiSymbols.json5'), renderSnapshot(snapshot))
   ])
   const painting = await vendorPainting(from, out)
+  const archipelago = await vendorArchipelago(
+    hexmap,
+    (id) => (icons.isIconName(id) ? icons.iconBodies[id] : undefined),
+    ref,
+    out
+  )
 
   console.log(
     `sync-ki-design: vendored ${SOURCE_REPOSITORY} at ${ref} (${snapshot.counts.published} symbols published, ${snapshot.counts.withheldProposed} proposed withheld)`
@@ -353,7 +497,10 @@ async function main(): Promise<void> {
   console.log(
     `sync-ki-design: vendored ${PAINTING.path} at ${PAINTING.ref} as ${painting.variants.length} responsive images`
   )
-  console.log('Advance the ki-design ref in src/field-guide/index.njk sources to match.')
+  console.log(
+    `sync-ki-design: drew ${archipelago.drawnFrom.islands.length} islands charted ${archipelago.drawnFrom.charted} as ${Object.keys(archipelago.files).length} archipelago layouts`
+  )
+  console.log('Advance the ki-design ref in src/field-guide/index.njk and src/arcadia/index.njk sources to match.')
 }
 
 if (import.meta.main) {

@@ -11,8 +11,13 @@ sources:
     reviewed: '2026-10-18'
   - repository: knowledgeislands/ki-design
     path: examples/site-preview/hero-arcadia.svg
-    ref: 50e6bd12ea8c8aa5ac916bdbe0d50f8701a8433a
+    ref: 481ebeffe44a45e0323f832dd428e07408a8d318
     governs: 'The chart: Arcadia drawn from its hex map in the Modern tile set, with its cartouches'
+    reviewed: '2026-10-19'
+  - repository: knowledgeislands/ki-design
+    path: packages/hexmap/src/archipelago.ts
+    ref: 481ebeffe44a45e0323f832dd428e07408a8d318
+    governs: 'The islands chart: the snapshot drawn as an archipelago, the Capital at the centre, each island typed by its glyph and linked; vendored in src/_data/arcadiaArchipelago.json5 (GDR-KI-DESIGN-015)'
     reviewed: '2026-10-19'
   - repository: knowledgeislands/ki-principal
     path: Admin/Governance/Known Lands.md
@@ -42,6 +47,12 @@ sources:
   concerns they own, charted from Knowledge Islands Principal by `sync:arcadia` into src/_data/arcadiaSnapshot.json5
   and stamped with the date it was charted, never claiming to be live (GDR-KI-DESIGN-031). Private repositories
   never reach the snapshot. The labels are Known Lands' own; the only new words are the heading and the stamp.
+
+  Above the list, the same snapshot drawn as an archipelago by ki-design's renderer (GDR-KI-DESIGN-015), vendored
+  by `sync:design` in two layouts: a round cluster, and a tall one a phone can read; CSS shows one. Each island links
+  to its repository with its role and concern as the title. The glyphs type each island as ki-design's maps spec
+  does (src/_data/arcadiaArchipelago.json5), and the list uses the same ones so it reads as the chart's key. The
+  list stays: it is the chart's text equivalent and what the page shows without the drawing (GDR-KI-DESIGN-032).
 #}
 
 <!-- ═══ THE LEGEND: the painting ═══ -->
@@ -85,9 +96,13 @@ sources:
         <h3 id="islands-title">The islands</h3>
         <p class="charted"><time datetime="{{ arcadiaSnapshot.charted }}">Charted {{ arcadiaSnapshot.charted }}</time></p>
       </div>
+      <div class="islands-chart">
+        {% include "ki-design/arcadia-archipelago.svg" %}
+        {% include "ki-design/arcadia-archipelago-tall.svg" %}
+      </div>
       <ul aria-labelledby="islands-title">
         {%- for island in arcadiaSnapshot.islands %}
-        <li>{{ kiGlyph("capital" if island.role == "Capital" else "island") }}<div><a href="{{ island.repository }}">{{ island.name }}</a><span>{{ island.role }} · {{ island.concern }}</span></div></li>
+        <li>{{ kiGlyph(arcadiaArchipelago.glyphs[island.role] or arcadiaArchipelago.glyphs.default) }}<div><a href="{{ island.repository }}">{{ island.name }}</a><span>{{ island.role }} · {{ island.concern }}</span></div></li>
         {%- endfor %}
       </ul>
     </div>
