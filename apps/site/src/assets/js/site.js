@@ -15,6 +15,43 @@
     })
   }
 
+  // Night toggle (GDR-KI-DESIGN-025). The page follows the OS until a visitor presses the toggle; a choice
+  // is stored in this browser only, and the inline script in the head applies it before paint. Choosing the
+  // scheme the OS already shows clears the choice, so the page goes back to following the system.
+  const toggle = document.querySelector('.theme-toggle')
+  if (toggle instanceof HTMLButtonElement) {
+    const root = document.documentElement
+    const osNight = window.matchMedia('(prefers-color-scheme: dark)')
+    const remember = (theme) => {
+      try {
+        if (theme) localStorage.setItem('ki-theme', theme)
+        else localStorage.removeItem('ki-theme')
+      } catch {
+        // Storage refused (private mode, blocked site data): the choice lasts for this page only.
+      }
+    }
+    const showsNight = () => {
+      const forced = root.getAttribute('data-theme')
+      return forced === 'night' || (forced !== 'light' && osNight.matches)
+    }
+    const render = () => toggle.setAttribute('aria-pressed', String(showsNight()))
+    toggle.addEventListener('click', () => {
+      const night = !showsNight()
+      if (night === osNight.matches) {
+        root.removeAttribute('data-theme')
+        remember(null)
+      } else {
+        const theme = night ? 'night' : 'light'
+        root.setAttribute('data-theme', theme)
+        remember(theme)
+      }
+      render()
+    })
+    osNight.addEventListener('change', render)
+    render()
+    toggle.hidden = false
+  }
+
   // Field Guide: filter the symbol groups by category. Without script the filter row is hidden and
   // every group shows.
   const filters = document.querySelector('.guide-filters')

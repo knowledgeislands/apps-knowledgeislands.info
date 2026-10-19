@@ -2,6 +2,10 @@
   The site header: the logo roundel and wordmark, the Voyage and Atlas groups from `site.nav`, and the
   one brass call to action. Below 1100 px the groups fold into a Menu disclosure, a <details>, so it
   opens without JavaScript; assets/js/site.js only adds Escape-to-close.
+
+  The night toggle (GDR-KI-DESIGN-025) is a two-state toggle button: pressed means the page shows the
+  night chart. It ships `hidden` and assets/js/site.js reveals it, so without JavaScript there is no inert
+  control and the page simply follows the operating system.
 #}
 {% from "macros/icons.njk" import kiGlyph %}
 <header class="site-header" data-theme="night">
@@ -24,9 +28,10 @@
       {%- endfor %}
     </nav>
     <a class="btn btn-brass header-cta" href="{{ site.nav.cta.href }}">{{ site.nav.cta.label }}</a>
+    <button class="theme-toggle" type="button" aria-label="Night chart" aria-pressed="false" hidden>{{ kiGlyph("theme", 20) }}</button>
 
     <details class="nav-menu">
-      <summary>{{ kiGlyph("menu", 20) }}Menu</summary>
+      <summary>{{ kiGlyph("menu", 20) }}<span class="menu-label">Menu</span></summary>
       <nav class="menu-panel" aria-label="Main navigation, compact">
         {%- for group in site.nav.groups %}
         <div>

@@ -10,6 +10,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Cormorant+SC:wght@600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    {#- Before any paint: apply a night or day chart the visitor chose with the header toggle, so a forced theme
+        never flashes the OS one first. No stored choice, or no storage, leaves the root to follow the OS. #}
+    <script>try{var t=localStorage.getItem("ki-theme");if(t==="light"||t==="night")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
     <link rel="stylesheet" href="/assets/css/main.css" />
     <script src="/assets/js/site.js" defer></script>
   </head>
