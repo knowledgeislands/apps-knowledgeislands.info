@@ -1,4 +1,4 @@
-<!-- Vendored from knowledgeislands/ki-design at cf250cb89436c3a40b258675817a02c32af91780: examples/site-preview/index.html, the block between its arcadia markers. Do not edit here; refresh with `bun run --cwd apps/site sync:design` (GDR-KI-WEBSITE-002, ADR-KI-WEBSITE-001). -->
+<!-- Vendored from knowledgeislands/ki-design at 50e6bd12ea8c8aa5ac916bdbe0d50f8701a8433a: examples/site-preview/index.html, the block between its arcadia markers. Do not edit here; refresh with `bun run --cwd apps/site sync:design` (GDR-KI-WEBSITE-002, ADR-KI-WEBSITE-001). -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="-350 -198.77 770 390.64" role="img" aria-labelledby="plate-t plate-d" class="iso-map">
 <title id="plate-t">Arcadia by daylight, in the Modern tile set</title>
 <desc id="plate-d">An isometric hex map of Arcadia: the Capital on the central hills above the river, the Port on the south coast, the Observatory and Lighthouse on the eastern heights, the ancient forest in the west, ruins on the north-west ridge.</desc>

@@ -6,19 +6,24 @@ permalink: /field-guide/
 sources:
   - repository: knowledgeislands/ki-principal
     path: Pillars/Aesthetics/Symbol Library/Symbol Library.md
-    ref: 2b394a0fd80b7474661bd5679b67a71fee5b5576
-    governs: 'Which symbols are official, including the Port, its modes, the Lighthouse and the Council Hall enacted by GDR-KI-PRINCIPAL-010, and the Capital by GDR-KI-PRINCIPAL-011'
-    reviewed: '2026-10-18'
+    ref: ff513b9bfa6551b0e7a40f2bcbecb74eb43ef7ec
+    governs: 'Which symbols are official, including the Port, its modes, the Lighthouse and the Council Hall enacted by GDR-KI-PRINCIPAL-010, the Capital by GDR-KI-PRINCIPAL-011, and the Causeway and the Mill by GDR-KI-PRINCIPAL-013'
+    reviewed: '2026-10-19'
   - repository: knowledgeislands/ki-principal
     path: Pillars/Aesthetics/Visual Style/Visual Style.md
-    ref: 2b394a0fd80b7474661bd5679b67a71fee5b5576
+    ref: ff513b9bfa6551b0e7a40f2bcbecb74eb43ef7ec
     governs: 'The symbolic semantics the meanings are read against'
-    reviewed: '2026-10-18'
+    reviewed: '2026-10-19'
+  - repository: knowledgeislands/ki-principal
+    path: Pillars/Philosophy/Model/Agents/Agents.md
+    ref: ff513b9bfa6551b0e7a40f2bcbecb74eb43ef7ec
+    governs: 'The seven official roles and what each maps onto, enacted by GDR-KI-PRINCIPAL-014'
+    reviewed: '2026-10-19'
   - repository: knowledgeislands/ki-design
     path: packages/symbols/src/symbols.ts
-    ref: cf250cb89436c3a40b258675817a02c32af91780
+    ref: 50e6bd12ea8c8aa5ac916bdbe0d50f8701a8433a
     governs: 'Every card: name, meaning, status (Official or Agreed, GDR-KI-DESIGN-002) and glyph, vendored in src/_data/kiSymbols.json5'
-    reviewed: '2026-10-18'
+    reviewed: '2026-10-19'
 ---
 {% from "macros/icons.njk" import kiGlyph %}
 {#
@@ -41,6 +46,7 @@ sources:
   "port-mode": { title: "Port modes", intro: "The ways knowledge reaches and leaves an island: the districts of one Port.", voyage: "The Cycle", href: "/#cycle" },
   "signal": { title: "Signals", intro: "Marks that ask for attention. Every signal has a shape and a word, never colour alone.", voyage: "The Cycle", href: "/#cycle" },
   "condition": { title: "Condition", intro: "How well a place is tended, from the freshness of its evidence. Never a score.", voyage: "The Foundation", href: "/#foundation" },
+  "role": { title: "Roles", intro: "The hats an agent wears while tending an island. Any agent, human or AI, may wear one; a role names work, not authority." },
   "sea": { title: "The sea", intro: "Routes, currents and hazards between the islands.", voyage: "The Cycle", href: "/#cycle" }
 } %}
 
@@ -69,7 +75,7 @@ sources:
 <section class="section-parchment" aria-label="About these entries">
   <div class="page-container">
     <div class="prose-ki" style="padding-top: 3rem;">
-      <p>An agreed entry has the owner's agreement but is not yet written into Knowledge Islands Principal, so the rest of this site still uses the enacted word. The Port shows how an entry becomes official: Principal's Symbol Library once listed Harbour, an integration point, and Port, operational systems, as two symbols, and the design system agreed to fold them into one Port with four modes. <a href="https://github.com/knowledgeislands/ki-principal/blob/25b30fec5993da2162fa21a60db0d3a8f5893133/Admin/Governance/Decisions/GDR-KI-PRINCIPAL-010-the-port.md">GDR-KI-PRINCIPAL-010</a> enacted it, retiring the Harbour, and split the Lighthouse, now guidance only, from the Council Hall, which means governance. Entries still under discussion are not shown here.</p>
+      <p>An agreed entry has the owner's agreement but is not yet written into Knowledge Islands Principal, so the rest of this site still uses the enacted word. The Port shows how an entry becomes official: Principal's Symbol Library once listed Harbour, an integration point, and Port, operational systems, as two symbols, and the design system agreed to fold them into one Port with four modes. <a href="https://github.com/knowledgeislands/ki-principal/blob/25b30fec5993da2162fa21a60db0d3a8f5893133/Admin/Governance/Decisions/GDR-KI-PRINCIPAL-010-the-port.md">GDR-KI-PRINCIPAL-010</a> enacted it, retiring the Harbour, and split the Lighthouse, now guidance only, from the Council Hall, which means governance. <a href="https://github.com/knowledgeislands/ki-principal/blob/ff513b9bfa6551b0e7a40f2bcbecb74eb43ef7ec/Admin/Governance/Decisions/GDR-KI-PRINCIPAL-013-the-causeway-and-the-mill.md">GDR-KI-PRINCIPAL-013</a> made the Causeway the translation layer and added the Mill, and <a href="https://github.com/knowledgeislands/ki-principal/blob/ff513b9bfa6551b0e7a40f2bcbecb74eb43ef7ec/Admin/Governance/Decisions/GDR-KI-PRINCIPAL-014-steward-roles.md">GDR-KI-PRINCIPAL-014</a> made seven roles official. Entries still under discussion are not shown here.</p>
     </div>
   </div>
 </section>
