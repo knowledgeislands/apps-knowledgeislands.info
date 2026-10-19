@@ -1238,23 +1238,6 @@
     mask-image: linear-gradient(180deg, transparent 0, #000 1.25%);
   }
 
-  /* The caption keeps its own small pool of shadow at the bottom right. */
-  .hero-painting figcaption {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    z-index: 2;
-    padding: 1.75rem var(--gutter) 0.875rem 4.5rem;
-    color: var(--color-parchment);
-    background: radial-gradient(
-      ellipse farthest-side at 70% 85%,
-      rgb(11 27 49 / 86%) 0,
-      rgb(11 27 49 / 78%) 45%,
-      rgb(11 27 49 / 34%) 78%,
-      rgb(11 27 49 / 0%) 100%
-    );
-  }
-
   /* Framed, the painting fades out over its open edges, the sky band with it, in an eased ramp so the
      sunset, the sea and the cloud dissolve into the navy rather than stopping at a line. Below the
      frame width both feathers are zero, so the rule only applies above it. */
@@ -1293,20 +1276,6 @@
         linear-gradient(180deg, transparent 0, rgb(0 0 0 / 40%) 3.5%, #000 8%),
         linear-gradient(90deg, transparent 40%, #000 58%), linear-gradient(180deg, transparent 0, #000 1.25%);
       mask-composite: add, intersect, add;
-    }
-
-    /* Off the screen's edge, the caption's pool fades out on every side but the strip below, and its
-       words end just inside the painting's solid edge. */
-    .hero-painting figcaption {
-      right: calc(var(--hero-painting-right) + var(--hero-feather-right) - 4.5rem);
-      padding: 3rem 6rem 0.875rem;
-      background: radial-gradient(
-        ellipse 50% 100% at 50% 100%,
-        rgb(11 27 49 / 86%) 0,
-        rgb(11 27 49 / 80%) 55%,
-        rgb(11 27 49 / 40%) 80%,
-        rgb(11 27 49 / 0%) 100%
-      );
     }
   }
 
@@ -1772,12 +1741,6 @@
     height: auto;
   }
 
-  .painting-frame figcaption {
-    padding: 0.875rem var(--gutter) 0;
-    text-align: center;
-    color: var(--night-muted);
-  }
-
   /* The home Arcadia section draws the chart, the map, below its copy; the painting is the hero above. */
   .chart-kicker {
     margin-top: 3.5rem;
@@ -1805,20 +1768,6 @@
     background: var(--color-navy);
     position: relative;
     overflow: hidden;
-  }
-
-  .painting-frame {
-    position: relative;
-  }
-
-  .painting-frame figcaption {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    padding: 0.5rem var(--gutter) 0.75rem;
-    color: var(--color-parchment);
-    background: linear-gradient(90deg, rgb(15 36 64 / 0%), rgb(15 36 64 / 92%) 2.5rem);
-    padding-left: 3rem;
   }
 
   /* The title sits on the sea at the lower left, over a navy scrim; its contrast is measured against the
@@ -2903,14 +2852,6 @@
     box-shadow: none;
   }
 
-  .painting-frame figcaption {
-    position: static;
-    background: none;
-    padding: 0.625rem var(--gutter) 0;
-    text-align: left;
-    color: var(--night-muted);
-  }
-
   .chart-section {
     padding-top: 3.5rem;
   }
@@ -3093,13 +3034,6 @@
       rgb(0 0 0 / 28%) 90%,
       transparent 100%
     );
-  }
-
-  .hero-painting figcaption {
-    position: static;
-    background: none;
-    padding: 0.625rem var(--gutter) 0;
-    color: var(--night-muted);
   }
 
   .hero-copy {
