@@ -11,7 +11,6 @@
     "@types/bun": "^1.4.2",
     "@types/node": "^26.6.4",
     "dependency-cruiser": "^18.5.0",
-    "husky": "^9.1.7",
     "knip": "^6.39.0",
     "lint-staged": "^17.6.0",
     "rumdl": "^0.2.78",
@@ -56,7 +55,7 @@
     "ki:site:dev": "bun run --cwd apps/site ki:site:dev",
     "ki:site:preview": "bun run --cwd apps/site preview",
     "ki:site:upload": "bun run --cwd apps/site upload",
-    "prepare": "husky && bun install --frozen-lockfile --cwd tooling/boundaries",
+    "prepare": "git config core.hooksPath .githooks && bun install --frozen-lockfile --cwd tooling/boundaries",
     "self:typecheck": "bunx tsc --noEmit && turbo run typecheck",
     "test": "turbo run test"
   },

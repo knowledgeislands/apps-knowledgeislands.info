@@ -1,6 +1,7 @@
 {
   "$schema": "https://unpkg.com/knip@6/schema.json",
   "ignore": [".ncurc.cjs", ".claude/skills/**", ".agents/skills/**"],
+  "ignoreDependencies": ["@commitlint/cli", "lint-staged", "syncpack"],
   "ignoreExportsUsedInFile": true,
   "workspaces": {
     ".": {
