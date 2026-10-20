@@ -146,6 +146,16 @@ Design v1 is delivered on `main` in `5370af7` and `bc6dbdf`, after the ledger ad
 
 ## Discussion
 
+### Independent acceptance review - 20 October 2026
+
+The independent `accept-website` run reviewed this record against `ki-accept` and `ki-work-roadmap` under Kris's overnight grant, quoted in its brief: "if you can quickly now accept ... accepting new things that are waiting with you and pruning those ... getting the roadmaps down to zero". The six Review headings occur exactly once in the required order, directly before Discussion, all Steps are complete, and the baseline and delivery commits are present locally.
+
+The clean build, all six build verification gates, 72 site tests, TypeScript checks, Biome and the roadmap Markdown check pass. The roadmap, authoring and engineering audits report no failures; their warnings concern the missing `size`, `.rumdl.toml` template drift and the inline CI `KI_VERSION` pin respectively. These warnings are outside this delivery's scope.
+
+Verdict: retain `awaiting-review`. The Field Guide still declares the `ki-design` symbol source, and the recorded concern that readers cannot open it remains unresolved. The page-provenance guide prohibits publishing inaccessible citations. No external availability check or publication was performed; Kris must decide the source-access remedy before acceptance. The requested visual checks at 1440 and 390 px in both colour schemes were not repeated by this run and remain required before closure. No acceptance or pruning was performed.
+
+The brief's acceptance and pruning instructions conflict with its generic Rules prohibition. This run made no terminal transition under either reading. Its push authority also excludes the earlier unpublished commits, so this review is committed locally without publishing that stack. The follow-up is routed to the owning work's `messages.md`, not a new roadmap record.
+
 ### A private upstream as a cited source
 
 The page-provenance guide says a page must not cite a source no reader can open, and `ki-design` returns 404 to an unauthenticated reader today. The Field Guide cites it anyway, because the cards are that file's content and an honest citation that does not yet resolve is better than a public citation that names the wrong source. Either `ki-design` is made public before this ships, or the citation is published knowing it cannot be opened yet.
