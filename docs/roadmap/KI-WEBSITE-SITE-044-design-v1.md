@@ -11,7 +11,7 @@ blocks: []
 blocked_by: []
 baseline_ref: 05af1ad46153e4d1986a5ad7b3aa3efad564776b
 created_at: 2026-10-18T09:00:00Z
-updated_at: 2026-10-19T23:16:29Z
+updated_at: 2026-10-20T05:20:00Z
 ---
 
 ## Goal
@@ -119,7 +119,7 @@ The approved boundary held: tokens, type, Voyage and Atlas navigation, the resty
 
 ### Verification
 
-Run on `main` at `783effb`, after `bun install --frozen-lockfile`, on 2026-10-20:
+Run on `main` at `502c29d`, after `bun install --frozen-lockfile`, on 2026-10-20:
 
 - `bun run ki:site:clean && bun run ki:site:build` passed, with every `verify:*` gate.
 - `bun run --cwd apps/site test` passed, 72 tests and none failing.
@@ -127,6 +127,7 @@ Run on `main` at `783effb`, after `bun install --frozen-lockfile`, on 2026-10-20
 - `bunx @biomejs/biome check` passed.
 - `bunx rumdl check docs/roadmap` passed.
 - `ki repo audit --skill ki-work-roadmap --repo .` passed with no failures and one warning: this record declares no `size`, which the migration window allows.
+- `ki repo audit --skill ki-engineering --repo .` passed with no failures and one warning, CI-1, about the inline `KI_VERSION` pin in `.github/workflows/ci.yml`, which this record did not touch.
 
 The visual check at 1440 and 390 px in both colour schemes was not repeated for this update.
 
@@ -134,7 +135,6 @@ The visual check at 1440 and 390 px in both colour schemes was not repeated for 
 
 - The Field Guide cites `ki-design`, which is not yet public, so readers cannot open that citation; see Discussion. The reviewer decides whether to ship it as it stands.
 - `enactedCanon` and the Tower filter stay until `ki-design` marks the Port family canon and the Tower is enacted.
-- `ki repo audit --skill ki-engineering --repo .` fails DESIGN-2 on `.dependency-cruiser.ts`. This record did not touch the boundary configuration, so the failure is outside its scope.
 
 ### Post-change review
 
@@ -142,7 +142,7 @@ The goal is met: the site uses `ki-design`'s palette, type, glyphs and drawn Arc
 
 ### Mini recap
 
-Design v1 is delivered on `main` in `5370af7` and `bc6dbdf`, after the ledger advance in `3f9e38f`, and every gate in Verify passes. The open concerns are the private `ki-design` citation and the engineering audit's boundary failure, which is outside this record. Proposed learning route: none.
+Design v1 is delivered on `main` in `5370af7` and `bc6dbdf`, after the ledger advance in `3f9e38f`, and every gate in Verify passes. The open concern is the private `ki-design` citation; the engineering audit's earlier boundary failure has since cleared. Proposed learning route: none.
 
 ## Discussion
 
