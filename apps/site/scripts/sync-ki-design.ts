@@ -35,7 +35,7 @@ import { dirname, resolve } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import JSON5 from 'json5'
 import sharp from 'sharp'
-import type { ArcadiaSnapshot } from './sync-arcadia-snapshot.ts'
+import type { ArcadiaSnapshot } from './lib/arcadia-snapshot.ts'
 
 export const SOURCE_REPOSITORY = 'knowledgeislands/ki-design'
 export const SYMBOLS_PATH = 'packages/symbols/src/symbols.ts'

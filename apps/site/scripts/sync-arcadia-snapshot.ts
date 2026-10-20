@@ -29,6 +29,7 @@ import { execFileSync } from 'node:child_process'
 import { writeFile } from 'node:fs/promises'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import type { ArcadiaSnapshot, Island } from './lib/arcadia-snapshot.ts'
 
 export const SOURCE_REPOSITORY = 'knowledgeislands/ki-principal'
 export const INVENTORY_PATH = 'Admin/Governance/Known Lands.md'
@@ -50,19 +51,6 @@ export interface InventoryRow {
 export interface Roster {
   capital: string
   members: string[]
-}
-
-export interface Island {
-  name: string
-  repository: string
-  role: string
-  concern: string
-}
-
-export interface ArcadiaSnapshot {
-  source: { repository: string; path: string; roster: string; ref: string }
-  charted: string
-  islands: Island[]
 }
 
 /** Matches `"…"` as a TOML basic string; the roster holds URLs, so no escapes are expected or accepted. */
