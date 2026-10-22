@@ -5,7 +5,7 @@
  * of them and prints a clean run. Here that is the default rather than a risk: dependency-cruiser reads TypeScript
  * through the compiler API and supports `typescript@>=2 <7`, and the repository is on TypeScript 7, so against the
  * repository's own install it cruises zero modules and reports zero violations. The cruise therefore runs through the
- * install root at `tooling/boundaries`, which holds a TypeScript it can drive, and this suite checks the graph — a
+ * install root at `tooling/depcruise`, which holds a TypeScript it can drive, and this suite checks the graph — a
  * module floor, a type-only edge, a resolved crossing between layers — before it believes the violation count, then
  * cruises a fixture of deliberate crossings and expects each named rule to trip.
  *
@@ -27,7 +27,7 @@ const execute = promisify(execFile)
 const ROOT = resolve(import.meta.dirname, '..', '..', '..')
 
 /** The checker's own install root, outside the repository's dependency tree; nothing else resolves it. */
-const TOOLING = join(ROOT, 'tooling', 'boundaries')
+const TOOLING = join(ROOT, 'tooling', 'depcruise')
 const CHECKER = join(TOOLING, 'node_modules', '.bin', 'depcruise')
 
 /** Every source root of the site workspace, and this proof's own; a root left out is a boundary nothing checks. */
@@ -105,7 +105,7 @@ const installTooling = async (): Promise<void> => {
   try {
     await execute('bun', ['install', '--frozen-lockfile'], { cwd: TOOLING })
   } catch (failure) {
-    throw new Error(`tooling/boundaries did not install from its lockfile: ${(failure as { stderr?: string }).stderr}`)
+    throw new Error(`tooling/depcruise did not install from its lockfile: ${(failure as { stderr?: string }).stderr}`)
   }
 }
 
@@ -178,7 +178,7 @@ describe('the boundary tooling', () => {
   test('names the same dependency-cruiser as the repository', async () => {
     const [repository, tooling] = await Promise.all([
       manifest('package.json'),
-      manifest('tooling/boundaries/package.json')
+      manifest('tooling/depcruise/package.json')
     ])
 
     expect(tooling.dependencies?.['dependency-cruiser']).toBe(repository.devDependencies?.['dependency-cruiser'])
@@ -187,13 +187,13 @@ describe('the boundary tooling', () => {
   test('is installed at the versions its lockfile pins', async () => {
     const lockfile = await readFile(join(TOOLING, 'bun.lock'), 'utf8')
     for (const name of ['dependency-cruiser', 'typescript']) {
-      const installed = await manifest(`tooling/boundaries/node_modules/${name}/package.json`)
-      expect(installed.version, `${name} in tooling/boundaries; run bun install there`).toBe(locked(lockfile, name))
+      const installed = await manifest(`tooling/depcruise/node_modules/${name}/package.json`)
+      expect(installed.version, `${name} in tooling/depcruise; run bun install there`).toBe(locked(lockfile, name))
     }
   })
 
   test('is still needed', async () => {
-    // When this fails, dependency-cruiser drives the repository's own TypeScript and `tooling/boundaries` can go.
+    // When this fails, dependency-cruiser drives the repository's own TypeScript and `tooling/depcruise` can go.
     const refused = Number(/<\s*(\d+)/u.exec(typescript?.version ?? '')?.[1])
     const repository = await manifest('package.json')
 

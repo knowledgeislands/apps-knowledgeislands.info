@@ -7,7 +7,7 @@
  * helpers under `scripts/lib/` are what those commands share. Each rule below keeps one of those directions honest.
  *
  * The rules are cruised by `packages/boundaries/src/boundaries.test.ts` through the install root at
- * `tooling/boundaries`.
+ * `tooling/depcruise`.
  * dependency-cruiser reads TypeScript through the compiler API and supports `typescript@>=2 <7`; against this
  * repository's TypeScript 7 it would read nothing at all, and an empty graph satisfies every rule here.
  */
