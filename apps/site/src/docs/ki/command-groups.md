@@ -1,93 +1,97 @@
 ---
-title: How the command groups divide
-description: What the ki command-line interface is for, how its command groups divide by what they can change, and the three refusals that look like bugs the first time you meet one.
+title: How command groups divide
+description: The eighteen command groups in ki v0.13.0, what each operates on and when to use it.
 order: 2
 permalink: /docs/ki/command-groups/
 sources:
   - repository: knowledgeislands/tools-ki
     path: man/ki.1
     ref: v0.13.0
-    governs: 'The command groups, their scope boundaries, and the behaviour this page describes'
+    governs: 'The eighteen groups and their command scopes'
     reviewed: '2026-10-25'
-  - repository: knowledgeislands/tools-ki
-    path: docs/decisions/ADR-KI-TOOLS-002-compatible-harness-registry-and-native-operations.md
-    ref: v0.4.0
-    governs: 'The installs-but-does-not-originate boundary and the native repository operations'
-    reviewed: '2026-09-22'
+  - repository: knowledgeislands/ki-agentic-harness
+    path: skills/governance/ki-trades/SKILL.md
+    ref: 8897008fcee7b2c71a22115735ed038efccf7f32
+    governs: 'The current hold on new trade submissions'
+    reviewed: '2026-10-25'
 ---
 
-# The `ki` command line
+# How command groups divide
 
-`ki` is the one executable in the ecosystem you are expected to install. Everything else — the harness, the skills, the standards — arrives through it or is read by it.
-
-It is deliberately not much of a program. `ki` installs verified harnesses, activates capabilities in an explicit scope, and runs the operations a repository has declared. It originates no capability content and holds no standard of its own: the harness owns what a skill says, the principal knowledge bases own the reasoning, and a repository owns what it has declared. That boundary is why the command surface is mostly verbs about _state_ — install, activate, record, report — rather than verbs about work.
-
-[All {{ cliCommands.counts.commands }} commands are listed on one page](/docs/ki/commands/), taken verbatim from the tool's own manual. This page is for the part an inventory cannot give you: what the groups mean, and which of them you actually need.
-
-## The one command to start with
-
-```bash
-ki bootstrap
-```
-
-This detects which agent runtimes are present on your machine, installs the canonical harness, and installs the core user skills. It does not activate anything in a repository — that stays a decision you make per repository, and [the repositories guide](/docs/ki-agentic-harness/repositories/) covers it.
-
-After that, three commands cover most days:
-
-| Command | What it does |
-| --- | --- |
-| `ki manage list` | Shows what is installed: harnesses, their capabilities, your declared user skills, and registered repositories. |
-| `ki repo audit --skill <skill>` | Runs the read-only checks a repository's declared governance defines. |
-| `ki repo conform --skill <skill>` | Applies the repairs that audit found, where the skill defines a safe repair. |
-
-Everything below is the structure those sit inside.
-
-## How the commands divide
+You can choose a command by the thing you want to inspect or change: your installation, a repository, a territory, a work package or a source of knowledge. The eighteen groups below follow the manual shipped with `ki` at `v0.13.0`.
 
 {% figure "command-groups", "The eighteen command groups in tools-ki v0.13.0, labelled by what each operates on." %}
 
-The CLI groups commands by **what they can change**, not by subject matter. The distinction is the whole point of the grammar: you can tell from the group whether a command touches your machine, one repository, or the whole registered estate, before you read what it does.
+## General
 
-### Your machine
+The root invocation and `ki help` operate on the command tree. Use them to discover a command path or ask for help with a nested action before supplying its arguments.
 
-`ki bootstrap`, `ki manage …`, `ki skill …`, `ki harness …` and `ki dev …` act on the user-managed KI environment — the installation, its configuration, your declared user skills, and the machine-local registry.
+## Global options
 
-`ki manage` is the read-first surface. `search`, `list`, `outdated`, `missing`, `diag` and `doctor` change nothing; they report what is installed, what is stale, and what is configured but broken. [Local utility commands](/docs/ki/local-commands/) covers the ones whose boundaries are easy to misread — in particular `cleanup`, which reports only state KI itself recorded and never guesses from a directory's name.
+`--help` and `--version` inspect the selected command or the installed executable. Reach for them when checking grammar or confirming which release you are actually running.
 
-`ki harness` and `ki skill` are two halves of one lifecycle that the CLI keeps deliberately separate: installing a harness makes capabilities _available_, and activating a skill makes one _apply_. [The capability lifecycle](/docs/ki/capability-lifecycle/) is the page on why, and on what happens when you try to remove a harness something still depends on.
+## Installation
 
-`ki dev` swaps an installed harness for a local checkout and back. It is for working on a harness, not for using one.
+`ki bootstrap` establishes your user environment: detected agents, the canonical harness and core user skills. Use it on a new machine, or add `--refresh` after changing the agent runtimes you use; [getting started](/docs/ki/getting-started/) carries the first-run sequence.
 
-### One repository, or many
+## Local management
 
-`ki repo …` acts on repositories. Every command in the group accepts the same selectors — `--repo <path-or-pattern>`, `--territory <handle>`, `--estate` — so the same operation runs against one repository or across the registered estate without a different command.
+These commands inspect or maintain machine-local KI state: `ki inventory`, `ki diag`, `ki doctor`, `ki repair` and `ki update`, alongside completion, documentation locations, Markdown conversion, MCP source installations and editor projections. Use [local utility commands](/docs/ki/local-commands/) to distinguish inspection from a deliberate write.
 
-Within that group the split is again by effect. `audit`, `diag` and `roadmap list` change nothing. `conform` and `repair` apply repairs, and take `--dry-run`. `init`, `skill add` and `skill remove` change what the repository declares.
+## User management
 
-The important property is that `ki` does not define what an audit checks. A repository declares which skills govern it, and the skill supplies the checks and the repairs; the CLI resolves and runs them. This is why the same two commands cover Markdown style, roadmap frontmatter, and toolchain configuration — and why a clean audit means only that the skills you declared are satisfied.
+`ki skill add` and `ki skill remove` change which skills are active for you across repositories. Use them when a way of working should follow your agent rather than govern one particular island; [capability lifecycle](/docs/ki/capability-lifecycle/) explains the two activation scopes.
 
-### The estate
+## Repository options
 
-`ki registry …`, `ki territory …` and `ki trade …` are about relationships between repositories: which roots this machine knows about, which territories they belong to, and which typed routes carry work or knowledge between them. They matter once you have more than a handful of repositories and not before.
+Repository selectors choose the physical checkouts a `ki repo` action will operate on. Use `--repo`, `--territory`, `--estate` or `--principals`, with optional filters, when the current repository is too narrow or an explicit selection is clearer.
 
-`ki acquire …` is the intake surface, pulling bounded external material into a package a repository can hold. Each adapter defines its own accepted shape; [the ChatGPT capture format](/docs/ki/chatgpt-local-capture/) documents the one that asks the most of you.
+## Repository management
 
-## What the CLI will not do
+`ki repo` declares, opens, audits, conforms, diagnoses and repairs repositories, manages their skill declarations and source stores, and reads or maintains roadmap records. Reach for it when an island's declared governance or local projections need attention; [repositories and territory](/docs/ki/repositories-and-territory/) explains selection and repair.
 
-Three refusals are worth knowing in advance, because each looks like a bug the first time you meet it.
+## Batch records
 
-**It will not activate a capability you did not ask for.** `ki bootstrap` installs; it does not decide which repository is governed by what. Activation is always an explicit command in an explicit scope.
+`ki repo batch` records an already-approved, exact set of Ready work items in one repository. Use it for a bounded delivery window that needs a protected authority envelope and an evidence ledger, as described in [work and agents](/docs/ki/work-and-agents/).
 
-**It will not claim freshness it cannot evidence.** `ki manage outdated` reports a harness as outdated only when it can compare against real release evidence. Where it cannot, it says the evidence is unavailable rather than reporting that you are up to date — the two are different facts, and only one of them is safe to act on.
+## Knowledge Base search
 
-**It will not remove something another declaration depends on.** `ki harness uninstall` and `ki harness reinstall` refuse while a harness supplies an active user skill. Remove the declaration first with `ki skill remove`, then repeat the lifecycle command.
+`ki kb index`, `search` and `status` operate on a derived search index for one explicitly registered Knowledge Base. Use them to retrieve current local notes with scoped citations; the notes remain authoritative and search needs explicit provisioning.
 
-## Keeping an installation current
+## Registry management
 
-`ki manage update` refreshes the installation; `ki repo upgrade` refreshes the harness providers one repository's declarations select. Neither activates or deactivates anything. [Update and upgrade](/docs/ki/update-upgrade/) covers which one you want and why a Homebrew or development installation is deliberately excluded from self-update.
+`ki registry` records and lists canonical repository identities and their local checkout roots. Use it when a checkout must become visible to territory selection, trades or KB search, remembering that registration records presence rather than conformance.
 
-## Where the authority is
+## Harness management
 
-The installed executable is always the authority on exact grammar for your version. `ki --help` and `ki <command> --help` answer from your binary; this page answers what the commands are _for_, which no help output does.
+`ki harness` installs, inspects, reinstalls or removes compatible capability payloads. Use it when a skill's provider is missing or needs inspection; installing its payload and activating its skills remain separate decisions.
 
-Start with [install and get started](/docs/ki/getting-started/) if you have run none of this yet. [Every `ki` command](/docs/ki/commands/) is the inventory, vendored from the manual at `v0.4.0`. The rest of `ki`'s guides are listed on [the project's page](/projects/ki/).
+## Trades
+
+`ki repo trade` inspects routes and operates each repository's local side of an exchange. New submissions are currently on hold under the pinned harness; use the supported receipt and observation commands for existing records, with [trades and acquisition](/docs/ki/trades-and-acquisition/) explaining the boundary.
+
+## Territory management
+
+`ki territory` resolves a Capital's declared membership and can show, audit, open or inspect the selected local roots. Use it when you need an overview or editor view of several islands without changing what each island authorises.
+
+## Acquisition
+
+`ki acquire` lists enabled adapters and imports supplied source material into the selected receiver. Use ChatGPT's local-capture adapter or Granola's configured connection when preserving evidence; confirmed source marking is a separate operation from import.
+
+## Background agents
+
+`ki agent` prepares prompts, launches detached workers, queues dependent runs and reports their progress and results. Use it to delegate a bounded task while keeping its authority, status and report visible; [work and agents](/docs/ki/work-and-agents/) gives the operating sequence.
+
+## Work model
+
+`ki work status` reads work packages and groups them by who holds them and whether they are moving, stuck, blocked or on hold. Use it to find what needs attention without changing any work state.
+
+## Estate convergence
+
+`ki estate converge` previews how local checkouts differ from a tracked target manifest, and can deliberately apply or roll back recorded moves and repairs. Use it for a planned estate rearrangement, or its separate `--hooks` pass for supported hook bindings.
+
+## Development
+
+`ki dev` switches installed harnesses between verified archives and remembered local development checkouts, and checks or regenerates skill surfaces. Use it while maintaining a harness; ordinary users normally stay on the verified installation.
+
+[Every ki command](/docs/ki/commands/) publishes all {{ cliCommands.counts.commands }} entries from the release manual, including arguments and options. Your installed executable's `--help` remains the authority for the version on your machine.

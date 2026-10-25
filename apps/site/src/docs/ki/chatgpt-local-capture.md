@@ -6,9 +6,9 @@ order: 9
 sources:
   - repository: knowledgeislands/tools-ki
     path: man/ki.1
-    ref: v0.4.0
+    ref: v0.13.0
     governs: 'The ChatGPT import adapter and the capture shape it accepts'
-    reviewed: '2026-09-21'
+    reviewed: '2026-10-25'
 ---
 
 # ChatGPT local-capture format

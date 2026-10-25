@@ -27,12 +27,14 @@
  * durable fix is a machine-readable command projection from `tools-ki`; see
  * the handoff recorded against KI-WEBSITE-SITE-022.
  *
- * Usage: bun scripts/sync-cli-commands.ts --ref <tag-or-commit>
+ * Usage: bun scripts/sync-cli-commands.ts --ref <tag-or-commit> [--from <checkout>]
  * See docs/guides/developer/page-provenance.md.
  */
 
+import { execFile } from 'node:child_process'
 import { writeFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
+import { promisify } from 'node:util'
 import { githubFetchOk } from './lib/github.ts'
 
 const SOURCE_REPOSITORY = 'knowledgeislands/tools-ki'
@@ -60,6 +62,9 @@ const MINIMUM_COMMANDS = 40
 
 /** Stands in for an escaped space while a macro's arguments are being split. */
 const SPACE = '\u0000'
+/** Protects an intentional printable backslash from the unknown-escape check. */
+const BACKSLASH = '\u0001'
+const execFileAsync = promisify(execFile)
 
 const tagPattern = /^v\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$/
 const commitPattern = /^[0-9a-f]{40}$/
@@ -102,7 +107,8 @@ const unroff = (text: string): string =>
     .replace(/\\-/g, '-')
     .replace(/\\ /g, ' ')
     .replaceAll(SPACE, ' ')
-    .replace(/\\\\/g, '\\')
+    .replace(/\\(?:e|\\)/g, BACKSLASH)
+    .replace(/\\\(dq/g, '"')
 
 /**
  * Splits a macro's arguments on whitespace, honouring roff's double quoting.
@@ -164,7 +170,7 @@ const continuesCommand = (line: string): boolean =>
 
 const assertRendered = (text: string, where: string): string => {
   if (text.includes('\\')) throw new Error(`${where}: unrendered roff escape in "${text}"`)
-  return text
+  return text.replaceAll(BACKSLASH, '\\')
 }
 
 /**
@@ -301,18 +307,30 @@ const header = (ref: string): string => `// GENERATED FILE — do not edit by ha
 
 `
 
+/** Reads the pinned Git object when a local checkout is supplied; never its working tree. */
+export async function readCliManual(ref: string, from?: string): Promise<string> {
+  if (!tagPattern.test(ref) && !commitPattern.test(ref)) {
+    throw new Error(`${ref} is not an immutable ref; pass an exact tag or 40-character commit`)
+  }
+  if (from !== undefined) {
+    const { stdout } = await execFileAsync('git', ['-C', resolve(from), 'show', `${ref}:${SOURCE_PATH}`], {
+      maxBuffer: 4 * 1024 * 1024
+    })
+    return stdout
+  }
+  const url = `https://raw.githubusercontent.com/${SOURCE_REPOSITORY}/${ref}/${SOURCE_PATH}`
+  return (await githubFetchOk(url)).text()
+}
+
 async function main(): Promise<void> {
   const refFlag = process.argv.indexOf('--ref')
   const ref = refFlag === -1 ? undefined : process.argv[refFlag + 1]
-  if (!ref) throw new Error('usage: sync-cli-commands.ts --ref <tag-or-commit>')
-  if (!tagPattern.test(ref) && !commitPattern.test(ref)) {
-    throw new Error(`${ref} is not an immutable ref; pass an exact tag or a 40-character commit`)
+  const fromFlag = process.argv.indexOf('--from')
+  const from = fromFlag === -1 ? undefined : process.argv[fromFlag + 1]
+  if (!ref || (fromFlag !== -1 && (!from || from.startsWith('--')))) {
+    throw new Error('usage: sync-cli-commands.ts --ref <tag-or-commit> [--from <checkout>]')
   }
-
-  const url = `https://raw.githubusercontent.com/${SOURCE_REPOSITORY}/${ref}/${SOURCE_PATH}`
-  const response = await githubFetchOk(url)
-
-  const inventory = parseCliManual(await response.text())
+  const inventory = parseCliManual(await readCliManual(ref, from))
   const payload = { source: { repository: SOURCE_REPOSITORY, path: SOURCE_PATH, ref }, ...inventory }
 
   const target = resolve(import.meta.dirname, '../src/_data/cliCommands.json5')

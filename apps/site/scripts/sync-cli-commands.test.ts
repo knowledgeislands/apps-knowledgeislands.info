@@ -1,6 +1,10 @@
 import assert from 'node:assert/strict'
+import { execFileSync } from 'node:child_process'
+import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises'
+import { tmpdir } from 'node:os'
+import { join } from 'node:path'
 import { describe, test } from 'node:test'
-import { parseCliManual } from './sync-cli-commands.ts'
+import { parseCliManual, readCliManual } from './sync-cli-commands.ts'
 
 /** One `.TP` block: the invocation, then its description. */
 const entry = (command: string, ...description: string[]): string[] => ['.TP', command, ...description]
@@ -242,5 +246,58 @@ describe('parseCliManual', () => {
         ),
       /ki bootstrap: command appears more than once/
     )
+  })
+})
+
+describe('release roff escapes', () => {
+  test('renders printable backslashes and double quotes from the manual', () => {
+    const inventory = parseWithPadding(
+      group(
+        'Escapes',
+        'Render quoted values.',
+        entry('.B ki example', String.raw`Use \e| and \(dqgithub\(dq; a doubled slash is \\.`)
+      )
+    )
+    assert.equal(inventory.groups[0]?.commands[0]?.description, 'Use \\| and "github"; a doubled slash is \\.')
+  })
+  test('still refuses unknown escapes rather than dropping them', () => {
+    assert.throws(
+      () => parseWithPadding(group('Escapes', 'Render values.', entry('.B ki example', String.raw`Unknown \(zz.`))),
+      /unrendered roff escape/
+    )
+  })
+})
+
+describe('local manual input', () => {
+  test('reads the requested Git tag even when the working tree differs', async () => {
+    const root = await mkdtemp(join(tmpdir(), 'ki-cli-sync-'))
+    const git = (...args: string[]): string => execFileSync('git', ['-C', root, ...args], { encoding: 'utf8' })
+    try {
+      git('init', '-q')
+      await mkdir(join(root, 'man'))
+      const released = manual(padding(8))
+      await writeFile(join(root, 'man/ki.1'), released)
+      git('add', 'man/ki.1')
+      git(
+        '-c',
+        'user.name=CLI sync test',
+        '-c',
+        'user.email=cli-sync@example.invalid',
+        '-c',
+        'core.hooksPath=/dev/null',
+        'commit',
+        '-qm',
+        'test fixture'
+      )
+      git('tag', 'v0.13.0')
+      await writeFile(join(root, 'man/ki.1'), 'unreleased working tree')
+      const pinned = await readCliManual('v0.13.0', root)
+      assert.equal(pinned, released)
+      assert.equal(parseCliManual(pinned).counts.commands, 48)
+      await assert.rejects(readCliManual('v9.9.9', root), /git.*show/)
+      await assert.rejects(readCliManual('main', root), /not an immutable ref/)
+    } finally {
+      await rm(root, { recursive: true, force: true })
+    }
   })
 })

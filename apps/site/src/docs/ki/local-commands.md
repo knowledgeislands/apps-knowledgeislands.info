@@ -1,68 +1,75 @@
 ---
 title: Local utility commands
-description: Manage local KI capabilities, documentation locations, and supported machine projections.
+description: Inspect the local installation, reconcile managed links and editor views, and find the right maintenance command.
 permalink: /docs/ki/local-commands/
 order: 7
 sources:
   - repository: knowledgeislands/tools-ki
     path: man/ki.1
-    ref: v0.4.0
-    governs: 'The ki manage command surface and its local-only boundary'
-    reviewed: '2026-09-21'
+    ref: v0.13.0
+    governs: 'Local management commands and their inspection or mutation boundaries'
+    reviewed: '2026-10-25'
   - repository: knowledgeislands/tools-ki
-    path: docs/guides/vscode-management.md
-    ref: v0.4.0
-    governs: 'The chezmoi ownership boundary and fail-closed behaviour of ki manage vscode'
-    reviewed: '2026-09-21'
+    path: docs/guides/user/local-installation.md
+    ref: v0.13.0
+    governs: 'Inventory, diagnostics, repair, completion and MCP source installations'
+    reviewed: '2026-10-25'
+  - repository: knowledgeislands/tools-ki
+    path: docs/guides/user/vscode-management.md
+    ref: v0.13.0
+    governs: 'The chezmoi source boundary and editor-projection reconciliation'
+    reviewed: '2026-10-25'
 ---
 
 # Local utility commands
 
-`ki manage search`, `ki manage cleanup`, and `ki manage docs` operate only on local KI state or fixed public documentation locations.
+You can inspect what is installed, diagnose a broken user-skill link and preview its repair without changing a repository's governance. The local management commands at `v0.13.0` also cover completion, documentation locations and deliberate maintenance of machine-local projections.
 
-They do not discover a repository, fetch content, contact a registry, launch a browser, or activate a skill.
+## Find installed capabilities
 
-Use `ki manage search --help`, `ki manage cleanup --help`, and `ki manage docs --help` for exact grammar supported by the installed version.
+`ki inventory` lists verified installed harnesses and capabilities alongside declared user skills and registered repositories. `ki harness search <query>` searches only verified installed capability names, kinds and harness identifiers, case-insensitively. A non-empty query is required; no match is a successful empty result.
 
-## Search installed capabilities
+`ki harness outdated` reports comparable newer release evidence and names unavailable evidence rather than claiming freshness. `ki harness missing` reports desired user capabilities without an installed provider. [Update and upgrade](/docs/ki/update-upgrade/) explains the next step when something is stale.
 
-Run `ki manage search <query>` with one non-empty query.
+## Diagnose and repair
 
-KI inspects only verified installed harnesses and matches the query case-insensitively against each harness identifier, capability kind, and capability name.
+```bash
+ki diag
+ki doctor
+ki repair --dry-run
+```
 
-It prints matching capabilities in harness identifier, capability kind, and capability name order.
+`diag` gives a share-safe installation summary. Add `--full` for resolved paths and identities. `doctor` evaluates user configuration, installed harnesses and managed user-skill links, reports direct-current-directory legacy state and validates a direct `.ki.toml` without resolving its providers. Its complete report distinguishes passes, warnings, failures and skipped checks; health does not establish release freshness.
 
-For example, `ki manage search bootstrap` can report the installed `ki-bootstrap` skill.
+Repair previews by default. After reviewing the plan, `ki repair --apply` creates missing managed user-skill links and repoints stale or dangling symbolic links. It can remove a recognised legacy user-configuration schema marker. It never installs a harness or overwrites an unsafe ordinary file. A repository projection needs `ki repo repair` instead.
 
-When no capability matches, the command succeeds and prints `No matching installed capabilities.`
+`ki cleanup` currently reports that no eligible managed stale state exists and changes no files. It recognises only a persisted, versioned KI-owned stale format; it does not guess that unfamiliar caches or directories are disposable.
 
-## Report managed stale state
+## Print documentation and completion
 
-Run `ki manage cleanup` to report stale state that KI has explicitly recorded in a persisted, versioned KI-owned format.
+`ki docs` prints the canonical documentation locations. Select `overview`, `site`, `manual` or `roadmap` for one location. It does not open a browser or fetch the destination. The overview points at [the ki project](/projects/ki/).
 
-V1 defines no such artifact format, so the command prints `No eligible managed stale state.` and does not change files.
+`ki completion bash` and `ki completion zsh` print shell completion generated from the registered command tree. It completes known command options and closed values locally, delegates paths to the shell and leaves opaque identifiers for you to enter.
 
-It never treats cache contents, transaction-looking directories, unconfigured harnesses, links, or unknown files as stale merely from their names or locations.
+`ki link <identifier...>` prints Markdown links to work records, including a committed historical location for a pruned record when it can establish one. It reports an unresolved identifier rather than inventing a destination.
 
-## Print documentation locations
+## Reconcile editor projections
 
-Run `ki manage docs [topic]` to print canonical public URLs.
+```bash
+ki vscode check
+ki vscode sync
+```
 
-With no topic, KI prints every location with an `Overview:`, `Site:`, `Manual:`, or `Roadmap:` prefix.
+`check` compares the local registry and declared source-store bindings with chezmoi source state. `sync` previews the reconciliation; `sync --write` updates that source after review. Review `chezmoi diff` before applying through the owning dotfiles workflow. KI never runs `chezmoi apply`.
 
-The supported single-location topics are `overview`, `site`, `manual`, and `roadmap`.
+Unavailable bound stores are omitted with an actionable warning. Store creation and binding belong to `ki repo store`, covered in [repositories and territory](/docs/ki/repositories-and-territory/).
 
-- `ki manage docs overview` prints this site's `ki` product page. `tools-ki` owns that string, and every released version of it is now out of date: up to `v0.3.6` it printed `/tooling/cli/`, and `v0.4.0` prints `/tooling/ki/`. Both redirect. The canonical page is [`/projects/ki/`](/projects/ki/), because a released tool is a project that ships a binary rather than a section of its own.
-- `ki manage docs site` prints `https://knowledgeislands.info/`.
-- `ki manage docs manual` prints `https://github.com/knowledgeislands/tools-ki/blob/main/man/ki.1`.
-- `ki manage docs roadmap` prints `https://github.com/knowledgeislands/tools-ki/blob/main/ROADMAP.md`.
+## Other local operations
 
-`ki manage docs` only prints the URL; it does not launch a browser or retrieve its content.
+`ki markdown gfm` plans Obsidian-to-GFM link conversion for supplied files. Its preview and manifest protect a reviewed conversion, and undecided or changed input stops application. It is a conversion tool rather than a formatter.
 
-## Reconcile a VS Code projection
+`ki mcp install` and `update` build a governed source release in staging and activate it only after verification. `list` inspects source installations; `rollback` activates a retained complete version without fetching or building; `uninstall` removes the owned installation. These commands do not bind a server into an agent client.
 
-When a chezmoi source owns the machine's VS Code workspace files and shared agent trusted-folder inventory, `ki manage vscode check` compares that source state with the local KI repository registry without writing.
+`ki git check-message <file>` validates a supplied commit-message file against the portable Git message grammar without reading configuration or changing files.
 
-`ki manage vscode sync` previews a reconciliation. Add `--write` only after reviewing the plan, then review the resulting source changes with `chezmoi diff`. The command never runs `chezmoi apply`.
-
-`ki manage vscode source create <repository>` similarly previews an opt-in OneDrive source store; add `--write` to create and associate it after review. See the [tools-ki VS Code projection management guide](https://github.com/knowledgeislands/tools-ki/blob/v0.4.0/docs/guides/vscode-management.md) for the ownership boundary and fail-closed behaviour.
+[Every ki command](/docs/ki/commands/) carries the exact arguments. Use `ki <command> --help` for the grammar your installed executable supports.

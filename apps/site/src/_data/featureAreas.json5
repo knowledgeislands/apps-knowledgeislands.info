@@ -27,25 +27,26 @@
     slug: 'the-work-model',
     title: 'The work model',
     skills: ['ki-coordination', 'ki-work-package'],
-    commands: []
+    commands: ['ki work status']
   },
   {
     slug: 'work-packages',
     title: 'Work packages',
     skills: ['ki-work-package'],
-    commands: []
+    commands: ['ki work status']
   },
   {
     slug: 'coordination',
     title: 'Coordination',
     skills: ['ki-coordination', 'ki-subagents', 'ki-subagents-claude', 'ki-subagents-chatgpt'],
-    commands: []
+    commands: ['ki agent send', 'ki work status']
   },
   {
     slug: 'background-runs',
     title: 'Delegation and background runs',
     skills: ['ki-delegation'],
-    commands: ['ki agent']
+    commands: ['ki agent'],
+    page: '/docs/ki/work-and-agents/'
   },
   {
     slug: 'roadmap-lifecycle',
@@ -61,7 +62,7 @@
       'ki-accept',
       'ki-batch'
     ],
-    commands: ['ki batch'],
+    commands: ['ki repo roadmap', 'ki repo batch'],
     page: '/docs/ways-of-working/roadmap-lifecycle/'
   },
   {
@@ -74,7 +75,7 @@
     slug: 'trades',
     title: 'Trades',
     skills: ['ki-trades', 'ki-trade'],
-    commands: ['ki trade']
+    commands: ['ki repo trade']
   },
   {
     slug: 'recurring-work',
@@ -106,7 +107,8 @@
     slug: 'acquisition',
     title: 'Acquisition',
     skills: ['ki-acquire', 'ki-acquire-chatgpt', 'ki-acquire-granola', 'ki-pulse'],
-    commands: ['ki acquire']
+    commands: ['ki acquire'],
+    page: '/docs/ki/trades-and-acquisition/'
   },
   {
     slug: 'recap',
@@ -134,7 +136,8 @@
       'ki-repo-website-content',
       'ki-bootstrap'
     ],
-    commands: ['ki repo']
+    commands: ['ki registry', 'ki repo', 'ki harness', 'ki territory', 'ki estate converge'],
+    page: '/docs/ki/repositories-and-territory/'
   },
   {
     slug: 'conformance-standards',

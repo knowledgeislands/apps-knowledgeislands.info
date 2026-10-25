@@ -6,14 +6,14 @@ order: 5
 sources:
   - repository: knowledgeislands/tools-ki
     path: man/ki.1
-    ref: v0.4.0
+    ref: v0.13.0
     governs: 'The harness, skill and repository skill commands, and the refusals described here'
-    reviewed: '2026-09-22'
+    reviewed: '2026-10-25'
   - repository: knowledgeislands/tools-ki
-    path: docs/decisions/ADR-KI-TOOLS-002-compatible-harness-registry-and-native-operations.md
-    ref: v0.4.0
+    path: docs/decisions/ADR-KI-TOOL-KI-002-compatible-harness-registry-and-native-operations.md
+    ref: v0.13.0
     governs: 'The compatible-harness registry and the installs-but-does-not-activate boundary'
-    reviewed: '2026-09-22'
+    reviewed: '2026-10-25'
 ---
 
 # Capability lifecycle
@@ -22,13 +22,13 @@ Two things happen when a capability starts working for you, and `ki` keeps them 
 
 **Installing a harness** puts a set of capabilities on your machine, verified and inventoried. Nothing about your repositories changes; nothing starts applying.
 
-**Activating a skill** declares that one of those capabilities applies — either to you, in every repository you work in, or to one repository, for everyone who works in it.
+**Activating a skill** declares that one of those capabilities applies - either to you, in every repository you work in, or to one repository, for everyone who works in it.
 
 A capability that is installed but not activated is available and inert. That is the normal, intended resting state for most of what a harness ships.
 
 ## Why the split exists
 
-The alternative — install implies activate — fails in both directions.
+The alternative - install implies activate - fails in both directions.
 
 It over-applies: a harness ships dozens of skills, and installing it to get one would silently subject every repository on the machine to the rest. Governance you did not choose is governance you cannot reason about, and an audit that fails on rules you never adopted teaches you to ignore audits.
 
@@ -38,7 +38,7 @@ So the harness is a _supply_ of capability and the declaration is the _decision_
 
 ## Installing and inspecting harnesses
 
-Harnesses are addressed by identifier in `owner/name` form — `knowledgeislands/ki-agentic-harness`, for instance. These commands never accept a bare skill name or a capability-qualified target; a lifecycle operation acts on a whole payload.
+Harnesses are addressed by identifier in `owner/name` form - `knowledgeislands/ki-agentic-harness`, for instance. These commands never accept a bare skill name or a capability-qualified target; a lifecycle operation acts on a whole payload.
 
 | Command | Effect |
 | --- | --- |
@@ -50,7 +50,7 @@ Harnesses are addressed by identifier in `owner/name` form — `knowledgeislands
 
 `reinstall` replaces a harness only after the replacement archive passes integrity and capability inspection, so a corrupted or capability-losing archive cannot take the place of a working one.
 
-Lifecycle commands apply immediately once validation passes. There is no `--dry-run` here; among the commands that change state, only `ki acquire import --adapter chatgpt` and `ki repo conform` offer a preview.
+Lifecycle commands apply once validation passes and have no `--dry-run`. Commands that offer previews include `ki repair`, `ki repo conform`, acquisition imports and repository store operations; check the selected command's help before expecting a preview.
 
 ## Activating skills
 
@@ -64,9 +64,9 @@ ki repo skill add <skill>       # repository scope: applies to this repository
 ki repo skill remove <skill>
 ```
 
-User-scope skills are the ones that are about _you_ — how you plan, how you recap, how you want an agent to behave. They link into your configured agents' skill spaces, and `ki bootstrap` establishes the core set for you.
+User-scope skills are the ones that are about _you_ - how you plan, how you recap, how you want an agent to behave. They link into your configured agents' skill spaces, and `ki bootstrap` establishes the core set for you.
 
-Repository-scope skills are the ones that are about _this codebase_ — its Markdown style, its toolchain, its roadmap discipline. They are recorded in the repository's `.ki.toml` and are what `ki repo audit` and `ki repo conform` resolve against. Either form takes `--replace` to overwrite an existing declaration rather than fail on it.
+Repository-scope skills are the ones that are about _this codebase_ - its Markdown style, its toolchain, its roadmap discipline. They are recorded in the repository's `.ki.toml` and are what `ki repo audit` and `ki repo conform` resolve against. `add` in either scope takes `--replace` for an existing managed activation; removal has no replacement flag.
 
 The two scopes are managed independently. Removing a user skill does not touch any repository declaration, and removing a repository declaration does not affect your user scope.
 
