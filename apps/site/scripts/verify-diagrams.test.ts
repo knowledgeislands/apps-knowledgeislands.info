@@ -71,14 +71,14 @@ test('the full gate detects missing artefacts and stale viewer receipts', () => 
       resolve(root, 'apps/site/src/_data/vendoredDiagrams.json5'),
       JSON.stringify({ ...snapshot, diagrams: {} })
     )
-    for (const name of [
-      'diagrams.toml',
-      'command-groups.architecture.json',
-      'command-groups.svg',
-      'command-groups.html',
-      'command-groups.receipt.json'
-    ]) {
-      copyFileSync(resolve(repositoryRoot, 'docs/diagrams', name), resolve(root, 'docs/diagrams', name))
+    const manifestText = readFileSync(resolve(repositoryRoot, 'docs/diagrams/diagrams.toml'), 'utf8')
+    writeFileSync(resolve(root, 'docs/diagrams/diagrams.toml'), manifestText)
+    for (const [slug, entry] of Object.entries(parseManifest(manifestText))) {
+      const names = [`${slug}.${entry.type}.json`, `${slug}.svg`]
+      if (entry.commit_html) names.push(`${slug}.html`, `${slug}.receipt.json`)
+      for (const name of names) {
+        copyFileSync(resolve(repositoryRoot, 'docs/diagrams', name), resolve(root, 'docs/diagrams', name))
+      }
     }
     assert.deepEqual(verifyDiagrams(root), [])
     rmSync(resolve(root, 'docs/diagrams/command-groups.svg'))
