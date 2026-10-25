@@ -9,7 +9,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      KI_VERSION: v0.8.4
+      KI_VERSION: v0.13.0
     steps:
       - uses: actions/checkout@v7
       - uses: jdx/mise-action@v4
