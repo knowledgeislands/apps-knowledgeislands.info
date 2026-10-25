@@ -1,0 +1,188 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "One definition, one evidenced occurrence",
+    "locale": "en",
+    "quality_profile": "showcase",
+    "output": "docs/diagrams/recurring-occurrence.html",
+    "repository": {
+      "url": "https://github.com/knowledgeislands/ki-agentic-harness",
+      "revision": "8897008fcee7b2c71a22115735ed038efccf7f32"
+    }
+  },
+  "lanes": [
+    {
+      "id": "definition",
+      "label": "Repository definition"
+    },
+    {
+      "id": "occurrence",
+      "label": "Ordinary run"
+    }
+  ],
+  "mainPath": [
+    "adopt",
+    "schedule",
+    "run",
+    "evidence",
+    "review",
+    "reconcile"
+  ],
+  "nodes": [
+    {
+      "id": "adopt",
+      "lane": "definition",
+      "col": 0,
+      "type": "backend",
+      "label": "Adopt",
+      "sublabel": "purpose + authority + cost",
+      "sources": [
+        {
+          "path": "skills/change-management/ki-work-recurring/references/standards-recurring-work.md",
+          "line": 27,
+          "end_line": 37
+        }
+      ],
+      "icon": "person"
+    },
+    {
+      "id": "schedule",
+      "lane": "definition",
+      "col": 1,
+      "type": "backend",
+      "label": "Evaluate schedule",
+      "sublabel": "active, due and unreserved",
+      "sources": [
+        {
+          "path": "skills/change-management/ki-work-recurring/references/standards-recurring-work.md",
+          "line": 119,
+          "end_line": 135
+        }
+      ],
+      "icon": "calendar"
+    },
+    {
+      "id": "run",
+      "lane": "occurrence",
+      "col": 2,
+      "type": "backend",
+      "label": "Reserve and run",
+      "sublabel": "draft, plan, deliver",
+      "sources": [
+        {
+          "path": "skills/change-management/ki-work-recurring/references/standards-recurring-work.md",
+          "line": 135,
+          "end_line": 139
+        }
+      ],
+      "icon": "briefcase"
+    },
+    {
+      "id": "evidence",
+      "lane": "occurrence",
+      "col": 3,
+      "type": "database",
+      "label": "Retain evidence",
+      "sublabel": "repository-owned outcome",
+      "sources": [
+        {
+          "path": "skills/change-management/ki-work-recurring/references/standards-recurring-work.md",
+          "line": 113,
+          "end_line": 117
+        }
+      ],
+      "icon": "database"
+    },
+    {
+      "id": "review",
+      "lane": "occurrence",
+      "col": 4,
+      "type": "security",
+      "label": "Review",
+      "sublabel": "owner approves closure",
+      "sources": [
+        {
+          "path": "skills/change-management/ki-work-recurring/references/standards-recurring-work.md",
+          "line": 137,
+          "end_line": 139
+        }
+      ],
+      "icon": "decision"
+    },
+    {
+      "id": "reconcile",
+      "lane": "definition",
+      "col": 5,
+      "type": "backend",
+      "label": "Accepted closure",
+      "sublabel": "evidence updated; link cleared",
+      "sources": [
+        {
+          "path": "skills/change-management/ki-work-recurring/references/standards-recurring-work.md",
+          "line": 137,
+          "end_line": 145
+        }
+      ],
+      "icon": "active"
+    }
+  ],
+  "edges": [
+    {
+      "id": "adopt-schedule",
+      "from": "adopt",
+      "to": "schedule"
+    },
+    {
+      "id": "schedule-run",
+      "from": "schedule",
+      "to": "run",
+      "label": "admit"
+    },
+    {
+      "id": "run-evidence",
+      "from": "run",
+      "to": "evidence"
+    },
+    {
+      "id": "evidence-review",
+      "from": "evidence",
+      "to": "review"
+    },
+    {
+      "id": "review-reconcile",
+      "from": "review",
+      "to": "reconcile",
+      "label": "approved"
+    },
+    {
+      "id": "reconcile-schedule",
+      "from": "reconcile",
+      "to": "schedule",
+      "role": "return",
+      "variant": "dashed",
+      "route": "up-channel",
+      "fromSide": "top",
+      "toSide": "top",
+      "label": "next due"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "amber",
+      "title": "Admission is bounded",
+      "items": [
+        "Manual policy needs confirmation; a paused or reserved definition cannot spawn.",
+        "Admission creates one draft and reservation, not implementation authority."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Success needs reviewed evidence",
+      "items": [
+        "Only approved closure through ki-accept advances successful-run evidence.",
+        "Failed or cancelled runs never advance it; a scheduler owns no separate backlog."
+      ]
+    }
+  ]
+}

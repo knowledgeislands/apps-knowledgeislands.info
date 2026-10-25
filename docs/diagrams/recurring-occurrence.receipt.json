@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "slug": "recurring-occurrence",
+  "type": "workflow",
+  "source": {
+    "file": "recurring-occurrence.workflow.json",
+    "sha256": "ba07d66240d9a12f41e9df5684648a1fceff1a7870a18d59b6a26af6914585c3",
+    "bytes": 4473
+  },
+  "html": {
+    "file": "recurring-occurrence.html",
+    "sha256": "9a43fb252228595496cb4793d9edf998d739f46ac85855e0ffb9114b5d6d4943",
+    "bytes": 816807
+  },
+  "renderer": {
+    "name": "archify",
+    "version": "3.2.0"
+  }
+}

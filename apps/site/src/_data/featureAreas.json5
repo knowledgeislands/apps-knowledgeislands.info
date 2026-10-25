@@ -72,19 +72,22 @@
     slug: 'work-design',
     title: 'Work design',
     skills: ['ki-work-design'],
-    commands: []
+    commands: [],
+    page: '/docs/ways-of-working/work-design/'
   },
   {
     slug: 'trades',
     title: 'Trades',
     skills: ['ki-trades', 'ki-trade'],
-    commands: ['ki repo trade']
+    commands: ['ki repo trade'],
+    page: '/docs/ways-of-working/trades/'
   },
   {
     slug: 'recurring-work',
     title: 'Recurring work',
     skills: ['ki-work-recurring', 'ki-repo-kb-activities'],
-    commands: []
+    commands: [],
+    page: '/docs/ways-of-working/recurring-work/'
   },
   {
     slug: 'findings',

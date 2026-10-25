@@ -70,6 +70,6 @@ Finished work keeps its package, with the state `finished`, until the mark that 
 
 ## Boundaries
 
-The package standard owns the folder's shape and each file's form. When the folder is tidied, when a mark is struck and how the decisions log is written are the coordinator's, under [coordination](/docs/ways-of-working/coordination/). The run's own state folder, its brief and the path its report travels are the launcher's, under [background runs](/docs/ways-of-working/background-runs/). A design note's life from draft to graduation is `ki-work-design`'s.
+The package standard owns the folder's shape and each file's form. When the folder is tidied, when a mark is struck and how the decisions log is written are the coordinator's, under [coordination](/docs/ways-of-working/coordination/). The run's own state folder, its brief and the path its report travels are the launcher's, under [background runs](/docs/ways-of-working/background-runs/). A design note's life from draft to graduation is [work design](/docs/ways-of-working/work-design/).
 
 Until each live folder has been moved, a folder may still be in an older single-file shape, in which the definition and the state share one file. Readers accept both shapes; a package whose definition still carries a state field is failed, so a session that rewrites it from memory is caught at its next gate.

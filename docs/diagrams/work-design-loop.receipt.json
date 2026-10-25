@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "slug": "work-design-loop",
+  "type": "workflow",
+  "source": {
+    "file": "work-design-loop.workflow.json",
+    "sha256": "b51160139b9a20e372ac8b3c5678eb0bc456eed6a3dc7d473a96f808252ad40b",
+    "bytes": 4219
+  },
+  "html": {
+    "file": "work-design-loop.html",
+    "sha256": "3019414d9bb95493d8c06c5626471c7a1bb74cb2825358c40e439f84a2cc102b",
+    "bytes": 816396
+  },
+  "renderer": {
+    "name": "archify",
+    "version": "3.2.0"
+  }
+}

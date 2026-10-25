@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "slug": "trade",
+  "type": "sequence",
+  "source": {
+    "file": "trade.sequence.json",
+    "sha256": "dd95543c0514fbf111b42411f03c039c91db7e61718129ab2bc9c687c1730ac1",
+    "bytes": 4621
+  },
+  "html": {
+    "file": "trade.html",
+    "sha256": "08f13fbc0bbf0aea0de82a9bec73dee9f699a82d0a1a4a756a99ae187973ee4d",
+    "bytes": 816006
+  },
+  "renderer": {
+    "name": "archify",
+    "version": "3.2.0"
+  }
+}

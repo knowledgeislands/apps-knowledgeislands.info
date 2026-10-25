@@ -51,3 +51,21 @@ How does a background run travel from brief to prune, and which file carries eac
 Which statuses does a work record pass through from capture to pruning, and which skill owns each move? The figure follows the repository roadmaps standard at harness `8897008f`.
 
 [![A work record from triage to pruned](record-lifecycle.svg)](record-lifecycle.html)
+
+## Work design loop
+
+How does an undecided proposal become owner decisions and a piloted rollout? The workflow follows the work-design standard at harness `8897008f`.
+
+[![Work design loop](work-design-loop.svg)](work-design-loop.html)
+
+## Trade
+
+How do local trade copies reach receipt, receiver disposition and eligible release without transferring ownership? The sequence follows the trade standard at harness `8897008f`.
+
+[![Trade](trade.svg)](trade.html)
+
+## Recurring occurrence
+
+How is a recurring obligation adopted, scheduled, run, evidenced and reviewed? The workflow follows the recurring-work and Activity standards at harness `8897008f`.
+
+[![Recurring occurrence](recurring-occurrence.svg)](recurring-occurrence.html)

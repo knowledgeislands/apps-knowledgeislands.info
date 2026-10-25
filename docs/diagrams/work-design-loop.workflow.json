@@ -1,0 +1,186 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "From proposal to piloted rollout",
+    "locale": "en",
+    "quality_profile": "showcase",
+    "output": "docs/diagrams/work-design-loop.html",
+    "repository": {
+      "url": "https://github.com/knowledgeislands/ki-agentic-harness",
+      "revision": "8897008fcee7b2c71a22115735ed038efccf7f32"
+    }
+  },
+  "lanes": [
+    {
+      "id": "shaping",
+      "label": "Orchestrator"
+    },
+    {
+      "id": "reviewers",
+      "label": "Independent reviewers"
+    },
+    {
+      "id": "owner",
+      "label": "Owner"
+    },
+    {
+      "id": "delivery",
+      "label": "Ordinary work"
+    }
+  ],
+  "mainPath": [
+    "brief",
+    "reviews",
+    "merge",
+    "decisions",
+    "pilot",
+    "waves"
+  ],
+  "nodes": [
+    {
+      "id": "brief",
+      "lane": "shaping",
+      "col": 0,
+      "type": "backend",
+      "label": "Brief",
+      "sublabel": "proposal + sourced claims",
+      "sources": [
+        {
+          "path": "skills/change-management/ki-work-design/references/standards-work-design.md",
+          "line": 37,
+          "end_line": 37
+        }
+      ],
+      "icon": "briefcase"
+    },
+    {
+      "id": "reviews",
+      "lane": "reviewers",
+      "col": 1,
+      "type": "backend",
+      "label": "Independent reviews",
+      "sublabel": "at least two models / runtimes",
+      "sources": [
+        {
+          "path": "skills/change-management/ki-work-design/references/standards-work-design.md",
+          "line": 38,
+          "end_line": 38
+        }
+      ],
+      "icon": "person"
+    },
+    {
+      "id": "merge",
+      "lane": "shaping",
+      "col": 2,
+      "type": "backend",
+      "label": "Merged report",
+      "sublabel": "evidence resolves disputes",
+      "sources": [
+        {
+          "path": "skills/change-management/ki-work-design/references/standards-work-design.md",
+          "line": 39,
+          "end_line": 39
+        }
+      ],
+      "icon": "briefcase"
+    },
+    {
+      "id": "decisions",
+      "lane": "owner",
+      "col": 3,
+      "type": "security",
+      "label": "Owner decisions",
+      "sublabel": "verbatim words + grant",
+      "sources": [
+        {
+          "path": "skills/change-management/ki-work-design/references/standards-work-design.md",
+          "line": 40,
+          "end_line": 40
+        }
+      ],
+      "icon": "decision"
+    },
+    {
+      "id": "pilot",
+      "lane": "delivery",
+      "col": 4,
+      "type": "backend",
+      "label": "Pilot",
+      "sublabel": "one before wider waves",
+      "sources": [
+        {
+          "path": "skills/change-management/ki-work-design/references/standards-work-design.md",
+          "line": 41,
+          "end_line": 49
+        }
+      ],
+      "icon": "flag"
+    },
+    {
+      "id": "waves",
+      "lane": "delivery",
+      "col": 5,
+      "type": "backend",
+      "label": "Wider waves",
+      "sublabel": "pilot lessons in each brief",
+      "sources": [
+        {
+          "path": "skills/change-management/ki-work-design/references/standards-work-design.md",
+          "line": 41,
+          "end_line": 49
+        }
+      ],
+      "icon": "briefcase"
+    }
+  ],
+  "edges": [
+    {
+      "id": "brief-reviews",
+      "from": "brief",
+      "to": "reviews"
+    },
+    {
+      "id": "reviews-merge",
+      "from": "reviews",
+      "to": "merge"
+    },
+    {
+      "id": "merge-decisions",
+      "from": "merge",
+      "to": "decisions",
+      "label": "choices"
+    },
+    {
+      "id": "decisions-pilot",
+      "from": "decisions",
+      "to": "pilot",
+      "label": "approved"
+    },
+    {
+      "id": "pilot-waves",
+      "from": "pilot",
+      "to": "waves",
+      "label": "lessons"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "amber",
+      "title": "Review before choice",
+      "items": [
+        "Reviewers form their own views before reading each other.",
+        "Differences cite evidence; agreement is not a vote."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Owner authority governs delivery",
+      "items": [
+        "The loop grants no push, prune, release or acceptance authority.",
+        "Design notes graduate into durable homes, then leave the work folder."
+      ]
+    }
+  ]
+}

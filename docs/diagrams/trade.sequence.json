@@ -1,0 +1,195 @@
+{
+  "schema_version": 1,
+  "diagram_type": "sequence",
+  "meta": {
+    "title": "Trade: local copies, local decisions",
+    "locale": "en",
+    "quality_profile": "showcase",
+    "output": "docs/diagrams/trade.html",
+    "repository": {
+      "url": "https://github.com/knowledgeislands/ki-agentic-harness",
+      "revision": "8897008fcee7b2c71a22115735ed038efccf7f32"
+    }
+  },
+  "participants": [
+    {
+      "id": "sender",
+      "type": "external",
+      "label": "Sender",
+      "sublabel": "owns outbound",
+      "sources": [
+        {
+          "path": "skills/governance/ki-trades/references/standards-trades.md",
+          "line": 132,
+          "end_line": 186
+        }
+      ]
+    },
+    {
+      "id": "policy",
+      "type": "security",
+      "label": "Capital policy",
+      "sublabel": "grants typed route",
+      "sources": [
+        {
+          "path": "skills/governance/ki-trades/references/standards-trades.md",
+          "line": 38,
+          "end_line": 73
+        }
+      ]
+    },
+    {
+      "id": "outbound",
+      "type": "database",
+      "label": "Sender record",
+      "sublabel": "preparing / submitted",
+      "sources": [
+        {
+          "path": "skills/governance/ki-trades/references/standards-trades.md",
+          "line": 109,
+          "end_line": 174
+        }
+      ]
+    },
+    {
+      "id": "receiver",
+      "type": "external",
+      "label": "Receiver",
+      "sublabel": "decides locally",
+      "sources": [
+        {
+          "path": "skills/governance/ki-trades/references/standards-trades.md",
+          "line": 176,
+          "end_line": 209
+        }
+      ]
+    },
+    {
+      "id": "inbound",
+      "type": "database",
+      "label": "Receiver record",
+      "sublabel": "received + decision",
+      "sources": [
+        {
+          "path": "skills/governance/ki-trades/references/standards-trades.md",
+          "line": 174,
+          "end_line": 230
+        }
+      ]
+    }
+  ],
+  "messages": [
+    {
+      "id": "route-check",
+      "from": "sender",
+      "to": "policy",
+      "y": 160,
+      "label": "Check export route",
+      "variant": "default"
+    },
+    {
+      "id": "route-granted",
+      "from": "policy",
+      "to": "sender",
+      "y": 194,
+      "label": "Granted for kind",
+      "variant": "return"
+    },
+    {
+      "id": "prepare",
+      "from": "sender",
+      "to": "outbound",
+      "y": 228,
+      "label": "Prepare and commit",
+      "variant": "default",
+      "note": "Mutable; one stable identity"
+    },
+    {
+      "id": "submit",
+      "from": "sender",
+      "to": "outbound",
+      "y": 282,
+      "label": "Submit and freeze",
+      "variant": "default"
+    },
+    {
+      "id": "read-submission",
+      "from": "receiver",
+      "to": "outbound",
+      "y": 322,
+      "label": "Read on active route",
+      "variant": "default"
+    },
+    {
+      "id": "projection",
+      "from": "outbound",
+      "to": "receiver",
+      "y": 356,
+      "label": "Sender projection",
+      "variant": "return"
+    },
+    {
+      "id": "receive",
+      "from": "receiver",
+      "to": "inbound",
+      "y": 390,
+      "label": "Create receipt",
+      "variant": "default",
+      "note": "Received; unconsidered only"
+    },
+    {
+      "id": "disposition",
+      "from": "receiver",
+      "to": "inbound",
+      "y": 448,
+      "label": "Confirm disposition",
+      "variant": "default",
+      "note": "Human-confirmed through ki-next"
+    },
+    {
+      "id": "observe",
+      "from": "sender",
+      "to": "inbound",
+      "y": 510,
+      "label": "Read policy evidence",
+      "variant": "default",
+      "note": "Observation grants no authority"
+    },
+    {
+      "id": "release",
+      "from": "sender",
+      "to": "outbound",
+      "y": 570,
+      "label": "Release if eligible",
+      "variant": "default",
+      "note": "Selected policy must be satisfied"
+    },
+    {
+      "id": "prune",
+      "from": "receiver",
+      "to": "inbound",
+      "y": 632,
+      "label": "Prune after release",
+      "variant": "default",
+      "note": "Only eligible release permits pruning"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "amber",
+      "title": "Ownership never transfers",
+      "items": [
+        "Sender writes only outbound; receiver writes only inbound.",
+        "Receipt proves delivery, not adoption, priority or acceptance."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Observe before release",
+      "items": [
+        "Unattended and receipt need evidenced receipt; work may wait for a decision.",
+        "Completion requires owner-valid adapter evidence; the checker fails closed."
+      ]
+    }
+  ]
+}

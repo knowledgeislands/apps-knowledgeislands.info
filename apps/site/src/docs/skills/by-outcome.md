@@ -66,8 +66,8 @@ Find the group that matches the kind of result you want, read down to the outcom
 | Coordinate a piece of territory or Project work and reply in the right form | [`ki-coordination`](/docs/skills/catalogue/#ki-coordination) | [Coordination](/docs/ways-of-working/coordination/) |
 | Keep a piece of work resumable from Git rather than a transcript | [`ki-work-package`](/docs/skills/catalogue/#ki-work-package) | [Work packages](/docs/ways-of-working/work-packages/) |
 | Hand work to a detached background agent | [`ki-delegation`](/docs/skills/catalogue/#ki-delegation) | [Background runs](/docs/ways-of-working/background-runs/) |
-| Shape a new Project or model before any work record exists | [`ki-work-design`](/docs/skills/catalogue/#ki-work-design) | Ways of working |
-| Send work or knowledge to another repository, or receive it | [`ki-trade`](/docs/skills/catalogue/#ki-trade) for one side, [`ki-trades`](/docs/skills/catalogue/#ki-trades) for the protocol | Ways of working |
+| Shape a new Project or model | [`ki-work-design`][design-skill] | [Work design][design-page] |
+| Exchange work or knowledge | [`ki-trade`][trade-skill], [`ki-trades`][trades-skill] | [Trades][trades-page] |
 | Define a reusable agent role | [`ki-subagents`](/docs/skills/catalogue/#ki-subagents), then [`ki-subagents-claude`](/docs/skills/catalogue/#ki-subagents-claude) or [`ki-subagents-chatgpt`](/docs/skills/catalogue/#ki-subagents-chatgpt) for the runtime | Ways of working |
 | Coordinate agents around a group of repositories with Paperclip | [`ki-agent-coordination-paperclip`](/docs/skills/catalogue/#ki-agent-coordination-paperclip) | Ways of working |
 
@@ -81,7 +81,7 @@ Find the group that matches the kind of result you want, read down to the outcom
 | Deliver one approved record through to review | [`ki-implement`](/docs/skills/catalogue/#ki-implement) | [Roadmap lifecycle](/docs/ways-of-working/roadmap-lifecycle/) |
 | Close a reviewed record, or cancel one with approval | [`ki-accept`](/docs/skills/catalogue/#ki-accept) | [Roadmap lifecycle](/docs/ways-of-working/roadmap-lifecycle/) |
 | Run an authorised window over a set of ready records | [`ki-batch`](/docs/skills/catalogue/#ki-batch) | [Roadmap lifecycle](/docs/ways-of-working/roadmap-lifecycle/) |
-| Adopt and evidence work that recurs | [`ki-work-recurring`](/docs/skills/catalogue/#ki-work-recurring), with [`ki-repo-kb-activities`](/docs/skills/catalogue/#ki-repo-kb-activities) for the Activity note | Ways of working |
+| Adopt and evidence recurring work | [`ki-work-recurring`][recurring-skill]† | [Recurring work][recurring-page] |
 
 ### Bind, budget and tidy the agent runtimes
 
@@ -107,3 +107,13 @@ Every row names one skill that exists in the vendored catalogue at the pinned co
 ## Boundaries
 
 When none of the rows fits, describe the outcome to your agent and let the runtime match a description before reaching for `ki-skills` to author a new skill; a one-off action belongs in an existing skill or a work record rather than a new capability. A skill named here is invoked only if your session can see it, which means it is a user-scope skill or is projected into the repository you started in. Naming a skill does not declare it: a repository is held to a governance skill only when its `.ki.toml` lists it.
+
+† Knowledge Base Activity notes are provided by [`ki-repo-kb-activities`](/docs/skills/catalogue/#ki-repo-kb-activities).
+
+[design-skill]: /docs/skills/catalogue/#ki-work-design
+[design-page]: /docs/ways-of-working/work-design/
+[trade-skill]: /docs/skills/catalogue/#ki-trade
+[trades-skill]: /docs/skills/catalogue/#ki-trades
+[trades-page]: /docs/ways-of-working/trades/
+[recurring-skill]: /docs/skills/catalogue/#ki-work-recurring
+[recurring-page]: /docs/ways-of-working/recurring-work/

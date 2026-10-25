@@ -89,3 +89,43 @@ regenerate = "Read the status and horizon, lifecycle moves and lifecycle commit 
 last_checked = "1056bb668c2ab6c6724118a784fd5fe7f9891a75"
 svg_form = "ki"
 commit_html = true
+
+[work-design-loop]
+type = "workflow"
+question = "How does an undecided proposal become owner decisions and a piloted rollout?"
+audience = "Knowledge Islands users understanding work design loop"
+traced = [
+  "skills/change-management/ki-work-design/references/standards-work-design.md",
+]
+stale_when = "the five stages, review independence, owner authority or pilot gate change from 8897008f"
+regenerate = "Read the work-design standard in ki-agentic-harness at 8897008f. Draw brief, independent reviews on different models or runtimes, merged report, owner decisions, pilot and wider waves. Only the owner decides, and pilot lessons enter every wave brief. Finalise with bun run --cwd apps/site diagrams:build -- --svg work-design-loop."
+last_checked = "1edd468af8b76b1cf075a411bdbd95bc3284f9a9"
+svg_form = "ki"
+commit_html = true
+
+[trade]
+type = "sequence"
+question = "How do local trade copies reach receipt, receiver disposition and eligible release without transferring ownership?"
+audience = "Knowledge Islands users understanding trade"
+traced = [
+  "skills/governance/ki-trades/references/standards-trades.md",
+]
+stale_when = "the route, immutable record, receiver disposition or observation-led release rules change from 8897008f"
+regenerate = "Read the trade and trade-operations standards in ki-agentic-harness at 8897008f. Draw sender, Capital policy, sender record, receiver and receiver record. Show granted route, preparation, frozen submission, explicit receipt, human-confirmed local disposition, observation, eligible release and later receiver pruning. Ownership never transfers and observations are local reads. Finalise with bun run --cwd apps/site diagrams:build -- --svg trade."
+last_checked = "1edd468af8b76b1cf075a411bdbd95bc3284f9a9"
+svg_form = "ki"
+commit_html = true
+
+[recurring-occurrence]
+type = "workflow"
+question = "How is a recurring obligation adopted, scheduled, run, evidenced and reviewed?"
+audience = "Knowledge Islands users understanding recurring occurrence"
+traced = [
+  "skills/change-management/ki-work-recurring/references/standards-recurring-work.md",
+  "skills/repo-structure/ki-repo-kb-activities/references/standards-activities.md",
+]
+stale_when = "the admission, single-run reservation or successful-run reconciliation rules change from 8897008f"
+regenerate = "Read the recurring-work and Activity standards in ki-agentic-harness at 8897008f. Draw adoption, schedule evaluation, one reserved ordinary run, retained evidence, review and approved closure. Only approved ki-accept closure advances successful-run evidence; admission and execution remain separate. Finalise with bun run --cwd apps/site diagrams:build -- --svg recurring-occurrence."
+last_checked = "1edd468af8b76b1cf075a411bdbd95bc3284f9a9"
+svg_form = "ki"
+commit_html = true

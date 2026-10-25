@@ -66,6 +66,6 @@ The same three reply forms make an ordinary conversational session predictable t
 
 ## Boundaries
 
-Coordination governs the coordinator's timing and judgement: when the folder is tidied, when the mark is struck, how a hold is agreed and how every session replies. The package's shape is [work packages](/docs/ways-of-working/work-packages/). The run side, the run packet, the brief's shape, the authority footers and the queue, is [background runs](/docs/ways-of-working/background-runs/). Shaping a new Project before any record exists is `ki-work-design`, and the record lifecycle its runs move is [roadmap lifecycle](/docs/ways-of-working/roadmap-lifecycle/).
+Coordination governs the coordinator's timing and judgement: when the folder is tidied, when the mark is struck, how a hold is agreed and how every session replies. The package's shape is [work packages](/docs/ways-of-working/work-packages/). The run side, the run packet, the brief's shape, the authority footers and the queue, is [background runs](/docs/ways-of-working/background-runs/). Shaping a new Project before any record exists is [work design](/docs/ways-of-working/work-design/), and the record lifecycle its runs move is [roadmap lifecycle](/docs/ways-of-working/roadmap-lifecycle/).
 
 A session becomes a coordinator only when the owner opens or re-bootstraps it with a coordinating opener matching its package's level. A repository declaring the skill does not make a session a coordinator, and a background run is the detached actor a coordinator briefs, not a fourth kind of session.
