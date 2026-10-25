@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "slug": "tending-tracks",
+  "type": "architecture",
+  "source": {
+    "file": "tending-tracks.architecture.json",
+    "sha256": "e2e996e111b6bcc8b01a9bb8af960563b68afd07931d0fb53fe67b50eb537929",
+    "bytes": 4147
+  },
+  "html": {
+    "file": "tending-tracks.html",
+    "sha256": "d676579034d6dc0f4c7259b103de90446b4e3113a2b7ac031d286ad53b21b771",
+    "bytes": 830471
+  },
+  "renderer": {
+    "name": "archify",
+    "version": "3.2.0"
+  }
+}

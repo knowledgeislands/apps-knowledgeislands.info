@@ -94,6 +94,7 @@
     title: 'Findings',
     skills: ['ki-coordination'],
     commands: [],
+    page: '/docs/ways-of-working/findings/',
     interim: true
   },
   {
@@ -101,6 +102,7 @@
     title: 'Tending',
     skills: ['ki-repo-kb', 'ki-work-roadmap', 'ki-accept'],
     commands: [],
+    page: '/docs/ways-of-working/tending/',
     interim: true
   },
   {

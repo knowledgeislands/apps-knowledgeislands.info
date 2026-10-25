@@ -69,3 +69,21 @@ How do local trade copies reach receipt, receiver disposition and eligible relea
 How is a recurring obligation adopted, scheduled, run, evidenced and reviewed? The workflow follows the recurring-work and Activity standards at harness `8897008f`.
 
 [![Recurring occurrence](recurring-occurrence.svg)](recurring-occurrence.html)
+
+## A finding from the owner's request to its home
+
+What happens to a finding between the owner asking for it and its settled home? The lifecycle shows the finding opened by the request, carried in full through every report, refreshed when its facts change, settled at a mark or on the owner's word, and then homed in a record, a design note or the decisions log, or dropped.
+
+[![A finding from the owner's request to its home](finding-life.svg)](finding-life.html)
+
+## Tending: the structural track and the PMO track
+
+What do the four structural levels and the five PMO levels of a tending pass each look at, and how do captures move between them? The architecture shows the two tracks side by side, the upward movement of captures from level to level, and the owner at the end, who decides every query.
+
+[![Tending: the structural track and the PMO track](tending-tracks.svg)](tending-tracks.html)
+
+## One tending pass: focus, pass, dispositions, report
+
+How does one tending pass run, from the owner asking for it to the light report it ends with? The workflow shows the coordinator launching one run per repository for the lower levels, each item given exactly one disposition, the territory levels run from that round's results, and the report that is as light as its outcome allows.
+
+[![One tending pass: focus, pass, dispositions, report](tending-pass.svg)](tending-pass.html)

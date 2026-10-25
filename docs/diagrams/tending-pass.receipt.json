@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "slug": "tending-pass",
+  "type": "workflow",
+  "source": {
+    "file": "tending-pass.workflow.json",
+    "sha256": "2ce5cfd8329c4cdc342f419d7cc4bdfe066b9f3097890c76923513d96d774896",
+    "bytes": 2819
+  },
+  "html": {
+    "file": "tending-pass.html",
+    "sha256": "6ddedd3a0c0913086352c601900fbdabc714a16f64dc580f80a9b91ceeb17f09",
+    "bytes": 816616
+  },
+  "renderer": {
+    "name": "archify",
+    "version": "3.2.0"
+  }
+}

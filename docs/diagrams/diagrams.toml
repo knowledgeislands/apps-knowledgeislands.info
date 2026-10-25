@@ -129,3 +129,36 @@ regenerate = "Read the recurring-work and Activity standards in ki-agentic-harne
 last_checked = "1edd468af8b76b1cf075a411bdbd95bc3284f9a9"
 svg_form = "ki"
 commit_html = true
+
+[finding-life]
+type = "lifecycle"
+question = "What happens to a finding between the owner asking for it and its settled home?"
+audience = "Knowledge Islands users reading how a coordinating session carries the answer to a question they asked."
+traced = ["+/_WORK/ki.ways-of-working/design/findings.md"]
+stale_when = "The finding states, the two ways a finding is settled or the four dispositions in the findings design note change from f3297dcb"
+regenerate = "Read the findings design note at the pinned ki-principal revision and redraw the lifecycle. Finalise with bun run --cwd apps/site diagrams:build -- --svg finding-life."
+last_checked = "1edd468af8b76b1cf075a411bdbd95bc3284f9a9"
+svg_form = "ki"
+commit_html = true
+
+[tending-tracks]
+type = "architecture"
+question = "What do the four structural levels and the five PMO levels of a tending pass each look at, and how do captures move between them?"
+audience = "Knowledge Islands users reading how a territory is kept in shape and its work kept in the right place."
+traced = ["+/_WORK/ki.ways-of-working/design/tending.md"]
+stale_when = "The tracks, the number or purpose of their levels or the upward movement of captures in the tending design note change from f3297dcb"
+regenerate = "Read the tending design note at the pinned ki-principal revision and redraw the two tracks. Finalise with bun run --cwd apps/site diagrams:build -- --svg tending-tracks."
+last_checked = "1edd468af8b76b1cf075a411bdbd95bc3284f9a9"
+svg_form = "ki"
+commit_html = true
+
+[tending-pass]
+type = "workflow"
+question = "How does one tending pass run, from the owner asking for it to the light report it ends with?"
+audience = "Knowledge Islands users reading what to expect when they ask for a tending pass."
+traced = ["+/_WORK/ki.ways-of-working/design/tending.md"]
+stale_when = "The split of levels between runs and the territory pass, the six dispositions or the report rule in the tending design note change from f3297dcb"
+regenerate = "Read the tending design note at the pinned ki-principal revision and redraw the pass. Finalise with bun run --cwd apps/site diagrams:build -- --svg tending-pass."
+last_checked = "1edd468af8b76b1cf075a411bdbd95bc3284f9a9"
+svg_form = "ki"
+commit_html = true

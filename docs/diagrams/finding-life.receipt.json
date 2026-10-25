@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "slug": "finding-life",
+  "type": "lifecycle",
+  "source": {
+    "file": "finding-life.lifecycle.json",
+    "sha256": "9ce8e63a7bf07388434e3dd8ab13fb48f7f533f4eeb7c8e2f2e7a5f29c4c1f21",
+    "bytes": 3176
+  },
+  "html": {
+    "file": "finding-life.html",
+    "sha256": "af7be2f2390779ae12c42bedd461be34dd9dc8f2b34ce9fd0fa79409fb2a21a7",
+    "bytes": 820741
+  },
+  "renderer": {
+    "name": "archify",
+    "version": "3.2.0"
+  }
+}
