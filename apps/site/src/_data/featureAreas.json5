@@ -109,20 +109,22 @@
     slug: 'knowledge-bases',
     title: 'Knowledge bases',
     skills: ['ki-repo-kb', 'ki-repo-kb-principal', 'ki-repo-kb-streams', 'ki-repo-kb-live-artifacts'],
-    commands: ['ki kb']
+    commands: ['ki kb'],
+    page: ['/docs/knowledge/knowledge-bases/', '/docs/knowledge/query-save-update/']
   },
   {
     slug: 'acquisition',
     title: 'Acquisition',
     skills: ['ki-acquire', 'ki-acquire-chatgpt', 'ki-acquire-granola', 'ki-pulse'],
     commands: ['ki acquire'],
-    page: '/docs/ki/trades-and-acquisition/'
+    page: '/docs/knowledge/acquiring-knowledge/'
   },
   {
     slug: 'recap',
     title: 'Recap',
     skills: ['ki-recap'],
-    commands: []
+    commands: [],
+    page: '/docs/knowledge/recap-and-handover/'
   },
   {
     slug: 'repository-standards',

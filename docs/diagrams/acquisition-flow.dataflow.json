@@ -1,0 +1,310 @@
+{
+  "schema_version": 1,
+  "diagram_type": "dataflow",
+  "meta": {
+    "title": "Selected captures and public signals into an island",
+    "locale": "en",
+    "output": "docs/diagrams/acquisition-flow.html",
+    "quality_profile": "showcase",
+    "repository": {
+      "url": "https://github.com/knowledgeislands/ki-agentic-harness",
+      "revision": "8897008fcee7b2c71a22115735ed038efccf7f32"
+    }
+  },
+  "stages": [
+    {
+      "label": "Selected sources"
+    },
+    {
+      "label": "Source routes"
+    },
+    {
+      "label": "Scope and evidence"
+    },
+    {
+      "label": "Preserved or handed off"
+    },
+    {
+      "label": "Receiving island"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "agent",
+      "type": "external",
+      "label": "Agent sessions",
+      "sublabel": "Exception-selected scope",
+      "stage": 0,
+      "row": 0,
+      "sources": [
+        {
+          "path": "skills/acquire/ki-acquire/references/standards-agent-session-acquisition.md",
+          "line": 1,
+          "end_line": 25
+        }
+      ]
+    },
+    {
+      "id": "chatgpt",
+      "type": "external",
+      "label": "ChatGPT",
+      "sublabel": "Readable supplied capture",
+      "stage": 0,
+      "row": 1,
+      "sources": [
+        {
+          "path": "skills/acquire/ki-acquire-chatgpt/references/standards-chatgpt-acquisition.md",
+          "line": 1,
+          "end_line": 35
+        }
+      ]
+    },
+    {
+      "id": "granola",
+      "type": "external",
+      "label": "Granola",
+      "sublabel": "Principal-owned meetings",
+      "stage": 0,
+      "row": 2,
+      "sources": [
+        {
+          "path": "skills/acquire/ki-acquire-granola/references/standards-granola-acquisition.md",
+          "line": 1,
+          "end_line": 62
+        }
+      ]
+    },
+    {
+      "id": "agent-route",
+      "type": "backend",
+      "label": "Read-only route",
+      "sublabel": "Proven session coverage",
+      "stage": 1,
+      "row": 0,
+      "sources": [
+        {
+          "path": "skills/acquire/ki-acquire/references/standards-agent-session-acquisition.md",
+          "line": 1,
+          "end_line": 25
+        }
+      ]
+    },
+    {
+      "id": "chatgpt-route",
+      "type": "backend",
+      "label": "Local import",
+      "sublabel": "Digest or full snapshot",
+      "stage": 1,
+      "row": 1,
+      "sources": [
+        {
+          "path": "skills/acquire/ki-acquire-chatgpt/references/standards-chatgpt-acquisition.md",
+          "line": 1,
+          "end_line": 35
+        }
+      ]
+    },
+    {
+      "id": "granola-route",
+      "type": "backend",
+      "label": "Granola adapter",
+      "sublabel": "UUIDs, notes, originals",
+      "stage": 1,
+      "row": 2,
+      "sources": [
+        {
+          "path": "skills/acquire/ki-acquire-granola/references/standards-granola-acquisition.md",
+          "line": 1,
+          "end_line": 62
+        }
+      ]
+    },
+    {
+      "id": "verify",
+      "type": "security",
+      "label": "Verify scope",
+      "sublabel": "Read back; name gaps",
+      "stage": 2,
+      "row": 1,
+      "sources": [
+        {
+          "path": "skills/acquire/ki-acquire/references/standards-acquisition.md",
+          "line": 1,
+          "end_line": 46
+        }
+      ]
+    },
+    {
+      "id": "package",
+      "type": "database",
+      "label": "Capture package",
+      "sublabel": "Only acquisition record",
+      "stage": 3,
+      "row": 1,
+      "sources": [
+        {
+          "path": "skills/acquire/ki-acquire/references/standards-acquisition.md",
+          "line": 1,
+          "end_line": 46
+        }
+      ]
+    },
+    {
+      "id": "island",
+      "type": "database",
+      "label": "Island intake",
+      "sublabel": "Receiver owns adoption",
+      "stage": 4,
+      "row": 1,
+      "sources": [
+        {
+          "path": "skills/acquire/ki-acquire/references/standards-acquisition.md",
+          "line": 1,
+          "end_line": 46
+        }
+      ]
+    },
+    {
+      "id": "signals",
+      "type": "external",
+      "label": "Public signals",
+      "sublabel": "Submitted or bounded",
+      "stage": 0,
+      "row": 4,
+      "sources": [
+        {
+          "path": "skills/acquire/ki-pulse/references/standards-pulse.md",
+          "line": 1,
+          "end_line": 58
+        }
+      ]
+    },
+    {
+      "id": "pulse",
+      "type": "backend",
+      "label": "Pulse",
+      "sublabel": "One cited disposition",
+      "stage": 1,
+      "row": 4,
+      "sources": [
+        {
+          "path": "skills/acquire/ki-pulse/references/standards-pulse.md",
+          "line": 1,
+          "end_line": 58
+        }
+      ]
+    },
+    {
+      "id": "handoff",
+      "type": "security",
+      "label": "Authorised handoff",
+      "sublabel": "Destination owner gates",
+      "stage": 3,
+      "row": 4,
+      "sources": [
+        {
+          "path": "skills/acquire/ki-pulse/references/standards-pulse.md",
+          "line": 1,
+          "end_line": 58
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "id": "agent-agent-route",
+      "from": "agent",
+      "to": "agent-route",
+      "label": "selected scope"
+    },
+    {
+      "id": "chatgpt-chatgpt-route",
+      "from": "chatgpt",
+      "to": "chatgpt-route",
+      "label": "readable text"
+    },
+    {
+      "id": "granola-granola-route",
+      "from": "granola",
+      "to": "granola-route",
+      "label": "owned notes"
+    },
+    {
+      "id": "agent-route-verify",
+      "from": "agent-route",
+      "to": "verify",
+      "label": "session evidence"
+    },
+    {
+      "id": "chatgpt-route-verify",
+      "from": "chatgpt-route",
+      "to": "verify",
+      "label": "capture scope"
+    },
+    {
+      "id": "granola-route-verify",
+      "from": "granola-route",
+      "to": "verify",
+      "label": "text and images"
+    },
+    {
+      "id": "verify-package",
+      "from": "verify",
+      "to": "package",
+      "label": "verified bytes"
+    },
+    {
+      "id": "package-island",
+      "from": "package",
+      "to": "island",
+      "label": "whole package"
+    },
+    {
+      "id": "signals-pulse",
+      "from": "signals",
+      "to": "pulse",
+      "label": "current leads"
+    },
+    {
+      "id": "pulse-handoff",
+      "from": "pulse",
+      "to": "handoff",
+      "label": "explicit consent"
+    },
+    {
+      "id": "handoff-island",
+      "from": "handoff",
+      "to": "island",
+      "label": "owner accepts"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Capture preserves evidence",
+      "items": [
+        "Ordinary learning uses durable guidance; full agent-session import is an exception.",
+        "ChatGPT imports one user-prepared readable capture; Granola reads owned notes.",
+        "Required originals retain exact bytes, names, sizes and checksums."
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "The receiving island decides",
+      "items": [
+        "Dispatch moves a whole package or roll-up into +/_ACQUIRED/.",
+        "Receiver triage is distinguishable metadata in the existing capture package.",
+        "Delivery grants no canonical adoption, source mutation or retirement authority."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Pulse is a separate bounded route",
+      "items": [
+        "At most ten leads produce at most five cited observations per Scan.",
+        "Each signal gets Read / learn, Watch, Act or Discard.",
+        "Without explicit handoff authority and a destination owner, output stays transient."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,181 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "A live-session recap and its handover",
+    "locale": "en",
+    "output": "docs/diagrams/recap-handover.html",
+    "quality_profile": "showcase",
+    "repository": {
+      "url": "https://github.com/knowledgeislands/ki-agentic-harness",
+      "revision": "8897008fcee7b2c71a22115735ed038efccf7f32"
+    }
+  },
+  "lanes": [
+    {
+      "id": "evidence",
+      "label": "Fresh evidence and session scope"
+    },
+    {
+      "id": "recap",
+      "label": "Three legs and carry-forward outputs"
+    }
+  ],
+  "mainPath": [
+    "ground",
+    "summary",
+    "outstanding",
+    "learning",
+    "actions",
+    "digest"
+  ],
+  "nodes": [
+    {
+      "id": "ground",
+      "lane": "evidence",
+      "col": 0,
+      "type": "backend",
+      "label": "Ground the thread",
+      "sublabel": "Every repository; current Git",
+      "sources": [
+        {
+          "path": "skills/change-management/ki-recap/SKILL.md",
+          "line": 42,
+          "end_line": 42
+        }
+      ]
+    },
+    {
+      "id": "summary",
+      "lane": "recap",
+      "col": 1,
+      "type": "backend",
+      "label": "Summarise",
+      "sublabel": "Changes, decisions, files touched",
+      "sources": [
+        {
+          "path": "skills/change-management/ki-recap/SKILL.md",
+          "line": 22,
+          "end_line": 22
+        }
+      ]
+    },
+    {
+      "id": "outstanding",
+      "lane": "recap",
+      "col": 2,
+      "type": "backend",
+      "label": "Surface what is outstanding",
+      "sublabel": "Only unfinished thread work",
+      "sources": [
+        {
+          "path": "skills/change-management/ki-recap/SKILL.md",
+          "line": 23,
+          "end_line": 23
+        }
+      ]
+    },
+    {
+      "id": "learning",
+      "lane": "recap",
+      "col": 3,
+      "type": "security",
+      "label": "Harvest the learnings",
+      "sublabel": "Confirm durable learning writes",
+      "sources": [
+        {
+          "path": "skills/change-management/ki-recap/SKILL.md",
+          "line": 24,
+          "end_line": 24
+        }
+      ]
+    },
+    {
+      "id": "actions",
+      "lane": "recap",
+      "col": 4,
+      "type": "backend",
+      "label": "Actions",
+      "sublabel": "Labelled imperative checklist",
+      "sources": [
+        {
+          "path": "skills/change-management/ki-recap/SKILL.md",
+          "line": 32,
+          "end_line": 32
+        }
+      ]
+    },
+    {
+      "id": "digest",
+      "lane": "evidence",
+      "col": 5,
+      "type": "backend",
+      "label": "Carry-forward digest",
+      "sublabel": "Only the next cycle scope",
+      "sources": [
+        {
+          "path": "skills/change-management/ki-recap/SKILL.md",
+          "line": 38,
+          "end_line": 38
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "ground-summary",
+      "from": "ground",
+      "to": "summary"
+    },
+    {
+      "id": "summary-outstanding",
+      "from": "summary",
+      "to": "outstanding"
+    },
+    {
+      "id": "outstanding-learning",
+      "from": "outstanding",
+      "to": "learning"
+    },
+    {
+      "id": "learning-actions",
+      "from": "learning",
+      "to": "actions"
+    },
+    {
+      "id": "actions-digest",
+      "from": "actions",
+      "to": "digest"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Ground the whole live thread",
+      "items": [
+        "Recap and compaction do not reset coverage.",
+        "Recheck commits, gates and session-owned file state in every repository.",
+        "Transcript evidence is advisory; unavailable evidence is not clean evidence."
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Recorded deferrals are distinct",
+      "items": [
+        "An agreed follow-up needs a verified canonical roadmap or Stream home.",
+        "Once captured, its remaining lifecycle is not a thread Action.",
+        "An unwritten agreed handoff or undecided learning route remains outstanding."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Outputs preserve the next scope",
+      "items": [
+        "Discussion coverage is optional and bounded by available evidence.",
+        "Actions is a checklist for the user, not permission to act unprompted.",
+        "Offer documented compaction at a safe boundary; a digest is not context reduction.",
+        "A portable checkpoint hand-off needs explicit checkpoint <thread>."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "slug": "acquisition-flow",
+  "type": "dataflow",
+  "source": {
+    "file": "acquisition-flow.dataflow.json",
+    "sha256": "6c806334cb0450eda2ee05fb0ee256274468e964a562fd9666d93b98c664e088",
+    "bytes": 7441
+  },
+  "html": {
+    "file": "acquisition-flow.html",
+    "sha256": "abb716edd34a8c8e5770e8165d2eaa47f418e1f1343baecd1f2d78fa363863f6",
+    "bytes": 827575
+  },
+  "renderer": {
+    "name": "archify",
+    "version": "3.2.0"
+  }
+}

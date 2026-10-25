@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "slug": "query-save-update",
+  "type": "workflow",
+  "source": {
+    "file": "query-save-update.workflow.json",
+    "sha256": "0b4ef4ca5a2edf51984926d086ccb4f1d69315f473ce84968a1847fa6e5a6d62",
+    "bytes": 5348
+  },
+  "html": {
+    "file": "query-save-update.html",
+    "sha256": "5acb399bd5526dfc5482ac2e2aa0b43cd43524d5e54e6a5ed22ffe943fe5da2e",
+    "bytes": 820012
+  },
+  "renderer": {
+    "name": "archify",
+    "version": "3.2.0"
+  }
+}

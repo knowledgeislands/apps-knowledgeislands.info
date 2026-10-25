@@ -36,12 +36,12 @@ Find the group that matches the kind of result you want, read down to the outcom
 
 | Outcome | Skill | Explained in |
 | --- | --- | --- |
-| Create, query, update or distil a note in a knowledge base | [`ki-repo-kb`](/docs/skills/catalogue/#ki-repo-kb) | Knowledge |
-| Govern the principal knowledge base of a territory | [`ki-repo-kb-principal`](/docs/skills/catalogue/#ki-repo-kb-principal) | Knowledge |
-| Keep a dashboard or tracker as a Markdown and HTML pair | [`ki-repo-kb-live-artifacts`](/docs/skills/catalogue/#ki-repo-kb-live-artifacts) | Knowledge |
-| Capture an agent session or meeting into the knowledge base | [`ki-acquire`](/docs/skills/catalogue/#ki-acquire), with [`ki-acquire-chatgpt`](/docs/skills/catalogue/#ki-acquire-chatgpt) or [`ki-acquire-granola`](/docs/skills/catalogue/#ki-acquire-granola) for the source | Knowledge |
-| Capture a link or scan for public developments, and route the signal | [`ki-pulse`](/docs/skills/catalogue/#ki-pulse) | Knowledge |
-| Recap a live session and hand its unfinished work over | [`ki-recap`](/docs/skills/catalogue/#ki-recap) | Knowledge |
+| Create, query, update or distil a note in a knowledge base | [`ki-repo-kb`](/docs/skills/catalogue/#ki-repo-kb) | [Query, save and update](/docs/knowledge/query-save-update/) |
+| Govern the principal knowledge base of a territory | [`ki-repo-kb-principal`](/docs/skills/catalogue/#ki-repo-kb-principal) | [Knowledge bases](/docs/knowledge/knowledge-bases/) |
+| Keep a dashboard or tracker as a Markdown and HTML pair | [`ki-repo-kb-live-artifacts`](/docs/skills/catalogue/#ki-repo-kb-live-artifacts) | [Knowledge bases](/docs/knowledge/knowledge-bases/) |
+| Capture an agent session or meeting into the knowledge base | [`ki-acquire`](/docs/skills/catalogue/#ki-acquire), with [`ki-acquire-chatgpt`](/docs/skills/catalogue/#ki-acquire-chatgpt) or [`ki-acquire-granola`](/docs/skills/catalogue/#ki-acquire-granola) for the source | [Acquiring knowledge](/docs/knowledge/acquiring-knowledge/) |
+| Capture a link or scan for public developments, and route the signal | [`ki-pulse`](/docs/skills/catalogue/#ki-pulse) | [Acquiring knowledge](/docs/knowledge/acquiring-knowledge/) |
+| Recap a live session and hand its unfinished work over | [`ki-recap`](/docs/skills/catalogue/#ki-recap) | [Recap and handover](/docs/knowledge/recap-and-handover/) |
 
 ### Shape and check a repository
 

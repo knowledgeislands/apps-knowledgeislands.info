@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "slug": "recap-handover",
+  "type": "workflow",
+  "source": {
+    "file": "recap-handover.workflow.json",
+    "sha256": "4cef16a02d728dc27b4c145022d763edf314ac10a35416c2841750f22817aa9f",
+    "bytes": 4425
+  },
+  "html": {
+    "file": "recap-handover.html",
+    "sha256": "79c868abf46777272c8a220f3b9108b32bdca4bc6daebeae436b73eecfb6eda8",
+    "bytes": 815571
+  },
+  "renderer": {
+    "name": "archify",
+    "version": "3.2.0"
+  }
+}

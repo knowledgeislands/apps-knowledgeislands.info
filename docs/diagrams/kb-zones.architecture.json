@@ -1,0 +1,295 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "An island: zones, working areas and principal overlay",
+    "locale": "en",
+    "output": "docs/diagrams/kb-zones.html",
+    "quality_profile": "showcase",
+    "repository": {
+      "url": "https://github.com/knowledgeislands/ki-agentic-harness",
+      "revision": "8897008fcee7b2c71a22115735ed038efccf7f32"
+    }
+  },
+  "components": [
+    {
+      "id": "calendar",
+      "type": "database",
+      "label": "Calendar",
+      "sublabel": "Calendar.md",
+      "pos": [
+        40,
+        40
+      ],
+      "size": [
+        200,
+        78
+      ],
+      "sources": [
+        {
+          "path": "skills/repo-structure/ki-repo-kb/SKILL.md",
+          "line": 29,
+          "end_line": 29
+        }
+      ],
+      "tag": "Dated records"
+    },
+    {
+      "id": "pillars",
+      "type": "database",
+      "label": "Pillars",
+      "sublabel": "Pillars.md",
+      "pos": [
+        280,
+        40
+      ],
+      "size": [
+        200,
+        78
+      ],
+      "sources": [
+        {
+          "path": "skills/repo-structure/ki-repo-kb/SKILL.md",
+          "line": 30,
+          "end_line": 30
+        }
+      ],
+      "tag": "Internal knowledge"
+    },
+    {
+      "id": "resources",
+      "type": "database",
+      "label": "Resources",
+      "sublabel": "Resources.md",
+      "pos": [
+        520,
+        40
+      ],
+      "size": [
+        200,
+        78
+      ],
+      "sources": [
+        {
+          "path": "skills/repo-structure/ki-repo-kb/SKILL.md",
+          "line": 31,
+          "end_line": 31
+        }
+      ],
+      "tag": "External references"
+    },
+    {
+      "id": "streams",
+      "type": "database",
+      "label": "Streams",
+      "sublabel": "Streams.md",
+      "pos": [
+        760,
+        40
+      ],
+      "size": [
+        200,
+        78
+      ],
+      "sources": [
+        {
+          "path": "skills/repo-structure/ki-repo-kb/SKILL.md",
+          "line": 32,
+          "end_line": 32
+        }
+      ],
+      "tag": "Finite forward work"
+    },
+    {
+      "id": "admin",
+      "type": "database",
+      "label": "Admin",
+      "sublabel": "Admin.md",
+      "pos": [
+        1000,
+        40
+      ],
+      "size": [
+        200,
+        78
+      ],
+      "sources": [
+        {
+          "path": "skills/repo-structure/ki-repo-kb/SKILL.md",
+          "line": 34,
+          "end_line": 34
+        }
+      ],
+      "tag": "Governance + operations"
+    },
+    {
+      "id": "inbound",
+      "type": "external",
+      "label": "+ / inbound",
+      "sublabel": "Inputs for local work",
+      "pos": [
+        40,
+        260
+      ],
+      "size": [
+        200,
+        78
+      ],
+      "sources": [
+        {
+          "path": "skills/repo-structure/ki-repo-kb/SKILL.md",
+          "line": 28,
+          "end_line": 28
+        }
+      ]
+    },
+    {
+      "id": "outbound",
+      "type": "external",
+      "label": "- / outbound",
+      "sublabel": "Digests and compiled outputs",
+      "pos": [
+        280,
+        260
+      ],
+      "size": [
+        200,
+        78
+      ],
+      "sources": [
+        {
+          "path": "skills/repo-structure/ki-repo-kb/SKILL.md",
+          "line": 33,
+          "end_line": 33
+        }
+      ]
+    },
+    {
+      "id": "indexes",
+      "type": "backend",
+      "label": "Index notes",
+      "sublabel": "Introduce and point to children",
+      "pos": [
+        520,
+        260
+      ],
+      "size": [
+        200,
+        78
+      ],
+      "sources": [
+        {
+          "path": "skills/repo-structure/ki-repo-kb/references/standards-knowledge-base.md",
+          "line": 43,
+          "end_line": 43
+        }
+      ]
+    },
+    {
+      "id": "principal",
+      "type": "security",
+      "label": "Principal overlay",
+      "sublabel": "Charter, Known Lands, gate",
+      "pos": [
+        760,
+        260
+      ],
+      "size": [
+        200,
+        78
+      ],
+      "sources": [
+        {
+          "path": "skills/repo-structure/ki-repo-kb-principal/references/standards-principal.md",
+          "line": 1,
+          "end_line": 39
+        }
+      ],
+      "tag": "Designated Capital"
+    },
+    {
+      "id": "live",
+      "type": "backend",
+      "label": "Live Artifacts",
+      "sublabel": "Markdown source + HTML view",
+      "pos": [
+        1000,
+        260
+      ],
+      "size": [
+        200,
+        78
+      ],
+      "sources": [
+        {
+          "path": "skills/repo-structure/ki-repo-kb-live-artifacts/SKILL.md",
+          "line": 29,
+          "end_line": 29
+        }
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "Five zones, each with a same-name index note",
+      "wraps": [
+        "calendar",
+        "pillars",
+        "resources",
+        "streams",
+        "admin"
+      ],
+      "pad": 22
+    }
+  ],
+  "connections": [
+    {
+      "id": "index-resources",
+      "from": "indexes",
+      "to": "resources",
+      "label": "context, not copies"
+    },
+    {
+      "id": "principal-admin",
+      "from": "principal",
+      "to": "admin",
+      "label": "adds governance"
+    },
+    {
+      "id": "admin-live",
+      "from": "admin",
+      "to": "live",
+      "label": "operations"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Indexes give context",
+      "items": [
+        "Each zone has an index note with its own name.",
+        "An Overview and substantive child sections explain how knowledge fits together.",
+        "The + and - working areas have no same-name zone index."
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "The principal overlay",
+      "items": [
+        "One designated principal island holds the Capital role for a territory.",
+        "The Charter and Known Lands state membership and the authority boundary.",
+        "Adopting the overlay or passing its audit does not appoint a Capital."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Knowledge and operations",
+      "items": [
+        "Streams holds flat Roadmap records; their accepted outputs go to canonical zones.",
+        "Admin/MEMORY.md anchors the memory cascade.",
+        "Live Artifacts keep authoritative Markdown and a same-stem HTML render together."
+      ]
+    }
+  ]
+}

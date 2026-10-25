@@ -162,3 +162,74 @@ regenerate = "Read the tending design note at the pinned ki-principal revision a
 last_checked = "1edd468af8b76b1cf075a411bdbd95bc3284f9a9"
 svg_form = "ki"
 commit_html = true
+
+
+[kb-zones]
+
+type = "architecture"
+question = "How do an island's five zones, directional working areas, index notes and principal overlay fit together?"
+audience = "Knowledge Islands users keeping and handing over knowledge"
+traced = [
+  "skills/repo-structure/ki-repo-kb/SKILL.md",
+  "skills/repo-structure/ki-repo-kb-principal/references/standards-principal.md",
+  "skills/repo-structure/ki-repo-kb-live-artifacts/SKILL.md",
+]
+stale_when = "the zone model, index convention, principal declarations or Live Artifact pairing changes from harness 8897008f"
+regenerate = "Read the traced files at ki-agentic-harness 8897008f. Draw the five indexed zones, the inbound and outbound working areas, and the designated principal overlay on Admin. Show Live Artifacts as authoritative Markdown paired with an HTML render. Finalise with bun run --cwd apps/site diagrams:build -- --svg kb-zones."
+last_checked = "de1b44ef7c25d5a4619c4c86311bf085740a8db3"
+svg_form = "ki"
+commit_html = true
+
+
+[query-save-update]
+
+type = "workflow"
+question = "How does a session query evidence, save or update a note, and produce a digest?"
+audience = "Knowledge Islands users keeping and handing over knowledge"
+traced = [
+  "skills/repo-structure/ki-repo-kb/SKILL.md",
+  "skills/repo-structure/ki-repo-kb/references/mode-query.md",
+  "skills/repo-structure/ki-repo-kb/references/mode-save.md",
+  "skills/repo-structure/ki-repo-kb/references/mode-update.md",
+  "skills/repo-structure/ki-repo-kb/references/mode-digest.md",
+]
+stale_when = "context loading, retrieval, confirmation, canonical-change approval or digest routing changes from harness 8897008f"
+regenerate = "Read the traced files at ki-agentic-harness 8897008f. Draw context loading, bounded query and a cited answer, a sourced new or merged draft, confirmation and canonical-change approval, the linked note and an optional outbound session digest. Finalise with bun run --cwd apps/site diagrams:build -- --svg query-save-update."
+last_checked = "de1b44ef7c25d5a4619c4c86311bf085740a8db3"
+svg_form = "ki"
+commit_html = true
+
+
+[acquisition-flow]
+
+type = "dataflow"
+question = "How do selected source captures and bounded public signals reach an island without granting adoption authority?"
+audience = "Knowledge Islands users keeping and handing over knowledge"
+traced = [
+  "skills/acquire/ki-acquire/references/standards-acquisition.md",
+  "skills/acquire/ki-acquire/references/standards-agent-session-acquisition.md",
+  "skills/acquire/ki-acquire-chatgpt/references/standards-chatgpt-acquisition.md",
+  "skills/acquire/ki-acquire-granola/references/standards-granola-acquisition.md",
+  "skills/acquire/ki-pulse/references/standards-pulse.md",
+]
+stale_when = "source selection, provider coverage, verified capture dispatch or Pulse handoff authority changes from harness 8897008f"
+regenerate = "Read the traced files at ki-agentic-harness 8897008f. Draw exception-selected agent sessions, readable ChatGPT captures and owned Granola notes through their read-only source routes into verified packages and receiver-local intake. Keep bounded Pulse signals on a distinct explicit-authority handoff to the island. Finalise with bun run --cwd apps/site diagrams:build -- --svg acquisition-flow."
+last_checked = "de1b44ef7c25d5a4619c4c86311bf085740a8db3"
+svg_form = "ki"
+commit_html = true
+
+
+[recap-handover]
+
+type = "workflow"
+question = "How does a grounded live-session recap reconcile changes, decisions, unfinished work and learning routes?"
+audience = "Knowledge Islands users keeping and handing over knowledge"
+traced = [
+  "skills/change-management/ki-recap/SKILL.md",
+  "skills/change-management/ki-recap/references/standards-session-recap.md",
+]
+stale_when = "recap scope, the three legs, Actions, learning confirmation or carry-forward outputs change from harness 8897008f"
+regenerate = "Read the traced files at ki-agentic-harness 8897008f. Draw fresh grounding across the whole live thread, then Summarise, Surface what is outstanding and Harvest the learnings in that order. End with Actions and the carry-forward digest. Keep recorded deferrals distinct from unfinished thread work and learning writes subject to confirmation. Finalise with bun run --cwd apps/site diagrams:build -- --svg recap-handover."
+last_checked = "de1b44ef7c25d5a4619c4c86311bf085740a8db3"
+svg_form = "ki"
+commit_html = true

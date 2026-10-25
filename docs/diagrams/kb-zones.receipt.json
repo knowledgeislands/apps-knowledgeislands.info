@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "slug": "kb-zones",
+  "type": "architecture",
+  "source": {
+    "file": "kb-zones.architecture.json",
+    "sha256": "b5457f5ede1d575ddc1eff981e231e911d9af95cd5329b488956e140a29f0251",
+    "bytes": 6246
+  },
+  "html": {
+    "file": "kb-zones.html",
+    "sha256": "4806d6f7bfdc0bc4ee3e0ed28edd7d89d45d8b5c56f07a3b6126997c62d015c1",
+    "bytes": 824967
+  },
+  "renderer": {
+    "name": "archify",
+    "version": "3.2.0"
+  }
+}

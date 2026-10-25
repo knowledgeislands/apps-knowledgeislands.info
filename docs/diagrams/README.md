@@ -87,3 +87,27 @@ What do the four structural levels and the five PMO levels of a tending pass eac
 How does one tending pass run, from the owner asking for it to the light report it ends with? The workflow shows the coordinator launching one run per repository for the lower levels, each item given exactly one disposition, the territory levels run from that round's results, and the report that is as light as its outcome allows.
 
 [![One tending pass: focus, pass, dispositions, report](tending-pass.svg)](tending-pass.html)
+
+## Knowledge Base zones
+
+How do an island's five zones, directional working areas, index notes and principal overlay fit together? The figure follows the pinned harness at `8897008f`.
+
+[![Five zones, working areas and the principal overlay](kb-zones.svg)](kb-zones.html)
+
+## Query, save and update
+
+How does a session query evidence, save or update a note, and produce a digest? The figure follows the pinned harness at `8897008f`.
+
+[![The knowledge loop in a session](query-save-update.svg)](query-save-update.html)
+
+## Acquisition flow
+
+How do selected source captures and bounded public signals reach an island without granting adoption authority? The figure follows the pinned harness at `8897008f`.
+
+[![Selected sources and authorised signals into an island](acquisition-flow.svg)](acquisition-flow.html)
+
+## Recap and handover
+
+How does a grounded live-session recap reconcile changes, decisions, unfinished work and learning routes? The figure follows the pinned harness at `8897008f`.
+
+[![A grounded recap and its learning routes](recap-handover.svg)](recap-handover.html)

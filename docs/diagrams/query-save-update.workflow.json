@@ -1,0 +1,219 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Query, save and update in one session",
+    "locale": "en",
+    "output": "docs/diagrams/query-save-update.html",
+    "quality_profile": "showcase",
+    "repository": {
+      "url": "https://github.com/knowledgeislands/ki-agentic-harness",
+      "revision": "8897008fcee7b2c71a22115735ed038efccf7f32"
+    }
+  },
+  "lanes": [
+    {
+      "id": "evidence",
+      "label": "Context and evidence"
+    },
+    {
+      "id": "notes",
+      "label": "Note changes and outputs"
+    }
+  ],
+  "mainPath": [
+    "context",
+    "query",
+    "draft",
+    "approval",
+    "write",
+    "digest"
+  ],
+  "nodes": [
+    {
+      "id": "context",
+      "lane": "evidence",
+      "col": 0,
+      "type": "backend",
+      "label": "Load context",
+      "sublabel": "Root and active Pillar memory",
+      "sources": [
+        {
+          "path": "skills/repo-structure/ki-repo-kb/SKILL.md",
+          "line": 94,
+          "end_line": 94
+        }
+      ]
+    },
+    {
+      "id": "query",
+      "lane": "evidence",
+      "col": 1,
+      "type": "backend",
+      "label": "QUERY",
+      "sublabel": "Search and read targeted lines",
+      "sources": [
+        {
+          "path": "skills/repo-structure/ki-repo-kb/references/mode-query.md",
+          "line": 1,
+          "end_line": 9
+        }
+      ]
+    },
+    {
+      "id": "answer",
+      "lane": "evidence",
+      "col": 2,
+      "type": "backend",
+      "label": "Cited answer",
+      "sublabel": "Paths and validated line ranges",
+      "sources": [
+        {
+          "path": "skills/repo-structure/ki-repo-kb/references/mode-query.md",
+          "line": 1,
+          "end_line": 9
+        }
+      ]
+    },
+    {
+      "id": "draft",
+      "lane": "notes",
+      "col": 2,
+      "type": "backend",
+      "label": "SAVE or UPDATE",
+      "sublabel": "New note or merged enrichment",
+      "sources": [
+        {
+          "path": "skills/repo-structure/ki-repo-kb/references/mode-save.md",
+          "line": 1,
+          "end_line": 11
+        },
+        {
+          "path": "skills/repo-structure/ki-repo-kb/references/mode-update.md",
+          "line": 1,
+          "end_line": 11
+        }
+      ]
+    },
+    {
+      "id": "approval",
+      "lane": "notes",
+      "col": 3,
+      "type": "security",
+      "label": "Confirm and route",
+      "sublabel": "Canonical changes need approval",
+      "sources": [
+        {
+          "path": "skills/repo-structure/ki-repo-kb/references/mode-save.md",
+          "line": 1,
+          "end_line": 11
+        },
+        {
+          "path": "skills/repo-structure/ki-repo-kb/references/mode-update.md",
+          "line": 1,
+          "end_line": 11
+        }
+      ]
+    },
+    {
+      "id": "write",
+      "lane": "notes",
+      "col": 4,
+      "type": "database",
+      "label": "Linked note",
+      "sublabel": "Cited facts, existing structure",
+      "sources": [
+        {
+          "path": "skills/repo-structure/ki-repo-kb/SKILL.md",
+          "line": 76,
+          "end_line": 76
+        },
+        {
+          "path": "skills/repo-structure/ki-repo-kb/references/mode-update.md",
+          "line": 1,
+          "end_line": 11
+        }
+      ]
+    },
+    {
+      "id": "digest",
+      "lane": "notes",
+      "col": 5,
+      "type": "database",
+      "label": "DIGEST if useful",
+      "sublabel": "-/_DIGESTS/ session output",
+      "sources": [
+        {
+          "path": "skills/repo-structure/ki-repo-kb/references/mode-digest.md",
+          "line": 1,
+          "end_line": 26
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "context-query",
+      "from": "context",
+      "to": "query"
+    },
+    {
+      "id": "query-answer",
+      "from": "query",
+      "to": "answer",
+      "label": "evidence"
+    },
+    {
+      "id": "query-draft",
+      "from": "query",
+      "to": "draft",
+      "label": "new or changed"
+    },
+    {
+      "id": "draft-approval",
+      "from": "draft",
+      "to": "approval"
+    },
+    {
+      "id": "approval-write",
+      "from": "approval",
+      "to": "write",
+      "label": "approved"
+    },
+    {
+      "id": "write-digest",
+      "from": "write",
+      "to": "digest",
+      "label": "optional"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Read before answering or editing",
+      "items": [
+        "Use provisioned bounded search; fall back to literal search and targeted reads.",
+        "A search index finds notes; current note evidence supports the answer.",
+        "UPDATE enriches a freshly read note and preserves its structure."
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Writing respects the island",
+      "items": [
+        "Propose the destination and filename, cite facts and confirm the write.",
+        "Where Enactment applies, substantive canonical changes use approved forward work.",
+        "Trivial fixes and authorised factual profile auto-appends retain narrow exceptions."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Digests are produced outputs",
+      "items": [
+        "DIGEST uses Context, Decisions, Facts Learned, Related Work and Keywords.",
+        "It carries note_type: session-digest and retain_until, normally 30 days ahead.",
+        "Extract useful knowledge before discarding it; keep the README scaffold."
+      ]
+    }
+  ]
+}
