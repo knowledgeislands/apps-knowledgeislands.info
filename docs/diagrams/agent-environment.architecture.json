@@ -1,0 +1,258 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Agent environment: intent and evidence",
+    "locale": "en",
+    "output": "+/diagrams/agent-environment/agent-environment.html",
+    "quality_profile": "showcase",
+    "repository": {
+      "url": "https://github.com/knowledgeislands/ki-agentic-harness",
+      "revision": "8897008fcee7b2c71a22115735ed038efccf7f32"
+    }
+  },
+  "components": [
+    {
+      "id": "inventory",
+      "type": "database",
+      "label": "Portable MCP inventory",
+      "sublabel": "mcp-servers.yaml / client targeting",
+      "pos": [
+        400,
+        40
+      ],
+      "size": [
+        250,
+        74
+      ],
+      "sources": [
+        {
+          "path": "skills/environment/ki-binding/SKILL.md",
+          "line": 15,
+          "end_line": 19
+        },
+        {
+          "path": "skills/environment/ki-binding-chezmoi/SKILL.md",
+          "line": 14,
+          "end_line": 23
+        }
+      ]
+    },
+    {
+      "id": "claude-binding",
+      "type": "backend",
+      "label": "Claude binding",
+      "sublabel": "Code / Desktop definitions",
+      "pos": [
+        40,
+        230
+      ],
+      "size": [
+        250,
+        74
+      ],
+      "sources": [
+        {
+          "path": "skills/environment/ki-binding-claude/SKILL.md",
+          "line": 16,
+          "end_line": 28
+        }
+      ]
+    },
+    {
+      "id": "codex-binding",
+      "type": "backend",
+      "label": "Codex binding",
+      "sublabel": "Native CLI merge boundary",
+      "pos": [
+        760,
+        230
+      ],
+      "size": [
+        250,
+        74
+      ],
+      "sources": [
+        {
+          "path": "skills/environment/ki-binding-chatgpt/SKILL.md",
+          "line": 16,
+          "end_line": 28
+        }
+      ]
+    },
+    {
+      "id": "claude",
+      "type": "frontend",
+      "label": "Claude runtimes",
+      "sublabel": "Code / Desktop; web convention",
+      "pos": [
+        40,
+        420
+      ],
+      "size": [
+        250,
+        74
+      ],
+      "sources": [
+        {
+          "path": "skills/environment/ki-binding-claude/SKILL.md",
+          "line": 16,
+          "end_line": 28
+        }
+      ]
+    },
+    {
+      "id": "codex",
+      "type": "frontend",
+      "label": "Codex runtime",
+      "sublabel": "Application-owned MCP configuration",
+      "pos": [
+        760,
+        420
+      ],
+      "size": [
+        250,
+        74
+      ],
+      "sources": [
+        {
+          "path": "skills/environment/ki-binding-chatgpt/SKILL.md",
+          "line": 16,
+          "end_line": 28
+        }
+      ]
+    },
+    {
+      "id": "claude-evidence",
+      "type": "backend",
+      "label": "Claude evidence adapter",
+      "sublabel": "Selected repository files only",
+      "pos": [
+        40,
+        610
+      ],
+      "size": [
+        250,
+        74
+      ],
+      "sources": [
+        {
+          "path": "skills/environment/ki-tokenomics-claude/SKILL.md",
+          "line": 16,
+          "end_line": 24
+        }
+      ]
+    },
+    {
+      "id": "policy",
+      "type": "security",
+      "label": "Portable context policy",
+      "sublabel": "Budgets + model purpose",
+      "pos": [
+        400,
+        610
+      ],
+      "size": [
+        250,
+        74
+      ],
+      "sources": [
+        {
+          "path": "skills/environment/ki-tokenomics/SKILL.md",
+          "line": 15,
+          "end_line": 40
+        }
+      ]
+    },
+    {
+      "id": "codex-evidence",
+      "type": "backend",
+      "label": "Codex evidence adapter",
+      "sublabel": "Selected repository files only",
+      "pos": [
+        760,
+        610
+      ],
+      "size": [
+        250,
+        74
+      ],
+      "sources": [
+        {
+          "path": "skills/environment/ki-tokenomics-chatgpt/SKILL.md",
+          "line": 16,
+          "end_line": 26
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "inventory-claude",
+      "from": "inventory",
+      "to": "claude-binding",
+      "label": "Claude targets"
+    },
+    {
+      "id": "inventory-codex",
+      "from": "inventory",
+      "to": "codex-binding",
+      "label": "Codex targets"
+    },
+    {
+      "id": "claude-native",
+      "from": "claude-binding",
+      "to": "claude",
+      "label": "compare intent"
+    },
+    {
+      "id": "codex-native",
+      "from": "codex-binding",
+      "to": "codex",
+      "label": "compare / render"
+    },
+    {
+      "id": "policy-claude",
+      "from": "policy",
+      "to": "claude-evidence",
+      "label": "policy"
+    },
+    {
+      "id": "policy-codex",
+      "from": "policy",
+      "to": "codex-evidence",
+      "label": "policy"
+    },
+    {
+      "id": "claude-inspect",
+      "from": "claude-evidence",
+      "to": "claude",
+      "label": "inspect files"
+    },
+    {
+      "id": "codex-inspect",
+      "from": "codex-evidence",
+      "to": "codex",
+      "label": "inspect files"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Optional file rendering",
+      "items": [
+        "ki-binding-chezmoi checks the source-to-template path.",
+        "Review chezmoi diff before an authorised apply."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Access and evidence stay separate",
+      "items": [
+        "Host-bound access uses the host mcporter bridge.",
+        "Cloud web connectors have no local render target.",
+        "Repository files do not prove live runtime health."
+      ]
+    }
+  ]
+}

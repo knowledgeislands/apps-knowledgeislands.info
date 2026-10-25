@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "slug": "agent-environment",
+  "type": "architecture",
+  "source": {
+    "file": "agent-environment.architecture.json",
+    "sha256": "c1a74a5518f60f77dce72a8d084229bc4e49bd59cdcf198c0fc69b4d4bc39e32",
+    "bytes": 5439
+  },
+  "html": {
+    "file": "agent-environment.html",
+    "sha256": "6134f0f0175bdb93ef4f9123aec8d7cd4d6f1947a3b1f652d8de6466b907eda5",
+    "bytes": 825343
+  },
+  "renderer": {
+    "name": "archify",
+    "version": "3.2.0"
+  }
+}

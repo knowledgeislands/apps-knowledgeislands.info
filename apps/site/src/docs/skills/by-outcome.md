@@ -87,11 +87,11 @@ Find the group that matches the kind of result you want, read down to the outcom
 
 | Outcome | Skill | Explained in |
 | --- | --- | --- |
-| Keep one portable inventory of MCP servers | [`ki-binding`](/docs/skills/catalogue/#ki-binding) | Harness |
-| Project that inventory into Claude, Codex or chezmoi | [`ki-binding-claude`](/docs/skills/catalogue/#ki-binding-claude), [`ki-binding-chatgpt`](/docs/skills/catalogue/#ki-binding-chatgpt) or [`ki-binding-chezmoi`](/docs/skills/catalogue/#ki-binding-chezmoi) | Harness |
-| Set context budgets and model-purpose policy | [`ki-tokenomics`](/docs/skills/catalogue/#ki-tokenomics), with [`ki-tokenomics-claude`](/docs/skills/catalogue/#ki-tokenomics-claude) or [`ki-tokenomics-chatgpt`](/docs/skills/catalogue/#ki-tokenomics-chatgpt) for observed evidence | Harness |
-| Tidy accumulated Claude or Codex state | [`ki-housekeeping-claude`](/docs/skills/catalogue/#ki-housekeeping-claude) or [`ki-housekeeping-chatgpt`](/docs/skills/catalogue/#ki-housekeeping-chatgpt) | Harness |
-| Assess language models or agentic protocols before adopting one | [`ki-model-radar`](/docs/skills/catalogue/#ki-model-radar) or [`ki-agentic-radar`](/docs/skills/catalogue/#ki-agentic-radar) | Harness |
+| Keep one portable inventory of MCP servers | [`ki-binding`](/docs/skills/catalogue/#ki-binding) | [Agent environment](/docs/ki-agentic-harness/agent-environment/) |
+| Project that inventory into Claude, Codex or chezmoi | [`ki-binding-claude`](/docs/skills/catalogue/#ki-binding-claude), [`ki-binding-chatgpt`](/docs/skills/catalogue/#ki-binding-chatgpt) or [`ki-binding-chezmoi`](/docs/skills/catalogue/#ki-binding-chezmoi) | [Agent environment](/docs/ki-agentic-harness/agent-environment/) |
+| Set context budgets and model-purpose policy | [`ki-tokenomics`](/docs/skills/catalogue/#ki-tokenomics), with [`ki-tokenomics-claude`](/docs/skills/catalogue/#ki-tokenomics-claude) or [`ki-tokenomics-chatgpt`](/docs/skills/catalogue/#ki-tokenomics-chatgpt) for observed evidence | [Agent environment](/docs/ki-agentic-harness/agent-environment/) |
+| Tidy accumulated Claude or Codex state | [`ki-housekeeping-claude`](/docs/skills/catalogue/#ki-housekeeping-claude) or [`ki-housekeeping-chatgpt`](/docs/skills/catalogue/#ki-housekeeping-chatgpt) | [Agent environment](/docs/ki-agentic-harness/agent-environment/) |
+| Assess language models or agentic protocols before adopting one | [`ki-model-radar`](/docs/skills/catalogue/#ki-model-radar) or [`ki-agentic-radar`](/docs/skills/catalogue/#ki-agentic-radar) | [Agent environment](/docs/ki-agentic-harness/agent-environment/) |
 
 ### Design a product's look and feel
 

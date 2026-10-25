@@ -1,91 +1,66 @@
 ---
 title: Onboard a repository
-description: Connect a repository to native KI governance with explicit capability declarations, trusted harnesses, and CI.
-permalink: /docs/ki-agentic-harness/onboarding/
+description: Connect an existing repository to declared KI governance and verify the runtime links and checks.
 order: 5
+permalink: /docs/ki-agentic-harness/onboarding/
 sources:
   - repository: knowledgeislands/tools-ki
     path: man/ki.1
-    ref: v0.4.0
-    governs: 'The commands an onboarding repository runs and their order'
-    reviewed: '2026-09-21'
+    ref: v0.13.0
+    governs: 'The commands and scope boundaries at the reviewed CLI release'
+    reviewed: '2026-10-25'
   - repository: knowledgeislands/ki-agentic-harness
     path: docs/decisions/ADR-KI-HARNESS-012-compatible-harness-publication-and-governed-rubric-boundary.md
-    ref: 7dcee9dc3aa33c863c77cb56d1bab762d026dbbb
-    governs: 'The publication and rubric boundary onboarding conforms a repository to'
-    reviewed: '2026-09-21'
+    ref: 8897008fcee7b2c71a22115735ed038efccf7f32
+    governs: 'Trusted operations and the separation of user and repository state'
+    reviewed: '2026-10-25'
+  - repository: knowledgeislands/ki-agentic-harness
+    path: skills/keystone/ki-bootstrap/SKILL.md
+    ref: 8897008fcee7b2c71a22115735ed038efccf7f32
+    governs: 'The setup sequence and managed-state recovery'
+    reviewed: '2026-10-25'
 ---
 
-# Onboard a repository to native KI governance
+# Onboard a repository
 
-Knowledge Islands repository governance resolves declared capabilities from verified installed compatible harnesses and executes them through the native `ki` host.
+Onboarding connects an existing repository to the standards it actually needs. You establish the machine environment, record the repository's identity and coverage, then check both the managed skill links and the declared governance before relying on them.
 
-The contract behind that sentence is ADR-KI-HARNESS-012, in the KI Agentic Harness. It is recorded in the sources at the foot of this page; you do not need to read it to follow what is here.
+## What it is
 
-## Trust and installation
+A governed repository carries a regular `.ki.toml` at its physical Git worktree root. It records identity, permitted harnesses and the skills that govern the repository. Those declarations travel with the work; the local registry records where this checkout lives on this machine.
 
-Each user has a KI XDG configuration and an installed compatible-harness set. `ki bootstrap` creates the configuration, installs the canonical `knowledgeislands/ki-agentic-harness`, and activates the core user skills for detected runtimes.
+## How it works
 
-`ki harness install <harness-id>` adds another verified compatible harness. Installing a harness does not activate all of its capabilities or change a repository.
+There are two scopes. User setup supplies verified installed harnesses and user-level skills. Repository setup records the skills and managed discovery links for one repository. Neither scope silently activates everything in the other.
 
-`ki` uses the standard XDG data, configuration, cache, and state locations. It does not define a separate KI home variable.
+`ki-bootstrap` explains the sequence. `ki-repo` owns the judgement about repository coverage. The native host resolves declared dependencies and refuses unavailable, incompatible, ambiguous or untrusted capabilities before running their operations.
 
-## Repository declaration and activation
+## How you use it
 
-A KI repository carries a regular `.ki.toml` at its Git worktree root. `[repo]` names the harnesses it may draw from, and each `[skills.<name>]` table declares one governance capability by bare name. [Govern a repository](/docs/ki-agentic-harness/repositories/) shows the file.
-
-Activate a repository skill with:
-
-```bash
-ki repo skill add <skill> --repo <repository>
-```
-
-The command resolves one installed provider, updates the repository declaration, and creates managed runtime-discovery links. It refuses ambiguous providers and unfamiliar destination state.
-
-`ki repo skill remove` reverses only the declaration and links whose ownership KI can prove. User activation is separate and uses `ki skill add` or `ki skill remove`.
-
-`ki-repo` owns the judgment about which capabilities a repository should declare.
-
-## Native repository maintenance
-
-The native operations are:
+1. Run `ki bootstrap` to establish the user environment, then `ki doctor` to inspect its health.
+2. Initialise the existing Git worktree with `ki repo init`. Supply its repository and Capital URLs, title, description, stable repository code, supported runtimes and visibility. The command records identity and registers the physical root; it does not create a Git repository or activate skills.
+3. Choose the applicable capabilities and add each with `ki repo skill add <skill>`. This writes its declaration and managed runtime links.
+4. Start a new agent session after changing those links, then inspect the repository and its checks.
 
 ```bash
-ki repo educate --repo <repository>
-ki repo audit --repo <repository>
-ki repo conform --repo <repository> --dry-run
+ki repo diag
+ki repo educate
+ki repo audit
+ki repo conform --dry-run
 ```
 
-They physically resolve the selected repository, read `.ki.toml`, validate declared dependencies, and load registered compatible operations from verified installed harnesses.
+`educate` explains the declared expectations. `audit` checks without repairing. The conform preview validates the proposed safe mechanical repairs before you decide to apply them. Review judgement criteria alongside the machine results.
 
-AUDIT is read-only. CONFORM applies only registered safe mechanical changes; `--dry-run` validates and reports without publishing. EDUCATE renders the declared rubric guidance.
+For Harbour Atlas, the fictional island, this could mean activating writing and knowledge-base governance, then reviewing whether the existing material fits both. The declaration follows what the island contains and how it works.
 
-Missing, incompatible, undeclared, ambiguous, or untrusted capabilities fail before an operation runs. `--skill <skill>` narrows an operation to one declared capability without changing repository coverage.
+## What it provides
 
-The host never invokes copied rubric runners, repository-local wrappers, a nearby checkout, or an ad hoc child-process fallback. Harness contributors record a checkout with `ki dev local set <harness-id> <local-harness-path>` and select it explicitly with `ki dev local on [harness-id]`.
+Onboarding gives a repository explicit coverage, discoverable skills and a repeatable way to inspect conformance. In CI, establish a compatible CLI and verified harness inventory, run `ki repo audit --repo .`, then run the repository's tests.
 
-## CI and automation
+When a link is missing or stale, `ki repo repair --dry-run` previews reconciliation of recognised managed projections. `ki diag --full` identifies whether operations resolve from an archive or an explicitly selected development checkout.
 
-CI must establish a compatible released `ki` and its required verified harness inventory before running:
+## Boundaries
 
-```bash
-ki repo audit --repo .
-```
+Initialisation is not conformance, and conformance is not human acceptance. Installing the harness alone does not declare repository coverage.
 
-The governance audit runs before the repository test suite. Automation fails when acquisition, verification, registry loading, operation availability, or declared-skill resolution fails; it does not bootstrap a checkout-local executor.
-
-The harness's pre-commit hook audits a complete staged snapshot when governed skill sources change. That snapshot includes unchanged siblings, shared providers, and the repository-local `ki-self` source where applicable.
-
-## Existing repository-vendored state
-
-The former models created `.ki/` or `.ki-meta/` executors and regular-file skill copies under repository runtime-discovery directories.
-
-That material is now migration evidence, not an executor or a managed runtime link. Map every consumer to its native replacement, prove generated ownership, and replace unchanged runtime copies through `ki repo skill`.
-
-If legacy state is altered, partial, unfamiliar, linked, dangling, escaping, or concurrently changed, preserve it and stop. A passing legacy runner does not prove that native governance is available.
-
-## Scope and recovery
-
-User-owned state comprises the XDG configuration, installed harnesses, and managed user-runtime links. Repository-owned state comprises `.ki.toml`, managed repository-runtime links, the committed repository-local `ki-self` source, and writes proposed by registered native operations.
-
-Use `ki manage doctor` for environment health, `ki manage diag` for installation mode and paths, `ki bootstrap --refresh` to reconcile configured inventory, and `ki <command> --help` for exact grammar.
+Repository-local executors and copied skill files are not trusted operation sources. Preserve unfamiliar or altered state and diagnose its ownership rather than deleting it to make setup pass. Managed recovery refuses unsafe state instead of guessing.

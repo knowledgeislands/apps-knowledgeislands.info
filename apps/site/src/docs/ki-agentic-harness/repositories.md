@@ -1,134 +1,75 @@
 ---
-title: Repositories
-description: What makes a repository a KI repository, what its .ki.toml declares, and the educate–audit–conform cycle that acts on those declarations.
-permalink: /docs/ki-agentic-harness/repositories/
+title: Govern a repository
+description: Declare repository coverage in .ki.toml and use educate, audit and conform to inspect and maintain it.
 order: 3
+permalink: /docs/ki-agentic-harness/repositories/
 sources:
   - repository: knowledgeislands/tools-ki
     path: man/ki.1
-    ref: v0.4.0
-    governs: 'The repository commands, their options, and the declaration form they read'
-    reviewed: '2026-09-22'
-  - repository: knowledgeislands/tools-ki
-    path: docs/decisions/ADR-KI-TOOLS-002-compatible-harness-registry-and-native-operations.md
-    ref: v0.4.0
-    governs: 'Native operation resolution and what the host refuses to execute'
-    reviewed: '2026-09-22'
+    ref: v0.13.0
+    governs: 'The commands and scope boundaries at the reviewed CLI release'
+    reviewed: '2026-10-25'
   - repository: knowledgeislands/ki-agentic-harness
     path: docs/decisions/ADR-KI-HARNESS-012-compatible-harness-publication-and-governed-rubric-boundary.md
-    ref: 7dcee9dc3aa33c863c77cb56d1bab762d026dbbb
-    governs: 'The boundary between what a harness publishes and what a repository declares'
-    reviewed: '2026-09-22'
+    ref: 8897008fcee7b2c71a22115735ed038efccf7f32
+    governs: 'The declarations and verified native-operation boundary'
+    reviewed: '2026-10-25'
+  - repository: knowledgeislands/ki-agentic-harness
+    path: skills/repo-structure/ki-repo-harness/SKILL.md
+    ref: 8897008fcee7b2c71a22115735ed038efccf7f32
+    governs: 'Harness publication and declared dependency resolution'
+    reviewed: '2026-10-25'
 ---
 
-# Repositories
+# Govern a repository
 
-A repository becomes a Knowledge Islands repository by carrying a `.ki.toml` at its Git worktree root. That file is the whole of the claim: it names the repository, names the harnesses it draws from, and declares which capabilities govern it.
+A repository's declarations make its standards visible and repeatable. You can see what governs it, explain the rules, check the evidence and preview safe repairs without relying on whichever guidance an agent happens to remember.
 
-Everything else follows from reading it. There is no server, no account, and no per-machine configuration that a colleague has to reproduce — they clone the repository and get the same governance, because the declaration travelled with the code.
+## What it is
 
-## What `.ki.toml` declares
+A KI repository has a `.ki.toml` declaration at its Git worktree root. Its `[repo]` table permits harness providers; each `[skills.<name>]` table declares one governance capability by its bare skill name.
 
 ```toml
 [repo]
 harnesses = ["knowledgeislands/ki-agentic-harness"]
 
 [skills.ki-authoring]
-# this capability's own configuration, where it takes any
 
 [skills.ki-work-roadmap]
 ```
 
-Two parts, and the split is the point.
+This excerpt shows coverage, not a complete identity declaration. `ki repo init` writes the initial declaration for an existing worktree using the identity values you supply.
 
-`[repo]` says where capability may come from. A provider must appear in that list before any of its skills can be declared.
+## How it works
 
-Each `[skills.<name>]` table declares that one capability governs this repository. The name is bare — `ki-authoring`, not `knowledgeislands/ki-agentic-harness:ki-authoring`. **Harness-qualified keys are invalid**, because a repository declares _what governs it_, not _where that came from_; the provider is a property of the installation, recorded once above.
+The host resolves a declared capability from permitted installed harnesses, validates its dependencies and loads its registered operations. The skill owns its rules and safe repairs; the CLI owns execution and reporting.
 
-`ki repo init` writes the initial file for an existing worktree:
+Repository scope describes this repository's work. User scope describes the capabilities you use across repositories. `ki repo skill add` and `ki repo skill remove` manage the former; `ki skill add` and `ki skill remove` manage the latter.
 
-```bash
-ki repo init \
-  --repository https://github.com/example/example \
-  --title "Example" \
-  --description "What this repository is for." \
-  --repo-code EXAMPLE \
-  --runtime claude \
-  --visibility public
-```
+## How you use it
 
-It declares identity for exactly one existing Git worktree root and registers that root in your machine-local registry. It does not create a Git repository.
+[Choose a skill by outcome](/docs/skills/by-outcome/), then declare the coverage the repository needs. Add a skill with `ki repo skill add <skill>`; use `--repo <path>` when selecting another repository. Start a fresh agent session after its discovery links change.
 
-## Declaring what governs it
+Run the three operations in this order when first inspecting a repository:
 
 ```bash
-ki repo skill add <skill> [--replace]
-ki repo skill remove <skill>
+ki repo educate
+ki repo audit
+ki repo conform --dry-run
 ```
 
-Adding resolves one installed provider for the bare name, writes the declaration, and creates the managed runtime-discovery links your agent reads. If two installed harnesses supply the name, it stops rather than choosing. Removing reverses only the declaration and the links whose ownership `ki` can prove — unfamiliar state is preserved rather than cleaned up.
+Use `ki repo conform` to apply the registered safe repairs when appropriate. The host validates the proposed write set and requires the selected initial audits to pass before publication. A dry run reports proposed changes without publishing them. Review the resulting evidence and any judgement criteria the mechanical pass leaves unassessed.
 
-Both take `--repo <path>` to act on a repository other than the one you are standing in.
+Add `--skill <skill>` to narrow an operation to one declared capability. This does not change the repository's coverage.
 
-Repository scope is about _this codebase_: its Markdown style, its toolchain, its roadmap discipline. It is separate from user scope, which is about how _you_ work and is managed with `ki skill add`. Removing one never touches the other. [The capability lifecycle](/docs/ki/capability-lifecycle/) covers both scopes together.
+## What it provides
 
-Choosing what to declare is its own question — [choose a skill by outcome](/docs/skills/by-outcome/) routes a plain-language goal to the capability that serves it.
+A shared declaration lets contributors and CI resolve the same intended standards. `ki repo diag` reports declaration and projection health. `ki repo repair --dry-run` previews reconciliation of recognised managed links. `ki repo upgrade` refreshes the harnesses selected by the repository's declarations.
 
-## The three operations
+The machine-local registry connects a repository's identity to this physical checkout. It helps commands find the work but does not replace the tracked declaration. [Onboarding](/docs/ki-agentic-harness/onboarding/) connects those two layers.
 
-```bash
-ki repo educate    # explain what the declared skills expect. Changes nothing.
-ki repo audit      # run their read-only checks. Changes nothing.
-ki repo conform --dry-run   # report the repairs it would make.
-ki repo conform             # apply them.
-```
+## Boundaries
 
-In increasing order of consequence, and worth running in that order the first time. `educate` renders the guidance behind the rules, which is usually more useful than reading a list of failures and inferring the rule from each.
+Unknown files and unfamiliar links are preserved. The host does not substitute a copied checker, a repository wrapper or an unselected checkout when a declared operation cannot resolve.
 
-`conform` applies only the registered, safe, mechanical repairs a skill defines. It stages its writes and re-audits before publishing them, and aborts before anything is written if the initial audit has a blocking finding — so a `conform` that fails leaves the tree exactly as it was.
-
-All three take `--skill <skill>` to narrow to one declared capability without changing what the repository declares, and `--progress` and `--reporter-levels` to control output. That narrowing matters more than it sounds: when you have just produced an artefact a particular skill governs, `ki repo audit --skill <that-skill>` is the check that looks at it.
-
-## What the host will not run
-
-`audit` and `conform` implement no checks of their own. They resolve the operations that this repository's declared skills register, verify them against the installed harness's integrity evidence, and run those.
-
-They will not run anything else — not a repository-local wrapper script, not a copied rubric runner sitting in the tree, not a package alias, not a checkout that happens to be nearby. Missing, incompatible, undeclared, ambiguous or untrusted capabilities fail _before_ an operation runs, rather than falling back to something that looks similar.
-
-This is why "the audit passed" is a precise claim. It means the operations registered by the declared skills, from harnesses whose payloads verified, all succeeded. It says nothing about rules nobody declared.
-
-A repository that needs rules of its own declares a `ki-self` provider, and those are still resolved rather than discovered. [Operator guides](/docs/ki/operator-guides/) covers that route.
-
-## When declarations and reality drift
-
-```bash
-ki repo diag              # declared skills and the health of their projections
-ki repo repair [--dry-run]  # reconcile the managed links
-ki repo upgrade           # refresh the harnesses this repository's declarations select
-```
-
-`diag` is the first thing to run when a skill you expect is not firing: it reports what the repository declares and whether the runtime projections for those declarations are healthy, and changes nothing.
-
-Most of what `ki` manages is a _link_ between two records — a declaration and a payload, a registry entry and a checkout. Deleting a file that looks stale usually breaks the other half of a pair. `repair` exists to reconcile exactly those projections, so reach for it rather than tidying by hand.
-
-## Roadmap and registry
-
-Two smaller surfaces attach to a repository and are easy to miss.
-
-`ki repo roadmap` reads the work records a repository keeps under its own roadmap convention — `list` filtered by horizon or status, `stats` for staleness, and `promote`, `demote` and `prune` for moving an item through its lifecycle. It is a reader and mover of records, not a planner.
-
-`ki registry add` records a repository in your machine-local registry, and `ki registry list` reports what is recorded. The registry is what lets other commands find a repository by path or pattern rather than by you standing in it.
-
-## In CI
-
-CI establishes a compatible released `ki` and the verified harness inventory the repository needs, then runs:
-
-```bash
-ki repo audit --repo .
-```
-
-Run the governance audit before the test suite. Automation fails when acquisition, verification, registry loading, operation availability or declared-skill resolution fails — it does not bootstrap a checkout-local executor to get past a missing payload.
-
-## Related
-
-[Onboard a repository](/docs/ki-agentic-harness/onboarding/) covers the trust, migration and legacy-state boundaries in full, including what to do with a repository-vendored `.ki/` directory from an older layout. [Install and get started](/docs/ki/getting-started/) is the end-to-end first run, and [every `ki` command](/docs/ki/commands/) is the full inventory.
+An audit reports the checks it assessed. A missing declaration means missing coverage, and judgement-only criteria need review. Keep publication and other consequential actions within their separate task authority.

@@ -11,3 +11,15 @@ regenerate = "Read man/ki.1 at tools-ki v0.13.0. Draw all eighteen COMMAND GROUP
 last_checked = "6a0cc482f3ef232533da8112374b0b94e3db6235"
 svg_form = "ki"
 commit_html = true
+
+[agent-environment]
+
+type = "architecture"
+question = "How do portable MCP inventory and context policy reach Claude and Codex?"
+audience = "Knowledge Islands users understanding their agent environment"
+traced = ["skills/environment/ki-binding/SKILL.md", "skills/environment/ki-binding-claude/SKILL.md", "skills/environment/ki-binding-chatgpt/SKILL.md", "skills/environment/ki-binding-chezmoi/SKILL.md", "skills/environment/ki-tokenomics/SKILL.md", "skills/environment/ki-tokenomics-claude/SKILL.md", "skills/environment/ki-tokenomics-chatgpt/SKILL.md"]
+stale_when = "the portable inventory, binding ownership or bounded runtime evidence contracts change"
+regenerate = "Read the traced SKILL.md files in ki-agentic-harness at 8897008f. Draw inventory and client bindings above Claude and Codex, with portable budgets and their evidence adapters below. Keep configuration intent distinct from runtime health and show chezmoi as an optional rendering path. Finalise with bun run --cwd apps/site diagrams:build -- --svg agent-environment."
+last_checked = "57864b1fb3bcdfe271b2ba34fef7fce12cc64e54"
+svg_form = "ki"
+commit_html = true
