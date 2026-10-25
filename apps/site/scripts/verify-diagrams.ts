@@ -3,8 +3,9 @@ import { execFileSync } from 'node:child_process'
 import { existsSync, readFileSync } from 'node:fs'
 import { relative, resolve } from 'node:path'
 import {
-  diagramSkill,
+  findDiagramSkill,
   harnessRepository,
+  receiptFailures,
   repositoryRoot,
   siteManifest,
   siteRoot,
@@ -68,6 +69,8 @@ export function verifyDiagrams(root = repositoryRoot): string[] {
     for (const name of [`${slug}.${entry.type}.json`, `${slug}.svg`, `${slug}.html`, `${slug}.receipt.json`]) {
       if (!existsSync(resolve(root, 'docs/diagrams', name))) failures.push(`${slug}: missing ${name}`)
     }
+    // The committed receipt must still fingerprint the committed source and viewer, wherever the build runs.
+    failures.push(...receiptFailures(resolve(root, 'docs/diagrams'), slug, entry.type))
   }
   for (const [slug, entry] of Object.entries(vendored.diagrams)) {
     for (const name of [entry.svg, entry.html, entry.receipt]) {
@@ -84,14 +87,18 @@ export function verifyDiagrams(root = repositoryRoot): string[] {
       failures.push(`${relative(site, file)}: ${String(error)}`)
     }
   }
-  // The canonical receipt checker validates source and HTML hashes, not merely file presence.
-  try {
-    execFileSync('bun', [resolve(diagramSkill(), 'scripts/build-html.ts'), '--repo', root, '--check'], {
-      encoding: 'utf8',
-      stdio: 'pipe'
-    })
-  } catch (error) {
-    failures.push(`build-html --check: ${String(error)}`)
+  // The canonical receipt checker cross-checks the same fingerprints where the harness skill is installed. The
+  // deploy environment holds only this repository, so its gate is the in-repo check above.
+  const skill = findDiagramSkill()
+  if (skill) {
+    try {
+      execFileSync('bun', [resolve(skill, 'scripts/build-html.ts'), '--repo', root, '--check'], {
+        encoding: 'utf8',
+        stdio: 'pipe'
+      })
+    } catch (error) {
+      failures.push(`build-html --check: ${String(error)}`)
+    }
   }
   return failures
 }

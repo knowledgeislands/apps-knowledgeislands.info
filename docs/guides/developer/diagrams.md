@@ -60,7 +60,7 @@ These are passthrough copies, outside template rendering. Heading anchors, exter
 
 ## Verification
 
-`verify:diagrams` runs after `verify:skill-names` in the site build. It refuses a figure absent from both inventories, a slug present in both, missing committed site forms, missing vendored artefacts, or a page whose harness citation differs from the vendored ref. It also invokes the canonical `build-html.ts --check`, which checks source and HTML fingerprints without Archify or a browser.
+`verify:diagrams` runs after `verify:skill-names` in the site build. It refuses a figure absent from both inventories, a slug present in both, missing committed site forms, missing vendored artefacts, or a page whose harness citation differs from the vendored ref. It then checks each committed receipt against the source and viewer fingerprints it recorded, so the gate runs wherever only this repository is present, including the Cloudflare build. Where the harness skill is installed it also invokes the canonical `build-html.ts --check` as a cross-check; neither needs Archify or a browser.
 
 ```bash
 bun run --cwd apps/site verify:diagrams

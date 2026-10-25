@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto'
 import { existsSync, readFileSync } from 'node:fs'
 import { homedir } from 'node:os'
 import { dirname, resolve } from 'node:path'
@@ -63,7 +64,7 @@ export const vendoredManifest = (root = siteRoot): VendoredDiagrams =>
   JSON5.parse(readFileSync(resolve(root, 'src/_data/vendoredDiagrams.json5'), 'utf8')) as VendoredDiagrams
 
 /** Installed harnesses work in CI too; generation may explicitly select another installation. */
-export function diagramSkill(): string {
+export function findDiagramSkill(): string | undefined {
   const relative = 'skills/governance/ki-diagrams'
   const candidates = [
     process.env.KI_DIAGRAMS_HOME,
@@ -72,8 +73,71 @@ export function diagramSkill(): string {
     resolve(homedir(), '.local/share/ki/harnesses', harnessRepository, relative),
     resolve(repositoryRoot, '../ki-agentic-harness', relative)
   ]
-  const found = candidates.find((path) => path && existsSync(resolve(path, 'scripts/build-html.ts')))
+  return candidates.find((path) => path && existsSync(resolve(path, 'scripts/build-html.ts')))
+}
+
+/** Generation cannot proceed without the skill; verification can, through `receiptFailures`. */
+export function diagramSkill(): string {
+  const found = findDiagramSkill()
   if (!found)
     throw new Error('Install the KI harness diagram skill or set KI_DIAGRAMS_HOME to its ki-diagrams directory')
   return found
+}
+
+interface ReceiptFile {
+  file: string
+  sha256: string
+  bytes: number
+}
+
+const isReceiptFile = (value: unknown): value is ReceiptFile =>
+  typeof value === 'object' &&
+  value !== null &&
+  typeof (value as ReceiptFile).file === 'string' &&
+  /^[0-9a-f]{64}$/.test(String((value as ReceiptFile).sha256)) &&
+  typeof (value as ReceiptFile).bytes === 'number'
+
+/**
+ * The receipt check of the ki-diagrams standard, restated here so the site build can run it where only this
+ * repository is present: a schema 1 receipt naming the slug and type, and the committed source and viewer still
+ * carrying the SHA-256 and byte count it recorded. Presence of the files is another check's finding.
+ */
+export function receiptFailures(directory: string, slug: string, type: string): string[] {
+  const names = { source: `${slug}.${type}.json`, html: `${slug}.html` }
+  const receiptPath = resolve(directory, `${slug}.receipt.json`)
+  if (
+    ![receiptPath, resolve(directory, names.source), resolve(directory, names.html)].every((path) => existsSync(path))
+  )
+    return []
+  const receiptName = `${slug}.receipt.json`
+  let receipt: Record<string, unknown>
+  try {
+    receipt = JSON.parse(readFileSync(receiptPath, 'utf8')) as Record<string, unknown>
+  } catch {
+    return [`${slug}: ${receiptName} is not valid JSON`]
+  }
+  if (
+    typeof receipt !== 'object' ||
+    receipt === null ||
+    receipt.schema !== 1 ||
+    !isReceiptFile(receipt.source) ||
+    !isReceiptFile(receipt.html)
+  )
+    return [`${slug}: ${receiptName} does not hold a schema 1 receipt`]
+  if (receipt.slug !== slug || receipt.type !== type)
+    return [`${slug}: ${receiptName} names ${String(receipt.slug)} as ${String(receipt.type)}`]
+  const failures: string[] = []
+  for (const [part, label] of [
+    ['source', 'the source'],
+    ['html', 'the viewer']
+  ] as const) {
+    const held = receipt[part] as ReceiptFile
+    const bytes = readFileSync(resolve(directory, names[part]))
+    if (held.file !== names[part]) {
+      failures.push(`${slug}: ${receiptName} names ${held.file} for ${label}, not ${names[part]}`)
+    } else if (held.sha256 !== createHash('sha256').update(bytes).digest('hex') || held.bytes !== bytes.byteLength) {
+      failures.push(`${slug}: ${label} ${names[part]} changed since the viewer was rendered`)
+    }
+  }
+  return failures
 }
