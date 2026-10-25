@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "slug": "command-groups",
+  "type": "architecture",
+  "source": {
+    "file": "command-groups.architecture.json",
+    "sha256": "cdc2894065e95273065e30d6dd5f6855f276abc19b1107c05cef06bf6039d23e",
+    "bytes": 8423
+  },
+  "html": {
+    "file": "command-groups.html",
+    "sha256": "de02193e832013165a3bc9fa14302024a79ce65ab80ccb114e1222af66a3f3df",
+    "bytes": 828639
+  },
+  "renderer": {
+    "name": "archify",
+    "version": "3.2.0"
+  }
+}

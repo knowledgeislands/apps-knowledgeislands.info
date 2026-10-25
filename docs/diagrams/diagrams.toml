@@ -1,0 +1,13 @@
+# Living diagrams manifest: one table per diagram, keyed by its slug.
+# See the ki-diagrams standard for each field.
+
+[command-groups]
+type = "architecture"
+question = "What are the eighteen ki command groups, and what does each operate on?"
+audience = "Knowledge Islands users choosing a command group"
+traced = ["man/ki.1", "apps/site/src/docs/ki/command-groups.md", "apps/site/src/_data/cliCommands.json5"]
+stale_when = "the command groups or their operational scopes in tools-ki man/ki.1 change from v0.13.0"
+regenerate = "Read man/ki.1 at tools-ki v0.13.0. Draw all eighteen COMMAND GROUPS headings as an Archify architecture diagram, citing their manual line ranges. Preserve their order and state what each operates on. Finalize with bun run --cwd apps/site diagrams:build -- --svg command-groups."
+last_checked = "6a0cc482f3ef232533da8112374b0b94e3db6235"
+svg_form = "ki"
+commit_html = true

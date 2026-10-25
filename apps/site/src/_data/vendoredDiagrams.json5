@@ -1,0 +1,109 @@
+// GENERATED FILE - do not edit.
+// bun run --cwd apps/site sync:diagrams -- --ref 8897008fcee7b2c71a22115735ed038efccf7f32
+// Copied byte for byte from knowledgeislands/ki-agentic-harness; source refs on embedding pages must match.
+{
+  "source": {
+    "repository": "knowledgeislands/ki-agentic-harness",
+    "path": "docs/diagrams/diagrams.toml",
+    "ref": "8897008fcee7b2c71a22115735ed038efccf7f32"
+  },
+  "synced": "2026-10-25",
+  "diagrams": {
+    "skill-map": {
+      "type": "architecture",
+      "question": "What skills does the harness hold, in which source concern does each live, which functional areas does each serve, and what shape is each?",
+      "last_checked": "3d50e252ed12b1f5ce842999631d1939ed562935",
+      "svg": "skill-map.svg",
+      "html": "skill-map.html",
+      "receipt": "skill-map.receipt.json"
+    },
+    "skill-area-fundamentals": {
+      "type": "architecture",
+      "question": "Which outside skills do the Fundamentals skills rely on, which outside skills rely on them, and how do they rely on each other?",
+      "last_checked": "8f4005240c3002a64af17add4bc8e878fd7e2ccd",
+      "svg": "skill-area-fundamentals.svg",
+      "html": "skill-area-fundamentals.html",
+      "receipt": "skill-area-fundamentals.receipt.json"
+    },
+    "skill-area-records-and-code": {
+      "type": "architecture",
+      "question": "Which outside skills do the Records and code skills rely on, which outside skills rely on them, and how do they rely on each other?",
+      "last_checked": "8f4005240c3002a64af17add4bc8e878fd7e2ccd",
+      "svg": "skill-area-records-and-code.svg",
+      "html": "skill-area-records-and-code.html",
+      "receipt": "skill-area-records-and-code.receipt.json"
+    },
+    "skill-area-coordination": {
+      "type": "architecture",
+      "question": "Which outside skills do the Coordination skills rely on, which outside skills rely on them, and how do they rely on each other?",
+      "last_checked": "3d50e252ed12b1f5ce842999631d1939ed562935",
+      "svg": "skill-area-coordination.svg",
+      "html": "skill-area-coordination.html",
+      "receipt": "skill-area-coordination.receipt.json"
+    },
+    "skill-area-work-and-delivery": {
+      "type": "architecture",
+      "question": "Which outside skills do the Work and delivery skills rely on, which outside skills rely on them, and how do they rely on each other?",
+      "last_checked": "8f4005240c3002a64af17add4bc8e878fd7e2ccd",
+      "svg": "skill-area-work-and-delivery.svg",
+      "html": "skill-area-work-and-delivery.html",
+      "receipt": "skill-area-work-and-delivery.receipt.json"
+    },
+    "skill-area-repository-types": {
+      "type": "architecture",
+      "question": "Which outside skills do the Repository types skills rely on, which outside skills rely on them, and how do they rely on each other?",
+      "last_checked": "8f4005240c3002a64af17add4bc8e878fd7e2ccd",
+      "svg": "skill-area-repository-types.svg",
+      "html": "skill-area-repository-types.html",
+      "receipt": "skill-area-repository-types.receipt.json"
+    },
+    "skill-area-agentic-systems": {
+      "type": "architecture",
+      "question": "Which outside skills do the Agentic systems skills rely on, which outside skills rely on them, and how do they rely on each other?",
+      "last_checked": "8f4005240c3002a64af17add4bc8e878fd7e2ccd",
+      "svg": "skill-area-agentic-systems.svg",
+      "html": "skill-area-agentic-systems.html",
+      "receipt": "skill-area-agentic-systems.receipt.json"
+    },
+    "skill-area-environment": {
+      "type": "architecture",
+      "question": "Which outside skills do the Environment skills rely on, which outside skills rely on them, and how do they rely on each other?",
+      "last_checked": "8f4005240c3002a64af17add4bc8e878fd7e2ccd",
+      "svg": "skill-area-environment.svg",
+      "html": "skill-area-environment.html",
+      "receipt": "skill-area-environment.receipt.json"
+    },
+    "skill-area-acquire": {
+      "type": "architecture",
+      "question": "Which outside skills do the Acquire skills rely on, which outside skills rely on them, and how do they rely on each other?",
+      "last_checked": "8bc9d49d0e4c06490a7f8ec81d00e65e92167fc5",
+      "svg": "skill-area-acquire.svg",
+      "html": "skill-area-acquire.html",
+      "receipt": "skill-area-acquire.receipt.json"
+    },
+    "skill-area-signals": {
+      "type": "architecture",
+      "question": "Which outside skills do the Signals skills rely on, which outside skills rely on them, and how do they rely on each other?",
+      "last_checked": "8f4005240c3002a64af17add4bc8e878fd7e2ccd",
+      "svg": "skill-area-signals.svg",
+      "html": "skill-area-signals.html",
+      "receipt": "skill-area-signals.receipt.json"
+    },
+    "skill-area-design": {
+      "type": "architecture",
+      "question": "Which outside skills do the Design skills rely on, which outside skills rely on them, and how do they rely on each other?",
+      "last_checked": "8f4005240c3002a64af17add4bc8e878fd7e2ccd",
+      "svg": "skill-area-design.svg",
+      "html": "skill-area-design.html",
+      "receipt": "skill-area-design.receipt.json"
+    },
+    "thread-model": {
+      "type": "workflow",
+      "question": "What steps does a piece of owner-directed work take, from the owner's message through a coordinating thread and a detached agent to the report, the mark and Project close?",
+      "last_checked": "b3b6a8085316555dfe92712595a442194b34905e",
+      "svg": "thread-model.svg",
+      "html": "thread-model.html",
+      "receipt": "thread-model.receipt.json"
+    }
+  }
+}

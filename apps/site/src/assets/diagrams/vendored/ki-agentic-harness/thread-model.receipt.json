@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "slug": "thread-model",
+  "type": "workflow",
+  "source": {
+    "file": "thread-model.workflow.json",
+    "sha256": "85d56270da906103a5267665b266f8274fa87d99e1948585077387425619149c",
+    "bytes": 11512
+  },
+  "html": {
+    "file": "thread-model.html",
+    "sha256": "b9965984e004429122c4bf39bd4d1ab2a9b9821d102d15f0b4b21cd4892d0d57",
+    "bytes": 842826
+  },
+  "renderer": {
+    "name": "archify",
+    "version": "3.2.0"
+  }
+}

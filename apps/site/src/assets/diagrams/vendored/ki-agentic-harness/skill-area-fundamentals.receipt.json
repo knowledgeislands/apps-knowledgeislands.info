@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "slug": "skill-area-fundamentals",
+  "type": "architecture",
+  "source": {
+    "file": "skill-area-fundamentals.architecture.json",
+    "sha256": "2203fbb4c6b9195f41cc0f3d25b1af13af9194fc9999e1c85d96c30d4aaf6ce2",
+    "bytes": 9559
+  },
+  "html": {
+    "file": "skill-area-fundamentals.html",
+    "sha256": "5a989a4337018256a55e91ce45c297d6b9d9056d16fc27a38f841f9996297cc6",
+    "bytes": 838915
+  },
+  "renderer": {
+    "name": "archify",
+    "version": "3.2.0"
+  }
+}

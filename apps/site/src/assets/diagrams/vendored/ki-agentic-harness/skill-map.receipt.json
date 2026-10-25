@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "slug": "skill-map",
+  "type": "architecture",
+  "source": {
+    "file": "skill-map.architecture.json",
+    "sha256": "8d68e6bbf763e22c7bffb8591ea11acdcecf61be9ea02cd090ca28a32b53f914",
+    "bytes": 31722
+  },
+  "html": {
+    "file": "skill-map.html",
+    "sha256": "e3e99f7ea99cff0eb78c4f4b62019df44c6850fcb729c6809d193df7723962b6",
+    "bytes": 928406
+  },
+  "renderer": {
+    "name": "archify",
+    "version": "3.2.0"
+  }
+}

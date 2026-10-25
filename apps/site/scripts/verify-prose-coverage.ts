@@ -36,10 +36,12 @@ const distDir = resolve(siteRoot, 'dist')
  * spacing or colour of their own. Everything outside this set is either
  * structural (`tbody`, `tr` group rows without painting them), inline markup
  * that inherits by design (`em`, `span`), or generated chrome with its own
- * component class (`svg`, `figure`).
+ * component class (`svg`).
  */
 const styledElements = new Set([
   'blockquote',
+  'figure',
+  'figcaption',
   'code',
   'h1',
   'h2',

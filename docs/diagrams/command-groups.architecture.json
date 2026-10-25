@@ -1,0 +1,415 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "The eighteen ki command groups",
+    "subtitle": "Each group names what an operation acts on - tools-ki v0.13.0",
+    "output": "+/diagrams/command-groups/command-groups.html",
+    "quality_profile": "showcase",
+    "legend": {
+      "entries": {
+        "backend": {
+          "label": "Command group"
+        }
+      }
+    },
+    "repository": {
+      "url": "https://github.com/knowledgeislands/tools-ki",
+      "revision": "65e062737e3efaa696c5d92aaf2f8fc8bf31d1e9"
+    }
+  },
+  "layout": {
+    "mode": "grid",
+    "cols": 3,
+    "origin": [
+      45,
+      50
+    ],
+    "cellW": 255,
+    "cellH": 74,
+    "gapX": 30,
+    "gapY": 30
+  },
+  "components": [
+    {
+      "id": "general",
+      "type": "backend",
+      "label": "General",
+      "sublabel": "Invocation and help",
+      "row": 0,
+      "col": 0,
+      "size": [
+        255,
+        74
+      ],
+      "sources": [
+        {
+          "path": "man/ki.1",
+          "line": 502,
+          "label": "tools-ki v0.13.0 manual"
+        }
+      ]
+    },
+    {
+      "id": "global-options",
+      "type": "backend",
+      "label": "Global options",
+      "sublabel": "Help and version flags",
+      "row": 0,
+      "col": 1,
+      "size": [
+        255,
+        74
+      ],
+      "sources": [
+        {
+          "path": "man/ki.1",
+          "line": 512,
+          "label": "tools-ki v0.13.0 manual"
+        }
+      ]
+    },
+    {
+      "id": "installation",
+      "type": "backend",
+      "label": "Installation",
+      "sublabel": "Bootstrap this machine",
+      "row": 0,
+      "col": 2,
+      "size": [
+        255,
+        74
+      ],
+      "sources": [
+        {
+          "path": "man/ki.1",
+          "line": 524,
+          "label": "tools-ki v0.13.0 manual"
+        }
+      ]
+    },
+    {
+      "id": "local-management",
+      "type": "backend",
+      "label": "Local management",
+      "sublabel": "Inspect and update installation",
+      "row": 1,
+      "col": 0,
+      "size": [
+        255,
+        74
+      ],
+      "sources": [
+        {
+          "path": "man/ki.1",
+          "line": 553,
+          "label": "tools-ki v0.13.0 manual"
+        }
+      ]
+    },
+    {
+      "id": "user-management",
+      "type": "backend",
+      "label": "User management",
+      "sublabel": "User skill declarations",
+      "row": 1,
+      "col": 1,
+      "size": [
+        255,
+        74
+      ],
+      "sources": [
+        {
+          "path": "man/ki.1",
+          "line": 815,
+          "label": "tools-ki v0.13.0 manual"
+        }
+      ]
+    },
+    {
+      "id": "repository-options",
+      "type": "backend",
+      "label": "Repository options",
+      "sublabel": "Repository selectors",
+      "row": 1,
+      "col": 2,
+      "size": [
+        255,
+        74
+      ],
+      "sources": [
+        {
+          "path": "man/ki.1",
+          "line": 826,
+          "label": "tools-ki v0.13.0 manual"
+        }
+      ]
+    },
+    {
+      "id": "repository-management",
+      "type": "backend",
+      "label": "Repository management",
+      "sublabel": "Repository standards and repairs",
+      "row": 2,
+      "col": 0,
+      "size": [
+        255,
+        74
+      ],
+      "sources": [
+        {
+          "path": "man/ki.1",
+          "line": 867,
+          "label": "tools-ki v0.13.0 manual"
+        }
+      ]
+    },
+    {
+      "id": "batch-records",
+      "type": "backend",
+      "label": "Batch records",
+      "sublabel": "Bounded work authority",
+      "row": 2,
+      "col": 1,
+      "size": [
+        255,
+        74
+      ],
+      "sources": [
+        {
+          "path": "man/ki.1",
+          "line": 1300,
+          "label": "tools-ki v0.13.0 manual"
+        }
+      ]
+    },
+    {
+      "id": "knowledge-base-search",
+      "type": "backend",
+      "label": "Knowledge Base search",
+      "sublabel": "Search island knowledge",
+      "row": 2,
+      "col": 2,
+      "size": [
+        255,
+        74
+      ],
+      "sources": [
+        {
+          "path": "man/ki.1",
+          "line": 1325,
+          "label": "tools-ki v0.13.0 manual"
+        }
+      ]
+    },
+    {
+      "id": "registry-management",
+      "type": "backend",
+      "label": "Registry management",
+      "sublabel": "Known repositories and roots",
+      "row": 3,
+      "col": 0,
+      "size": [
+        255,
+        74
+      ],
+      "sources": [
+        {
+          "path": "man/ki.1",
+          "line": 1341,
+          "label": "tools-ki v0.13.0 manual"
+        }
+      ]
+    },
+    {
+      "id": "harness-management",
+      "type": "backend",
+      "label": "Harness management",
+      "sublabel": "Install and remove harnesses",
+      "row": 3,
+      "col": 1,
+      "size": [
+        255,
+        74
+      ],
+      "sources": [
+        {
+          "path": "man/ki.1",
+          "line": 1389,
+          "label": "tools-ki v0.13.0 manual"
+        }
+      ]
+    },
+    {
+      "id": "trades",
+      "type": "backend",
+      "label": "Trades",
+      "sublabel": "Routes between repositories",
+      "row": 3,
+      "col": 2,
+      "size": [
+        255,
+        74
+      ],
+      "sources": [
+        {
+          "path": "man/ki.1",
+          "line": 1427,
+          "label": "tools-ki v0.13.0 manual"
+        }
+      ]
+    },
+    {
+      "id": "territory-management",
+      "type": "backend",
+      "label": "Territory management",
+      "sublabel": "Repository groupings",
+      "row": 4,
+      "col": 0,
+      "size": [
+        255,
+        74
+      ],
+      "sources": [
+        {
+          "path": "man/ki.1",
+          "line": 1564,
+          "label": "tools-ki v0.13.0 manual"
+        }
+      ]
+    },
+    {
+      "id": "acquisition",
+      "type": "backend",
+      "label": "Acquisition",
+      "sublabel": "Capture external material",
+      "row": 4,
+      "col": 1,
+      "size": [
+        255,
+        74
+      ],
+      "sources": [
+        {
+          "path": "man/ki.1",
+          "line": 1604,
+          "label": "tools-ki v0.13.0 manual"
+        }
+      ]
+    },
+    {
+      "id": "background-agents",
+      "type": "backend",
+      "label": "Background agents",
+      "sublabel": "Launch and monitor runs",
+      "row": 4,
+      "col": 2,
+      "size": [
+        255,
+        74
+      ],
+      "sources": [
+        {
+          "path": "man/ki.1",
+          "line": 1673,
+          "label": "tools-ki v0.13.0 manual"
+        }
+      ]
+    },
+    {
+      "id": "work-model",
+      "type": "backend",
+      "label": "Work model",
+      "sublabel": "Work identifiers and packages",
+      "row": 5,
+      "col": 0,
+      "size": [
+        255,
+        74
+      ],
+      "sources": [
+        {
+          "path": "man/ki.1",
+          "line": 2151,
+          "label": "tools-ki v0.13.0 manual"
+        }
+      ]
+    },
+    {
+      "id": "estate-convergence",
+      "type": "backend",
+      "label": "Estate convergence",
+      "sublabel": "Converge a registered estate",
+      "row": 5,
+      "col": 1,
+      "size": [
+        255,
+        74
+      ],
+      "sources": [
+        {
+          "path": "man/ki.1",
+          "line": 2220,
+          "label": "tools-ki v0.13.0 manual"
+        }
+      ]
+    },
+    {
+      "id": "development",
+      "type": "backend",
+      "label": "Development",
+      "sublabel": "Local harness development",
+      "row": 5,
+      "col": 2,
+      "size": [
+        255,
+        74
+      ],
+      "sources": [
+        {
+          "path": "man/ki.1",
+          "line": 2302,
+          "label": "tools-ki v0.13.0 manual"
+        }
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "ki - one command surface",
+      "wraps": [
+        "general",
+        "global-options",
+        "installation",
+        "local-management",
+        "user-management",
+        "repository-options",
+        "repository-management",
+        "batch-records",
+        "knowledge-base-search",
+        "registry-management",
+        "harness-management",
+        "trades",
+        "territory-management",
+        "acquisition",
+        "background-agents",
+        "work-model",
+        "estate-convergence",
+        "development"
+      ]
+    }
+  ],
+  "connections": [],
+  "cards": [
+    {
+      "dot": "emerald",
+      "title": "Read by purpose",
+      "items": [
+        "All eighteen groups in the v0.13.0 manual.",
+        "Names and source ranges follow man/ki.1.",
+        "Use ki <command> --help for exact grammar."
+      ]
+    }
+  ]
+}

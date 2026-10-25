@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "slug": "skill-area-signals",
+  "type": "architecture",
+  "source": {
+    "file": "skill-area-signals.architecture.json",
+    "sha256": "46d142f2a38456c8aa1a8beef6e190adbf0e8e5242725e5e55bc44bfe2ee5f8a",
+    "bytes": 3051
+  },
+  "html": {
+    "file": "skill-area-signals.html",
+    "sha256": "98691295d91a703f70720cf19bbd8eb21cf16dcdafdff775c06f50f8801c3f6c",
+    "bytes": 809078
+  },
+  "renderer": {
+    "name": "archify",
+    "version": "3.2.0"
+  }
+}

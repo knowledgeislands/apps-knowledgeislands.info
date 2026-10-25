@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 732" role="img" lang="en" aria-labelledby="archify-diagram-title archify-diagram-description" data-preset="classic" data-quality-profile="showcase" data-node-ui="" data-reader-fit="intrinsic-height" data-reader-min-text="7.5" data-reader-primary-text="14" width="940" height="732" data-theme="light" fill="#000000" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, &quot;Liberation Mono&quot;, monospace"><rect x="0" y="0" width="940" height="732" fill="#f5efe0"/>
+        <title id="archify-diagram-title">The eighteen ki command groups</title>
+        <desc id="archify-diagram-description">Each group names what an operation acts on - tools-ki v0.13.0</desc>
+        <!-- Definitions -->
+        <defs>
+          <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#4a5568"/>
+          </marker>
+          <marker id="arrowhead-emphasis" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#317070"/>
+          </marker>
+          <marker id="arrowhead-security" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#9b2c1c"/>
+          </marker>
+          <marker id="arrowhead-dashed" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#1b3a5c"/>
+          </marker>
+          <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M 40 0 L 0 0 0 40" stroke-width="0.5px" fill="none" stroke="#d4c9b4"/>
+          </pattern>
+        </defs>
+        
+
+        <!-- Background Grid -->
+        <rect width="100%" height="100%" fill="url(#grid)"/>
+
+        <!-- Boundaries (behind everything) -->
+        <rect data-graph-role="structural-frame" data-composition-frame-kind="region" data-composition-frame-id="0" data-composition-frame-label="ki - one command surface" x="15" y="20" width="885" height="644" rx="12" stroke-width="1" fill="#806020" fill-opacity="0.031" stroke="#93723b"/>
+
+        <!-- Connection paths (before components for correct z-order) -->
+
+
+        <!-- Components -->
+        <g id="node-general" data-node-id="general" data-node-label="General" tabindex="0" role="button" aria-label="Focus General, Invocation and help, ki - one command surface" aria-pressed="false" data-node-kind="backend" data-node-sublabel="Invocation and help" data-node-context="ki - one command surface">
+          <title>General · Invocation and help · ki - one command surface</title>
+          <rect x="45" y="50" width="255" height="74" rx="8" fill="#f5efe0"/>
+          <rect x="45" y="50" width="255" height="74" rx="8" data-animate="node" stroke-width="1.25px" fill="#ddddcc" stroke="#2d5a3d"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" transform="translate(51 56) scale(0.6875)" fill="none" stroke="#2d5a3d" stroke-width="1.35px" stroke-linecap="round" stroke-linejoin="round" opacity="0.76">
+            <path d="M6 3 3 8l3 5M10 3l3 5-3 5" vector-effect="non-scaling-stroke"/>
+          </g>
+          <text data-node-label="" x="172.5" y="85" font-size="11px" font-weight="600" text-anchor="middle" fill="#1a2030">General</text>
+        <text x="172.5" y="101" font-size="9px" text-anchor="middle" fill="#4a5568">Invocation and help</text>
+        </g>
+
+        <g id="node-global-options" data-node-id="global-options" data-node-label="Global options" tabindex="0" role="button" aria-label="Focus Global options, Help and version flags, ki - one command surface" aria-pressed="false" data-node-kind="backend" data-node-sublabel="Help and version flags" data-node-context="ki - one command surface">
+          <title>Global options · Help and version flags · ki - one command surface</title>
+          <rect x="330" y="50" width="255" height="74" rx="8" fill="#f5efe0"/>
+          <rect x="330" y="50" width="255" height="74" rx="8" data-animate="node" stroke-width="1.25px" fill="#ddddcc" stroke="#2d5a3d"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" transform="translate(336 56) scale(0.6875)" fill="none" stroke="#2d5a3d" stroke-width="1.35px" stroke-linecap="round" stroke-linejoin="round" opacity="0.76">
+            <path d="M6 3 3 8l3 5M10 3l3 5-3 5" vector-effect="non-scaling-stroke"/>
+          </g>
+          <text data-node-label="" x="457.5" y="85" font-size="11px" font-weight="600" text-anchor="middle" fill="#1a2030">Global options</text>
+        <text x="457.5" y="101" font-size="9px" text-anchor="middle" fill="#4a5568">Help and version flags</text>
+        </g>
+
+        <g id="node-installation" data-node-id="installation" data-node-label="Installation" tabindex="0" role="button" aria-label="Focus Installation, Bootstrap this machine, ki - one command surface" aria-pressed="false" data-node-kind="backend" data-node-sublabel="Bootstrap this machine" data-node-context="ki - one command surface">
+          <title>Installation · Bootstrap this machine · ki - one command surface</title>
+          <rect x="615" y="50" width="255" height="74" rx="8" fill="#f5efe0"/>
+          <rect x="615" y="50" width="255" height="74" rx="8" data-animate="node" stroke-width="1.25px" fill="#ddddcc" stroke="#2d5a3d"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" transform="translate(621 56) scale(0.6875)" fill="none" stroke="#2d5a3d" stroke-width="1.35px" stroke-linecap="round" stroke-linejoin="round" opacity="0.76">
+            <path d="M6 3 3 8l3 5M10 3l3 5-3 5" vector-effect="non-scaling-stroke"/>
+          </g>
+          <text data-node-label="" x="742.5" y="85" font-size="11px" font-weight="600" text-anchor="middle" fill="#1a2030">Installation</text>
+        <text x="742.5" y="101" font-size="9px" text-anchor="middle" fill="#4a5568">Bootstrap this machine</text>
+        </g>
+
+        <g id="node-local-management" data-node-id="local-management" data-node-label="Local management" tabindex="0" role="button" aria-label="Focus Local management, Inspect and update installation, ki - one command surface" aria-pressed="false" data-node-kind="backend" data-node-sublabel="Inspect and update installation" data-node-context="ki - one command surface">
+          <title>Local management · Inspect and update installation · ki - one command surface</title>
+          <rect x="45" y="154" width="255" height="74" rx="8" fill="#f5efe0"/>
+          <rect x="45" y="154" width="255" height="74" rx="8" data-animate="node" stroke-width="1.25px" fill="#ddddcc" stroke="#2d5a3d"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" transform="translate(51 160) scale(0.6875)" fill="none" stroke="#2d5a3d" stroke-width="1.35px" stroke-linecap="round" stroke-linejoin="round" opacity="0.76">
+            <path d="M6 3 3 8l3 5M10 3l3 5-3 5" vector-effect="non-scaling-stroke"/>
+          </g>
+          <text data-node-label="" x="172.5" y="189" font-size="11px" font-weight="600" text-anchor="middle" fill="#1a2030">Local management</text>
+        <text x="172.5" y="205" font-size="9px" text-anchor="middle" fill="#4a5568">Inspect and update installation</text>
+        </g>
+
+        <g id="node-user-management" data-node-id="user-management" data-node-label="User management" tabindex="0" role="button" aria-label="Focus User management, User skill declarations, ki - one command surface" aria-pressed="false" data-node-kind="backend" data-node-sublabel="User skill declarations" data-node-context="ki - one command surface">
+          <title>User management · User skill declarations · ki - one command surface</title>
+          <rect x="330" y="154" width="255" height="74" rx="8" fill="#f5efe0"/>
+          <rect x="330" y="154" width="255" height="74" rx="8" data-animate="node" stroke-width="1.25px" fill="#ddddcc" stroke="#2d5a3d"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" transform="translate(336 160) scale(0.6875)" fill="none" stroke="#2d5a3d" stroke-width="1.35px" stroke-linecap="round" stroke-linejoin="round" opacity="0.76">
+            <path d="M6 3 3 8l3 5M10 3l3 5-3 5" vector-effect="non-scaling-stroke"/>
+          </g>
+          <text data-node-label="" x="457.5" y="189" font-size="11px" font-weight="600" text-anchor="middle" fill="#1a2030">User management</text>
+        <text x="457.5" y="205" font-size="9px" text-anchor="middle" fill="#4a5568">User skill declarations</text>
+        </g>
+
+        <g id="node-repository-options" data-node-id="repository-options" data-node-label="Repository options" tabindex="0" role="button" aria-label="Focus Repository options, Repository selectors, ki - one command surface" aria-pressed="false" data-node-kind="backend" data-node-sublabel="Repository selectors" data-node-context="ki - one command surface">
+          <title>Repository options · Repository selectors · ki - one command surface</title>
+          <rect x="615" y="154" width="255" height="74" rx="8" fill="#f5efe0"/>
+          <rect x="615" y="154" width="255" height="74" rx="8" data-animate="node" stroke-width="1.25px" fill="#ddddcc" stroke="#2d5a3d"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" transform="translate(621 160) scale(0.6875)" fill="none" stroke="#2d5a3d" stroke-width="1.35px" stroke-linecap="round" stroke-linejoin="round" opacity="0.76">
+            <path d="M6 3 3 8l3 5M10 3l3 5-3 5" vector-effect="non-scaling-stroke"/>
+          </g>
+          <text data-node-label="" x="742.5" y="189" font-size="11px" font-weight="600" text-anchor="middle" fill="#1a2030">Repository options</text>
+        <text x="742.5" y="205" font-size="9px" text-anchor="middle" fill="#4a5568">Repository selectors</text>
+        </g>
+
+        <g id="node-repository-management" data-node-id="repository-management" data-node-label="Repository management" tabindex="0" role="button" aria-label="Focus Repository management, Repository standards and repairs, ki - one command surface" aria-pressed="false" data-node-kind="backend" data-node-sublabel="Repository standards and repairs" data-node-context="ki - one command surface">
+          <title>Repository management · Repository standards and repairs · ki - one command surface</title>
+          <rect x="45" y="258" width="255" height="74" rx="8" fill="#f5efe0"/>
+          <rect x="45" y="258" width="255" height="74" rx="8" data-animate="node" stroke-width="1.25px" fill="#ddddcc" stroke="#2d5a3d"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" transform="translate(51 264) scale(0.6875)" fill="none" stroke="#2d5a3d" stroke-width="1.35px" stroke-linecap="round" stroke-linejoin="round" opacity="0.76">
+            <path d="M6 3 3 8l3 5M10 3l3 5-3 5" vector-effect="non-scaling-stroke"/>
+          </g>
+          <text data-node-label="" x="172.5" y="293" font-size="11px" font-weight="600" text-anchor="middle" fill="#1a2030">Repository management</text>
+        <text x="172.5" y="309" font-size="9px" text-anchor="middle" fill="#4a5568">Repository standards and repairs</text>
+        </g>
+
+        <g id="node-batch-records" data-node-id="batch-records" data-node-label="Batch records" tabindex="0" role="button" aria-label="Focus Batch records, Bounded work authority, ki - one command surface" aria-pressed="false" data-node-kind="backend" data-node-sublabel="Bounded work authority" data-node-context="ki - one command surface">
+          <title>Batch records · Bounded work authority · ki - one command surface</title>
+          <rect x="330" y="258" width="255" height="74" rx="8" fill="#f5efe0"/>
+          <rect x="330" y="258" width="255" height="74" rx="8" data-animate="node" stroke-width="1.25px" fill="#ddddcc" stroke="#2d5a3d"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" transform="translate(336 264) scale(0.6875)" fill="none" stroke="#2d5a3d" stroke-width="1.35px" stroke-linecap="round" stroke-linejoin="round" opacity="0.76">
+            <path d="M6 3 3 8l3 5M10 3l3 5-3 5" vector-effect="non-scaling-stroke"/>
+          </g>
+          <text data-node-label="" x="457.5" y="293" font-size="11px" font-weight="600" text-anchor="middle" fill="#1a2030">Batch records</text>
+        <text x="457.5" y="309" font-size="9px" text-anchor="middle" fill="#4a5568">Bounded work authority</text>
+        </g>
+
+        <g id="node-knowledge-base-search" data-node-id="knowledge-base-search" data-node-label="Knowledge Base search" tabindex="0" role="button" aria-label="Focus Knowledge Base search, Search island knowledge, ki - one command surface" aria-pressed="false" data-node-kind="backend" data-node-sublabel="Search island knowledge" data-node-context="ki - one command surface">
+          <title>Knowledge Base search · Search island knowledge · ki - one command surface</title>
+          <rect x="615" y="258" width="255" height="74" rx="8" fill="#f5efe0"/>
+          <rect x="615" y="258" width="255" height="74" rx="8" data-animate="node" stroke-width="1.25px" fill="#ddddcc" stroke="#2d5a3d"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" transform="translate(621 264) scale(0.6875)" fill="none" stroke="#2d5a3d" stroke-width="1.35px" stroke-linecap="round" stroke-linejoin="round" opacity="0.76">
+            <path d="M6 3 3 8l3 5M10 3l3 5-3 5" vector-effect="non-scaling-stroke"/>
+          </g>
+          <text data-node-label="" x="742.5" y="293" font-size="11px" font-weight="600" text-anchor="middle" fill="#1a2030">Knowledge Base search</text>
+        <text x="742.5" y="309" font-size="9px" text-anchor="middle" fill="#4a5568">Search island knowledge</text>
+        </g>
+
+        <g id="node-registry-management" data-node-id="registry-management" data-node-label="Registry management" tabindex="0" role="button" aria-label="Focus Registry management, Known repositories and roots, ki - one command surface" aria-pressed="false" data-node-kind="backend" data-node-sublabel="Known repositories and roots" data-node-context="ki - one command surface">
+          <title>Registry management · Known repositories and roots · ki - one command surface</title>
+          <rect x="45" y="362" width="255" height="74" rx="8" fill="#f5efe0"/>
+          <rect x="45" y="362" width="255" height="74" rx="8" data-animate="node" stroke-width="1.25px" fill="#ddddcc" stroke="#2d5a3d"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" transform="translate(51 368) scale(0.6875)" fill="none" stroke="#2d5a3d" stroke-width="1.35px" stroke-linecap="round" stroke-linejoin="round" opacity="0.76">
+            <path d="M6 3 3 8l3 5M10 3l3 5-3 5" vector-effect="non-scaling-stroke"/>
+          </g>
+          <text data-node-label="" x="172.5" y="397" font-size="11px" font-weight="600" text-anchor="middle" fill="#1a2030">Registry management</text>
+        <text x="172.5" y="413" font-size="9px" text-anchor="middle" fill="#4a5568">Known repositories and roots</text>
+        </g>
+
+        <g id="node-harness-management" data-node-id="harness-management" data-node-label="Harness management" tabindex="0" role="button" aria-label="Focus Harness management, Install and remove harnesses, ki - one command surface" aria-pressed="false" data-node-kind="backend" data-node-sublabel="Install and remove harnesses" data-node-context="ki - one command surface">
+          <title>Harness management · Install and remove harnesses · ki - one command surface</title>
+          <rect x="330" y="362" width="255" height="74" rx="8" fill="#f5efe0"/>
+          <rect x="330" y="362" width="255" height="74" rx="8" data-animate="node" stroke-width="1.25px" fill="#ddddcc" stroke="#2d5a3d"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" transform="translate(336 368) scale(0.6875)" fill="none" stroke="#2d5a3d" stroke-width="1.35px" stroke-linecap="round" stroke-linejoin="round" opacity="0.76">
+            <path d="M6 3 3 8l3 5M10 3l3 5-3 5" vector-effect="non-scaling-stroke"/>
+          </g>
+          <text data-node-label="" x="457.5" y="397" font-size="11px" font-weight="600" text-anchor="middle" fill="#1a2030">Harness management</text>
+        <text x="457.5" y="413" font-size="9px" text-anchor="middle" fill="#4a5568">Install and remove harnesses</text>
+        </g>
+
+        <g id="node-trades" data-node-id="trades" data-node-label="Trades" tabindex="0" role="button" aria-label="Focus Trades, Routes between repositories, ki - one command surface" aria-pressed="false" data-node-kind="backend" data-node-sublabel="Routes between repositories" data-node-context="ki - one command surface">
+          <title>Trades · Routes between repositories · ki - one command surface</title>
+          <rect x="615" y="362" width="255" height="74" rx="8" fill="#f5efe0"/>
+          <rect x="615" y="362" width="255" height="74" rx="8" data-animate="node" stroke-width="1.25px" fill="#ddddcc" stroke="#2d5a3d"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" transform="translate(621 368) scale(0.6875)" fill="none" stroke="#2d5a3d" stroke-width="1.35px" stroke-linecap="round" stroke-linejoin="round" opacity="0.76">
+            <path d="M6 3 3 8l3 5M10 3l3 5-3 5" vector-effect="non-scaling-stroke"/>
+          </g>
+          <text data-node-label="" x="742.5" y="397" font-size="11px" font-weight="600" text-anchor="middle" fill="#1a2030">Trades</text>
+        <text x="742.5" y="413" font-size="9px" text-anchor="middle" fill="#4a5568">Routes between repositories</text>
+        </g>
+
+        <g id="node-territory-management" data-node-id="territory-management" data-node-label="Territory management" tabindex="0" role="button" aria-label="Focus Territory management, Repository groupings, ki - one command surface" aria-pressed="false" data-node-kind="backend" data-node-sublabel="Repository groupings" data-node-context="ki - one command surface">
+          <title>Territory management · Repository groupings · ki - one command surface</title>
+          <rect x="45" y="466" width="255" height="74" rx="8" fill="#f5efe0"/>
+          <rect x="45" y="466" width="255" height="74" rx="8" data-animate="node" stroke-width="1.25px" fill="#ddddcc" stroke="#2d5a3d"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" transform="translate(51 472) scale(0.6875)" fill="none" stroke="#2d5a3d" stroke-width="1.35px" stroke-linecap="round" stroke-linejoin="round" opacity="0.76">
+            <path d="M6 3 3 8l3 5M10 3l3 5-3 5" vector-effect="non-scaling-stroke"/>
+          </g>
+          <text data-node-label="" x="172.5" y="501" font-size="11px" font-weight="600" text-anchor="middle" fill="#1a2030">Territory management</text>
+        <text x="172.5" y="517" font-size="9px" text-anchor="middle" fill="#4a5568">Repository groupings</text>
+        </g>
+
+        <g id="node-acquisition" data-node-id="acquisition" data-node-label="Acquisition" tabindex="0" role="button" aria-label="Focus Acquisition, Capture external material, ki - one command surface" aria-pressed="false" data-node-kind="backend" data-node-sublabel="Capture external material" data-node-context="ki - one command surface">
+          <title>Acquisition · Capture external material · ki - one command surface</title>
+          <rect x="330" y="466" width="255" height="74" rx="8" fill="#f5efe0"/>
+          <rect x="330" y="466" width="255" height="74" rx="8" data-animate="node" stroke-width="1.25px" fill="#ddddcc" stroke="#2d5a3d"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" transform="translate(336 472) scale(0.6875)" fill="none" stroke="#2d5a3d" stroke-width="1.35px" stroke-linecap="round" stroke-linejoin="round" opacity="0.76">
+            <path d="M6 3 3 8l3 5M10 3l3 5-3 5" vector-effect="non-scaling-stroke"/>
+          </g>
+          <text data-node-label="" x="457.5" y="501" font-size="11px" font-weight="600" text-anchor="middle" fill="#1a2030">Acquisition</text>
+        <text x="457.5" y="517" font-size="9px" text-anchor="middle" fill="#4a5568">Capture external material</text>
+        </g>
+
+        <g id="node-background-agents" data-node-id="background-agents" data-node-label="Background agents" tabindex="0" role="button" aria-label="Focus Background agents, Launch and monitor runs, ki - one command surface" aria-pressed="false" data-node-kind="backend" data-node-sublabel="Launch and monitor runs" data-node-context="ki - one command surface">
+          <title>Background agents · Launch and monitor runs · ki - one command surface</title>
+          <rect x="615" y="466" width="255" height="74" rx="8" fill="#f5efe0"/>
+          <rect x="615" y="466" width="255" height="74" rx="8" data-animate="node" stroke-width="1.25px" fill="#ddddcc" stroke="#2d5a3d"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" transform="translate(621 472) scale(0.6875)" fill="none" stroke="#2d5a3d" stroke-width="1.35px" stroke-linecap="round" stroke-linejoin="round" opacity="0.76">
+            <path d="M6 3 3 8l3 5M10 3l3 5-3 5" vector-effect="non-scaling-stroke"/>
+          </g>
+          <text data-node-label="" x="742.5" y="501" font-size="11px" font-weight="600" text-anchor="middle" fill="#1a2030">Background agents</text>
+        <text x="742.5" y="517" font-size="9px" text-anchor="middle" fill="#4a5568">Launch and monitor runs</text>
+        </g>
+
+        <g id="node-work-model" data-node-id="work-model" data-node-label="Work model" tabindex="0" role="button" aria-label="Focus Work model, Work identifiers and packages, ki - one command surface" aria-pressed="false" data-node-kind="backend" data-node-sublabel="Work identifiers and packages" data-node-context="ki - one command surface">
+          <title>Work model · Work identifiers and packages · ki - one command surface</title>
+          <rect x="45" y="570" width="255" height="74" rx="8" fill="#f5efe0"/>
+          <rect x="45" y="570" width="255" height="74" rx="8" data-animate="node" stroke-width="1.25px" fill="#ddddcc" stroke="#2d5a3d"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" transform="translate(51 576) scale(0.6875)" fill="none" stroke="#2d5a3d" stroke-width="1.35px" stroke-linecap="round" stroke-linejoin="round" opacity="0.76">
+            <path d="M6 3 3 8l3 5M10 3l3 5-3 5" vector-effect="non-scaling-stroke"/>
+          </g>
+          <text data-node-label="" x="172.5" y="605" font-size="11px" font-weight="600" text-anchor="middle" fill="#1a2030">Work model</text>
+        <text x="172.5" y="621" font-size="9px" text-anchor="middle" fill="#4a5568">Work identifiers and packages</text>
+        </g>
+
+        <g id="node-estate-convergence" data-node-id="estate-convergence" data-node-label="Estate convergence" tabindex="0" role="button" aria-label="Focus Estate convergence, Converge a registered estate, ki - one command surface" aria-pressed="false" data-node-kind="backend" data-node-sublabel="Converge a registered estate" data-node-context="ki - one command surface">
+          <title>Estate convergence · Converge a registered estate · ki - one command surface</title>
+          <rect x="330" y="570" width="255" height="74" rx="8" fill="#f5efe0"/>
+          <rect x="330" y="570" width="255" height="74" rx="8" data-animate="node" stroke-width="1.25px" fill="#ddddcc" stroke="#2d5a3d"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" transform="translate(336 576) scale(0.6875)" fill="none" stroke="#2d5a3d" stroke-width="1.35px" stroke-linecap="round" stroke-linejoin="round" opacity="0.76">
+            <path d="M6 3 3 8l3 5M10 3l3 5-3 5" vector-effect="non-scaling-stroke"/>
+          </g>
+          <text data-node-label="" x="457.5" y="605" font-size="11px" font-weight="600" text-anchor="middle" fill="#1a2030">Estate convergence</text>
+        <text x="457.5" y="621" font-size="9px" text-anchor="middle" fill="#4a5568">Converge a registered estate</text>
+        </g>
+
+        <g id="node-development" data-node-id="development" data-node-label="Development" tabindex="0" role="button" aria-label="Focus Development, Local harness development, ki - one command surface" aria-pressed="false" data-node-kind="backend" data-node-sublabel="Local harness development" data-node-context="ki - one command surface">
+          <title>Development · Local harness development · ki - one command surface</title>
+          <rect x="615" y="570" width="255" height="74" rx="8" fill="#f5efe0"/>
+          <rect x="615" y="570" width="255" height="74" rx="8" data-animate="node" stroke-width="1.25px" fill="#ddddcc" stroke="#2d5a3d"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" transform="translate(621 576) scale(0.6875)" fill="none" stroke="#2d5a3d" stroke-width="1.35px" stroke-linecap="round" stroke-linejoin="round" opacity="0.76">
+            <path d="M6 3 3 8l3 5M10 3l3 5-3 5" vector-effect="non-scaling-stroke"/>
+          </g>
+          <text data-node-label="" x="742.5" y="605" font-size="11px" font-weight="600" text-anchor="middle" fill="#1a2030">Development</text>
+        <text x="742.5" y="621" font-size="9px" text-anchor="middle" fill="#4a5568">Local harness development</text>
+        </g>
+
+        <!-- Connection labels -->
+
+
+        <!-- Boundary labels (foreground masks keep routes out of titles) -->
+        <g data-graph-role="structural-frame-label" data-composition-frame-id="0" data-composition-frame-kind="region" data-composition-frame-label="ki - one command surface">
+          <rect data-graph-role="structural-frame-label-mask" x="19" y="30" width="139.6" height="16" rx="3" fill="#eae0cb" stroke="#ccb692" stroke-width="0.8px"/>
+          <text data-boundary-label="" x="23" y="43" font-size="9px" font-weight="600" fill="#8a5a12">ki - one command surface</text>
+        </g>
+
+        <!-- Legend -->
+        <g data-legend="">
+          <text x="40" y="696" font-size="12px" font-weight="650" fill="#1a2030">Legend</text>
+          <g data-legend-semantic-kind="backend" data-legend-x="40" data-legend-baseline="716" data-legend-width="124">
+            <rect x="40" y="707" width="16" height="10" rx="2.5" stroke-width="1" fill="#ddddcc" stroke="#2d5a3d"/>
+            <text x="62" y="716" font-size="10px" font-weight="500" fill="#4a5568">Command group</text>
+          </g>
+        </g>
+      </svg>

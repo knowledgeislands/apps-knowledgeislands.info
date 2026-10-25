@@ -6,9 +6,9 @@ permalink: /docs/ki/command-groups/
 sources:
   - repository: knowledgeislands/tools-ki
     path: man/ki.1
-    ref: v0.10.1
+    ref: v0.13.0
     governs: 'The command groups, their scope boundaries, and the behaviour this page describes'
-    reviewed: '2026-10-11'
+    reviewed: '2026-10-25'
   - repository: knowledgeislands/tools-ki
     path: docs/decisions/ADR-KI-TOOLS-002-compatible-harness-registry-and-native-operations.md
     ref: v0.4.0
@@ -43,6 +43,8 @@ After that, three commands cover most days:
 Everything below is the structure those sit inside.
 
 ## How the commands divide
+
+{% figure "command-groups", "The eighteen command groups in tools-ki v0.13.0, labelled by what each operates on." %}
 
 The CLI groups commands by **what they can change**, not by subject matter. The distinction is the whole point of the grammar: you can tell from the group whether a command touches your machine, one repository, or the whole registered estate, before you read what it does.
 

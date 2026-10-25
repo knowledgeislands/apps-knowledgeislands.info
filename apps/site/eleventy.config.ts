@@ -45,6 +45,63 @@ export default function (eleventyConfig: UserConfig) {
   // Add any static asset directories that should be copied verbatim to dist.
   eleventyConfig.addPassthroughCopy('src/assets/images')
   eleventyConfig.addPassthroughCopy('src/assets/js')
+  eleventyConfig.addPassthroughCopy({ 'src/assets/diagrams': 'diagrams' })
+  eleventyConfig.addPassthroughCopy({ '../../docs/diagrams/*.html': 'diagrams/site' })
+  eleventyConfig.addPassthroughCopy({ '../../docs/diagrams/*.svg': 'diagrams/site' })
+  eleventyConfig.addWatchTarget('../../docs/diagrams')
+  const escapeHtml = (value: string): string =>
+    value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
+
+  function figure(slug: string, caption: string): string {
+    if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) throw new Error(`Invalid figure slug: ${slug}`)
+    const site = Bun.TOML.parse(readFileSync('../../docs/diagrams/diagrams.toml', 'utf8')) as Record<string, unknown>
+    const vendored = JSON5.parse(readFileSync('src/_data/vendoredDiagrams.json5', 'utf8')) as {
+      diagrams: Record<string, { svg: string; html: string }>
+    }
+    const entry = vendored.diagrams[slug]
+    if (site[slug] && entry) throw new Error(`Ambiguous figure slug: ${slug}`)
+    if (!site[slug] && !entry) throw new Error(`Unknown figure slug: ${slug}`)
+    const files = site[slug]
+      ? { svg: `../../docs/diagrams/${slug}.svg`, html: `/diagrams/site/${slug}.html` }
+      : {
+          svg: `src/assets/diagrams/vendored/ki-agentic-harness/${entry.svg}`,
+          html: `/diagrams/vendored/ki-agentic-harness/${entry.html}`
+        }
+    // Prefix local IDs so several exported SVGs can share a page without sharing clip paths or styles.
+    let svg = readFileSync(files.svg, 'utf8')
+      .replace(/<\?xml[^>]*\?>/g, '')
+      .replace(/<!DOCTYPE[^>]*>/gi, '')
+    const ids = [...svg.matchAll(/\bid="([^"]+)"/g)].map((match) => match[1])
+    const prefix = `figure-${slug}-`
+    for (const id of ids) {
+      svg = svg
+        .replaceAll(`id="${id}"`, `id="${prefix}${id}"`)
+        .replaceAll(`url(#${id})`, `url(#${prefix}${id})`)
+        .replaceAll(`href="#${id}"`, `href="#${prefix}${id}"`)
+    }
+    svg = svg.replace(
+      /aria-labelledby="([^"]+)"/g,
+      (_match, value: string) =>
+        `aria-labelledby="${value
+          .split(/\s+/)
+          .map((id) => `${prefix}${id}`)
+          .join(' ')}"`
+    )
+    // Dual SVG exports carry their own stylesheet. Scope it to this SVG so a vendored chart
+    // cannot recolour the site or another inline chart; the copied source stays byte-identical.
+    svg = svg
+      .replace('<svg ', `<svg id="figure-${slug}" `)
+      .replace(
+        /<style([^>]*)>([\s\S]*?)<\/style>/g,
+        (_match, attributes: string, css: string) => `<style${attributes}>@scope (#figure-${slug}) {${css}}</style>`
+      )
+    return `<figure class="figure-diagram"><div class="figure-diagram-panel">${svg}</div><figcaption>${escapeHtml(caption)} <a href="${files.html}" target="_blank" rel="noopener">Interactive</a></figcaption></figure>`
+  }
+  eleventyConfig.addShortcode('figure', figure)
+
+  // Passthrough copies bypass transforms. Guard viewer URLs too if they ever enter the template pipeline.
+  const isPage = (path: string | undefined): path is string =>
+    !!path?.endsWith('.html') && !relative(outputRoot, resolve(path)).split(sep).join('/').startsWith('diagrams/')
 
   // ── Transform: give prose headings a stable id ───────────────────────────
   // Long reference pages need in-page anchors to be navigable at all: the
@@ -65,7 +122,7 @@ export default function (eleventyConfig: UserConfig) {
       .replace(/^-+|-+$/g, '')
 
   eleventyConfig.addTransform('heading-anchors', (content: string, outputPath: string | undefined) => {
-    if (!outputPath?.endsWith('.html')) return content
+    if (!isPage(outputPath)) return content
     const used = new Map<string, number>()
     return content.replace(/<(h2|h3|h4)>([\s\S]*?)<\/\1>/gi, (match, tag: string, inner: string) => {
       const base = headingSlug(inner)
@@ -92,7 +149,7 @@ export default function (eleventyConfig: UserConfig) {
     '<path d="M15 3h6v6"/><path d="M11 13 21 3"/></svg>'
 
   eleventyConfig.addTransform('external-link-icons', (content: string, outputPath: string | undefined) => {
-    if (!outputPath?.endsWith('.html')) return content
+    if (!isPage(outputPath)) return content
     return content.replace(
       /<a\s+([^>]*href="https?:\/\/[^"]*"[^>]*)>([\s\S]*?)<\/a>/gi,
       (match, attrs: string, inner: string) => {
@@ -108,7 +165,7 @@ export default function (eleventyConfig: UserConfig) {
   // Ensures href/src/srcset attributes pointing at absolute internal paths are
   // rewritten to relative paths, making dist/ portable without a web server.
   eleventyConfig.addTransform('explicit-index-links', (content: string, outputPath: string | undefined) => {
-    if (!outputPath?.endsWith('.html')) return content
+    if (!isPage(outputPath)) return content
     return (
       content
         .replace(/(\s(?:href|src)=)(["'])([^"']+)(\2)/gi, (_match, prefix: string, quote: string, url: string) => {
