@@ -40,6 +40,8 @@ harnesses = ["knowledgeislands/ki-agentic-harness"]
 
 This excerpt shows coverage, not a complete identity declaration. `ki repo init` writes the initial declaration for an existing worktree using the identity values you supply.
 
+[Repository standards](/docs/standards/repository-standards/) explains how the universal contract and repository shapes compose; [engineering and Git](/docs/standards/engineering-and-git/) and [writing](/docs/standards/writing/) cover their supporting conventions.
+
 ## How it works
 
 The host resolves a declared capability from permitted installed harnesses, validates its dependencies and loads its registered operations. The skill owns its rules and safe repairs; the CLI owns execution and reporting.

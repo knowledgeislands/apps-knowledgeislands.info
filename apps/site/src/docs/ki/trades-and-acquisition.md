@@ -61,6 +61,8 @@ A trade is a directional exchange of work or knowledge between registered reposi
 
 Acquisition preserves selected source material as a capture package. `ki-acquire` governs its scope, fidelity and omissions; `ki acquire` runs enabled adapters. Knowledge Base search serves a third need: finding evidence already held in local notes, using a rebuildable index governed by `ki-repo-kb`.
 
+[Trades](/docs/ways-of-working/trades/), [acquiring knowledge](/docs/knowledge/acquiring-knowledge/) and [querying, saving and updating](/docs/knowledge/query-save-update/) explain the practices these commands support.
+
 ## How it works
 
 Trade routes and standing grants come from the territory Capital's policy. Sender and receiver each write only their own repository. A submitted record is immutable; receipt creates a receiver-owned copy initially marked unconsidered. The receiver's decision remains separate from delivery. Release depends on the sender's observation policy, and receiver pruning depends on observable sender release.

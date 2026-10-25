@@ -42,12 +42,12 @@
   {
     slug: 'ki',
     title: 'The ki CLI',
-    description: 'The command line that drives a Knowledge Islands repository — what the commands do and when to reach for them.'
+    description: 'The commands that operate installations, repositories, territory, work and knowledge, and when to use them.'
   },
   {
     slug: 'ki-agentic-harness',
     title: 'The Agentic Harness',
-    description: 'How the harness is put together, how its skills are chosen and tuned, and how work is planned and delivered through it.'
+    description: 'How to install, govern and tune the harness, use its skills and maintain the agent environment.'
   },
   {
     slug: 'prompting',

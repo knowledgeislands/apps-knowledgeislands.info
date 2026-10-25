@@ -41,6 +41,8 @@ A repository's `.ki.toml` declares its identity, Capital, kind, shape and govern
 
 Harnesses supply the skills those declarations select. `ki-repo` governs the repository contract and `ki-bootstrap` explains installation and activation. Registration, skill activation and a successful audit establish different facts: location, applicable governance and the result of the checks actually run.
 
+[Repository standards](/docs/standards/repository-standards/) explains the shapes, universal contract and review loop behind these commands.
+
 ## How it works
 
 Repository options resolve a complete target selection before an action starts. `--repo <path-or-pattern>` names explicit roots; `--territory <handle>` selects a Capital's members; `--estate` selects registered repositories; `--principals` selects registered territory Capitals. These primary scopes are mutually exclusive. Repeated `--filter <prefix>` arguments narrow directory basenames with literal, case-sensitive OR matching.

@@ -147,13 +147,19 @@
       'ki-bootstrap'
     ],
     commands: ['ki registry', 'ki repo', 'ki harness', 'ki territory', 'ki estate converge'],
-    page: '/docs/ki/repositories-and-territory/'
+    page: ['/docs/standards/repository-standards/', '/docs/ki/repositories-and-territory/']
   },
   {
     slug: 'conformance-standards',
     title: 'Decision records, engineering, writing and diagrams',
     skills: ['ki-decision-records', 'ki-engineering', 'ki-git', 'ki-authoring', 'ki-guides', 'ki-specs', 'ki-diagrams'],
-    commands: []
+    commands: [],
+    page: [
+      '/docs/standards/decision-records/',
+      '/docs/standards/engineering-and-git/',
+      '/docs/standards/writing/',
+      '/docs/standards/diagrams/'
+    ]
   },
   {
     slug: 'agent-environment',
