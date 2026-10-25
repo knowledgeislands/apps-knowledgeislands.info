@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "slug": "coordinating-turn",
+  "type": "sequence",
+  "source": {
+    "file": "coordinating-turn.sequence.json",
+    "sha256": "753d03b3ad057aedcf3d1faf309585d640db931d4d65cba7bc474b21e2693f7f",
+    "bytes": 4537
+  },
+  "html": {
+    "file": "coordinating-turn.html",
+    "sha256": "3d883fdc11b8d319af5c0e59cf5a84d8e0ddada7ff1cac86a940a52900bbf682",
+    "bytes": 820890
+  },
+  "renderer": {
+    "name": "archify",
+    "version": "3.2.0"
+  }
+}

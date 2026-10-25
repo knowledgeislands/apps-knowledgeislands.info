@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "The work folder and who writes into it",
+    "locale": "en",
+    "output": "+/diagrams/work-folder/work-folder.html",
+    "quality_profile": "showcase",
+    "repository": {
+      "url": "https://github.com/knowledgeislands/ki-agentic-harness",
+      "revision": "8897008fcee7b2c71a22115735ed038efccf7f32"
+    }
+  },
+  "components": [
+    {"id": "work-md", "type": "database", "label": "work.md", "sublabel": "definition: description, Goals, Scope", "pos": [40, 40], "size": [250, 74], "sources": [{"path": "skills/governance/ki-work-package/references/standards-work-package.md", "line": 164, "end_line": 170}]},
+    {"id": "state-md", "type": "database", "label": "state.md", "sublabel": "where the work lies; Now, Next steps, Held", "pos": [330, 40], "size": [250, 74], "sources": [{"path": "skills/governance/ki-work-package/references/standards-work-package.md", "line": 221, "end_line": 226}]},
+    {"id": "queries-md", "type": "database", "label": "queries.md", "sublabel": "open and parked queries in full", "pos": [620, 40], "size": [250, 74], "sources": [{"path": "skills/governance/ki-work-package/references/standards-work-package.md", "line": 276, "end_line": 280}]},
+    {"id": "messages-md", "type": "messagebus", "label": "messages.md", "sublabel": "incoming queue, priority order", "pos": [910, 40], "size": [250, 74], "sources": [{"path": "skills/governance/ki-work-package/references/standards-work-package.md", "line": 135, "end_line": 140}]},
+    {"id": "decisions-md", "type": "database", "label": "decisions.md", "sublabel": "the decisions log", "pos": [1200, 40], "size": [250, 74], "sources": [{"path": "skills/governance/ki-work-package/references/standards-work-package.md", "line": 306, "end_line": 310}]},
+    {"id": "reports", "type": "backend", "label": "<run>.report.md", "sublabel": "until its outcome is homed", "pos": [40, 230], "size": [250, 74], "sources": [{"path": "skills/governance/ki-work-package/references/standards-work-package.md", "line": 62, "end_line": 80}]},
+    {"id": "briefs", "type": "backend", "label": "briefs/<run>.md", "sublabel": "while the handoff is open", "pos": [330, 230], "size": [250, 74], "sources": [{"path": "skills/governance/ki-work-package/references/standards-work-package.md", "line": 62, "end_line": 80}]},
+    {"id": "findings", "type": "backend", "label": "findings/<tag>.md", "sublabel": "one file per open finding", "pos": [620, 230], "size": [250, 74], "sources": [{"path": "skills/governance/ki-work-package/references/standards-work-package.md", "line": 62, "end_line": 80}]},
+    {"id": "design", "type": "backend", "label": "design/", "sublabel": "design notes and their diagram sources", "pos": [1200, 230], "size": [250, 74], "sources": [{"path": "skills/governance/ki-work-package/references/standards-work-package.md", "line": 62, "end_line": 80}]},
+    {"id": "launcher", "type": "cloud", "label": "The launcher, ki agent", "sublabel": "homes the run's report on DONE", "pos": [40, 470], "size": [250, 74], "sources": [{"path": "skills/governance/ki-work-package/references/standards-work-package.md", "line": 84, "end_line": 108}]},
+    {"id": "steward", "type": "security", "label": "The work's own steward", "sublabel": "the only party that deletes here", "icon": "person", "pos": [330, 470], "size": [250, 74], "sources": [{"path": "skills/governance/ki-work-package/references/standards-work-package.md", "line": 84, "end_line": 108}]},
+    {"id": "other-work", "type": "external", "label": "Other work, State of play", "sublabel": "one line in the queue, nothing else", "pos": [910, 470], "size": [250, 74], "sources": [{"path": "skills/governance/ki-work-package/references/standards-work-package.md", "line": 84, "end_line": 108}]},
+    {"id": "review", "type": "external", "label": "+/_WORK_REVIEW/<id>/", "sublabel": "migrated work awaiting review; not live", "pos": [1200, 470], "size": [250, 74], "sources": [{"path": "skills/governance/ki-work-package/references/standards-work-package.md", "line": 154, "end_line": 160}]}
+  ],
+  "boundaries": [
+    {"kind": "region", "label": "+/_WORK/<id>/, the work folder: a closed list", "wraps": ["work-md", "state-md", "queries-md", "messages-md", "decisions-md", "reports", "briefs", "findings", "design"], "pad": 24}
+  ],
+  "connections": [
+    {"id": "launcher-reports", "from": "launcher", "to": "reports", "label": "writes the report"},
+    {"id": "steward-briefs", "from": "steward", "to": "briefs", "label": "writes the rest, tidies", "variant": "emphasis"},
+    {"id": "other-messages", "from": "other-work", "to": "messages-md", "label": "adds its one line"},
+    {"id": "reports-queries", "from": "reports", "to": "queries-md", "label": "queries copied at receive", "variant": "dashed"},
+    {"id": "review-work", "from": "review", "to": "design", "label": "git mv into the folder when found live", "variant": "dashed"}
+  ],
+  "cards": [
+    {"dot": "cyan", "title": "Five files from creation", "items": ["work.md and state.md split the logbook: what the work is, and how it has moved", "queries.md, messages.md and decisions.md start as None, so no reader meets a missing file", "Nothing else belongs: no scripts, screenshots or scratch folders"]},
+    {"dot": "amber", "title": "Kept until", "items": ["A report stays until its outcome has a durable home; its queries leave it at receive", "A brief stays while its handoff is open; a finding until it is settled", "A design note stays until it graduates or is recorded as superseded"]},
+    {"dot": "rose", "title": "Entry points", "items": ["Only the folder's own work deletes there", "Other work and the State of play add or replace one messages line, committed alone", "Tidying removes named files by explicit path; Git history holds the rest"]}
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "slug": "seven-states",
+  "type": "lifecycle",
+  "source": {
+    "file": "seven-states.lifecycle.json",
+    "sha256": "a92767614e84de82151f86cd89baeface9dd75fa083be9a2a4b52930bd5b8ec1",
+    "bytes": 4275
+  },
+  "html": {
+    "file": "seven-states.html",
+    "sha256": "9401c2a6fa62a79fe87416d83fefcd6d9814848b780418c8a6291c93b8a780a0",
+    "bytes": 825834
+  },
+  "renderer": {
+    "name": "archify",
+    "version": "3.2.0"
+  }
+}

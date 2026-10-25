@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "slug": "work-model",
+  "type": "architecture",
+  "source": {
+    "file": "work-model.architecture.json",
+    "sha256": "20ea5cb9a8cd311fc3b121ee5edcae1704fdffd43e749ee2b3bb2207f62c51fb",
+    "bytes": 3594
+  },
+  "html": {
+    "file": "work-model.html",
+    "sha256": "1f6df4631ccef493cd03763772828023f3a365d0ceb7a3423558c36e0c82af17",
+    "bytes": 818976
+  },
+  "renderer": {
+    "name": "archify",
+    "version": "3.2.0"
+  }
+}

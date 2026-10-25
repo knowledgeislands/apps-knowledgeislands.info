@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "slug": "work-folder",
+  "type": "architecture",
+  "source": {
+    "file": "work-folder.architecture.json",
+    "sha256": "4c9b8f8ffa3194bb73a9e4798b02d0d7a804a3468403ebff9fe193cedb32a991",
+    "bytes": 5844
+  },
+  "html": {
+    "file": "work-folder.html",
+    "sha256": "575f3b27a373e38a70626830443501dda256e156c28abd25e61c4b6148cb4820",
+    "bytes": 833569
+  },
+  "renderer": {
+    "name": "archify",
+    "version": "3.2.0"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "slug": "record-lifecycle",
+  "type": "lifecycle",
+  "source": {
+    "file": "record-lifecycle.lifecycle.json",
+    "sha256": "7624bfbbb9c802461767add33690aaf61f5512f1860fab79dcd480ab67a27572",
+    "bytes": 4791
+  },
+  "html": {
+    "file": "record-lifecycle.html",
+    "sha256": "9e36b3679edb0ea1027ee612a4d9f5c0259da941536b73bbf51a2513d6ecda2d",
+    "bytes": 830949
+  },
+  "renderer": {
+    "name": "archify",
+    "version": "3.2.0"
+  }
+}

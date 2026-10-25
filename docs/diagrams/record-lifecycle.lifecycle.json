@@ -1,0 +1,43 @@
+{
+  "schema_version": 3,
+  "diagram_type": "lifecycle",
+  "meta": {
+    "title": "A work record from captured to pruned",
+    "locale": "en",
+    "output": "+/diagrams/record-lifecycle/record-lifecycle.html",
+    "quality_profile": "showcase",
+    "repository": {"url": "https://github.com/knowledgeislands/ki-agentic-harness", "revision": "8897008fcee7b2c71a22115735ed038efccf7f32"}
+  },
+  "mainPath": ["triage", "draft", "ready", "in-progress", "awaiting-review", "done"],
+  "states": [
+    {"id": "triage", "type": "start", "label": "Triage", "sublabel": "captured", "tag": "no horizon", "step": "01", "sources": [{"path": "skills/change-management/ki-work-roadmap/references/standards-repository-roadmaps.md", "line": 120, "end_line": 123}]},
+    {"id": "draft", "type": "active", "label": "Draft", "sublabel": "being shaped", "tag": "any horizon", "step": "02", "sources": [{"path": "skills/change-management/ki-work-roadmap/references/standards-repository-roadmaps.md", "line": 86, "end_line": 105}]},
+    {"id": "ready", "type": "waiting", "label": "Ready", "sublabel": "approved", "tag": "now or next", "step": "03", "sources": [{"path": "skills/change-management/ki-work-roadmap/references/standards-repository-roadmaps.md", "line": 86, "end_line": 105}]},
+    {"id": "in-progress", "type": "active", "label": "In progress", "sublabel": "being delivered", "tag": "now", "step": "04", "sources": [{"path": "skills/change-management/ki-work-roadmap/references/standards-repository-roadmaps.md", "line": 124, "end_line": 160}]},
+    {"id": "awaiting-review", "type": "decision", "label": "Awaiting review", "sublabel": "packet ready", "tag": "now", "step": "05", "sources": [{"path": "skills/change-management/ki-work-roadmap/references/standards-repository-roadmaps.md", "line": 124, "end_line": 160}]},
+    {"id": "done", "type": "success", "label": "Done", "sublabel": "kept as history", "tag": "terminal", "step": "06", "sources": [{"path": "skills/change-management/ki-work-roadmap/references/standards-repository-roadmaps.md", "line": 86, "end_line": 105}]},
+    {"id": "pruned", "type": "neutral", "label": "Pruned", "sublabel": "Git keeps it", "tag": "after a commit", "sources": [{"path": "skills/change-management/ki-work-roadmap/references/standards-repository-roadmaps.md", "line": 242, "end_line": 249}]},
+    {"id": "hold", "type": "waiting", "label": "Hold", "sublabel": "status kept", "tag": "horizon", "sources": [{"path": "skills/change-management/ki-work-roadmap/references/standards-repository-roadmaps.md", "line": 108, "end_line": 110}]},
+    {"id": "cancelled", "type": "failure", "label": "Cancelled", "sublabel": "resolution set", "tag": "terminal", "sources": [{"path": "skills/change-management/ki-work-roadmap/references/standards-repository-roadmaps.md", "line": 124, "end_line": 160}]}
+  ],
+  "transitions": [
+    {"id": "adopt", "from": "triage", "to": "draft", "label": "adopt"},
+    {"id": "plan", "from": "draft", "to": "ready", "label": "plan"},
+    {"id": "start", "from": "ready", "to": "in-progress", "label": "start"},
+    {"id": "deliver", "from": "in-progress", "to": "awaiting-review", "label": "deliver"},
+    {"id": "accept", "from": "awaiting-review", "to": "done", "label": "accept", "variant": "emphasis"},
+    {"id": "prune", "from": "done", "to": "pruned", "label": "prune", "variant": "dashed"},
+    {"id": "failed-review", "from": "awaiting-review", "to": "in-progress", "label": "fails"},
+    {"id": "replan", "from": "ready", "to": "draft", "label": "replan"},
+    {"id": "hold", "from": "ready", "to": "hold", "label": "hold"},
+    {"id": "release", "from": "hold", "to": "ready", "label": "release"},
+    {"id": "cancel-triage", "from": "triage", "to": "cancelled", "label": "cancel", "variant": "security"},
+    {"id": "cancel-draft", "from": "draft", "to": "cancelled", "label": "cancel", "variant": "security"},
+    {"id": "prune-cancelled", "from": "cancelled", "to": "pruned", "label": "prune", "variant": "dashed"}
+  ],
+  "cards": [
+    {"dot": "cyan", "title": "Two independent axes", "items": ["Status says how far the work has got", "Horizon says when it is intended: now, next, soon, future or hold", "A horizon is present if and only if the record is adopted and open"]},
+    {"dot": "amber", "title": "One skill per move", "items": ["ki-next captures, adopts, selects, defers, holds and releases", "ki-plan shapes a draft to Ready; ki-implement starts and delivers", "ki-accept accepts, cancels and prunes, each with human approval"]},
+    {"dot": "rose", "title": "Pruning is the exception", "items": ["A record is deleted only after a commit holds it as done or cancelled", "The prune commit removes explicitly selected records and nothing else", "Its subject is chore(roadmap): prune N done work record(s)"]}
+  ]
+}

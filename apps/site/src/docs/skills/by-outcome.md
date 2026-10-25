@@ -22,7 +22,7 @@ After this page you can start from a plain-language result you want, name the on
 
 ## What it is
 
-Sixty-four skills is more than anyone remembers by name. This page turns the question round: it lists outcomes a reader actually wants, and beside each one names the skill to reach for and the page where the practice is explained. The skill names link to their entries in the [catalogue](/docs/skills/catalogue/), which carries each description in the harness's own words. Where the explaining page is the roadmap lifecycle, it is linked; the other practices are named by the section that explains them, Ways of working, Knowledge or Standards.
+Sixty-four skills is more than anyone remembers by name. This page turns the question round: it lists outcomes a reader actually wants, and beside each one names the skill to reach for and the page where the practice is explained. The skill names link to their entries in the [catalogue](/docs/skills/catalogue/), which carries each description in the harness's own words. Where the explaining page is published, it is linked; the other practices are named by the section that will explain them, Ways of working, Knowledge or Standards.
 
 ## How it works
 
@@ -63,9 +63,9 @@ Find the group that matches the kind of result you want, read down to the outcom
 
 | Outcome | Skill | Explained in |
 | --- | --- | --- |
-| Coordinate a piece of territory or Project work and reply in the right form | [`ki-coordination`](/docs/skills/catalogue/#ki-coordination) | Ways of working |
-| Keep a piece of work resumable from Git rather than a transcript | [`ki-work-package`](/docs/skills/catalogue/#ki-work-package) | Ways of working |
-| Hand work to a detached background agent | [`ki-delegation`](/docs/skills/catalogue/#ki-delegation) | Ways of working |
+| Coordinate a piece of territory or Project work and reply in the right form | [`ki-coordination`](/docs/skills/catalogue/#ki-coordination) | [Coordination](/docs/ways-of-working/coordination/) |
+| Keep a piece of work resumable from Git rather than a transcript | [`ki-work-package`](/docs/skills/catalogue/#ki-work-package) | [Work packages](/docs/ways-of-working/work-packages/) |
+| Hand work to a detached background agent | [`ki-delegation`](/docs/skills/catalogue/#ki-delegation) | [Background runs](/docs/ways-of-working/background-runs/) |
 | Shape a new Project or model before any work record exists | [`ki-work-design`](/docs/skills/catalogue/#ki-work-design) | Ways of working |
 | Send work or knowledge to another repository, or receive it | [`ki-trade`](/docs/skills/catalogue/#ki-trade) for one side, [`ki-trades`](/docs/skills/catalogue/#ki-trades) for the protocol | Ways of working |
 | Define a reusable agent role | [`ki-subagents`](/docs/skills/catalogue/#ki-subagents), then [`ki-subagents-claude`](/docs/skills/catalogue/#ki-subagents-claude) or [`ki-subagents-chatgpt`](/docs/skills/catalogue/#ki-subagents-chatgpt) for the runtime | Ways of working |
@@ -75,12 +75,12 @@ Find the group that matches the kind of result you want, read down to the outcom
 
 | Outcome | Skill | Explained in |
 | --- | --- | --- |
-| Choose where a repository records its forward work | [`ki-work`](/docs/skills/catalogue/#ki-work), then [`ki-work-roadmap`](/docs/skills/catalogue/#ki-work-roadmap), [`ki-work-github-issues`](/docs/skills/catalogue/#ki-work-github-issues) or [`ki-work-linear`](/docs/skills/catalogue/#ki-work-linear) | [Plan and deliver governed work](/docs/ways-of-working/roadmap-lifecycle/) |
-| Capture new work or decide what comes next | [`ki-next`](/docs/skills/catalogue/#ki-next) | [Plan and deliver governed work](/docs/ways-of-working/roadmap-lifecycle/) |
-| Make a selected record ready to implement | [`ki-plan`](/docs/skills/catalogue/#ki-plan) | [Plan and deliver governed work](/docs/ways-of-working/roadmap-lifecycle/) |
-| Deliver one approved record through to review | [`ki-implement`](/docs/skills/catalogue/#ki-implement) | [Plan and deliver governed work](/docs/ways-of-working/roadmap-lifecycle/) |
-| Close a reviewed record, or cancel one with approval | [`ki-accept`](/docs/skills/catalogue/#ki-accept) | [Plan and deliver governed work](/docs/ways-of-working/roadmap-lifecycle/) |
-| Run an authorised window over a set of ready records | [`ki-batch`](/docs/skills/catalogue/#ki-batch) | [Plan and deliver governed work](/docs/ways-of-working/roadmap-lifecycle/) |
+| Choose where a repository records its forward work | [`ki-work`](/docs/skills/catalogue/#ki-work), then [`ki-work-roadmap`](/docs/skills/catalogue/#ki-work-roadmap), [`ki-work-github-issues`](/docs/skills/catalogue/#ki-work-github-issues) or [`ki-work-linear`](/docs/skills/catalogue/#ki-work-linear) | [Roadmap lifecycle](/docs/ways-of-working/roadmap-lifecycle/) |
+| Capture new work or decide what comes next | [`ki-next`](/docs/skills/catalogue/#ki-next) | [Roadmap lifecycle](/docs/ways-of-working/roadmap-lifecycle/) |
+| Make a selected record ready to implement | [`ki-plan`](/docs/skills/catalogue/#ki-plan) | [Roadmap lifecycle](/docs/ways-of-working/roadmap-lifecycle/) |
+| Deliver one approved record through to review | [`ki-implement`](/docs/skills/catalogue/#ki-implement) | [Roadmap lifecycle](/docs/ways-of-working/roadmap-lifecycle/) |
+| Close a reviewed record, or cancel one with approval | [`ki-accept`](/docs/skills/catalogue/#ki-accept) | [Roadmap lifecycle](/docs/ways-of-working/roadmap-lifecycle/) |
+| Run an authorised window over a set of ready records | [`ki-batch`](/docs/skills/catalogue/#ki-batch) | [Roadmap lifecycle](/docs/ways-of-working/roadmap-lifecycle/) |
 | Adopt and evidence work that recurs | [`ki-work-recurring`](/docs/skills/catalogue/#ki-work-recurring), with [`ki-repo-kb-activities`](/docs/skills/catalogue/#ki-repo-kb-activities) for the Activity note | Ways of working |
 
 ### Bind, budget and tidy the agent runtimes

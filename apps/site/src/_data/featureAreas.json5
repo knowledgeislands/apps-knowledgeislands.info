@@ -27,26 +27,29 @@
     slug: 'the-work-model',
     title: 'The work model',
     skills: ['ki-coordination', 'ki-work-package'],
-    commands: ['ki work status']
+    commands: ['ki work status'],
+    page: '/docs/ways-of-working/the-work-model/'
   },
   {
     slug: 'work-packages',
     title: 'Work packages',
     skills: ['ki-work-package'],
-    commands: ['ki work status']
+    commands: ['ki work status'],
+    page: '/docs/ways-of-working/work-packages/'
   },
   {
     slug: 'coordination',
     title: 'Coordination',
     skills: ['ki-coordination', 'ki-subagents', 'ki-subagents-claude', 'ki-subagents-chatgpt'],
-    commands: ['ki agent send', 'ki work status']
+    commands: ['ki agent send', 'ki work status'],
+    page: '/docs/ways-of-working/coordination/'
   },
   {
     slug: 'background-runs',
     title: 'Delegation and background runs',
     skills: ['ki-delegation'],
     commands: ['ki agent'],
-    page: '/docs/ki/work-and-agents/'
+    page: '/docs/ways-of-working/background-runs/'
   },
   {
     slug: 'roadmap-lifecycle',

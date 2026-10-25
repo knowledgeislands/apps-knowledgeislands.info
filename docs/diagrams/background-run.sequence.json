@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "diagram_type": "sequence",
+  "meta": {
+    "title": "A background run: brief, launch, status marks, report, receive, prune",
+    "locale": "en",
+    "output": "+/diagrams/background-run/background-run.html",
+    "quality_profile": "showcase",
+    "repository": {"url": "https://github.com/knowledgeislands/ki-agentic-harness", "revision": "8897008fcee7b2c71a22115735ed038efccf7f32"}
+  },
+  "participants": [
+    {"id": "coordinator", "type": "backend", "label": "Coordinator", "sublabel": "the run's supervisor", "sources": [{"path": "skills/governance/ki-delegation/references/standards-background-runs.md", "line": 43, "end_line": 50}]},
+    {"id": "package", "type": "database", "label": "Work package", "sublabel": "+/_WORK/<id>/", "sources": [{"path": "skills/governance/ki-delegation/references/standards-background-runs.md", "line": 51, "end_line": 83}]},
+    {"id": "launcher", "type": "cloud", "label": "ki agent", "sublabel": "the reference launcher", "sources": [{"path": "skills/governance/ki-delegation/references/standards-background-runs.md", "line": 239, "end_line": 244}]},
+    {"id": "state", "type": "database", "label": "Run state folder", "sublabel": "runtime files only", "sources": [{"path": "skills/governance/ki-delegation/references/standards-background-runs.md", "line": 51, "end_line": 83}]},
+    {"id": "run", "type": "backend", "label": "Detached run", "sublabel": "the worker", "sources": [{"path": "skills/governance/ki-delegation/references/standards-background-runs.md", "line": 37, "end_line": 42}]}
+  ],
+  "segments": [
+    {"from": 150, "to": 256, "label": "Brief and launch"},
+    {"from": 266, "to": 372, "label": "Status marks"},
+    {"from": 382, "to": 560, "label": "Report, receive and prune"}
+  ],
+  "messages": [
+    {"id": "brief", "from": "coordinator", "to": "package", "y": 160, "label": "briefs/<run>.md, committed by path"},
+    {"id": "launch", "from": "coordinator", "to": "launcher", "y": 188, "label": "ki agent launch", "variant": "emphasis"},
+    {"id": "packet", "from": "launcher", "to": "state", "y": 216, "label": "prompt, launch record, pid, log"},
+    {"id": "start", "from": "launcher", "to": "run", "y": 244, "label": "start detached; survives the session"},
+    {"id": "status", "from": "run", "to": "state", "y": 278, "label": "status: HH:MM TZ - activity, every two minutes"},
+    {"id": "events", "from": "run", "to": "state", "y": 306, "label": "milestone:, blocked:, failed: prefixes", "variant": "dashed"},
+    {"id": "watch", "from": "coordinator", "to": "launcher", "y": 334, "label": "ki agent status, ki agent wait"},
+    {"id": "progress", "from": "launcher", "to": "coordinator", "y": 362, "label": "run events", "variant": "return"},
+    {"id": "report", "from": "run", "to": "state", "y": 394, "label": "<name>.report.md, then DONE", "variant": "emphasis"},
+    {"id": "home", "from": "launcher", "to": "package", "y": 422, "label": "homes the report in the work folder"},
+    {"id": "receive", "from": "coordinator", "to": "package", "y": 450, "label": "receive: queries copied, state.md rewritten"},
+    {"id": "close", "from": "coordinator", "to": "launcher", "y": 478, "label": "ki agent close"},
+    {"id": "gate", "from": "launcher", "to": "state", "y": 506, "label": "gate: report homed, decisions reconciled", "variant": "dashed"},
+    {"id": "prune", "from": "coordinator", "to": "package", "y": 534, "label": "tidy: git rm the brief and the homed report", "variant": "dashed"}
+  ],
+  "activations": [
+    {"participant": "coordinator", "from": 160, "to": 540, "type": "backend"},
+    {"participant": "launcher", "from": 188, "to": 512, "type": "cloud"},
+    {"participant": "run", "from": 244, "to": 400, "type": "backend"}
+  ],
+  "cards": [
+    {"dot": "cyan", "title": "Detached", "items": ["Standard input is closed and the run survives an interrupted session", "An in-session subagent is not a background agent", "DONE as the last status line is the only completion signal"]},
+    {"dot": "amber", "title": "Two homes", "items": ["Runtime files stay in the run's state folder", "Knowledge files, the brief and the report, live in the work folder", "The launcher copies the report when it sees DONE"]},
+    {"dot": "rose", "title": "Authority", "items": ["Tiers none, push, prune and release; fetch and machine grants", "An unattended window keeps the deny list; force-push and no-verify are never lifted", "Decisions are logged with ki agent decide and reconciled before close"]}
+  ]
+}

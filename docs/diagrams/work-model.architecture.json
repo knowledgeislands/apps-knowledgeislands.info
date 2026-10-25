@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "The work model: supervisor, worker, the work and the two moves",
+    "locale": "en",
+    "output": "+/diagrams/work-model/work-model.html",
+    "quality_profile": "showcase",
+    "repository": {
+      "url": "https://github.com/knowledgeislands/ki-principal",
+      "revision": "c070f022217b1aefb09df718855210260b43e664"
+    }
+  },
+  "components": [
+    {
+      "id": "package",
+      "type": "database",
+      "label": "Work package",
+      "sublabel": "+/_WORK/<id>/: five files, read in levels",
+      "pos": [40, 40],
+      "size": [250, 74],
+      "sources": [{"path": "Pillars/Philosophy/Model/Processes/Work Process/Work Process.md", "line": 158, "end_line": 160}]
+    },
+    {
+      "id": "git",
+      "type": "database",
+      "label": "Git, the logbook",
+      "sublabel": "git log on the work folder is the history",
+      "pos": [700, 40],
+      "size": [250, 74],
+      "sources": [{"path": "Pillars/Philosophy/Model/Processes/Work Process/Work Process.md", "line": 208, "end_line": 208}]
+    },
+    {
+      "id": "work",
+      "type": "cloud",
+      "label": "The work",
+      "sublabel": "the unit; outlives every session",
+      "pos": [370, 230],
+      "size": [250, 74],
+      "sources": [{"path": "Pillars/Philosophy/Model/Processes/Work Process/Work Process.md", "line": 15, "end_line": 15}]
+    },
+    {
+      "id": "supervisor",
+      "type": "external",
+      "label": "Supervisor",
+      "sublabel": "the owner, or the coordinator for its runs",
+      "icon": "person",
+      "pos": [40, 420],
+      "size": [250, 74],
+      "sources": [{"path": "Pillars/Philosophy/Model/Processes/Work Process/Work Process.md", "line": 64, "end_line": 70}]
+    },
+    {
+      "id": "worker",
+      "type": "backend",
+      "label": "Worker",
+      "sublabel": "the coordinating agent, or a run",
+      "pos": [700, 420],
+      "size": [250, 74],
+      "sources": [{"path": "Pillars/Philosophy/Model/Processes/Work Process/Work Process.md", "line": 64, "end_line": 70}]
+    }
+  ],
+  "connections": [
+    {"id": "work-package", "from": "work", "to": "package", "label": "lives in"},
+    {"id": "work-git", "from": "work", "to": "git", "label": "committed at every send", "variant": "dashed"},
+    {"id": "supervisor-work", "from": "supervisor", "to": "work", "label": "receive: with me"},
+    {"id": "worker-work", "from": "worker", "to": "work", "label": "holds it: With worker", "variant": "emphasis"},
+    {"id": "supervisor-worker", "from": "supervisor", "to": "worker", "label": "send: Handoff to worker"},
+    {"id": "worker-supervisor", "from": "worker", "to": "supervisor", "label": "send: Handoff to supervisor", "fromSide": "bottom", "toSide": "bottom", "via": [[825, 570], [165, 570]]}
+  ],
+  "cards": [
+    {"dot": "cyan", "title": "The unit is work", "items": ["A chat session is only a channel through which a party works on it", "The work is committed at every send and outlives every session", "A work package is read like a skill: definition first, detail when needed"]},
+    {"dot": "amber", "title": "Two roles, relative to a handoff", "items": ["For territory and Project work the coordinating agent is the worker and the owner the supervisor", "For a run the coordinator is the supervisor and the run the worker", "The holder is derived from the state and the two roles"]},
+    {"dot": "rose", "title": "Two moves", "items": ["Only the holder may send or receive", "Send puts the work into a handoff; receive takes it out", "A message mid-run is a steer and moves nothing"]}
+  ]
+}

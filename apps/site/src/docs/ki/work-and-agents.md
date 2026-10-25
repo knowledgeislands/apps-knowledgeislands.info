@@ -42,9 +42,9 @@ You can see who holds a piece of work, delegate a bounded task without keeping i
 
 ## What it is
 
-A work package describes one piece of work under `+/_WORK/<id>/`. Its five files hold the definition in `work.md`, current state in `state.md`, outstanding queries, incoming messages and decisions. The `ki-work-package` skill governs that durable package; `ki work status` reads it.
+A work package describes one piece of work under `+/_WORK/<id>/`. Its five files hold the definition in `work.md`, current state in `state.md`, outstanding queries, incoming messages and decisions. The `ki-work-package` skill governs that durable package, described under [work packages](/docs/ways-of-working/work-packages/); `ki work status` reads it.
 
-A detached run is a worker's execution of a supplied brief. `ki agent` provides the launcher and monitoring surface governed by `ki-delegation`. A batch envelope, governed by `ki-batch`, records authority for one exact set of Ready items in one repository. Neither a running process nor a batch ledger replaces the canonical work records.
+A detached run is a worker's execution of a supplied brief. `ki agent` provides the launcher and monitoring surface governed by `ki-delegation`, described under [background runs](/docs/ways-of-working/background-runs/). A batch envelope, governed by `ki-batch`, records authority for one exact set of Ready items in one repository. Neither a running process nor a batch ledger replaces the canonical work records.
 
 ## How it works
 

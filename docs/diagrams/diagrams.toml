@@ -23,3 +23,69 @@ regenerate = "Read the traced SKILL.md files in ki-agentic-harness at 8897008f. 
 last_checked = "57864b1fb3bcdfe271b2ba34fef7fce12cc64e54"
 svg_form = "ki"
 commit_html = true
+
+[work-model]
+type = "architecture"
+question = "Who holds a piece of work, where does it live, and what are the two moves that pass it between supervisor and worker?"
+audience = "Knowledge Islands users learning the work model"
+traced = ["Pillars/Philosophy/Model/Processes/Work Process/Work Process.md"]
+stale_when = "the roles, the two moves or the work package's homes in the Work Process note change from c070f022"
+regenerate = "Read the Work Process note in ki-principal at c070f022. Draw the supervisor and worker beneath the work, with the work package and the Git logbook as its homes, and label send and receive on the moves between the roles. Finalise with bun run --cwd apps/site diagrams:build -- --svg work-model."
+last_checked = "1056bb668c2ab6c6724118a784fd5fe7f9891a75"
+svg_form = "ki"
+commit_html = true
+
+[seven-states]
+type = "lifecycle"
+question = "What are the seven states a piece of work can be in, and which move takes it from one to the next?"
+audience = "Knowledge Islands users reading a banner or a state file"
+traced = ["Pillars/Philosophy/Model/Processes/Work Process/Work Process.md"]
+stale_when = "the seven states, the receive words or the hold reasons in the Work Process note change from c070f022"
+regenerate = "Read the seven states table and the Words section of the Work Process note in ki-principal at c070f022. Draw every state with the note's own names, the receive words on the supervisor's receive, and the hold and release moves. Finalise with bun run --cwd apps/site diagrams:build -- --svg seven-states."
+last_checked = "1056bb668c2ab6c6724118a784fd5fe7f9891a75"
+svg_form = "ki"
+commit_html = true
+
+[work-folder]
+type = "architecture"
+question = "What does a work folder hold, how long does each file stay, and who may write into it?"
+audience = "Knowledge Islands users picking work up from its package"
+traced = ["skills/governance/ki-work-package/references/standards-work-package.md"]
+stale_when = "the closed list, the kept-until rules or the entry points of the work-package standard change from 8897008f"
+regenerate = "Read the work folder section and the exact package form of the work-package standard in ki-agentic-harness at 8897008f. Draw the five package files above the reports, briefs, findings and design note, inside the folder as a region, with the launcher, the steward, other work and the review holding area outside it. Finalise with bun run --cwd apps/site diagrams:build -- --svg work-folder."
+last_checked = "1056bb668c2ab6c6724118a784fd5fe7f9891a75"
+svg_form = "ki"
+commit_html = true
+
+[coordinating-turn]
+type = "sequence"
+question = "What happens in one coordinating turn, from an owner message through launch, wake and receive to the owner report?"
+audience = "Knowledge Islands users who own or coordinate work"
+traced = ["skills/change-management/ki-coordination/references/standards-coordination.md"]
+stale_when = "the responsive coordinator rules, the turn budget, the heartbeat or the owner report shape change from 8897008f"
+regenerate = "Read the responsive coordinator, reply forms and owner report sections of the coordination standard in ki-agentic-harness at 8897008f. Draw the owner, coordinator, work package, launcher and run, with the owner message, the launch, the five-minute wake, the receive and the owner report in order. Finalise with bun run --cwd apps/site diagrams:build -- --svg coordinating-turn."
+last_checked = "1056bb668c2ab6c6724118a784fd5fe7f9891a75"
+svg_form = "ki"
+commit_html = true
+
+[background-run]
+type = "sequence"
+question = "How does a background run travel from brief to prune, and which file carries each step?"
+audience = "Knowledge Islands users delegating work to background agents"
+traced = ["skills/governance/ki-delegation/references/standards-background-runs.md"]
+stale_when = "the run packet, the status line contract, the DONE signal or the close gate change from 8897008f"
+regenerate = "Read the detachment, run packet, run events, reporting and reference launcher sections of the background-run standard in ki-agentic-harness at 8897008f. Draw the coordinator, work package, launcher, run state folder and detached run, with the brief, launch, status marks, report, receive and prune in order. Finalise with bun run --cwd apps/site diagrams:build -- --svg background-run."
+last_checked = "1056bb668c2ab6c6724118a784fd5fe7f9891a75"
+svg_form = "ki"
+commit_html = true
+
+[record-lifecycle]
+type = "lifecycle"
+question = "Which statuses does a work record pass through from capture to pruning, and which skill owns each move?"
+audience = "Knowledge Islands users planning and delivering roadmap work"
+traced = ["skills/change-management/ki-work-roadmap/references/standards-repository-roadmaps.md"]
+stale_when = "the status set, the horizon rule, the lifecycle moves table or the prune commit boundary change from 8897008f"
+regenerate = "Read the status and horizon, lifecycle moves and lifecycle commit boundaries sections of the repository roadmaps standard in ki-agentic-harness at 8897008f. Draw triage, draft, ready, in-progress, awaiting-review, done and pruned as the main path, with hold and cancelled beside it and every move labelled as the table names it. Finalise with bun run --cwd apps/site diagrams:build -- --svg record-lifecycle."
+last_checked = "1056bb668c2ab6c6724118a784fd5fe7f9891a75"
+svg_form = "ki"
+commit_html = true

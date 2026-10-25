@@ -1,0 +1,41 @@
+{
+  "schema_version": 3,
+  "diagram_type": "lifecycle",
+  "meta": {
+    "title": "The seven states of a piece of work",
+    "locale": "en",
+    "output": "+/diagrams/seven-states/seven-states.html",
+    "quality_profile": "showcase",
+    "repository": {
+      "url": "https://github.com/knowledgeislands/ki-principal",
+      "revision": "c070f022217b1aefb09df718855210260b43e664"
+    }
+  },
+  "mainPath": ["with-worker", "handoff-to-supervisor", "with-supervisor", "finished"],
+  "states": [
+    {"id": "with-worker", "type": "start", "label": "With worker", "sublabel": "a run is live, or a turn is open", "tag": "with someone", "step": "01", "sources": [{"path": "Pillars/Philosophy/Model/Processes/Work Process/Work Process.md", "line": 84, "end_line": 84}]},
+    {"id": "handoff-to-supervisor", "type": "waiting", "label": "Handoff to supervisor", "sublabel": "sent, not yet received", "tag": "handed off", "step": "02", "sources": [{"path": "Pillars/Philosophy/Model/Processes/Work Process/Work Process.md", "line": 86, "end_line": 86}]},
+    {"id": "with-supervisor", "type": "external", "label": "With supervisor", "sublabel": "the supervisor has received it", "tag": "with someone", "step": "03", "sources": [{"path": "Pillars/Philosophy/Model/Processes/Work Process/Work Process.md", "line": 85, "end_line": 85}]},
+    {"id": "finished", "type": "success", "label": "Finished", "sublabel": "closed", "tag": "done", "step": "04", "sources": [{"path": "Pillars/Philosophy/Model/Processes/Work Process/Work Process.md", "line": 90, "end_line": 90}]},
+    {"id": "handoff-to-worker", "type": "waiting", "label": "Handoff to worker", "sublabel": "replied, not yet received", "tag": "handed off", "sources": [{"path": "Pillars/Philosophy/Model/Processes/Work Process/Work Process.md", "line": 87, "end_line": 87}]},
+    {"id": "handoff-to-target", "type": "waiting", "label": "Handoff to <target>", "sublabel": "other work, a run or a person", "tag": "handed off", "sources": [{"path": "Pillars/Philosophy/Model/Processes/Work Process/Work Process.md", "line": 88, "end_line": 88}]},
+    {"id": "on-hold", "type": "neutral", "label": "On hold", "sublabel": "paused, or more expected", "tag": "on hold", "sources": [{"path": "Pillars/Philosophy/Model/Processes/Work Process/Work Process.md", "line": 89, "end_line": 99}]}
+  ],
+  "transitions": [
+    {"id": "worker-sends", "from": "with-worker", "to": "handoff-to-supervisor", "label": "worker sends"},
+    {"id": "supervisor-receives", "from": "handoff-to-supervisor", "to": "with-supervisor", "label": "with me"},
+    {"id": "supervisor-replies", "from": "with-supervisor", "to": "handoff-to-worker", "label": "supervisor replies"},
+    {"id": "worker-receives", "from": "handoff-to-worker", "to": "with-worker", "label": "worker receives"},
+    {"id": "finish", "from": "with-supervisor", "to": "finished", "label": "finish", "variant": "emphasis"},
+    {"id": "send-to-target", "from": "with-worker", "to": "handoff-to-target", "label": "send to a target", "variant": "dashed"},
+    {"id": "target-returns", "from": "handoff-to-target", "to": "with-worker", "label": "target replies", "variant": "dashed"},
+    {"id": "hold", "from": "with-worker", "to": "on-hold", "label": "hold agreed, drained"},
+    {"id": "release", "from": "on-hold", "to": "with-worker", "label": "resume"},
+    {"id": "finish-from-hold", "from": "on-hold", "to": "finished", "label": "finish"}
+  ],
+  "cards": [
+    {"dot": "cyan", "title": "Four kinds of state", "items": ["With someone: With worker or With supervisor", "Handed off: to supervisor, to worker or to a named target", "On hold, and Finished"]},
+    {"dot": "amber", "title": "Only two things are set", "items": ["The receive words are with me, ack, got it and seen; pause and done for now agree a hold; resume and finish are the moves off hold", "The supervisor's receive and the hold are set", "Every other state is derived from where the work's items lie", "A heartbeat runs only while work lies with a worker"]},
+    {"dot": "rose", "title": "On hold has two reasons", "items": ["Paused: waiting on a named release condition while other work goes on", "More expected: done for now, released when new work arrives", "Drain is the activity on the way in, never a state"]}
+  ]
+}

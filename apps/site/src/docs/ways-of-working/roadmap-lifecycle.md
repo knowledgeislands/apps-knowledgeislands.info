@@ -1,133 +1,86 @@
 ---
-title: Plan and deliver governed work
-description: Turn a deep audit or transferred concern into implementation-ready, governed roadmap work.
+title: Roadmap lifecycle
+description: How a work record moves from triage through draft, ready, in progress and awaiting review to done, which skill owns each move, and how horizons, holds and batches fit around it.
 permalink: /docs/ways-of-working/roadmap-lifecycle/
 order: 5
 sources:
   - repository: knowledgeislands/ki-agentic-harness
-    path: skills/README.md
+    path: skills/change-management/ki-work/SKILL.md
     ref: 8897008fcee7b2c71a22115735ed038efccf7f32
-    governs: 'The ki-work, ki-plan, ki-implement, and ki-accept responsibilities the request template routes through'
+    governs: 'The adapter declaration and the shared lifecycle vocabulary'
+    reviewed: '2026-10-25'
+  - repository: knowledgeislands/ki-agentic-harness
+    path: skills/change-management/ki-work-roadmap/references/standards-repository-roadmaps.md
+    ref: 8897008fcee7b2c71a22115735ed038efccf7f32
+    governs: 'Statuses, horizons, triage, the lifecycle moves and the commit boundaries'
+    reviewed: '2026-10-25'
+  - repository: knowledgeislands/ki-agentic-harness
+    path: skills/change-management/ki-next/SKILL.md
+    ref: 8897008fcee7b2c71a22115735ed038efccf7f32
+    governs: 'Capture, adoption, selection, deferral, hold and release'
+    reviewed: '2026-10-25'
+  - repository: knowledgeislands/ki-agentic-harness
+    path: skills/change-management/ki-plan/SKILL.md
+    ref: 8897008fcee7b2c71a22115735ed038efccf7f32
+    governs: 'Shaping a draft to ready'
+    reviewed: '2026-10-25'
+  - repository: knowledgeislands/ki-agentic-harness
+    path: skills/change-management/ki-implement/SKILL.md
+    ref: 8897008fcee7b2c71a22115735ed038efccf7f32
+    governs: 'Delivery from ready through in progress to awaiting review'
+    reviewed: '2026-10-25'
+  - repository: knowledgeislands/ki-agentic-harness
+    path: skills/change-management/ki-accept/SKILL.md
+    ref: 8897008fcee7b2c71a22115735ed038efccf7f32
+    governs: 'Closure, cancellation and pruning'
+    reviewed: '2026-10-25'
+  - repository: knowledgeislands/ki-agentic-harness
+    path: skills/change-management/ki-batch/SKILL.md
+    ref: 8897008fcee7b2c71a22115735ed038efccf7f32
+    governs: 'The batch envelope over an exact set of ready records'
     reviewed: '2026-10-25'
 ---
 
-# Plan and deliver governed work
+# Roadmap lifecycle
 
-The reusable pattern is a "deep audit to implementation-ready roadmap" request. It does not depend on legal work, Knowledge Islands, Streams, or even a software repository.
+Every work record moves through the same seven statuses under four skills, so you can read any record's status and horizon and know what has happened to it, what may happen next and who is allowed to make that move.
 
-This is a reusable request template, not a competing planning standard. `ki-work` selects the configured work-tracking adapter; `ki-work-roadmap` owns repository-roadmap and work-item structure when Roadmap is selected. `ki-plan` owns planning through `Ready`; `ki-implement` owns delivery through `Acceptance`; `ki-accept` owns closure and confirmed pruning; and `ki-delegation` owns delegation-ready execution.
+{% figure "record-lifecycle", "A record passes from triage through draft, ready, in progress and awaiting review to done; hold and cancelled sit beside the path, and a terminal record is pruned by its own commit." %}
 
-## Live work lifecycle
+## What it is
 
-The process skills form three explicit cycles from a live session into governed delivery:
+A work record is one finite piece of forward work: a Markdown file in a repository's roadmap, or the equivalent record in a Knowledge Base's Streams. Its lifecycle is the shared vocabulary every KI repository uses to say how far a piece of work has got and when it is intended, whichever tracker holds it. The repository declares one work adapter in its configuration, local roadmap by default for a Project repository and Streams for a Knowledge Base, and that adapter owns where records live and how they are named. Four process skills own the moves between states, and no other skill closes or deletes a record.
 
-```text
-Roadmap cycle
-ki-recap → ki-next → ki-plan → Ready
+The vocabulary has two independent axes. `status` says how far the work has got and is one of `triage`, `draft`, `ready`, `in-progress`, `awaiting-review`, `done` or `cancelled`. `horizon` says when it is intended and is one of `now`, `next`, `soon`, `future` or `hold`. The horizon rule is one line: a record carries a horizon if and only if it is adopted and open. A triage record, a done record and a cancelled record have none.
 
-Implementation cycle
-ki-implement → In progress → verified Acceptance
+## How it works
 
-Acceptance cycle
-ki-accept → Done → confirmed prune when requested
-```
+Work enters as `triage`: a substantive outcome, concern or decision captured without prior approval, but only within a capture gate. Only a blocker, a defect seen failing or an item the owner asked for is captured, by the owning coordinator, never by a background run. Creating a triage record adopts nothing. Every exit from triage needs a person's explicit approval: adoption to `draft` with a horizon and a kind, or cancellation.
 
-The arrows show responsibility passing between processes. With the Roadmap adapter selected, `ki-work-roadmap` is the governance foundation for horizons, work-item shape, links, and transition rules; it is not an execution stage. With the Streams adapter selected for a Knowledge Base, `ki-repo-kb-streams` supplies the equivalent lifecycle.
+| Status | Allowed horizon | Meaning |
+| --- | --- | --- |
+| `triage` | none | captured but not adopted |
+| `draft` | `now`, `next`, `soon`, `future`, `hold` | adopted, being shaped or waiting its turn |
+| `ready` | `now`, `next`, `hold` | plan and verification reviewable, approved to start |
+| `in-progress`, `awaiting-review` | `now`, `hold` | being delivered, or delivered and awaiting review |
+| `done`, `cancelled` | none | terminal, kept as history until pruned |
 
-`ki-plan` stops at `Ready`. `ki-implement` requires an approved ready item, records its immutable baseline, executes only its bounded plan, assembles verification evidence, moves it to `Acceptance`, and stops. `ki-accept` requires human approval by default before moving it to `Done`; pruning is a separate exact confirmation.
+Each move has one owner. `ki-next` adopts, defers, holds and releases: a defer changes the horizon and keeps the status, so ready work moves only among now, next and hold, and work in flight leaves now only for hold. A hold names its reason, a release condition and a review date, and keeps the record's status, baseline and completed steps. `ki-plan` shapes a now or next draft until it is `ready`, and a replan takes a ready record back to draft. `ki-implement` starts: `ready` to `in-progress`, moving the record to now in the same change, then delivers the approved plan from an immutable baseline, assembles the six-heading review packet and leaves the record at `awaiting-review`. `ki-accept` closes: `awaiting-review` to `done` with the horizon removed, a failed review back to `in-progress`, or any open record to `cancelled` with an approved resolution. Only `ki-accept` prunes, and only a record already committed as done or cancelled, in a commit of its own with the subject `chore(roadmap): prune <N> done work record(s)`.
 
-## Authorised batches
+Git need not hold every intermediate state. A record may first land already `ready` when capture, shaping and approval form one unit, and the move to in progress is operational and needs no commit of its own. What must land is the terminal state, before any prune.
 
-`ki-batch` applies the same boundaries to an explicitly named set in two phases:
+When nothing is immediately eligible, selection reads now and next first, then soon, then future. Held records are left out until released, and triage is never selected without adoption. Within one horizon, priority orders records, then the nearer target date, then size, smallest first, and a high priority at a later horizon never overtakes an earlier one.
 
-1. **Preparation** coordinates `ki-next` selection and `ki-plan` shaping over the named candidates, producing a reviewed batch authorisation. No implementation begins.
-2. **Implementation** validates that authorisation and coordinates repeated independent `ki-implement` cycles in dependency order.
+## How you use it
 
-Every item keeps its own baseline, lifecycle, verification, and acceptance packet. Ambiguous or out-of-authority work is parked and recorded rather than inferred. The normal batch endpoint is `Acceptance`; `ki-accept` remains the closure owner unless the authorisation expressly grants acceptance authority for named items. Pruning always remains separately confirmed.
+Suppose the fictional Tern Holm archive repository keeps its roadmap locally. Mara notices during a run that the ferry timetable import fails on a leap day; it is a defect seen failing, so the coordinator captures it as a triage record. The owner reads it the next morning and adopts it to `draft` at `next`. When it is selected, `ki-plan` adds the execution sections, states the verification and, once the owner approves, marks it `ready`. A background run under `ki-implement` records the baseline, moves it to `in-progress` at `now`, delivers the fix, runs the checks, writes the review packet and leaves it at `awaiting-review`. The owner's acceptance, given in the coordination thread, lets `ki-accept` record `done` and remove the horizon. A later prune commit removes the file, and Git keeps it.
 
-`ki-trade` receives typed cross-repository submissions into `+/_TRADES/`. `ki-next` considers those records while grounding the portfolio and brings submitted trades to the receiver for disposition before ordinary work selection. Parked trades return for review when their trigger fires.
+A set of ready records that share a bounded delivery advantage and stay independently executable may be run as a batch. `ki-batch` is an authority envelope, not another plan: one repository, one window, an exact human-approved set, with each record keeping its own baseline, delivery and review packet, and closure granted only when the authorisation names it. An item outside the envelope is parked, never admitted dynamically.
 
-Adoption creates a recipient-owned work item at its honest horizon. Where transferred detail should be preserved, enrich that same item and name its origin without promoting it into the immediate queue. The inbox copy is then removed; the sender may remove its corresponding outbound copy once the durable destination is confirmed. Agent or model-tier delegation is a separate concern recorded in the item's `## Delegation` section and executed through `ki-delegation`.
+## What it provides
 
-## Generic principles
+You get one lifecycle that reads the same in every repository and Knowledge Base you work in, so a status and horizon mean one thing everywhere. Because every move has one owner and every exit from triage, every start and every closure needs a person's approval, nothing is adopted, started, accepted or deleted by an agent on its own. Terminal records stay as history until a prune commit removes them, and that commit is recognisable in the log.
 
-- Inspect the existing system thoroughly before proposing changes.
-- Define an explicit scope and exclusions.
-- Separate planning from implementation: change only the planning artefacts.
-- Identify what already works and should be preserved.
-- Find duplication, conflicting ownership, stale state, unclear status, and missing structure.
-- Establish a target operating model with clear responsibilities and sources of truth.
-- Record reasoning and rejected alternatives so implementers do not reopen settled decisions.
-- Separate judgment-heavy decisions from mechanical execution.
-- Decompose the migration into dependency-ordered, bounded plans.
-- Make each plan executable by a cold, lower-reasoning agent.
-- Include exact inputs, outputs, boundaries, escalation conditions, and pass/fail checks.
-- Preserve existing information until a conservation or migration manifest proves nothing will be lost.
-- Test the plans by giving them to someone without the original context.
-- Continue around non-blocking uncertainty; record unresolved areas as explicit follow-up work.
-- For long work, write regular checkpoints and create recoverable commits where appropriate.
+## Boundaries
 
-## Reusable prompt
-
-```text
-I want a deep, planning-only audit of [topic, system, repository, process, or body of work].
-
-The priority scope is:
-
-- [area one]
-- [area two]
-- [shared or cross-cutting areas]
-
-The following is out of scope:
-
-- [exclusions]
-
-Start by examining the current structure, conventions, documentation, workflows, status information, and active work. Spend enough time scanning to understand how the system actually operates, including places where practice differs from the documented model.
-
-Do not implement the proposed changes. You may create or update only the dedicated planning footprint at [location or output format].
-
-Before the main audit, raise any genuinely important questions or permission requirements. After that, work autonomously. If something cannot be resolved, continue with the parts that can be completed and record the unresolved area, its impact, and the follow-up needed.
-
-Produce:
-
-1. A proposal explaining:
-   - what is working well and should be preserved;
-   - what is unclear, duplicated, stale, overloaded, or missing;
-   - the underlying causes rather than only the symptoms;
-   - the recommended target model;
-   - clear ownership and source-of-truth boundaries;
-   - rejected alternatives and why they were rejected;
-   - risks, safeguards, and migration principles;
-   - measurable acceptance criteria.
-
-2. A dependency-ordered roadmap showing:
-   - foundational decisions and governance first;
-   - work that can run concurrently;
-   - migration and consolidation stages;
-   - integration, cutover, and final acceptance;
-   - anything deliberately deferred or out of scope.
-
-3. A set of implementation-ready plans suitable for cold, lower-reasoning agents.
-
-Each plan must state:
-
-- the outcome and definition of done;
-- dependencies and blockers;
-- locked decisions that must not be reopened;
-- questions that must be escalated;
-- exact permitted inputs, outputs, and change boundaries;
-- ordered implementation steps;
-- which steps are judgment-heavy and which are mechanical;
-- safe parallelisation and file or ownership boundaries;
-- conservation or rollback safeguards;
-- objective pass/fail verification;
-- the handoff package for the next plan.
-
-Do not let implementers infer unknown state, silently expand scope, or discard existing information. Unknowns must be verified, escalated, or explicitly preserved.
-
-Test at least the foundation plans by giving them to a cold lower-tier reviewer with no inherited context. Revise them until that reviewer can execute them without rediscovering the architecture.
-
-For a long-running filesystem task, write progress to the planning artefacts regularly and make stable, explicitly scoped checkpoint commits where authorised. Do not include unrelated changes.
-```
-
-A useful short name for this style of request is **planning-only architecture audit with cold-agent implementation handoffs**.
+The lifecycle governs the record, not the work around it. Coordinating the sessions and runs that move a record is [coordination](/docs/ways-of-working/coordination/) and [background runs](/docs/ways-of-working/background-runs/); the folder where a Project's state and queries live is [work packages](/docs/ways-of-working/work-packages/); the states a piece of work passes between a worker and a supervisor are [the work model](/docs/ways-of-working/the-work-model/) and are not these statuses. A handoff to another repository is one line in that work's message queue, never a record written into its roadmap. Durable rationale that outlives a record belongs in a decision record, and continuous practice belongs in a standard, not among finite work items.

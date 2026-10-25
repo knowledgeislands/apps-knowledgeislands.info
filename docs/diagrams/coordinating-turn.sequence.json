@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "diagram_type": "sequence",
+  "meta": {
+    "title": "One coordinating turn: owner message, launch, wake, receive, report",
+    "locale": "en",
+    "output": "+/diagrams/coordinating-turn/coordinating-turn.html",
+    "quality_profile": "showcase",
+    "repository": {"url": "https://github.com/knowledgeislands/ki-agentic-harness", "revision": "8897008fcee7b2c71a22115735ed038efccf7f32"}
+  },
+  "participants": [
+    {"id": "owner", "type": "external", "label": "Owner", "sublabel": "the supervisor", "icon": "person", "sources": [{"path": "skills/change-management/ki-coordination/references/standards-coordination.md", "line": 68, "end_line": 89}]},
+    {"id": "coordinator", "type": "backend", "label": "Coordinator", "sublabel": "five tool calls a turn", "sources": [{"path": "skills/change-management/ki-coordination/references/standards-coordination.md", "line": 183, "end_line": 207}]},
+    {"id": "package", "type": "database", "label": "Work package", "sublabel": "+/_WORK/<id>/", "sources": [{"path": "skills/change-management/ki-coordination/references/standards-coordination.md", "line": 944, "end_line": 949}]},
+    {"id": "launcher", "type": "cloud", "label": "ki agent", "sublabel": "launcher and waiter", "sources": [{"path": "skills/change-management/ki-coordination/references/standards-coordination.md", "line": 90, "end_line": 105}]},
+    {"id": "run", "type": "backend", "label": "Background run", "sublabel": "the worker, detached", "sources": [{"path": "skills/change-management/ki-coordination/references/standards-coordination.md", "line": 90, "end_line": 105}]}
+  ],
+  "segments": [
+    {"from": 150, "to": 312, "label": "Receive and launch"},
+    {"from": 322, "to": 400, "label": "Wake"},
+    {"from": 410, "to": 560, "label": "Receive and report"}
+  ],
+  "messages": [
+    {"id": "owner-message", "from": "owner", "to": "coordinator", "y": 160, "label": "message: decision or steer", "variant": "emphasis"},
+    {"id": "pick-up", "from": "coordinator", "to": "package", "y": 188, "label": "read the pick-up files"},
+    {"id": "brief", "from": "coordinator", "to": "package", "y": 216, "label": "write briefs/<run>.md, commit by path"},
+    {"id": "launch", "from": "coordinator", "to": "launcher", "y": 244, "label": "ki agent launch"},
+    {"id": "start", "from": "launcher", "to": "run", "y": 272, "label": "detached run starts"},
+    {"id": "launched-line", "from": "coordinator", "to": "owner", "y": 300, "label": "one timed line: launched", "variant": "return"},
+    {"id": "status", "from": "run", "to": "launcher", "y": 334, "label": "status line, every two minutes", "variant": "dashed"},
+    {"id": "wake", "from": "launcher", "to": "coordinator", "y": 362, "label": "wake: five-minute check", "variant": "dashed"},
+    {"id": "update", "from": "coordinator", "to": "owner", "y": 390, "label": "timed update, one or two lines", "variant": "return"},
+    {"id": "done", "from": "run", "to": "launcher", "y": 422, "label": "report written, then DONE", "variant": "emphasis"},
+    {"id": "home", "from": "launcher", "to": "package", "y": 450, "label": "homes <run>.report.md"},
+    {"id": "receive", "from": "coordinator", "to": "package", "y": 478, "label": "receive: queries into queries.md, state.md, commit"},
+    {"id": "report", "from": "coordinator", "to": "owner", "y": 506, "label": "owner report: Done, In Progress, Queries, banner", "variant": "return"},
+    {"id": "with-me", "from": "owner", "to": "coordinator", "y": 534, "label": "with me", "variant": "emphasis"}
+  ],
+  "activations": [
+    {"participant": "coordinator", "from": 160, "to": 540, "type": "backend"},
+    {"participant": "launcher", "from": 244, "to": 456, "type": "cloud"},
+    {"participant": "run", "from": 272, "to": 428, "type": "backend"}
+  ],
+  "cards": [
+    {"dot": "cyan", "title": "Three hard rules", "items": ["The coordinator never does the substantive work itself", "Every unit of work goes to a detached background agent through ki agent", "An owner message never pre-empts work in flight; it is a steer"]},
+    {"dot": "amber", "title": "The turn budget", "items": ["At most five tool calls, then back to the owner", "Reads: the package, ki agent status, one report, one short file", "Writes: the package, the decisions log and a brief"]},
+    {"dot": "rose", "title": "What the owner sees", "items": ["Timed one- or two-line updates while work lies with the worker", "The owner report when a unit of work ends", "The glyph banner and thread line closing every report"]}
+  ]
+}
