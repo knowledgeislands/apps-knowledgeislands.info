@@ -31,7 +31,7 @@ This page is about getting one onto your machine and knowing what you have. [The
 
 Three kinds of thing, and the distinction matters when you go looking for something:
 
-- **Skills** — the bulk of it. A governance skill holds a standard and registers the operations that check and repair against it; a process skill drives a lifecycle you invoke. [Skills and journeys](/docs/ki-agentic-harness/skills/) explains the difference, and [the catalogue](/docs/ki-agentic-harness/skill-catalogue/) lists every published one.
+- **Skills** — the bulk of it. A governance skill holds a standard and registers the operations that check and repair against it; a process skill drives a lifecycle you invoke. [Skills and journeys](/docs/skills/what-a-skill-is/) explains the difference, and [the catalogue](/docs/skills/catalogue/) lists every published one.
 - **Subagents and hooks** — runtime material that a supported agent picks up once the harness is installed and the capability is active.
 - **Registered operations** — the executable side of a governance skill. These are what `ki repo audit` and `ki repo conform` resolve and run; they exist only inside a harness payload with integrity evidence behind it.
 

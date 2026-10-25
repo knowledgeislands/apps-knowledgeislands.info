@@ -12,7 +12,7 @@
   },
   "private": true,
   "scripts": {
-    "build": "bun node_modules/@11ty/eleventy/cmd.cjs --config=eleventy.config.ts && bun run verify:routes && bun run verify:projects && bun run verify:provenance && bun run verify:docs && bun run verify:reachable && bun run verify:prose",
+    "build": "bun node_modules/@11ty/eleventy/cmd.cjs --config=eleventy.config.ts && bun run verify:routes && bun run verify:projects && bun run verify:provenance && bun run verify:docs && bun run verify:reachable && bun run verify:prose && bun run verify:features && bun run verify:skill-names",
     "clean": "rm -rf dist .wrangler",
     "deploy": "bunx wrangler deploy",
     "ki:site:dev": "concurrently --kill-others-on-fail --names css,11ty --prefix-colors cyan,yellow \"bun run ki:site:dev:css\" \"bun run ki:site:dev:serve\"",
@@ -27,11 +27,13 @@
     "typecheck": "bunx tsc --noEmit -p tsconfig.json",
     "upload": "bunx wrangler versions upload",
     "verify:docs": "bun scripts/verify-docs-sections.ts",
+    "verify:features": "bun scripts/verify-feature-areas.ts",
     "verify:projects": "bun scripts/verify-projects.ts",
     "verify:prose": "bun scripts/verify-prose-coverage.ts",
     "verify:provenance": "bun scripts/verify-provenance.ts",
     "verify:reachable": "bun scripts/verify-reachable.ts",
-    "verify:routes": "bun scripts/verify-tool-routes.ts"
+    "verify:routes": "bun scripts/verify-tool-routes.ts",
+    "verify:skill-names": "bun scripts/verify-skill-names.ts"
   },
   "type": "module"
 }

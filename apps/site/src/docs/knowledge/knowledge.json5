@@ -1,0 +1,11 @@
+// Directory data for the knowledge Docs section, inherited by every Markdown page beside it.
+//
+// A page belongs to its section by where it lives rather than by a line each page has to
+// remember: `section` keys the collection the Docs landing grid and section contents render
+// from, and `layout` gives the page the prose chrome: the measure, the styling, and the
+// provenance footer. The directory name is the section's `slug` in `src/_data/docsSections.json5`,
+// and `verify:docs` checks that this file agrees with it.
+{
+  layout: 'layouts/page.njk',
+  section: 'knowledge'
+}

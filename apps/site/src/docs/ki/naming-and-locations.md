@@ -30,7 +30,7 @@ So the command line shows up at three moments, and almost nowhere else:
 
 ## How capabilities are named
 
-A skill is named by its bare name — `ki-work-roadmap`, `ki-authoring`, `ki-mcp`:
+A skill is named by its bare name — `ki-work-roadmap`, `ki-authoring`, `ki-repo-mcp`:
 
 ```bash
 ki skill add ki-recap

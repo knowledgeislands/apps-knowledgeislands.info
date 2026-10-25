@@ -8,7 +8,8 @@
 // Counts and first-page links are NOT declared here. They are derived at build time from the
 // pages that actually carry the matching `section` binding, so a card cannot claim a number
 // the section does not hold. Adding a page to a section directory is the only thing needed to
-// change its count.
+// change its count. A declared section whose directory holds only its binding file is a
+// registered shelf with nothing on it yet: the landing grid skips it until its first page lands.
 //
 // `slug` is the directory under src/docs/ and the first path segment of every page in it.
 
@@ -17,6 +18,26 @@
     slug: 'get-started',
     title: 'Get Started',
     description: 'Stand up your own island: the harness, the repositories, and the first thing worth doing with them.'
+  },
+  {
+    slug: 'skills',
+    title: 'Skills',
+    description: 'What a skill is, how the sixty-four fit together, which one serves which outcome.'
+  },
+  {
+    slug: 'ways-of-working',
+    title: 'Ways of working',
+    description: 'How work is defined, held, moved, delegated, traded, tended and finished.'
+  },
+  {
+    slug: 'knowledge',
+    title: 'Knowledge',
+    description: 'How an island keeps, queries, acquires and hands over knowledge.'
+  },
+  {
+    slug: 'standards',
+    title: 'Standards',
+    description: 'What every repository, record, codebase, document and diagram conforms to.'
   },
   {
     slug: 'ki',

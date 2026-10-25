@@ -1,0 +1,163 @@
+// The feature-area crosswalk: what a reader must be able to understand, each area mapped to the
+// skills and commands that provide it and to the page that explains it.
+//
+// The sections under src/docs/ are the reading view; this file is the planning view beside it.
+// `verify:features` holds the two together: every skill named here is in the vendored catalogue
+// (src/_data/skillCatalogue.json5), every `page` named here exists under src/docs/, and every
+// Markdown page in the Skills, Ways of working, Knowledge and Standards sections is claimed by
+// exactly one area, Skills pages excepted because they are about skills in general rather than
+// about one area. `partials/provided-by.njk` renders an area's skills and commands on the page it
+// names, so the box a reader sees is derived from this file rather than typed on each page.
+//
+// Fields:
+//   slug      the area's stable key, also the leaf of the page it will be explained on
+//   title     how the area is named on the site
+//   skills    the catalogue skills that provide it; a glob in the plan is written out in full here
+//             so that every entry can be checked against the catalogue by name
+//   commands  the `ki` command groups that provide it, as the reader would type them; may be empty
+//   page      the site path of the page that explains the area, as a string or, where one area is
+//             explained across more than one page, a list; omitted while the page does not exist
+//   interim   true where the practice is written up before its standard home is chosen, so the page
+//             is labelled interim throughout
+//
+// Order is the plan's order and carries no meaning on the site.
+
+[
+  {
+    slug: 'the-work-model',
+    title: 'The work model',
+    skills: ['ki-coordination', 'ki-work-package'],
+    commands: []
+  },
+  {
+    slug: 'work-packages',
+    title: 'Work packages',
+    skills: ['ki-work-package'],
+    commands: []
+  },
+  {
+    slug: 'coordination',
+    title: 'Coordination',
+    skills: ['ki-coordination', 'ki-subagents', 'ki-subagents-claude', 'ki-subagents-chatgpt'],
+    commands: []
+  },
+  {
+    slug: 'background-runs',
+    title: 'Delegation and background runs',
+    skills: ['ki-delegation'],
+    commands: ['ki agent']
+  },
+  {
+    slug: 'roadmap-lifecycle',
+    title: 'Roadmap lifecycle',
+    skills: [
+      'ki-work',
+      'ki-work-roadmap',
+      'ki-work-github-issues',
+      'ki-work-linear',
+      'ki-next',
+      'ki-plan',
+      'ki-implement',
+      'ki-accept',
+      'ki-batch'
+    ],
+    commands: ['ki batch'],
+    page: '/docs/ways-of-working/roadmap-lifecycle/'
+  },
+  {
+    slug: 'work-design',
+    title: 'Work design',
+    skills: ['ki-work-design'],
+    commands: []
+  },
+  {
+    slug: 'trades',
+    title: 'Trades',
+    skills: ['ki-trades', 'ki-trade'],
+    commands: ['ki trade']
+  },
+  {
+    slug: 'recurring-work',
+    title: 'Recurring work',
+    skills: ['ki-work-recurring', 'ki-repo-kb-activities'],
+    commands: []
+  },
+  {
+    slug: 'findings',
+    title: 'Findings',
+    skills: ['ki-coordination'],
+    commands: [],
+    interim: true
+  },
+  {
+    slug: 'tending',
+    title: 'Tending',
+    skills: ['ki-repo-kb', 'ki-work-roadmap', 'ki-accept'],
+    commands: [],
+    interim: true
+  },
+  {
+    slug: 'knowledge-bases',
+    title: 'Knowledge bases',
+    skills: ['ki-repo-kb', 'ki-repo-kb-principal', 'ki-repo-kb-streams', 'ki-repo-kb-live-artifacts'],
+    commands: ['ki kb']
+  },
+  {
+    slug: 'acquisition',
+    title: 'Acquisition',
+    skills: ['ki-acquire', 'ki-acquire-chatgpt', 'ki-acquire-granola', 'ki-pulse'],
+    commands: ['ki acquire']
+  },
+  {
+    slug: 'recap',
+    title: 'Recap',
+    skills: ['ki-recap'],
+    commands: []
+  },
+  {
+    slug: 'repository-standards',
+    title: 'Repository standards',
+    // The plan's `ki-repo-*` written out, less the knowledge-base overlays, which Knowledge bases
+    // and Recurring work claim.
+    skills: [
+      'ki-repo',
+      'ki-repo-dotfiles-chezmoi',
+      'ki-repo-harness',
+      'ki-repo-homebrew-tap',
+      'ki-repo-mcp',
+      'ki-repo-project',
+      'ki-repo-specifications',
+      'ki-repo-tools',
+      'ki-repo-website',
+      'ki-repo-website-app',
+      'ki-repo-website-cloudflare',
+      'ki-repo-website-content',
+      'ki-bootstrap'
+    ],
+    commands: ['ki repo']
+  },
+  {
+    slug: 'conformance-standards',
+    title: 'Decision records, engineering, writing and diagrams',
+    skills: ['ki-decision-records', 'ki-engineering', 'ki-git', 'ki-authoring', 'ki-guides', 'ki-specs', 'ki-diagrams'],
+    commands: []
+  },
+  {
+    slug: 'agent-environment',
+    title: 'Agent environment',
+    skills: [
+      'ki-binding',
+      'ki-binding-claude',
+      'ki-binding-chatgpt',
+      'ki-binding-chezmoi',
+      'ki-tokenomics',
+      'ki-tokenomics-claude',
+      'ki-tokenomics-chatgpt',
+      'ki-housekeeping-claude',
+      'ki-housekeeping-chatgpt',
+      'ki-agentic-radar',
+      'ki-model-radar'
+    ],
+    commands: ['ki mcp']
+  }
+]

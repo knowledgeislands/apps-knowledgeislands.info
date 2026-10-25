@@ -1,8 +1,8 @@
 ---
 title: Choose a skill by outcome
 description: Route a plain-language outcome to the smallest Knowledge Islands skill or journey that serves it.
-permalink: /docs/ki-agentic-harness/skills-by-outcome/
-order: 5
+permalink: /docs/skills/by-outcome/
+order: 4
 sources:
   - repository: knowledgeislands/ki-agentic-harness
     path: skills/README.md

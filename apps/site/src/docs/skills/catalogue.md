@@ -1,8 +1,8 @@
 ---
 title: Skill catalogue
 description: Browse every capability in the canonical Knowledge Islands harness and learn when to use it.
-permalink: /docs/ki-agentic-harness/skill-catalogue/
-order: 6
+permalink: /docs/skills/catalogue/
+order: 3
 sources:
   - repository: knowledgeislands/ki-agentic-harness
     path: skills/README.md
@@ -18,9 +18,9 @@ sources:
 
 # Skill catalogue
 
-Every skill in the harness, grouped by [source concern](/docs/ki-agentic-harness/skills/#the-skill-domains), the folder it lives in. Each entry says what the skill governs and when to reach for it, and the finder table gives the functional area each serves, which is what the skill is for rather than where it is kept.
+Every skill in the harness, grouped by [source concern](/docs/skills/what-a-skill-is/#the-skill-domains), the folder it lives in. Each entry says what the skill governs and when to reach for it, and the finder table gives the functional area each serves, which is what the skill is for rather than where it is kept.
 
-This inventory is **vendored, not rewritten**. The harness generates it from each skill's own declaration and publishes it as a specified block in its `skills/` README; this page takes that block verbatim at a pinned commit, so a skill renamed, added, or removed upstream cannot leave the site describing one that is not there. The functional areas come from the same commit, read from the table the harness draws its skill map and area diagrams from. What the site adds is the routing around it: [choose a skill by outcome](/docs/ki-agentic-harness/skills-by-outcome/) if you know the result you want but not the name, and [skills and journeys](/docs/ki-agentic-harness/skills/) for how the set fits together.
+This inventory is **vendored, not rewritten**. The harness generates it from each skill's own declaration and publishes it as a specified block in its `skills/` README; this page takes that block verbatim at a pinned commit, so a skill renamed, added, or removed upstream cannot leave the site describing one that is not there. The functional areas come from the same commit, read from the table the harness draws its skill map and area diagrams from. What the site adds is the routing around it: [choose a skill by outcome](/docs/skills/by-outcome/) if you know the result you want but not the name, and [skills and journeys](/docs/skills/what-a-skill-is/) for how the set fits together.
 
 The harness publishes **{{ skillCatalogue.counts.total }} skills** at this snapshot: {{ skillCatalogue.counts.governance }} governance skills that hold a standard, and {{ skillCatalogue.counts.process }} process skills that drive a workflow. They sit in {{ skillCatalogue.domains | length }} source concerns and serve {{ skillCatalogue.areas | length }} functional areas.
 

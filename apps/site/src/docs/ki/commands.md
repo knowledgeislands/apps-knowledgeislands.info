@@ -17,7 +17,7 @@ All {{ cliCommands.counts.commands }} commands, in the {{ cliCommands.counts.gro
 
 This inventory is **vendored, not rewritten**. `ki` ships a manual page, and this page takes it verbatim from `{{ cliCommands.source.ref }}` — every invocation and every description below is the tool's own text, parsed rather than paraphrased. A command renamed, added, or withdrawn upstream cannot leave this site describing one that is not there.{% if cliCommands.counts.omittedGroups %} The parse reads both of the manual's inventories and reconciles them, because at this release they disagree: one group appears in the synopsis and not in the reference section. It is published below, marked.{% endif %}
 
-What the site adds is the routing around it. If you do not know which command you want, [the CLI overview](/docs/ki/command-groups/) explains what each group is for and which concept page covers it. If you know the outcome but not the mechanism, [choose a skill by outcome](/docs/ki-agentic-harness/skills-by-outcome/) may be the better starting point, because much of what `ki` does is activate a capability rather than perform the work itself.
+What the site adds is the routing around it. If you do not know which command you want, [the CLI overview](/docs/ki/command-groups/) explains what each group is for and which concept page covers it. If you know the outcome but not the mechanism, [choose a skill by outcome](/docs/skills/by-outcome/) may be the better starting point, because much of what `ki` does is activate a capability rather than perform the work itself.
 
 ## Reading an entry
 

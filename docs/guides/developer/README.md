@@ -18,6 +18,7 @@ For the developer maintaining the Knowledge Islands website: how it deploys, how
 ## Published pages
 
 - [Docs sections](docs-sections.md) — where a page in a Docs section lives, what binds it there, and the reading order, opening claim and no-deferral rules `verify:docs` enforces.
+- [Feature areas](feature-areas.md) — the crosswalk from each feature area to the skills and commands that provide it and the page that explains it, the Provided by box it renders, and the `verify:features` and `verify:skill-names` gates.
 - [Deciding what this site publishes](what-to-publish.md) — whether a piece of public explanation belongs here or in the repository that holds it, and what the site owes a source it restates.
 - [Page provenance](page-provenance.md) — the `sources` declaration every published page carries, and how a refresh sweep finds pages whose upstream has moved.
 - [Page reachability](page-reachability.md) — how the build proves every published page can be reached by navigating, and which link to add when one cannot.

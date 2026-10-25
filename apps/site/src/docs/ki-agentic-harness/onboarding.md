@@ -2,7 +2,7 @@
 title: Onboard a repository
 description: Connect a repository to native KI governance with explicit capability declarations, trusted harnesses, and CI.
 permalink: /docs/ki-agentic-harness/onboarding/
-order: 8
+order: 5
 sources:
   - repository: knowledgeislands/tools-ki
     path: man/ki.1

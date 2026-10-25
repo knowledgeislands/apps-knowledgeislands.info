@@ -14,7 +14,10 @@ const site = {
   // Atlas Specifications; none of those pages exists yet (/specifications redirects home), so they are
   // left out rather than pointed somewhere they are not (KI-WEBSITE-SITE-044). Arcadia and the call to
   // action go to /arcadia/, the painting beside the chart (KI-WEBSITE-SITE-045); the home page's Arcadia
-  // section keeps its #arcadia anchor.
+  // section keeps its #arcadia anchor. Projects left the bar when the Docs landing page took the
+  // project catalogue below its section grid: the catalogue answers "what is this" and lives
+  // where "how do I" is answered, so /projects/ stays reachable from Docs, the home page and
+  // Arcadia without a third Atlas entry.
   nav: {
     groups: [
       {
@@ -29,8 +32,7 @@ const site = {
         label: 'Atlas',
         items: [
           { label: 'Field Guide', href: '/field-guide/' },
-          { label: 'Docs', href: '/docs/' },
-          { label: 'Projects', href: '/projects/' }
+          { label: 'Docs', href: '/docs/' }
         ]
       }
     ],

@@ -2,7 +2,7 @@
 title: Tune an agent session
 description: Reduce standing context and runtime cost while retaining the capabilities an agent needs.
 permalink: /docs/ki-agentic-harness/tuning/
-order: 10
+order: 6
 sources:
   - repository: knowledgeislands/ki-agentic-harness
     path: skills/environment/ki-tokenomics/references/standards-tokenomics.md
@@ -115,7 +115,7 @@ Memory is the one layer where two different audits apply, and they are complemen
 
 The scope rule the hygiene pass enforces is also the cheapest way to keep the index small: repo-specific guidance belongs in that repo's `CLAUDE.md`, cross-project personal preferences in `~/.claude/*.md`, and only genuine user/reference facts stay in memory. Machine-generated noise — stale "learned patterns" blocks, another repo's paths — is both a hygiene failure and dead standing cost; prune it here rather than compressing it at runtime.
 
-There is a fourth route for substantial guidance that is relevant only to a recognisable class of task: promote it from always-on `CLAUDE.md` prose into an on-demand skill. The skill's `description` remains a small standing selection cost, but its body loads only when triggered, so a self-contained occasional procedure or domain playbook can become much cheaper. Do not lift one-line rules or default-behaviour gates blindly — the description may cost more than the line saves, and a behaviour the agent must apply without an explicit task trigger still needs a concise always-loaded anchor. Invoke the [`ki-skills` skill](/docs/ki-agentic-harness/skill-catalogue/#ki-skills) to judge whether the material is substantial, situational, self-contained, discoverable, and safely anchored before promoting it.
+There is a fourth route for substantial guidance that is relevant only to a recognisable class of task: promote it from always-on `CLAUDE.md` prose into an on-demand skill. The skill's `description` remains a small standing selection cost, but its body loads only when triggered, so a self-contained occasional procedure or domain playbook can become much cheaper. Do not lift one-line rules or default-behaviour gates blindly — the description may cost more than the line saves, and a behaviour the agent must apply without an explicit task trigger still needs a concise always-loaded anchor. Invoke the [`ki-skills` skill](/docs/skills/catalogue/#ki-skills) to judge whether the material is substantial, situational, self-contained, discoverable, and safely anchored before promoting it.
 
 ### When the hygiene audit reports issues
 

@@ -104,6 +104,6 @@ ki harness uninstall example/harness
 
 ## Related
 
-[Update and upgrade](/docs/ki/update-upgrade/) covers refreshing an installation without changing any of these declarations. [Every `ki` command](/docs/ki/commands/) has the full inventory, including the options each command accepts. [Skills and journeys](/docs/ki-agentic-harness/skills/) explains what a skill actually contains, which is the other half of deciding whether to activate one.
+[Update and upgrade](/docs/ki/update-upgrade/) covers refreshing an installation without changing any of these declarations. [Every `ki` command](/docs/ki/commands/) has the full inventory, including the options each command accepts. [Skills and journeys](/docs/skills/what-a-skill-is/) explains what a skill actually contains, which is the other half of deciding whether to activate one.
 
 Use `ki harness --help` and `ki skill --help` for the exact grammar your installed version supports.

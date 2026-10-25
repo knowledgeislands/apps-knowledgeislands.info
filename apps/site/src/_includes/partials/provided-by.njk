@@ -1,0 +1,45 @@
+{#
+  What provides the thing this page explains.
+
+  A page in Ways of working, Knowledge or Standards explains one feature area, and the area is
+  provided by named skills and `ki` command groups. Naming them on the page is what lets a reader
+  go from understanding to doing, but typed on each page the names would drift the moment the
+  harness renamed one. So the names come from the crosswalk, `src/_data/featureAreas.json5`,
+  which `verify:features` checks against the vendored catalogue, and the box is rendered for any
+  page whose path an area names. A page no area names renders nothing.
+
+  It shares the provenance footer's styling: like the sources table, it is about the page rather
+  than part of its argument.
+
+  See docs/guides/developer/feature-areas.md.
+#}
+{%- set providedBy = null %}
+{%- for area in featureAreas %}
+  {%- if area.page is string %}
+    {%- if area.page == page.url %}{% set providedBy = area %}{% endif %}
+  {%- elif area.page %}
+    {%- for path in area.page %}{% if path == page.url %}{% set providedBy = area %}{% endif %}{% endfor %}
+  {%- endif %}
+{%- endfor %}
+{%- if providedBy %}
+
+<aside class="prose-provenance" aria-label="Provided by">
+
+<p class="overline">Provided by</p>
+
+<ul>
+{%- for skill in providedBy.skills %}
+  <li><a href="/docs/skills/catalogue/#{{ skill }}"><code>{{ skill }}</code></a></li>
+{%- endfor %}
+{%- for command in providedBy.commands %}
+  <li><code>{{ command }}</code> in <a href="/docs/ki/commands/">the ki CLI</a></li>
+{%- endfor %}
+</ul>
+
+{%- if providedBy.interim %}
+<p>The practice on this page is written up as it works now, before its standard home is chosen.</p>
+{%- endif %}
+
+</aside>
+
+{%- endif %}

@@ -10,7 +10,7 @@
 // file is recorded as the snapshot's `roster`, the key verify:provenance holds a second file under.
 //
 // The ref below must match the ref declared in the sources frontmatter of
-// src/docs/ki-agentic-harness/skill-catalogue.md; verify:provenance fails the build when they disagree.
+// src/docs/skills/catalogue.md; verify:provenance fails the build when they disagree.
 // See docs/guides/developer/page-provenance.md.
 //
 // Snapshot taken at 8897008fcee7b2c71a22115735ed038efccf7f32.

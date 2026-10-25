@@ -97,7 +97,7 @@ Use a **bare skill name**. Harness-qualified keys such as `knowledgeislands/ki-a
 
 Add `--replace` to overwrite an existing declaration rather than fail on it, and `--repo <path>` to act on a repository other than the one you are standing in.
 
-Not sure which skill you want? [Choose a skill by outcome](/docs/ki-agentic-harness/skills-by-outcome/) routes a plain-language goal to the right one, and [the catalogue](/docs/ki-agentic-harness/skill-catalogue/) is the full inventory.
+Not sure which skill you want? [Choose a skill by outcome](/docs/skills/by-outcome/) routes a plain-language goal to the right one, and [the catalogue](/docs/skills/catalogue/) is the full inventory.
 
 **Check it worked:**
 

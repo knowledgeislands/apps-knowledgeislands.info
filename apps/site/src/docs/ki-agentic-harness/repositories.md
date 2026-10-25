@@ -72,7 +72,7 @@ Both take `--repo <path>` to act on a repository other than the one you are stan
 
 Repository scope is about _this codebase_: its Markdown style, its toolchain, its roadmap discipline. It is separate from user scope, which is about how _you_ work and is managed with `ki skill add`. Removing one never touches the other. [The capability lifecycle](/docs/ki/capability-lifecycle/) covers both scopes together.
 
-Choosing what to declare is its own question — [choose a skill by outcome](/docs/ki-agentic-harness/skills-by-outcome/) routes a plain-language goal to the capability that serves it.
+Choosing what to declare is its own question — [choose a skill by outcome](/docs/skills/by-outcome/) routes a plain-language goal to the capability that serves it.
 
 ## The three operations
 

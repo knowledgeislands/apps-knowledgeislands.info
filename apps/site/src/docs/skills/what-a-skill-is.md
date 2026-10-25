@@ -1,8 +1,8 @@
 ---
 title: Skills and journeys
 description: Understand Knowledge Islands skills, their domains, and the process journey from a live session to governed delivery.
-permalink: /docs/ki-agentic-harness/skills/
-order: 4
+permalink: /docs/skills/what-a-skill-is/
+order: 1
 sources:
   - repository: knowledgeislands/ki-agentic-harness
     path: skills/README.md
@@ -13,9 +13,9 @@ sources:
 
 # Skills and journeys
 
-The skills are the bulk of the harness today. Most are **governance skills** — each holds a house standard and ships the universal **EDUCATE / AUDIT / CONFORM / REFRESH** modes (plus skill-specific ones), backed by a tracked `references/sources.md`. A smaller, growing set are **process skills** — lightweight skills that drive an action or lifecycle rather than holding a standard (`ADR-KI-HARNESS-SKILLS-006`); `ki-recap`, `ki-next`, `ki-plan`, `ki-implement`, `ki-accept`, `ki-batch`, and `ki-coordination` form the current repository-delivery set, with `ki-delegation` governing the background runs they launch. This page is the map: what a skill is, how the set fits together, and the shape they share; the per-skill entries are in [the catalogue](/docs/ki-agentic-harness/skill-catalogue/).
+The skills are the bulk of the harness today. Most are **governance skills** — each holds a house standard and ships the universal **EDUCATE / AUDIT / CONFORM / REFRESH** modes (plus skill-specific ones), backed by a tracked `references/sources.md`. A smaller, growing set are **process skills** — lightweight skills that drive an action or lifecycle rather than holding a standard (`ADR-KI-HARNESS-SKILLS-006`); `ki-recap`, `ki-next`, `ki-plan`, `ki-implement`, `ki-accept`, `ki-batch`, and `ki-coordination` form the current repository-delivery set, with `ki-delegation` governing the background runs they launch. This page is the map: what a skill is, how the set fits together, and the shape they share; the per-skill entries are in [the catalogue](/docs/skills/catalogue/).
 
-If you know the outcome you want but not the skill name, start with [choose a skill by outcome](/docs/ki-agentic-harness/skills-by-outcome/), which routes a plain-language goal to the smallest capability that serves it.
+If you know the outcome you want but not the skill name, start with [choose a skill by outcome](/docs/skills/by-outcome/), which routes a plain-language goal to the smallest capability that serves it.
 
 ## The repository delivery journey
 
@@ -78,7 +78,7 @@ Its universal modes apply at local scale:
 - **CONFORM** runs AUDIT first, then proposes and—only after confirmation—applies the appropriate source-state remediation.
 - **REFRESH** retires resolved concerns and promotes either a recurring cross-repository pattern into a named Knowledge Islands skill or multi-step change work into the repository roadmap.
 
-`ki-housekeeping-claude` recognises this boundary: it governs accumulated Claude machine state, while `ki-self` governs the repository-local concerns that sit beside it. [Skills by outcome](/docs/ki-agentic-harness/skills-by-outcome/) routes the same territory by what you are trying to do rather than by family, and keeps `ki-self` distinct as repository-local governance that can promote a recurring pattern into a named shared skill.
+`ki-housekeeping-claude` recognises this boundary: it governs accumulated Claude machine state, while `ki-self` governs the repository-local concerns that sit beside it. [Skills by outcome](/docs/skills/by-outcome/) routes the same territory by what you are trying to do rather than by family, and keeps `ki-self` distinct as repository-local governance that can promote a recurring pattern into a named shared skill.
 
 ## The skill domains
 

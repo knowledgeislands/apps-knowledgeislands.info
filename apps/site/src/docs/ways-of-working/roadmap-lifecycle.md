@@ -1,8 +1,8 @@
 ---
 title: Plan and deliver governed work
 description: Turn a deep audit or transferred concern into implementation-ready, governed roadmap work.
-permalink: /docs/ki-agentic-harness/planning-and-delivery/
-order: 9
+permalink: /docs/ways-of-working/roadmap-lifecycle/
+order: 5
 sources:
   - repository: knowledgeislands/ki-agentic-harness
     path: skills/README.md

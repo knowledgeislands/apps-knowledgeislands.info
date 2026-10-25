@@ -1,9 +1,10 @@
 ---
 title: Docs — Knowledge Islands
-description: "Every guide the site publishes, grouped into sections you can work through: getting started, the ki CLI, the agentic harness, prompting, optional tools, and contributing."
+description: "Every guide the site publishes, grouped into sections you can work through, followed by the catalogue of every public project in the ecosystem."
 permalink: /docs/
 layout: layouts/base.njk
 ---
+{% from "macros/icons.njk" import kiIcon %}
 {%- set allDocs = collections.docsPages -%}
 
 <section class="section-navy hero-section hero-section-standard">
@@ -40,12 +41,39 @@ layout: layouts/base.njk
   </div>
 </section>
 
-<section class="section-mist section-pad">
+<section class="section-mist section-pad" id="catalogue">
+  <div class="page-container" style="max-width: 64rem;">
+    <div class="prose-ki" style="max-width: none; margin-bottom: 2rem;">
+      <p class="overline">The catalogue</p>
+      <h2>Every public project, and what it is the authority for.</h2>
+      <p>The sections above answer <em>how do I</em>. This catalogue answers <em>what is this</em>: every repository in the ecosystem, with what it owns and where it lives. Each card opens the project's own page; <a href="/projects/">Projects</a> holds the same catalogue grouped by kind, with a word on each group.</p>
+    </div>
+
+    <div class="grid-2col" style="gap: 1.5rem;">
+  {#- Rendered from the same project registry /projects/index.njk reads, card for card, so the
+      catalogue here and the directory there cannot list different projects. -#}
+  {%- for project in projects %}
+      <a href="{{ project.route | default('/projects/' + project.slug + '/') }}" class="card-ki tool-card" style="color: inherit; text-decoration: none;">
+        <div class="symbol-circle symbol-circle-{{ project.accent }}">{{ kiIcon(project.icon, 22) }}</div>
+        <h3 style="font-size: 1.25rem; margin-bottom: 0.625rem;"><code>{{ project.name }}</code></h3>
+        <p class="text-muted" style="font-size: 0.9375rem; margin: 0;">{{ project.tagline }}</p>
+        {%- if project.version %}
+        <p class="text-muted" style="font-size: 0.8125rem; margin: 0.625rem 0 0;">{{ project.version }} · {{ project.maturity }}</p>
+        {%- else %}
+        <p class="text-muted" style="font-size: 0.8125rem; margin: 0.625rem 0 0;">{{ project.availability }}{% if project.route %} · {{ project.route }}{% endif %}</p>
+        {%- endif %}
+      </a>
+  {%- endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section-parchment section-pad">
   <div class="page-container" style="max-width: 64rem;">
     <div class="prose-ki" style="max-width: none;">
       <p class="overline">What is not here</p>
-      <h2>The project directory is a catalogue, not a section.</h2>
-      <p>Every repository in the ecosystem is listed under <a href="/projects/">Projects</a>, with what it owns and where it lives. That page answers <em>what is this</em>. The sections above answer <em>how do I</em>, which is a different question and now has a different home.</p>
+      <h2>The catalogue is a directory, not a section.</h2>
+      <p>The catalogue below the sections, and <a href="/projects/">Projects</a>, list every repository in the ecosystem with what it owns and where it lives. They answer <em>what is this</em>. The sections above answer <em>how do I</em>, which is a different question with a different home: nothing in the catalogue is a guide, and no guide lives under a project.</p>
     </div>
   </div>
 </section>

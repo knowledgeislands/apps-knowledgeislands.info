@@ -16,6 +16,10 @@ layout: layouts/base.njk
   The provenance footer is included here for the same reason, and for one more: thirty-five pages
   each ended with the include in their own Markdown body, which put a table of links to other
   repositories through the Markdown renderer as the page's closing section (KI-WEBSITE-SITE-024).
+
+  The Provided by box sits between the section contents and the sources for the same reason: it is
+  derived from the feature-area crosswalk for any page an area names, so it belongs to the layout
+  rather than to the page (docs/guides/developer/feature-areas.md).
 #}
 <section class="section-parchment section-pad">
   <div class="page-container" style="max-width: 64rem;">
@@ -23,6 +27,7 @@ layout: layouts/base.njk
       {% include "partials/up-link.njk" %}
       {{ content | safe }}
       {% include "partials/section-contents.njk" %}
+      {% include "partials/provided-by.njk" %}
       {% include "partials/sources.njk" %}
     </article>
   </div>
