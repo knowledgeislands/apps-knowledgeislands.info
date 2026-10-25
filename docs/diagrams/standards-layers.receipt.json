@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "slug": "standards-layers",
+  "type": "architecture",
+  "source": {
+    "file": "standards-layers.architecture.json",
+    "sha256": "bced8d5b0ef55ff3e6f7adab9a6419ae87f88df5a82ea65a13fa4111e90dffd4",
+    "bytes": 2950
+  },
+  "html": {
+    "file": "standards-layers.html",
+    "sha256": "450a5d77003f86d981127a6f36ee059d5e01ca4796b59f8a3c4586ea231f6f30",
+    "bytes": 819648
+  },
+  "renderer": {
+    "name": "archify",
+    "version": "3.2.0"
+  }
+}

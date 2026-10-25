@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "slug": "repository-shapes",
+  "type": "architecture",
+  "source": {
+    "file": "repository-shapes.architecture.json",
+    "sha256": "c96bbc6dc5338920f8efb29064c99449504f80dcd2d34d241016a9c58202c046",
+    "bytes": 3259
+  },
+  "html": {
+    "file": "repository-shapes.html",
+    "sha256": "38c632f65fab91943f0f3ccce3439ceab1b4d865cc594756622e8ca6c3dbf115",
+    "bytes": 821497
+  },
+  "renderer": {
+    "name": "archify",
+    "version": "3.2.0"
+  }
+}

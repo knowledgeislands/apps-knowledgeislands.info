@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "slug": "decision-to-record",
+  "type": "workflow",
+  "source": {
+    "file": "decision-to-record.workflow.json",
+    "sha256": "261567451c4c8b32c82ce9a7ce7fb7707c941bf47dfeb9cb38a2b344be09451d",
+    "bytes": 2903
+  },
+  "html": {
+    "file": "decision-to-record.html",
+    "sha256": "f16f112870e845a5244a705991e72a6afd78d27965661f954aba3ad674235874",
+    "bytes": 816698
+  },
+  "renderer": {
+    "name": "archify",
+    "version": "3.2.0"
+  }
+}

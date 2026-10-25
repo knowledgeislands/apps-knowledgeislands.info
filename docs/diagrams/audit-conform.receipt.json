@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "slug": "audit-conform",
+  "type": "workflow",
+  "source": {
+    "file": "audit-conform.workflow.json",
+    "sha256": "207b5fac171c6606aff330cc8f501cac4f93ed6e14feec8af63dff21d3dba0b5",
+    "bytes": 2583
+  },
+  "html": {
+    "file": "audit-conform.html",
+    "sha256": "526cd0efb7c21270f8cab326734a33eccae3148023a12068ace80b5fa9eb4da8",
+    "bytes": 815584
+  },
+  "renderer": {
+    "name": "archify",
+    "version": "3.2.0"
+  }
+}

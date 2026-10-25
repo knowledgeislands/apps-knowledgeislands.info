@@ -111,3 +111,33 @@ How do selected source captures and bounded public signals reach an island witho
 How does a grounded live-session recap reconcile changes, decisions, unfinished work and learning routes? The figure follows the pinned harness at `8897008f`.
 
 [![A grounded recap and its learning routes](recap-handover.svg)](recap-handover.html)
+
+## Repository contract, shapes and overlays
+
+How do the universal repository contract, primary shapes and supporting overlays compose? This figure follows the governing skills at harness `8897008f`.
+
+[![Repository contract, shapes and overlays](repository-shapes.svg)](repository-shapes.html)
+
+## Educate, audit, conform and re-audit
+
+How does a repository move from declared foundations through approved repairs to a checked result? This figure follows the governing skills at harness `8897008f`.
+
+[![Educate, audit, conform and re-audit](audit-conform.svg)](audit-conform.html)
+
+## From a logged decision to durable rationale
+
+When does a logged decision warrant a typed record, and how is its rationale kept durable? This figure follows the governing skills at harness `8897008f`.
+
+[![From a logged decision to durable rationale](decision-to-record.svg)](decision-to-record.html)
+
+## Three layers of repository standards
+
+Which rules come from the universal contract, applicable shapes and capabilities, and repository choices? This figure follows the governing skills at harness `8897008f`.
+
+[![Three layers of repository standards](standards-layers.svg)](standards-layers.html)
+
+## Source, build, export, receipt and freshness
+
+How is a traced diagram rebuilt and checked as a complete maintained set? This figure follows the governing skills at harness `8897008f`.
+
+[![Source, build, export, receipt and freshness](diagram-regeneration.svg)](diagram-regeneration.html)

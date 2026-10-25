@@ -8,7 +8,7 @@ audience = "Knowledge Islands users choosing a command group"
 traced = ["man/ki.1", "apps/site/src/docs/ki/command-groups.md", "apps/site/src/_data/cliCommands.json5"]
 stale_when = "the command groups or their operational scopes in tools-ki man/ki.1 change from v0.13.0"
 regenerate = "Read man/ki.1 at tools-ki v0.13.0. Draw all eighteen COMMAND GROUPS headings as an Archify architecture diagram, citing their manual line ranges. Preserve their order and state what each operates on. Finalize with bun run --cwd apps/site diagrams:build -- --svg command-groups."
-last_checked = "6a0cc482f3ef232533da8112374b0b94e3db6235"
+last_checked = "8b4b7b75a637c969693278cb6bda125175bbbf88"
 svg_form = "ki"
 commit_html = true
 
@@ -231,5 +231,78 @@ traced = [
 stale_when = "recap scope, the three legs, Actions, learning confirmation or carry-forward outputs change from harness 8897008f"
 regenerate = "Read the traced files at ki-agentic-harness 8897008f. Draw fresh grounding across the whole live thread, then Summarise, Surface what is outstanding and Harvest the learnings in that order. End with Actions and the carry-forward digest. Keep recorded deferrals distinct from unfinished thread work and learning writes subject to confirmation. Finalise with bun run --cwd apps/site diagrams:build -- --svg recap-handover."
 last_checked = "de1b44ef7c25d5a4619c4c86311bf085740a8db3"
+svg_form = "ki"
+commit_html = true
+
+[repository-shapes]
+type = "architecture"
+question = "How do the universal repository contract, primary shapes and supporting overlays compose?"
+audience = "Knowledge Islands users applying repository, writing and diagram standards"
+traced = [
+  "skills/keystone/ki-repo/SKILL.md",
+  "skills/repo-structure/ki-repo-project/SKILL.md",
+  "skills/repo-structure/ki-repo-website/SKILL.md",
+  "skills/repo-structure/ki-repo-kb/SKILL.md",
+]
+stale_when = "Repository kind, primary-shape selection or the ownership of the specialist and website overlays changes from harness 8897008f"
+regenerate = "Read the traced files at ki-agentic-harness 8897008fcee7b2c71a22115735ed038efccf7f32. Redraw the current model answering the question, preserving authority boundaries. Finalise with bun run --cwd apps/site diagrams:build -- --svg repository-shapes."
+last_checked = "8b4b7b75a637c969693278cb6bda125175bbbf88"
+svg_form = "ki"
+commit_html = true
+
+[audit-conform]
+type = "workflow"
+question = "How does a repository move from declared foundations through approved repairs to a checked result?"
+audience = "Knowledge Islands users applying repository, writing and diagram standards"
+traced = [
+  "skills/keystone/ki-repo/SKILL.md",
+  "skills/keystone/ki-bootstrap/SKILL.md",
+]
+stale_when = "The foundation scaffold, audit resolution, approval boundary or re-audit loop changes from harness 8897008f"
+regenerate = "Read the traced files at ki-agentic-harness 8897008fcee7b2c71a22115735ed038efccf7f32. Redraw the current model answering the question, preserving authority boundaries. Finalise with bun run --cwd apps/site diagrams:build -- --svg audit-conform."
+last_checked = "8b4b7b75a637c969693278cb6bda125175bbbf88"
+svg_form = "ki"
+commit_html = true
+
+[decision-to-record]
+type = "workflow"
+question = "When does a logged decision warrant a typed record, and how is its rationale kept durable?"
+audience = "Knowledge Islands users applying repository, writing and diagram standards"
+traced = [
+  "skills/governance/ki-decision-records/SKILL.md",
+  "skills/governance/ki-decision-records/references/standards-decision-records.md",
+]
+stale_when = "The standalone-value test, type vocabulary, review or living-record rules change from harness 8897008f"
+regenerate = "Read the traced files at ki-agentic-harness 8897008fcee7b2c71a22115735ed038efccf7f32. Redraw the current model answering the question, preserving authority boundaries. Finalise with bun run --cwd apps/site diagrams:build -- --svg decision-to-record."
+last_checked = "8b4b7b75a637c969693278cb6bda125175bbbf88"
+svg_form = "ki"
+commit_html = true
+
+[standards-layers]
+type = "architecture"
+question = "Which rules come from the universal contract, applicable shapes and capabilities, and repository choices?"
+audience = "Knowledge Islands users applying repository, writing and diagram standards"
+traced = [
+  "skills/keystone/ki-repo/SKILL.md",
+  "skills/governance/ki-engineering/references/standards-engineering.md",
+  "skills/governance/ki-git/references/standards-git.md",
+]
+stale_when = "Universal ownership, engineering capability composition or repository-specific policy boundaries change from harness 8897008f"
+regenerate = "Read the traced files at ki-agentic-harness 8897008fcee7b2c71a22115735ed038efccf7f32. Redraw the current model answering the question, preserving authority boundaries. Finalise with bun run --cwd apps/site diagrams:build -- --svg standards-layers."
+last_checked = "8b4b7b75a637c969693278cb6bda125175bbbf88"
+svg_form = "ki"
+commit_html = true
+
+[diagram-regeneration]
+type = "workflow"
+question = "How is a traced diagram rebuilt and checked as a complete maintained set?"
+audience = "Knowledge Islands users applying repository, writing and diagram standards"
+traced = [
+  "skills/governance/ki-diagrams/references/standards-diagrams.md",
+  "skills/governance/ki-diagrams/references/rubric.md",
+]
+stale_when = "Committed forms, finalisation gates, export, receipt or freshness rules change from harness 8897008f"
+regenerate = "Read the traced files at ki-agentic-harness 8897008fcee7b2c71a22115735ed038efccf7f32. Redraw the current model answering the question, preserving authority boundaries. Finalise with bun run --cwd apps/site diagrams:build -- --svg diagram-regeneration."
+last_checked = "8b4b7b75a637c969693278cb6bda125175bbbf88"
 svg_form = "ki"
 commit_html = true

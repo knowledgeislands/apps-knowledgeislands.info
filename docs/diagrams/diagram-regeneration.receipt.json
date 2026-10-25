@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "slug": "diagram-regeneration",
+  "type": "workflow",
+  "source": {
+    "file": "diagram-regeneration.workflow.json",
+    "sha256": "7eee0f5ccfbc7cc39ae142dd8d24479d581d568ae0c9d0182e81dd227cf4e35e",
+    "bytes": 2901
+  },
+  "html": {
+    "file": "diagram-regeneration.html",
+    "sha256": "31bc4dd458a944261d06b5be6cba2a3cc11ac83fc0201223f689ea405dbadea7",
+    "bytes": 816004
+  },
+  "renderer": {
+    "name": "archify",
+    "version": "3.2.0"
+  }
+}
