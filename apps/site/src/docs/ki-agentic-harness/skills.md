@@ -6,14 +6,14 @@ order: 4
 sources:
   - repository: knowledgeislands/ki-agentic-harness
     path: skills/README.md
-    ref: bd6e29b5e0d567fb5ebb83566ddd46b3f6ba778b
+    ref: 8897008fcee7b2c71a22115735ed038efccf7f32
     governs: 'The skill domains and the generated capability inventory this page orients readers within'
-    reviewed: '2026-10-11'
+    reviewed: '2026-10-25'
 ---
 
 # Skills and journeys
 
-The skills are the bulk of the harness today. Most are **governance skills** — each holds a house standard and ships the universal **EDUCATE / AUDIT / CONFORM / REFRESH** modes (plus skill-specific ones), backed by a tracked `references/sources.md`. A smaller, growing set are **process skills** — lightweight skills that drive an action or lifecycle rather than holding a standard (`ADR-KI-HARNESS-SKILLS-006`); `ki-recap`, `ki-next`, `ki-plan`, `ki-implement`, `ki-accept`, `ki-batch`, and `ki-delegate` form the current repository-delivery set. This page is the map: what a skill is, how the set fits together, and the shape they share; the per-skill entries are in [the catalogue](/docs/ki-agentic-harness/skill-catalogue/).
+The skills are the bulk of the harness today. Most are **governance skills** — each holds a house standard and ships the universal **EDUCATE / AUDIT / CONFORM / REFRESH** modes (plus skill-specific ones), backed by a tracked `references/sources.md`. A smaller, growing set are **process skills** — lightweight skills that drive an action or lifecycle rather than holding a standard (`ADR-KI-HARNESS-SKILLS-006`); `ki-recap`, `ki-next`, `ki-plan`, `ki-implement`, `ki-accept`, `ki-batch`, and `ki-coordination` form the current repository-delivery set, with `ki-delegation` governing the background runs they launch. This page is the map: what a skill is, how the set fits together, and the shape they share; the per-skill entries are in [the catalogue](/docs/ki-agentic-harness/skill-catalogue/).
 
 If you know the outcome you want but not the skill name, start with [choose a skill by outcome](/docs/ki-agentic-harness/skills-by-outcome/), which routes a plain-language goal to the smallest capability that serves it.
 
@@ -41,7 +41,7 @@ ki-recap
 - **`ki-plan`** creates or enriches selected items through the explicit `Ready` gate, then stops.
 - **`ki-implement`** takes one approved `Ready` item through `In progress`, bounded execution, verification, and an evidence-backed `Acceptance` packet, then stops.
 - **`ki-accept`** reviews one item at `Acceptance`, requires human approval by default, moves approved work to `Done`, and prunes only exact confirmed retained records.
-- **`ki-delegate`** supports planning or implementation when work benefits from bounded specialist agents. It classifies, assigns, sequences, and gates delegated units; it does not own roadmap state or confer authority.
+- **`ki-delegation`** governs delegation when planning or implementation benefits from detached background agents: the run packet, prompt shape, authority footers, decisions log, run queue and monitoring, with durable packets for approved high-risk hand-offs. It does not own roadmap state or confer authority.
 
 `ki-batch` coordinates the same ownership boundaries across an explicit set:
 
@@ -82,93 +82,102 @@ Its universal modes apply at local scale:
 
 ## The skill domains
 
-The source tree groups capabilities into six semantic domains:
+The source tree groups capabilities into eight source concerns:
 
-1. **Agentic systems** — `ki-communication` and `ki-subagents`: the shared capability types that equip an agent.
-2. **Change management** — `ki-work`, its Roadmap, Streams, GitHub Issues, and Linear adapters, and the short lifecycle process skills.
-3. **Environment** — portable `ki-binding` and `ki-tokenomics`; their `-claude` and `-chatgpt` runtime adapters; and `ki-housekeeping-claude`.
-4. **Governance** — `ki-authoring`, `ki-checkpoint`, `ki-decision-records`, `ki-delegation`, `ki-engineering`, `ki-git`, `ki-guides`, `ki-specs`, `ki-trade`, and `ki-trades`: reusable standards and instruments that cut across repository shapes.
-5. **Keystone** — `ki-bootstrap`, `ki-repo`, and `ki-skills`: the installation, repository, and skill-quality contracts that hold the set together.
-6. **Repository structure** — the explicit primary structures `ki-repo-project` and `ki-repo-kb`, with composable deltas for harnesses, MCPs, websites, specifications, tools, and Knowledge Base zones.
+1. **Acquire** — `ki-acquire` and its `-chatgpt` and `-granola` adapters, with `ki-pulse`: exception-based capture of agent sessions and meeting notes into a Knowledge Base.
+2. **Agentic systems** — `ki-subagents` with its `-claude` and `-chatgpt` adapters, and `ki-agent-coordination-paperclip`: the capability types that equip an agent and the coordination of several.
+3. **Change management** — `ki-work`, its Roadmap, GitHub Issues, and Linear adapters, `ki-work-recurring`, `ki-work-design`, `ki-coordination`, and the short lifecycle process skills `ki-next`, `ki-plan`, `ki-implement`, `ki-accept`, `ki-batch`, and `ki-recap`.
+4. **Design** — `ki-design-inspiration` and `ki-design-system`: visual references and the interface design system.
+5. **Environment** — portable `ki-binding` and `ki-tokenomics`; their `-claude`, `-chatgpt`, and `-chezmoi` runtime adapters; and `ki-housekeeping-claude` and `ki-housekeeping-chatgpt`.
+6. **Governance** — `ki-authoring`, `ki-decision-records`, `ki-delegation`, `ki-diagrams`, `ki-engineering`, `ki-git`, `ki-guides`, `ki-specs`, `ki-trade`, `ki-trades`, `ki-work-package`, and the `ki-model-radar` and `ki-agentic-radar` assessments: reusable standards and instruments that cut across repository shapes.
+7. **Keystone** — `ki-bootstrap`, `ki-repo`, and `ki-skills`: the installation, repository, and skill-quality contracts that hold the set together.
+8. **Repository structure** — the explicit primary structures `ki-repo-project` and `ki-repo-kb`, with composable deltas for harnesses, MCPs, websites, specifications, tools, dotfiles, Homebrew taps, and Knowledge Base zones.
 
 ## Interdependencies
 
-The domains group the skills by concern. A second relationship runs across them: which governance capability each skill necessarily requires. Formal composition is declared in `ki-depends-on:` frontmatter; selecting a dependent runs its prerequisites first. A repository explicitly declares both the selected skill and every dependency. Textual list order has no meaning, and separately coverage-detected standards do not appear as dependency edges. The tree below mirrors the declarations rather than expanding coverage.
+The domains group the skills by concern. A second relationship runs across them: which governance capability each skill necessarily requires. Formal composition is declared in `ki-depends-on:` frontmatter; selecting a dependent runs its prerequisites first. A repository explicitly declares both the selected skill and every dependency. Textual list order has no meaning, and separately coverage-detected standards do not appear as dependency edges. The tree below mirrors the declarations rather than expanding coverage, and lists only the skills that declare a dependency.
 
 <!-- BEGIN GENERATED SKILL GRAPH -->
 
 ```text
-ki-bootstrap
+ki-acquire-chatgpt
+└─ ki-acquire
 
-ki-work
-├─ ki-work-roadmap
-├─ ki-work-github-issues
-└─ ki-work-linear
+ki-acquire-granola
+└─ ki-acquire
 
-ki-repo-kb
-├─ ki-repo-kb-activities
-├─ ki-repo-kb-live-artifacts
-└─ ki-repo-kb-streams
-
-ki-repo-website
-├─ ki-repo-website-content
-├─ ki-repo-website-app
-└─ ki-repo-website-cloudflare
-
-ki-repo-harness
-
-ki-repo-mcp
-
-ki-repo-specifications
-
-ki-specs
-
-ki-git
-
-ki-housekeeping-claude
-
-ki-tokenomics-claude
-└─ ki-tokenomics
-
-ki-tokenomics-chatgpt
-└─ ki-tokenomics
-
-ki-tokenomics
-
-ki-binding-claude
-└─ ki-binding
+ki-agent-coordination-paperclip
+└─ ki-git
 
 ki-binding-chatgpt
 └─ ki-binding
 
 ki-binding-chezmoi
 ├─ ki-binding
-└─ ki-dotfiles-chezmoi
+└─ ki-repo-dotfiles-chezmoi
    └─ ki-authoring
 
-ki-delegate
+ki-binding-claude
+└─ ki-binding
 
-ki-accept
-
-ki-batch
-
-ki-engineering
-
-ki-homebrew-tap
-
-ki-implement
-
-ki-next
-
-ki-plan
+ki-coordination
+├─ ki-delegation
+└─ ki-work-package
 
 ki-recap
+└─ ki-authoring
 
 ki-repo
 ├─ ki-authoring
 └─ ki-git
 
-ki-tools
+ki-repo-dotfiles-chezmoi
+└─ ki-authoring
+
+ki-repo-harness
+├─ ki-skills
+├─ ki-subagents
+├─ ki-decision-records
+└─ ki-work-roadmap
+
+ki-repo-kb
+├─ ki-repo-kb-activities
+├─ ki-repo-kb-live-artifacts
+└─ ki-repo-kb-streams
+
+ki-repo-kb-principal
+├─ ki-repo-kb
+│  ├─ ki-repo-kb-activities
+│  ├─ ki-repo-kb-live-artifacts
+│  └─ ki-repo-kb-streams
+└─ ki-decision-records
+
+ki-repo-mcp
+└─ ki-engineering
+
+ki-repo-website-app
+└─ ki-repo-website
+
+ki-repo-website-cloudflare
+└─ ki-repo-website
+
+ki-repo-website-content
+└─ ki-repo-website
+
+ki-subagents-chatgpt
+└─ ki-subagents
+
+ki-subagents-claude
+└─ ki-subagents
+
+ki-tokenomics-chatgpt
+└─ ki-tokenomics
+
+ki-tokenomics-claude
+└─ ki-tokenomics
+
+ki-trade
+└─ ki-trades
 ```
 
 <!-- END GENERATED SKILL GRAPH -->

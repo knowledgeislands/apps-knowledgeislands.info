@@ -59,7 +59,7 @@ A third case sits between the two. A **vendored** page declares its `sources` in
 
 | Page | Vendors | Sync script | Record |
 | --- | --- | --- | --- |
-| `/projects/ki-agentic-harness/skill-catalogue/` | The harness's generated capability inventory, from its marker-delimited block in `skills/README.md` | `sync-skill-catalogue.ts` → `src/_data/skillCatalogue.json5` | ADR-KI-WEBSITE-001 |
+| `/docs/ki-agentic-harness/skill-catalogue/` | The harness's generated capability inventory, from its marker-delimited block in `skills/README.md`, with each skill's functional areas from the generator table `skill-functions.ts` at the same commit | `sync-skill-catalogue.ts` → `src/_data/skillCatalogue.json5` | ADR-KI-WEBSITE-001 |
 | `/projects/ki/commands/` | The `ki` command inventory, from `man/ki.1` | `sync-cli-commands.ts` → `src/_data/cliCommands.json5` | ADR-KI-WEBSITE-001 |
 | `/field-guide/` | The canon and decided entries of the `ki-design` symbol library, from `packages/symbols` | `sync-ki-design.ts` → `src/_data/kiSymbols.json5` | KI-WEBSITE-SITE-044 |
 | `/arcadia/` | The chosen Arcadia painting, from `ki-design` `docs/briefs/references/arcadia.png`, as responsive images | `sync-ki-design.ts` → `src/_data/arcadiaPainting.json5` | KI-WEBSITE-SITE-045 |

@@ -6,9 +6,9 @@ order: 5
 sources:
   - repository: knowledgeislands/ki-agentic-harness
     path: skills/README.md
-    ref: bd6e29b5e0d567fb5ebb83566ddd46b3f6ba778b
+    ref: 8897008fcee7b2c71a22115735ed038efccf7f32
     governs: 'The skill names and responsibilities the outcome routes resolve to'
-    reviewed: '2026-10-11'
+    reviewed: '2026-10-25'
   - repository: knowledgeislands/ki-agentic-harness
     path: skills/governance/ki-diagrams/references/standards-diagrams.md
     ref: f70599fc8a122c5b56ec34245749d668e1774d80
@@ -40,8 +40,8 @@ A normal repository-governance journey is `ki-repo` plus the structure skill mat
 - **How does a reader use, operate, contribute to, or maintain it?** Use `ki-guides` for practical instructions under `docs/guides/`.
 - **What does the system look like, and is the picture still true?** Use `ki-diagrams` to keep diagrams that explain it: traced from the code, committed as a source and a self-contained SVG under `docs/diagrams/`, listed in one manifest, and refreshed when what they draw changes. The [Diagrams standard](https://github.com/knowledgeislands/ki-agentic-harness/blob/main/skills/governance/ki-diagrams/references/standards-diagrams.md) sets the rules.
 - **When should repository work happen?** Use `ki-work` to select the adapter, then the matching adapter skill: `ki-work-roadmap`, `ki-work-github-issues`, or `ki-work-linear`.
-- **What recurring maintenance is due?** Use `ki-work-housekeeping` to govern templates and due-run spawning.
-- **How can a live thread resume in fresh context?** Use `ki-checkpoint` for one concise repository-owned reconstruction snapshot. Use `ki-recap` instead when summarising the current live session and routing durable learning. When explicitly authorised, `ki-recap checkpoint <thread>` supplies grounded recap evidence to the separately owned checkpoint update procedure and refuses an incomplete hand-off.
+- **What recurring work is due?** Use `ki-work-recurring` to govern a recurrence's identity and cadence, reserve each due run, and record the evidence of a successful one.
+- **How can work be picked up without a transcript?** Use `ki-work-package` for the work folder that holds a piece of work's definition, state, queries, messages and decisions, so a fresh session resumes from Git rather than from a vendor transcript. Use `ki-recap` instead when summarising the current live session and routing durable learning; when explicitly authorised, `ki-recap checkpoint <thread>` supplies grounded recap evidence to the work package's own update procedure and refuses an incomplete hand-off.
 
 Keep these instruments separate. A guide may link to the decision or specification that supports it, but it should not become a second copy of either. A future action belongs in the selected work adapter rather than a Decision Record.
 
@@ -91,7 +91,7 @@ Repository structures compose with the universal baseline; they do not replace i
 - **Assess language models and executable agent routes** — use `ki-model-radar`; it keeps recommendation, support, retirement, and movement state separate and routes approved consumer changes instead of mutating runtime defaults.
 - **Assess agentic protocols, formats, and architectural signals** — use `ki-agentic-radar`; it separates specification maturity, implementation evidence, interoperability evidence, structural patterns, and Knowledge Islands stance without adopting a protocol automatically.
 - **Inspect bounded runtime filesystem evidence** — use `ki-tokenomics-claude` or `ki-tokenomics-chatgpt` after the portable policy. These adapters do not establish undocumented live-session state.
-- **Govern Claude-specific runtime housekeeping** — use `ki-housekeeping-claude`; use `ki-work-housekeeping` instead for portable recurring repository maintenance.
+- **Govern Claude-specific runtime housekeeping** — use `ki-housekeeping-claude`; use `ki-work-recurring` instead for portable recurring repository maintenance.
 - **Review and explicitly delete repository-scoped Codex sessions** — use `ki-housekeeping-chatgpt`; it is opt-in while its app-server binding remains experimental, and it never provides automatic retention.
 
 Runtime binding and runtime evidence are separate from capability activation. A source file or clean source audit is not proof that a runtime loaded or executed it.

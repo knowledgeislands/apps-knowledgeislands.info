@@ -6,9 +6,9 @@ order: 7
 sources:
   - repository: knowledgeislands/ki-agentic-harness
     path: skills/README.md
-    ref: bd6e29b5e0d567fb5ebb83566ddd46b3f6ba778b
+    ref: 8897008fcee7b2c71a22115735ed038efccf7f32
     governs: 'Skill names, trigger descriptions, argument hints, and the invocation forms a runtime accepts'
-    reviewed: '2026-10-11'
+    reviewed: '2026-10-25'
 ---
 
 # Use skills
@@ -30,7 +30,7 @@ None of those name a skill, and all three reliably load one. This is the normal 
 **By slash command.** Type `/<skill-name>` to invoke one directly, optionally with arguments:
 
 ```text
-/ki-mcp audit ~/kis/knowledgeislands/mcp-gsuite
+/ki-repo-mcp audit ~/kis/knowledgeislands/mcp-gsuite
 ```
 
 Use this when you want certainty about which skill runs, or when you want a specific mode of a skill that has several.
@@ -47,15 +47,15 @@ The third is the one people forget. A skill in the catalogue is not necessarily 
 
 ## Arguments and modes
 
-A skill that takes modes advertises them in its `argument-hint` frontmatter, which your runtime shows as you type the slash command. For example `ki-mcp` lists:
+A skill that takes modes advertises them in its `argument-hint` frontmatter, which your runtime shows as you type the slash command. For example `ki-repo-mcp` lists:
 
 ```text
-audit <repo> | conform <repo> | educate <repo> | refresh
+audit <repo> | conform <repo> | educate <repo> | help | refresh
 ```
 
 The words before each `<...>` are the modes; the rest is what to pass. Many governance skills share this shape — `educate` explains, `audit` checks, `conform` repairs — which is worth internalising once because it then transfers to every skill that has it.
 
-The hint is a hint, not a parser. Everything you type after the skill name reaches the skill as free text, so a plain-language phrasing of the same request works just as well as the canonical form. `/ki-mcp check the gsuite server` and `/ki-mcp audit ~/kis/knowledgeislands/mcp-gsuite` both get there.
+The hint is a hint, not a parser. Everything you type after the skill name reaches the skill as free text, so a plain-language phrasing of the same request works just as well as the canonical form. `/ki-repo-mcp check the gsuite server` and `/ki-repo-mcp audit ~/kis/knowledgeislands/mcp-gsuite` both get there.
 
 ## When the wrong skill loads
 
