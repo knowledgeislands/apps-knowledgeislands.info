@@ -48,7 +48,7 @@ Use a literal slug and caption in a Docs Markdown page:
 {% figure "command-groups", "The eighteen command groups and what each operates on." %}
 ```
 
-The `figure` shortcode resolves the slug against the site manifest or vendored data, refuses unknown or ambiguous names, and inlines the SVG in a `figure-diagram` figure. It escapes the caption and supplies an **Interactive** link with `target="_blank"` and `rel="noopener"`.
+The `figure` shortcode resolves the slug against the site manifest or vendored data, refuses unknown or ambiguous names, and inlines the SVG in a `figure-diagram` figure. It escapes the caption and supplies an **Interactive** link with `target="_blank"` and `rel="noopener"`. The figure lands in Markdown, where an HTML block ends at the first blank line and whatever follows is rendered as prose; a `<p>` inside an inline SVG ends the SVG in the browser. The shortcode therefore drops the blank lines every exported SVG carries, and `verify:diagrams` reads each built page back to refuse prose markup inside a figure.
 
 Figures use a parchment panel under both site charts. Site-owned `ki` SVGs carry the KI day palette; vendored `dual` SVGs retain Archify's own palette, with their stylesheet scoped to that figure. Local SVG identifiers are prefixed so diagrams can share a page. Narrow screens scroll the panel while retaining readable diagram text. Interactive HTML carries Archify's own day and night themes.
 

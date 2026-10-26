@@ -67,10 +67,14 @@ export default function (eleventyConfig: UserConfig) {
           svg: `src/assets/diagrams/vendored/ki-agentic-harness/${entry.svg}`,
           html: `/diagrams/vendored/ki-agentic-harness/${entry.html}`
         }
-    // Prefix local IDs so several exported SVGs can share a page without sharing clip paths or styles.
+    // The figure lands in Markdown, where markdown-it treats it as one HTML block that ends at the first
+    // blank line. Every exported SVG carries blank lines between its parts, so what followed the first one
+    // was rendered as prose: a <p> inside the SVG ends it in the browser, and the diagram collapsed. Drop
+    // the blank lines so the whole figure stays verbatim; whitespace between SVG elements is not content.
     let svg = readFileSync(files.svg, 'utf8')
       .replace(/<\?xml[^>]*\?>/g, '')
       .replace(/<!DOCTYPE[^>]*>/gi, '')
+      .replace(/^[ \t]*\r?\n/gm, '')
     const ids = [...svg.matchAll(/\bid="([^"]+)"/g)].map((match) => match[1])
     const prefix = `figure-${slug}-`
     for (const id of ids) {

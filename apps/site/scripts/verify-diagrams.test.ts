@@ -4,7 +4,7 @@ import { tmpdir } from 'node:os'
 import { resolve } from 'node:path'
 import { test } from 'node:test'
 import { harnessRepository, parseManifest, repositoryRoot, type VendoredDiagrams } from './lib/diagrams.ts'
-import { checkPage, figureSlugs, verifyDiagrams } from './verify-diagrams.ts'
+import { checkPage, figureSlugs, inlineFigureFailures, verifyDiagrams } from './verify-diagrams.ts'
 
 const ref = '8897008fcee7b2c71a22115735ed038efccf7f32'
 const snapshot: VendoredDiagrams = {
@@ -54,6 +54,18 @@ test('vendored figures require the matching ref on the harness entry itself', ()
   assert.equal(checkPage('page.md', page(source(harnessRepository, 'old')), new Set(), snapshot).length, 1)
   const mixed = `${source(harnessRepository, 'old')}\n${source('knowledgeislands/tools-ki', ref)}`
   assert.equal(checkPage('page.md', page(mixed), new Set(), snapshot).length, 1)
+})
+
+test('a built page fails when prose markup has been rendered inside an inline figure', () => {
+  const intact =
+    '<svg id="figure-one" xmlns="http://www.w3.org/2000/svg"><style>/* a\n\n b */</style><text>ok</text></svg>'
+  assert.deepEqual(inlineFigureFailures(`<figure>${intact}</figure>`, 'page.html'), [])
+  const cut =
+    '<svg id="figure-one" xmlns="http://www.w3.org/2000/svg"><style>/* a</style>\n<p>b */</p>\n<text>ok</text></svg>'
+  assert.deepEqual(inlineFigureFailures(`<figure>${cut}</figure>`, 'page.html'), [
+    'page.html: figure-one holds <p> inside its inline SVG'
+  ])
+  assert.deepEqual(inlineFigureFailures('<svg class="ki-glyph"><p>decorative</p></svg>', 'page.html'), [])
 })
 
 test('manifest rejects unsupported types and unsafe slugs before copying upstream files', () => {
@@ -114,5 +126,8 @@ test('passthrough viewers and SVGs remain byte-identical after the site build', 
     )
   const pageHtml = readFileSync(resolve(site, 'dist/docs/ki/command-groups/index.html'), 'utf8')
   assert.match(pageHtml, /<figure class="figure-diagram">/)
+  assert.deepEqual(inlineFigureFailures(pageHtml, 'command-groups'), [])
+  const skills = readFileSync(resolve(site, 'dist/docs/skills/how-the-skills-fit-together/index.html'), 'utf8')
+  assert.deepEqual(inlineFigureFailures(skills, 'how-the-skills-fit-together'), [])
   assert.match(pageHtml, /href="\.\.\/\.\.\/\.\.\/diagrams\/site\/command-groups.html" target="_blank" rel="noopener"/)
 })

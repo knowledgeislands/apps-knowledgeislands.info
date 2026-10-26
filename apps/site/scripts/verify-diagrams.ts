@@ -56,6 +56,21 @@ export function checkPage(
   return failures
 }
 
+/**
+ * Markdown closes an HTML block at a blank line, and the browser closes an inline SVG at the first HTML
+ * element that is not SVG. A figure that reached the built page with prose markup inside its <svg> was
+ * cut by one, then the other, so the reader saw no diagram. Every built page is read back for that.
+ */
+export function inlineFigureFailures(html: string, path: string): string[] {
+  const failures: string[] = []
+  const figures = html.matchAll(/<svg id="(figure-[a-z0-9-]+)"[\s\S]*?<\/svg>/g)
+  for (const figure of figures) {
+    const intruder = figure[0].match(/<\/?(p|h[1-6]|ol|ul|li|pre|blockquote|hr|em|strong|code|div|br|table)\b[^>]*>/)
+    if (intruder) failures.push(`${path}: ${figure[1]} holds ${intruder[0]} inside its inline SVG`)
+  }
+  return failures
+}
+
 export function verifyDiagrams(root = repositoryRoot): string[] {
   const site = resolve(root, 'apps/site')
   const manifest = siteManifest(root)
@@ -85,6 +100,14 @@ export function verifyDiagrams(root = repositoryRoot): string[] {
       )
     } catch (error) {
       failures.push(`${relative(site, file)}: ${String(error)}`)
+    }
+  }
+  // The gate runs after the build, so the built pages are there to read; a bare `verify:diagrams` without them
+  // still checks the sources above.
+  const built = resolve(site, 'dist/docs')
+  if (existsSync(built)) {
+    for (const file of walk(built, byExtension('.html'))) {
+      failures.push(...inlineFigureFailures(readFileSync(file, 'utf8'), relative(site, file)))
     }
   }
   // The canonical receipt checker cross-checks the same fingerprints where the harness skill is installed. The
