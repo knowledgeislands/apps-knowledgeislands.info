@@ -5,13 +5,12 @@ title: Adopt ki-design v1
 kind: deliver
 purpose: capability
 project: website
-horizon: now
-status: awaiting-review
+status: done
 blocks: []
 blocked_by: []
 baseline_ref: 05af1ad46153e4d1986a5ad7b3aa3efad564776b
 created_at: 2026-10-18T09:00:00Z
-updated_at: 2026-10-20T05:20:00Z
+updated_at: 2026-10-27T01:22:02Z
 ---
 
 ## Goal
@@ -143,6 +142,10 @@ The goal is met: the site uses `ki-design`'s palette, type, glyphs and drawn Arc
 ### Mini recap
 
 Design v1 is delivered on `main` in `5370af7` and `bc6dbdf`, after the ledger advance in `3f9e38f`, and every gate in Verify passes. The open concern is the private `ki-design` citation; the engineering audit's earlier boundary failure has since cleared. Proposed learning route: none.
+
+## Done
+
+Accepted 2026-10-27 by Kris Brown on the review packet above, under SWEEP-ACCEPT and his instruction of 27 October 2026 at 01:15 GMT, read back in the ways-of-working decisions log of ki-principal, entry "2026-10-27 01:15 GMT". Closed under `ki-accept` by the wow-accept-prune run.
 
 ## Discussion
 
