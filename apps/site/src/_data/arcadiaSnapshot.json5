@@ -8,15 +8,15 @@
 // is recorded. The ref below must match the ref declared for both files in the sources frontmatter of
 // src/arcadia/index.njk; verify:provenance fails the build when they disagree.
 //
-// Charted 2026-10-19 at df270aa2f24c95be72205403c94d3d6b63e20602.
+// Charted 2026-10-27 at 2ea0067b733c9f0547da02a2f7c8bece429c467d.
 {
   "source": {
     "repository": "knowledgeislands/ki-principal",
     "path": "Admin/Governance/Known Lands.md",
     "roster": ".ki.toml",
-    "ref": "df270aa2f24c95be72205403c94d3d6b63e20602"
+    "ref": "2ea0067b733c9f0547da02a2f7c8bece429c467d"
   },
-  "charted": "2026-10-19",
+  "charted": "2026-10-27",
   "islands": [
     {
       "name": "ki-principal",
@@ -89,12 +89,6 @@
       "repository": "https://github.com/knowledgeislands/mcp-ki-kb-fs",
       "role": "MCP",
       "concern": "Knowledge Base filesystem"
-    },
-    {
-      "name": "mcp-ki-kb-notion-mirror",
-      "repository": "https://github.com/knowledgeislands/mcp-ki-kb-notion-mirror",
-      "role": "MCP",
-      "concern": "Knowledge Base Notion mirror"
     },
     {
       "name": "mcp-m365",

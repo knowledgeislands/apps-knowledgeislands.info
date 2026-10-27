@@ -7,17 +7,17 @@
 // The source ref must match the ref declared in the sources frontmatter of src/arcadia/index.njk, and
 // drawnFrom must match the snapshot; verify:provenance fails the build when either disagrees.
 //
-// Drawn at 481ebeffe44a45e0323f832dd428e07408a8d318.
+// Drawn at 6fe35574ae4698cc16b741e92909785c743621c1.
 {
   "source": {
     "repository": "knowledgeislands/ki-design",
     "path": "packages/hexmap/src/archipelago.ts",
-    "ref": "481ebeffe44a45e0323f832dd428e07408a8d318"
+    "ref": "6fe35574ae4698cc16b741e92909785c743621c1"
   },
   "drawnFrom": {
     "path": "src/_data/arcadiaSnapshot.json5",
-    "ref": "df270aa2f24c95be72205403c94d3d6b63e20602",
-    "charted": "2026-10-19",
+    "ref": "2ea0067b733c9f0547da02a2f7c8bece429c467d",
+    "charted": "2026-10-27",
     "islands": [
       "ki-principal",
       "apps-knowledgeislands.info",
@@ -31,7 +31,6 @@
       "mcp-housekeeping-chatgpt",
       "mcp-housekeeping-claude",
       "mcp-ki-kb-fs",
-      "mcp-ki-kb-notion-mirror",
       "mcp-m365",
       "tools-git-almanac",
       "tools-ki",
