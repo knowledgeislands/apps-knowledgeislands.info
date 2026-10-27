@@ -362,35 +362,6 @@
     accent: 'teal'
   },
   {
-    slug: 'mcp-ki-kb-notion-mirror',
-    name: 'mcp-ki-kb-notion-mirror',
-    kind: 'mcp',
-    tagline: 'Mirror knowledge-base notes into Notion for people who do not work in the repository.',
-    description:
-      'Pushes Markdown notes into Notion records and writes the resulting Notion URL back into the note\'s frontmatter. The knowledge base stays canonical and the mirror stays derivative — a read surface for readers who are not in the repository. It assumes no fixed root folder and no fixed wiki database; note, tree, and roots verbs let a caller drive exactly the subtree it means to mirror.',
-    problem:
-      'A knowledge base that lives in a Git repository is unreachable for everyone who does not work in that repository. Copying notes into Notion by hand solves that once and then drifts. This server mirrors them on demand and writes the resulting Notion URL back into the note, so each side knows about the other.',
-    audience:
-      'You want this if your canonical notes are Markdown under version control but the people who need to read them work in Notion, and you would rather publish deliberately than move the knowledge base.',
-    capabilities: [
-      'Note verbs: preflight, update, status, touch, move and delete a single note\'s mirror.',
-      'Tree verbs: update, status, touch, prune and delete a whole subtree in one call.',
-      'Roots: list and drive exactly the subtree you mean to mirror, with no fixed root folder or wiki database assumed.',
-      'Exclusions, so a note or a subtree can be kept out of the mirror deliberately rather than by omission.',
-      'Frontmatter write-back recording the Notion URL and when it was published.'
-    ],
-    state:
-      'Public source, not published to any package registry. Clone it, build it, supply a Notion integration token, and register the built server with your MCP client.',
-    limits:
-      'It publishes one way. The verbs push notes into Notion and record where they landed; edits made in Notion are not brought back, because the mirror is derivative by design and nothing written there becomes authoritative. The knowledge base stays canonical.',
-    role: 'A derivative publication adapter. Nothing it writes to Notion becomes authoritative.',
-    usage: 'Not yet published to a registry. Clone the repository, build it, and register the built server with your MCP client.',
-    repository: 'https://github.com/knowledgeislands/mcp-ki-kb-notion-mirror',
-    availability: 'source',
-    icon: 'weave',
-    accent: 'gold'
-  },
-  {
     slug: 'mcp-git-audit',
     name: 'mcp-git-audit',
     kind: 'mcp',
