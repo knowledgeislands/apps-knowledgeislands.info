@@ -1,10 +1,16 @@
 import assert from 'node:assert/strict'
+import { execFileSync, spawnSync } from 'node:child_process'
+import { mkdir, mkdtemp, readFile, rename, writeFile } from 'node:fs/promises'
+import { tmpdir } from 'node:os'
+import { dirname, join } from 'node:path'
 import { describe, test } from 'node:test'
 import {
+  AREAS_PATH,
   CATALOGUE_END,
   CATALOGUE_START,
   parseCatalogue,
   parseFunctionalAreas,
+  readCatalogueSources,
   withFunctionalAreas
 } from './sync-skill-catalogue.ts'
 
@@ -21,6 +27,7 @@ const block = (body: string, counts = '2 skills: 1 governance skills and 1 proce
     `This source harness publishes ${counts}. The entries below are generated from canonical \`SKILL.md\` frontmatter.`,
     '',
     body,
+    AREAS_PATH,
     CATALOGUE_END,
     '',
     'Prose below the block, which the parser must also ignore.'
@@ -268,5 +275,144 @@ describe('withFunctionalAreas', () => {
     )
 
     assert.throws(() => withFunctionalAreas(catalogue, twice), /fundamentals: ki-authoring is in more than one group/)
+  })
+})
+
+/** Real Git objects prove that the adapter cannot substitute working-tree files. */
+const localFixture = async (missing?: string) => {
+  const root = await mkdtemp(join(tmpdir(), 'ki-catalogue $; '))
+  const git = (...args: string[]): string =>
+    execFileSync('git', ['-C', root, ...args], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }).trim()
+  git('init', '-q')
+  const readme = block(`${governance}\n${processSkill}`)
+  const functions = areasModule(`${fundamentals},\n${delivery}`)
+  for (const [path, content] of [
+    ['skills/README.md', readme],
+    [AREAS_PATH, functions]
+  ]) {
+    if (path === missing) continue
+    await mkdir(dirname(join(root, path)), { recursive: true })
+    await writeFile(join(root, path), content)
+    git('add', '--', path)
+  }
+  git(
+    '-c',
+    'user.name=Catalogue test',
+    '-c',
+    'user.email=catalogue@example.invalid',
+    '-c',
+    'core.hooksPath=/dev/null',
+    '-c',
+    'commit.gpgsign=false',
+    'commit',
+    '-qm',
+    'test fixture'
+  )
+  git('tag', 'v1.2.3')
+  return { root, git, ref: git('rev-parse', 'HEAD'), readme, functions }
+}
+
+describe('readCatalogueSources', () => {
+  test('reads both exact commit and tag blobs despite dirty files, without fetch', async (t) => {
+    const fetch = t.mock.method(globalThis, 'fetch', () => {
+      throw new Error('unexpected network')
+    })
+    const fixture = await localFixture()
+    await writeFile(join(fixture.root, 'skills/README.md'), 'dirty README')
+    await writeFile(join(fixture.root, AREAS_PATH), 'dirty functions')
+    for (const ref of [fixture.ref, 'v1.2.3']) {
+      const sources = await readCatalogueSources(ref, fixture.root)
+      assert.deepEqual(sources, [fixture.readme, fixture.functions])
+      assert.equal(withFunctionalAreas(parseCatalogue(sources[0]), parseFunctionalAreas(sources[1])).counts.total, 2)
+    }
+    assert.equal(fetch.mock.calls.length, 0)
+    t.mock.restoreAll()
+  })
+
+  test('rejects mutable, abbreviated and absent refs without network fallback', async (t) => {
+    const fetch = t.mock.method(globalThis, 'fetch', () => {
+      throw new Error('unexpected network')
+    })
+    const { root } = await localFixture()
+    for (const ref of ['', 'main', '8897008', 'v1.2.3; echo unsafe']) {
+      await assert.rejects(readCatalogueSources(ref, root), /not an immutable ref/)
+    }
+    for (const ref of ['v9.9.9', 'f'.repeat(40)]) {
+      await assert.rejects(readCatalogueSources(ref, root), /rev-parse/)
+    }
+    await assert.rejects(readCatalogueSources('v1.2.3', join(root, 'absent-repository')), /git/)
+    await assert.rejects(readCatalogueSources('v1.2.3', ''), /local repository path/)
+    assert.equal(fetch.mock.calls.length, 0)
+    t.mock.restoreAll()
+  })
+
+  for (const missing of ['skills/README.md', AREAS_PATH]) {
+    test(`fails closed when the pinned commit lacks ${missing}`, async (t) => {
+      const fetch = t.mock.method(globalThis, 'fetch', () => {
+        throw new Error('unexpected network')
+      })
+      const { root, ref } = await localFixture(missing)
+      await mkdir(dirname(join(root, missing)), { recursive: true })
+      await writeFile(join(root, missing), 'untracked file cannot replace absent blob')
+      await assert.rejects(readCatalogueSources(ref, root), /cat-file/)
+      assert.equal(fetch.mock.calls.length, 0)
+      t.mock.restoreAll()
+    })
+  }
+
+  test('does not lazily fetch an absent blob from a promisor remote', async (t) => {
+    const fetch = t.mock.method(globalThis, 'fetch', () => {
+      throw new Error('unexpected network')
+    })
+    const { root, git, ref } = await localFixture()
+    const blob = git('rev-parse', `${ref}:skills/README.md`)
+    await rename(join(root, '.git/objects', blob.slice(0, 2), blob.slice(2)), join(root, 'withheld-blob'))
+    git('config', 'extensions.partialClone', 'origin')
+    git('config', 'remote.origin.promisor', 'true')
+    git('config', 'remote.origin.url', join(root, 'absent-remote'))
+    const trace = join(root, 'git-trace.log')
+    const previousTrace = process.env.GIT_TRACE
+    process.env.GIT_TRACE = trace
+    try {
+      await assert.rejects(readCatalogueSources(ref, root), /cat-file/)
+    } finally {
+      if (previousTrace === undefined) delete process.env.GIT_TRACE
+      else process.env.GIT_TRACE = previousTrace
+    }
+    assert.doesNotMatch(await readFile(trace, 'utf8'), /\bfetch\b|upload-pack/)
+    assert.equal(fetch.mock.calls.length, 0)
+    t.mock.restoreAll()
+  })
+
+  test('retains the two existing GitHub source URLs when local input is omitted', async (t) => {
+    const ref = '8'.repeat(40)
+    const fetch = t.mock.method(
+      globalThis,
+      'fetch',
+      async (url: string | URL | Request) =>
+        new Response(String(url).endsWith('/skills/README.md') ? 'remote README' : 'remote functions')
+    )
+    assert.deepEqual(await readCatalogueSources(ref), ['remote README', 'remote functions'])
+    assert.deepEqual(
+      fetch.mock.calls.map((call) => String(call.arguments[0])).sort(),
+      ['skills/README.md', AREAS_PATH]
+        .map((path) => `https://raw.githubusercontent.com/knowledgeislands/ki-agentic-harness/${ref}/${path}`)
+        .sort()
+    )
+    t.mock.restoreAll()
+  })
+
+  test('CLI requires --ref and a value for explicit --from', () => {
+    for (const args of [
+      ['--from', '/unused'],
+      ['--ref', 'v1.2.3', '--from'],
+      ['--ref', 'v1.2.3', '--from', '--other']
+    ]) {
+      const result = spawnSync(process.execPath, [join(import.meta.dirname, 'sync-skill-catalogue.ts'), ...args], {
+        encoding: 'utf8'
+      })
+      assert.equal(result.status, 1)
+      assert.match(result.stderr, /usage: sync-skill-catalogue.ts/)
+    }
   })
 })

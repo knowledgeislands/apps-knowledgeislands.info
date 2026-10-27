@@ -21,8 +21,10 @@
  * See docs/guides/developer/page-provenance.md.
  */
 
+import { execFile } from 'node:child_process'
 import { writeFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
+import { promisify } from 'node:util'
 import JSON5 from 'json5'
 import { githubFetchOk } from './lib/github.ts'
 
@@ -359,19 +361,46 @@ const header = (ref: string): string => `// Vendored snapshot of the harness's g
 // Snapshot taken at ${ref}.
 `
 
-async function main(): Promise<void> {
-  const refFlag = process.argv.indexOf('--ref')
-  const ref = refFlag === -1 ? undefined : process.argv[refFlag + 1]
-  if (!ref) throw new Error('usage: sync-skill-catalogue.ts --ref <tag-or-commit>')
+const execFileAsync = promisify(execFile)
+
+/** Reads both source blobs at the same immutable ref; local mode never reaches GitHub. */
+export async function readCatalogueSources(ref: string, from?: string): Promise<[string, string]> {
   if (!tagPattern.test(ref) && !commitPattern.test(ref)) {
     throw new Error(`${ref} is not an immutable ref; pass an exact tag or a 40-character commit`)
   }
-
+  if (from !== undefined) {
+    if (!from.trim()) throw new Error('--from requires a local repository path')
+    const git = async (args: string[]): Promise<string> => {
+      const { stdout } = await execFileAsync('git', ['--no-replace-objects', '-C', resolve(from), ...args], {
+        encoding: 'utf8',
+        maxBuffer: 4 * 1024 * 1024,
+        // A partial clone must fail on absent objects rather than fetching them implicitly.
+        env: { ...process.env, GIT_NO_LAZY_FETCH: '1', GIT_TERMINAL_PROMPT: '0' }
+      })
+      return stdout
+    }
+    const commit = (await git(['rev-parse', '--verify', '--end-of-options', `${ref}^{commit}`])).trim()
+    return Promise.all([
+      git(['cat-file', 'blob', `${commit}:${SOURCE_PATH}`]),
+      git(['cat-file', 'blob', `${commit}:${AREAS_PATH}`])
+    ])
+  }
   const raw = (path: string): string => `https://raw.githubusercontent.com/${SOURCE_REPOSITORY}/${ref}/${path}`
-  const [readme, functions] = await Promise.all([
+  return Promise.all([
     githubFetchOk(raw(SOURCE_PATH)).then((response) => response.text()),
     githubFetchOk(raw(AREAS_PATH)).then((response) => response.text())
   ])
+}
+
+async function main(): Promise<void> {
+  const refFlag = process.argv.indexOf('--ref')
+  const ref = refFlag === -1 ? undefined : process.argv[refFlag + 1]
+  const fromFlag = process.argv.indexOf('--from')
+  const from = fromFlag === -1 ? undefined : process.argv[fromFlag + 1]
+  if (!ref || (fromFlag !== -1 && (!from || from.startsWith('--')))) {
+    throw new Error('usage: sync-skill-catalogue.ts --ref <tag-or-commit> [--from <repository>]')
+  }
+  const [readme, functions] = await readCatalogueSources(ref, from)
 
   const catalogue = withFunctionalAreas(parseCatalogue(readme), parseFunctionalAreas(functions))
   const payload = {

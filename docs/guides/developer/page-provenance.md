@@ -95,6 +95,14 @@ bun run --cwd apps/site sync:skills -- --ref <tag-or-commit>
 bun run --cwd apps/site sync:cli    -- --ref <tag-or-commit>
 ```
 
+The skill catalogue sync also accepts an explicit local repository, with the same mandatory immutable `--ref`:
+
+```bash
+bun run --cwd apps/site sync:skills -- --ref <tag-or-commit> --from /absolute/path/to/ki-agentic-harness
+```
+
+`--from` resolves from the command's working directory (`apps/site` with the command above), so supply a path from there or an absolute path. It reads `skills/README.md` and the existing `skill-functions.ts` source from Git blobs at that exact ref, ignoring dirty working files. A missing ref or blob fails the sync, including in a partial clone; local mode never fetches or falls back to GitHub. Omit `--from` to keep the existing GitHub route. Both routes retain the same parsers, snapshot payload and provenance.
+
 The snapshot's ref and the page's declared ref must agree, and the check **fails** when they do not — offline, unlike everything else in this guide. Upstream moving is not the site's fault and warns; the site citing one ref while publishing another is the site contradicting itself, and no amount of upstream good behaviour will fix it.
 
 Nothing is fetched during a build. `apps/site/dist/` has to be reproducible, so a build that reached the network would depend on when it ran.
