@@ -1,8 +1,6 @@
 name: Update tool release
 
 on:
-  repository_dispatch:
-    types: [tool-release-published]
   workflow_dispatch:
     inputs:
       tool:
