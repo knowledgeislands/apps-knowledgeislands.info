@@ -129,13 +129,17 @@
   {
     slug: 'repository-standards',
     title: 'Repository standards',
-    // The plan's `ki-repo-*` written out, less the knowledge-base overlays, which Knowledge bases
-    // and Recurring work claim.
+    // All existing repository standards; KB overlays also serve Knowledge bases and Recurring work.
     skills: [
       'ki-repo',
       'ki-repo-dotfiles-chezmoi',
       'ki-repo-harness',
       'ki-repo-homebrew-tap',
+      'ki-repo-kb',
+      'ki-repo-kb-activities',
+      'ki-repo-kb-live-artifacts',
+      'ki-repo-kb-principal',
+      'ki-repo-kb-streams',
       'ki-repo-mcp',
       'ki-repo-project',
       'ki-repo-specifications',

@@ -29,7 +29,7 @@
 
 <ul>
 {%- for skill in providedBy.skills %}
-  <li><a href="/docs/skills/catalogue/#{{ skill }}"><code>{{ skill }}</code></a></li>
+  <li><a href="/docs/skills/catalogue/#{{ skill }}"><code>{{ skill }}</code></a>{% if providedBy.slug == 'repository-standards' and skill in ['ki-repo-kb', 'ki-repo-kb-activities', 'ki-repo-kb-live-artifacts', 'ki-repo-kb-principal', 'ki-repo-kb-streams'] %} — Knowledge bases only{% endif %}</li>
 {%- endfor %}
 {%- for command in providedBy.commands %}
   <li><code>{{ command }}</code> in <a href="/docs/ki/commands/">the ki CLI</a></li>
