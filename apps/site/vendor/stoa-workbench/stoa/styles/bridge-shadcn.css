@@ -1,0 +1,77 @@
+/* ─── Bridge: shadcn-style site tokens → --stoa-* ─────────────────────────── */
+
+/* For a site that already themes itself with shadcn-style tokens (--background,
+   --primary, --cal-1-fill and so on): load this after tokens.css and the units
+   take the site's own colours, so adopting them changes nothing on the page.
+   A site without those tokens leaves this file out and keeps the defaults. */
+
+@layer stoa-bridge {
+  :root {
+    --stoa-background: var(--background);
+    --stoa-foreground: var(--foreground);
+    --stoa-card: var(--card);
+    --stoa-card-foreground: var(--card-foreground);
+    --stoa-popover: var(--popover);
+    --stoa-popover-foreground: var(--popover-foreground);
+    --stoa-primary: var(--primary);
+    --stoa-primary-foreground: var(--primary-foreground);
+    --stoa-muted: var(--muted);
+    --stoa-muted-foreground: var(--muted-foreground);
+    --stoa-accent: var(--accent);
+    --stoa-accent-foreground: var(--accent-foreground);
+    --stoa-border: var(--border);
+    --stoa-input: var(--input);
+    --stoa-ring: var(--ring);
+    --stoa-radius: var(--radius);
+    --stoa-font-sans: var(--font-sans);
+    --stoa-font-mono: var(--font-mono);
+    --stoa-shadow-sm: var(--shadow-sm);
+    --stoa-shadow-md: var(--shadow-md);
+    --stoa-shadow-lg: var(--shadow-lg);
+    --stoa-overlay: var(--overlay);
+    --stoa-sticky-top: var(--nav-h, 0px);
+    --stoa-page-pad: var(--page-pad, 24px);
+
+    --stoa-status-pass-fg: var(--status-pass-fg);
+    --stoa-status-pass-bg: var(--status-pass-bg);
+    --stoa-status-risk-fg: var(--status-risk-fg);
+    --stoa-status-risk-bg: var(--status-risk-bg);
+    --stoa-status-fail-fg: var(--status-fail-fg);
+    --stoa-status-fail-bg: var(--status-fail-bg);
+    --stoa-status-ns-fg: var(--status-ns-fg);
+    --stoa-status-ns-bg: var(--status-ns-bg);
+
+    --stoa-cal-1-fill: var(--cal-1-fill);
+    --stoa-cal-1-soft: var(--cal-1-soft);
+    --stoa-cal-1-text: var(--cal-1-text);
+    --stoa-cal-1-ink: var(--cal-1-ink);
+    --stoa-cal-2-fill: var(--cal-2-fill);
+    --stoa-cal-2-soft: var(--cal-2-soft);
+    --stoa-cal-2-text: var(--cal-2-text);
+    --stoa-cal-2-ink: var(--cal-2-ink);
+    --stoa-cal-3-fill: var(--cal-3-fill);
+    --stoa-cal-3-soft: var(--cal-3-soft);
+    --stoa-cal-3-text: var(--cal-3-text);
+    --stoa-cal-3-ink: var(--cal-3-ink);
+    --stoa-cal-4-fill: var(--cal-4-fill);
+    --stoa-cal-4-soft: var(--cal-4-soft);
+    --stoa-cal-4-text: var(--cal-4-text);
+    --stoa-cal-4-ink: var(--cal-4-ink);
+    --stoa-cal-5-fill: var(--cal-5-fill);
+    --stoa-cal-5-soft: var(--cal-5-soft);
+    --stoa-cal-5-text: var(--cal-5-text);
+    --stoa-cal-5-ink: var(--cal-5-ink);
+    --stoa-cal-6-fill: var(--cal-6-fill);
+    --stoa-cal-6-soft: var(--cal-6-soft);
+    --stoa-cal-6-text: var(--cal-6-text);
+    --stoa-cal-6-ink: var(--cal-6-ink);
+    --stoa-cal-7-fill: var(--cal-7-fill);
+    --stoa-cal-7-soft: var(--cal-7-soft);
+    --stoa-cal-7-text: var(--cal-7-text);
+    --stoa-cal-7-ink: var(--cal-7-ink);
+    --stoa-cal-8-fill: var(--cal-8-fill);
+    --stoa-cal-8-soft: var(--cal-8-soft);
+    --stoa-cal-8-text: var(--cal-8-text);
+    --stoa-cal-8-ink: var(--cal-8-ink);
+  }
+}

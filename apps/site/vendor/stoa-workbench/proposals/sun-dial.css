@@ -1,0 +1,226 @@
+/* PROPOSAL, not shipped: the circular Sun Dial and the moonlit night (see sun-dial.md). */
+wb-sun-dial {
+  display: grid;
+  justify-items: center;
+  gap: 0.5rem;
+  width: min(100%, 22rem);
+  color: var(--stoa-foreground);
+  font: inherit;
+}
+.wb-sun-dial__bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem 0.75rem;
+}
+.wb-sun-dial__modes {
+  display: flex;
+  gap: 0.25rem;
+}
+.wb-sun-dial__now {
+  padding: 0.25rem 0.75rem;
+  border: 1px solid var(--stoa-border);
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+[data-view-dial],
+[data-view-track] {
+  width: 100%;
+}
+.wb-sun-dial__trackview {
+  display: grid;
+  justify-items: center;
+  gap: 0.5rem;
+}
+.wb-sun-dial__skybox {
+  width: 7.5rem;
+  height: 7.5rem;
+}
+.wb-sun-dial__track {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  touch-action: none;
+  user-select: none;
+}
+.wb-sun-dial__modes button {
+  padding: 0.25rem 0.75rem;
+  border: 1px solid var(--stoa-border);
+  border-radius: 999px;
+  background: var(--stoa-card);
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+.wb-sun-dial__modes button[aria-pressed="true"] {
+  background: var(--stoa-accent);
+  color: var(--stoa-accent-foreground);
+}
+.wb-sun-dial__svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  touch-action: none;
+  user-select: none;
+}
+.wb-sun-dial__ring-hit {
+  cursor: pointer;
+}
+.wb-sun-dial__ring {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: var(--wb-dial-ring);
+  /* A band 24 units wide round the edge of the 264-unit box: the track. */
+  mask: radial-gradient(
+    circle closest-side,
+    transparent calc(100% - 24px),
+    #000 calc(100% - 23px),
+    #000 calc(100% - 1px),
+    transparent 100%
+  );
+}
+.wb-sun-dial__tick {
+  stroke: var(--stoa-muted-foreground);
+  stroke-width: 1;
+}
+.wb-sun-dial__tick--mid {
+  stroke: var(--stoa-muted-foreground);
+  stroke-width: 1.25;
+}
+.wb-sun-dial__tick--minor {
+  stroke: var(--stoa-muted-foreground);
+  stroke-width: 0.75;
+  opacity: 0.7;
+}
+.wb-sun-dial__tick--major {
+  stroke: var(--stoa-foreground);
+  stroke-width: 1.5;
+}
+.wb-sun-dial__label {
+  fill: var(--stoa-muted-foreground);
+  font-size: 11px;
+}
+.wb-sun-dial__rim {
+  fill: none;
+  stroke: var(--stoa-border);
+}
+.wb-sun-dial__reflection--sun {
+  fill: #ffd27a;
+}
+.wb-sun-dial__reflection--moon {
+  fill: #e9edf7;
+}
+.wb-sun-dial__shore {
+  stroke: rgb(255 255 255 / 0.18);
+  stroke-width: 1;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .wb-sun-dial__reflection rect {
+    animation: wb-ripple 3.2s ease-in-out infinite alternate;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+  .wb-sun-dial__reflection rect:nth-of-type(2) {
+    animation-delay: -1.1s;
+  }
+  .wb-sun-dial__reflection rect:nth-of-type(3) {
+    animation-delay: -2.2s;
+  }
+}
+@keyframes wb-ripple {
+  from {
+    transform: scaleX(0.75);
+  }
+  to {
+    transform: scaleX(1.15);
+  }
+}
+.wb-sun-dial__stars {
+  fill: #fff;
+}
+.wb-sun-dial__sun {
+  fill: #ffd27a;
+  filter: drop-shadow(0 0 6px #ffcf6e);
+}
+.wb-sun-dial__moon-dark {
+  fill: rgb(40 48 72 / 0.9);
+}
+.wb-sun-dial__moon-lit {
+  fill: #e9edf7;
+  filter: drop-shadow(0 0 3px rgb(220 228 255 / 0.8));
+}
+.wb-sun-dial__knob {
+  cursor: grab;
+  outline: none;
+}
+.wb-sun-dial__knob circle:first-child {
+  fill: var(--stoa-background);
+  stroke: var(--stoa-primary);
+  stroke-width: 3;
+}
+.wb-sun-dial__knob-dot {
+  fill: var(--stoa-primary);
+}
+.wb-sun-dial__knob:focus-visible circle:first-child {
+  stroke-width: 5;
+  stroke: var(--stoa-ring);
+}
+wb-sun-dial[data-turning] .wb-sun-dial__knob {
+  cursor: grabbing;
+}
+.wb-sun-dial__readout {
+  display: grid;
+  justify-items: center;
+  margin: 0;
+  min-height: 3em;
+  text-align: center;
+}
+.wb-sun-dial__readout span {
+  color: var(--stoa-muted-foreground);
+  font-size: 0.9em;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .wb-sun-dial__sun,
+  [data-moon] {
+    transition: opacity 0.2s;
+  }
+}
+
+/* The moonlit night: in dark mode the page takes a little of the moon's light. At new moon it is the theme's own
+   night; at full moon the background lifts and cools and a soft glow sits where the moon would be. A theme can
+   tune how much with --moonlight-strength (0 to 1). */
+:root[data-mode="dark"][data-moon-phase] body.wb-stage-page {
+  --moonlight: calc(var(--moon-illumination, 0) * var(--moon-up, 1) * var(--moonlight-strength, 1));
+  background:
+    radial-gradient(circle at 85% 0%, rgb(205 215 245 / calc(var(--moonlight) * 0.32)), transparent 60%),
+    linear-gradient(rgb(170 185 230 / calc(var(--moonlight) * 0.12)), rgb(170 185 230 / calc(var(--moonlight) * 0.12))),
+    var(--stoa-background);
+}
+.wb-moon-sample {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  margin-top: 1rem;
+}
+.wb-moon-sample > div {
+  padding: 0.75rem;
+  border: 1px solid var(--stoa-border);
+  border-radius: var(--stoa-radius, 8px);
+  background: var(--stoa-card);
+}
+:root[data-mode="dark"] .wb-moon-sample > div {
+  background: color-mix(
+    in oklch,
+    var(--stoa-card),
+    rgb(190 200 235) calc(var(--moon-illumination, 0) * var(--moon-up, 1) * 10%)
+  );
+}
+
+[data-view-dial][hidden],
+[data-view-track][hidden] {
+  display: none;
+}

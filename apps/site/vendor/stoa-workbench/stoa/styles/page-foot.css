@@ -1,0 +1,43 @@
+@layer stoa-components {
+  stoa-page-foot {
+    display: block;
+  }
+  stoa-page-foot[hidden] {
+    display: none;
+  }
+  stoa-page-foot .page-foot,
+  stoa-page-foot .site-footer {
+    margin-block-start: 2rem;
+    padding-block: 1.5rem;
+    border-block-start: 1px solid var(--stoa-border);
+    color: var(--stoa-muted-foreground);
+    font-family: var(--stoa-font-sans);
+    overflow-wrap: anywhere;
+  }
+  stoa-page-foot .page-foot section + section,
+  stoa-page-foot .page-foot__canonical {
+    margin-block-start: 1.5rem;
+  }
+  stoa-page-foot .page-foot h2 {
+    color: var(--stoa-foreground);
+    font-size: 1.125rem;
+  }
+  stoa-page-foot .page-foot a,
+  stoa-page-foot .site-footer a {
+    color: var(--stoa-primary);
+    text-decoration: underline;
+  }
+  stoa-page-foot .page-foot a:focus-visible,
+  stoa-page-foot .site-footer a:focus-visible {
+    outline: 2px solid var(--stoa-ring);
+    outline-offset: 3px;
+  }
+  stoa-page-foot .site-footer nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  stoa-page-foot .site-footer__build {
+    font-size: 0.875rem;
+  }
+}

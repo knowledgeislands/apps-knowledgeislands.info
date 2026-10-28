@@ -1,0 +1,172 @@
+// GENERATED FILE - do not edit.
+// bun run --cwd apps/site sync:stoa -- --ref v0.27.1
+// The Stoa workbench at v0.27.1 (2d58048dbb2c161c3fa1583bfcf62265c839d032); vendor/stoa-workbench/ holds its export, and pages citing it must cite this tag.
+{
+  "source": {
+    "repository": "knowledgeislands/packages-portal-commons",
+    "path": "apps/workbench/stories.js",
+    "ref": "v0.27.1"
+  },
+  "commit": "2d58048dbb2c161c3fa1583bfcf62265c839d032",
+  "version": "0.27.1",
+  "synced": "2026-10-28",
+  "stories": [
+    {
+      "id": "theme-engine",
+      "group": "Theme",
+      "title": "Theme Engine",
+      "note": "Edit the config to change the offered modes, themes, Solar options and axes; the engine restarts with it. The mode switch in the top bar is the same engine."
+    },
+    {
+      "id": "header",
+      "group": "Frame",
+      "title": "Header",
+      "note": "Narrow the stage to Phone or Tablet to see the burger and compact search; collapseAt is the header’s own width. Brand, navigation and slots are site-owned. identity is off: the workbench has no Access to name a signed-in person."
+    },
+    {
+      "id": "page-foot",
+      "group": "Frame",
+      "title": "Page Foot and site footer",
+      "note": "Notes are trusted HTML; source titles and update text are escaped. The source register belongs to the site."
+    },
+    {
+      "id": "command-bar",
+      "group": "Find",
+      "title": "Command Bar and shortcuts",
+      "note": "Open with the button, Ctrl+K or /. Press ? for the shortcuts. The index is the sample one the workbench serves."
+    },
+    {
+      "id": "filter-bar",
+      "group": "Find",
+      "title": "Filter Bar",
+      "note": "Type state:open and a space, or pick a quick filter. The query is kept in the address."
+    },
+    {
+      "id": "calendar",
+      "group": "Dates",
+      "title": "Calendar",
+      "note": "List, Months and Runway views of the sample set; change \"today\" to move the view."
+    },
+    {
+      "id": "timeline",
+      "group": "Dates",
+      "title": "Timeline",
+      "note": "Every dated entry grouped by month, with past and next marked as of \"today\"."
+    },
+    {
+      "id": "today-board",
+      "group": "Dates",
+      "title": "Today board",
+      "note": "Each calendar’s entries for one day."
+    },
+    {
+      "id": "issues-list",
+      "group": "Content",
+      "title": "Issues List",
+      "note": "A static list grouped by status; no script. Set strict to false to render data that fails validation."
+    },
+    {
+      "id": "diagram-viewer",
+      "group": "Content",
+      "title": "Diagram Viewer",
+      "note": "Click the diagram or Explore. Zoom, pan, Fit and Reset; Escape closes."
+    },
+    {
+      "id": "sun-dial-proposal",
+      "group": "Proposals",
+      "title": "Circular Sun Dial and moonlight",
+      "note": "A proposal, not shipped (proposals/sun-dial.md). Turn the dial round and round: midnight runs on into the next day and the moon moves on a day each turn. Moon turns through a lunation instead, new to full and back, and the night page takes the moon’s light. Letting go in Day holds the phase, as the straight dial does. The straight dial is below for comparison."
+    }
+  ],
+  "units": [
+    {
+      "id": "timeline",
+      "note": "Static chronology across Stoa Calendars, grouped by month with past and next marked."
+    },
+    {
+      "id": "today-board",
+      "note": "Today per calendar, refreshed at midnight in the calendar set time zone.",
+      "element": "stoa-today-board"
+    },
+    {
+      "id": "build-commit",
+      "note": "Build-only commit and commit date, with Page Foot site-strip metadata."
+    },
+    {
+      "id": "issues-list",
+      "note": "Static issue tables with site-owned statuses, areas, owners and row attributes; optional strict validation and linked next-call names."
+    },
+    {
+      "id": "diagram-viewer",
+      "note": "Accessible image and inline SVG modal with zoom, pan, fit and reset; diagram content stays site-owned.",
+      "element": "stoa-diagram-viewer"
+    },
+    {
+      "id": "header",
+      "note": "Responsive header frame; brand, navigation and search/preferences/end slots remain site-owned.",
+      "element": "stoa-header"
+    },
+    {
+      "id": "page-foot",
+      "note": "Page notes, sources and pending updates, plus the site footer strip; source registers and expansion stay site-owned.",
+      "element": "stoa-page-foot"
+    },
+    {
+      "id": "styles",
+      "note": "Base styles and --stoa-* tokens; a site maps its own tokens onto them, or uses bridge-shadcn.css."
+    },
+    {
+      "id": "calendar",
+      "note": "Calendar set contract, ICS feeds and calendar views; no site identity.",
+      "element": "stoa-calendar"
+    },
+    {
+      "id": "shortcuts",
+      "note": "One keydown listener and the one list of shortcuts the help dialog shows.",
+      "element": "stoa-shortcuts-help"
+    },
+    {
+      "id": "search-index",
+      "note": "The index the Command Bar fetches, built and checked at build time."
+    },
+    {
+      "id": "command-bar",
+      "note": "Generic once its configuration settles across two or more sites.",
+      "element": "stoa-command-bar"
+    },
+    {
+      "id": "filter-bar",
+      "note": "Filters the items a build wrote by key:value pills and words, with quick filters, a ✕ clear and ?q= links.",
+      "element": "stoa-filter-bar"
+    },
+    {
+      "id": "theme-engine",
+      "note": "Theme semantics, registry, pre-paint, persistence, controls and conformance; palettes stay in site adapters."
+    },
+    {
+      "id": "theme-menu",
+      "note": "Chooses among the site's themes from its registry; generic once the Theme Engine settles what it hands the menu.",
+      "element": "stoa-theme-menu"
+    }
+  ],
+  "themes": [
+    {
+      "id": "harbour",
+      "name": "Harbour",
+      "description": "Slate and teal",
+      "detail": "The default: cool blues over a quiet grey."
+    },
+    {
+      "id": "meadow",
+      "name": "Meadow",
+      "description": "Moss and straw",
+      "detail": "Greens with a warm accent."
+    },
+    {
+      "id": "ember",
+      "name": "Ember",
+      "description": "Brick and gold",
+      "detail": "Warm reds and a golden accent."
+    }
+  ]
+}

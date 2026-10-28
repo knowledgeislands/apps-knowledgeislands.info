@@ -1,0 +1,68 @@
+/* ─── Stoa Shortcuts help ─────────────────────────────────────────────────── */
+
+/* Styles for <stoa-shortcuts-help>: the keyboard shortcuts dialog the
+   Shortcut Registry generates from its registrations. It shares the Command
+   Bar's dialog frame (.command-bar, .command-bar__panel in command-bar.css). */
+
+@layer stoa-components {
+  /* ── Keyboard shortcuts ── */
+  .command-bar--shortcuts .command-bar__panel {
+    padding: 4px 20px 16px;
+    overflow-y: auto;
+  }
+
+  .shortcuts__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .shortcuts__title {
+    margin: 12px 0 4px;
+    font-size: 1.05rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  .shortcuts__group {
+    margin: 14px 0 6px;
+    color: var(--stoa-muted-foreground);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+
+  .shortcuts__list {
+    margin: 0;
+  }
+
+  .shortcuts__list > div {
+    display: grid;
+    grid-template-columns: 8.5rem 1fr;
+    gap: 12px;
+    align-items: baseline;
+    padding: 6px 0;
+    border-top: 1px solid var(--stoa-border);
+  }
+
+  .shortcuts__list dt {
+    white-space: nowrap;
+  }
+
+  .shortcuts__list dd {
+    margin: 0;
+    font-size: 0.86rem;
+  }
+
+  .shortcuts__note {
+    margin: 14px 0 0;
+    font-size: 0.86rem;
+  }
+
+  .shortcuts__note a {
+    color: var(--stoa-popover-foreground);
+    text-decoration: underline;
+  }
+}

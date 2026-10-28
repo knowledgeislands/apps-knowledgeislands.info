@@ -1,0 +1,6 @@
+// Directory data for the Stoa section: the pages about Stoa, the web components the Knowledge Islands sites can
+// share, with its units shown live from the vendored workbench (sync:stoa).
+{
+  layout: 'layouts/page.njk',
+  section: 'stoa'
+}

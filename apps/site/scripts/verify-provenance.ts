@@ -44,7 +44,8 @@ const vendoredData = [
   'src/_data/kiSymbols.json5',
   'src/_data/arcadiaPainting.json5',
   'src/_data/arcadiaSnapshot.json5',
-  'src/_data/arcadiaArchipelago.json5'
+  'src/_data/arcadiaArchipelago.json5',
+  'src/_data/stoaWorkbench.json5'
 ].map((file) => resolve(siteRoot, file))
 
 const repositoryOwner = 'knowledgeislands'
@@ -451,6 +452,26 @@ const checkVendoredSnapshot = (vendored: string): void => {
 }
 
 for (const vendored of vendoredData) checkVendoredSnapshot(vendored)
+
+/**
+ * Holds the vendored Stoa workbench to the snapshot that describes it. The pages frame the workbench's files and
+ * cite the snapshot's tag, so the files must be the export of that same commit; a hand-edited or half-synced
+ * vendor/stoa-workbench/ would publish something no citation covers.
+ */
+const checkStoaWorkbench = (): void => {
+  const where = 'vendor/stoa-workbench/workbench.json'
+  try {
+    const snapshot = JSON5.parse(readFileSync(resolve(siteRoot, 'src/_data/stoaWorkbench.json5'), 'utf-8'))
+    const exported = JSON.parse(readFileSync(resolve(siteRoot, where), 'utf-8'))
+    if (exported.commit !== snapshot.commit || exported.version !== snapshot.version)
+      fail(
+        `${where}: is the export of ${exported.version} at ${exported.commit}, but the snapshot records ${snapshot.version} at ${snapshot.commit}. Re-run sync:stoa.`
+      )
+  } catch (error) {
+    fail(`${where}: could not be read with its snapshot (${(error as Error).message}).`)
+  }
+}
+checkStoaWorkbench()
 
 /**
  * Holds the islands chart on /arcadia/ to the snapshot it draws (GDR-KI-DESIGN-031).

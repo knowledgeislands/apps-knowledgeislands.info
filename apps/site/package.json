@@ -25,6 +25,7 @@
     "sync:design": "bun scripts/sync-ki-design.ts",
     "sync:diagrams": "bun scripts/sync-diagrams.ts",
     "sync:skills": "bun scripts/sync-skill-catalogue.ts",
+    "sync:stoa": "bun scripts/sync-stoa.ts",
     "test": "bun test scripts",
     "typecheck": "bunx tsc --noEmit -p tsconfig.json",
     "upload": "bunx wrangler versions upload",

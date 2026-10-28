@@ -1,0 +1,398 @@
+/* ─── Stoa Filter Bar ─────────────────────────────────────────────────────── */
+
+/* Styles for <stoa-filter-bar>. One line: the box carries the pills and the
+   icons; the quick filters and the help drop down over the content rather
+   than pushing it down. Every colour is a --stoa-* token, with no
+   color-mix(), so a site's contrast check already knows each surface. An
+   active quick filter is also aria-pressed, so it is never shown by colour
+   alone. */
+
+@layer stoa-components {
+  stoa-filter-bar[hidden] {
+    display: none;
+  }
+
+  stoa-filter-bar {
+    display: block;
+  }
+
+  .filter-bar {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 14px 16px;
+    color: var(--stoa-foreground);
+    font-family: var(--stoa-font-sans);
+    background: var(--stoa-card);
+    border: 1px solid var(--stoa-border);
+    border-radius: var(--stoa-radius-lg);
+    box-shadow: var(--stoa-shadow-sm);
+  }
+
+  /* The bar is the script's: without it the full list is the page. */
+  .filter-bar[hidden] {
+    display: none;
+  }
+
+  /* Anchors the overlays. min-width: 0 lets the pills scroll inside the box
+     instead of widening the page on a narrow screen. */
+  .filter-bar__row {
+    position: relative;
+    min-width: 0;
+  }
+
+  .filter-bar__box {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+    /* A fixed height, not a minimum: adding or removing a pill must not
+       redraw the box. */
+    height: 38px;
+    padding: 3px 4px 3px 10px;
+    background: var(--stoa-background);
+    border: 1px solid var(--stoa-input);
+    border-radius: var(--stoa-radius-sm);
+    cursor: text;
+    transition: border-color 0.15s;
+  }
+
+  .filter-bar__box:focus-within {
+    border-color: var(--stoa-ring);
+    outline: 2px solid var(--stoa-ring);
+    outline-offset: 1px;
+  }
+
+  .filter-bar__icon {
+    flex: none;
+    width: 16px;
+    height: 16px;
+    color: var(--stoa-muted-foreground);
+  }
+
+  .filter-bar__input {
+    flex: 1 1 120px;
+    min-width: 80px;
+    height: 28px;
+    padding: 0 2px;
+    color: var(--stoa-foreground);
+    font-family: var(--stoa-font-sans);
+    font-size: 13px;
+    background: transparent;
+    border: none;
+    outline: none;
+  }
+
+  /* The pills scroll sideways rather than wrap, so the box stays one line.
+     Lists reset here, so a page's own `ul` and `li` rules do not reach in. */
+  .filter-bar__pills {
+    display: flex;
+    flex: 0 1 auto;
+    align-items: center;
+    gap: 4px;
+    min-width: 0;
+    max-width: 70%;
+    margin: 0;
+    padding: 2px;
+    overflow-x: auto;
+    list-style: none;
+    scrollbar-width: none;
+  }
+
+  .filter-bar__pills::-webkit-scrollbar {
+    display: none;
+  }
+
+  .filter-bar__pills[hidden] {
+    display: none;
+  }
+
+  .filter-bar__pill {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    max-width: 260px;
+    height: 22px;
+    margin: 0;
+    padding: 0 4px 0 9px;
+    color: var(--stoa-accent-foreground);
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+    background: var(--stoa-accent);
+    border-radius: 9999px;
+  }
+
+  .filter-bar__pill-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .filter-bar__pill-field {
+    font-weight: 700;
+  }
+
+  .filter-bar__pill-x {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    padding: 0;
+    color: var(--stoa-accent-foreground);
+    font-size: 11px;
+    line-height: 1;
+    background: transparent;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+
+  .filter-bar__pill-x:hover {
+    background: var(--stoa-card);
+  }
+
+  /* The ✕ clear, the quick filters and the help, on the right of the box. */
+  .filter-bar__tools {
+    flex: none;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    margin-left: auto;
+  }
+
+  .filter-bar__tool,
+  .filter-bar__pop-close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    color: var(--stoa-muted-foreground);
+    font-family: var(--stoa-font-sans);
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: var(--stoa-radius-sm);
+    cursor: pointer;
+    transition:
+      background 0.15s,
+      color 0.15s,
+      border-color 0.15s;
+  }
+
+  .filter-bar__tool[hidden] {
+    display: none;
+  }
+
+  .filter-bar__tool:hover,
+  .filter-bar__pop-close:hover {
+    color: var(--stoa-foreground);
+    background: var(--stoa-muted);
+  }
+
+  .filter-bar__tool[aria-expanded="true"] {
+    color: var(--stoa-accent-foreground);
+    background: var(--stoa-accent);
+    border-color: var(--stoa-primary);
+  }
+
+  .filter-bar__pill-x:focus-visible,
+  .filter-bar__tool:focus-visible,
+  .filter-bar__pop-close:focus-visible,
+  .filter-bar__qf-chip:focus-visible,
+  .filter-bar__example:focus-visible {
+    outline: 2px solid var(--stoa-ring);
+    outline-offset: 1px;
+  }
+
+  /* The overlay: below the box, over the content. */
+  .filter-bar__pop {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    left: 0;
+    z-index: 40;
+    max-height: min(70vh, 520px);
+    padding: 14px 16px;
+    overflow-y: auto;
+    background: var(--stoa-card);
+    border: 1px solid var(--stoa-border);
+    border-radius: var(--stoa-radius-lg);
+    box-shadow: var(--stoa-shadow-md);
+  }
+
+  .filter-bar__pop[hidden] {
+    display: none;
+  }
+
+  /* Focus moves to the overlay itself on opening; its controls carry the
+     visible focus ring. */
+  .filter-bar__pop:focus {
+    outline: none;
+  }
+
+  /* The help's ✕, in its top right corner; the text keeps clear of it. */
+  .filter-bar__pop-close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+  }
+
+  .filter-bar__hint > p:first-of-type {
+    padding-right: 28px;
+  }
+
+  /* Quick filters: one column per field, stacking on a narrow screen. */
+  .filter-bar__quick {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px 24px;
+    align-items: start;
+  }
+
+  .filter-bar__qf-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+  }
+
+  .filter-bar__qf-group[hidden] {
+    display: none;
+  }
+
+  .filter-bar__qf-label {
+    color: var(--stoa-muted-foreground);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .filter-bar__qf-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .filter-bar__qf-chip {
+    padding: 2px 8px;
+    color: var(--stoa-muted-foreground);
+    font-family: var(--stoa-font-sans);
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+    background: transparent;
+    border: 1px solid var(--stoa-border);
+    border-radius: 9999px;
+    cursor: pointer;
+    transition:
+      background 0.15s,
+      color 0.15s,
+      border-color 0.15s;
+  }
+
+  .filter-bar__qf-chip:hover {
+    color: var(--stoa-foreground);
+    background: var(--stoa-muted);
+  }
+
+  .filter-bar__qf-chip[aria-pressed="true"] {
+    color: var(--stoa-accent-foreground);
+    background: var(--stoa-accent);
+    border-color: var(--stoa-primary);
+  }
+
+  /* On a narrow screen the columns stack, and the pills may take the room of
+     all but a short input, so a single pill shows whole. */
+  @media (max-width: 720px) {
+    .filter-bar__quick {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .filter-bar__pills {
+      max-width: none;
+    }
+
+    .filter-bar__input {
+      flex-basis: 48px;
+      min-width: 48px;
+    }
+  }
+
+  .filter-bar__hint {
+    color: var(--stoa-muted-foreground);
+    font-size: 11px;
+    line-height: 1.7;
+  }
+
+  .filter-bar__hint p {
+    margin: 0 0 8px;
+  }
+
+  .filter-bar__hint code {
+    padding: 1px 5px;
+    color: var(--stoa-foreground);
+    font-family: var(--stoa-font-mono);
+    font-size: 11px;
+    background: var(--stoa-muted);
+    border-radius: 4px;
+  }
+
+  .filter-bar__examples-label {
+    color: var(--stoa-foreground);
+    font-weight: 600;
+  }
+
+  .filter-bar__examples {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .filter-bar__examples li {
+    margin: 0;
+  }
+
+  .filter-bar__example {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 10px 4px 4px;
+    color: var(--stoa-muted-foreground);
+    font-family: var(--stoa-font-sans);
+    font-size: 11px;
+    text-align: left;
+    background: transparent;
+    border: 1px solid var(--stoa-border);
+    border-radius: var(--stoa-radius-sm);
+    cursor: pointer;
+    transition:
+      border-color 0.15s,
+      color 0.15s;
+  }
+
+  .filter-bar__example code {
+    white-space: nowrap;
+  }
+
+  .filter-bar__example:hover {
+    color: var(--stoa-foreground);
+    border-color: var(--stoa-primary);
+  }
+
+  /* Hidden items stay hidden, whatever display a site's list gives them. */
+  [data-filter-item][hidden],
+  [data-filter-empty][hidden] {
+    display: none;
+  }
+}

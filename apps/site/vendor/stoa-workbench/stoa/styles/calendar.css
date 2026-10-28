@@ -1,0 +1,1911 @@
+/* ─── Stoa Calendar ───────────────────────────────────────────────────────── */
+
+/* Styles for <stoa-calendar> and the markup its renderers write
+   (src/calendar/render.js): the calendar page with its subscribe actions and
+   month list, and the calendar view with its panel and its Months, Runway and
+   List views. Lifted from the reference site's calendar styles, every colour a
+   --stoa-* token (styles/tokens.css). Each calendar takes a colour slot
+   (`--stoa-cal-<n>-*`, chosen by its `colour`) and is always shown with its
+   code as well, and every status is a word, so colour is never the only cue. A
+   confirmed date is solid; every other status is hatched or outlined. */
+
+@layer stoa-components {
+  /* ── Shared pieces the reference site drew from its own pages ── */
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .source-ref {
+    white-space: nowrap;
+  }
+
+  .calendar-page {
+    max-width: var(--stoa-content-width, 860px);
+    margin: 0 auto;
+    padding: 2rem var(--stoa-page-pad) 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .calendar-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .calendar-section__title {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--stoa-foreground);
+    margin: 0;
+  }
+
+  .calendar-section__title svg,
+  .calendar-section__title i {
+    width: 20px;
+    height: 20px;
+    color: var(--stoa-primary);
+    flex-shrink: 0;
+  }
+
+  .calendar-section__desc {
+    font-size: 0.9rem;
+    color: var(--stoa-muted-foreground);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .cal-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 1px 6px;
+    border-radius: 3px;
+    background: var(--stoa-muted);
+    color: var(--stoa-muted-foreground);
+  }
+
+  stoa-calendar {
+    display: block;
+  }
+}
+
+@layer stoa-components {
+  .calendar-crumb {
+    font-size: 0.8rem;
+    color: var(--stoa-muted-foreground);
+    margin: 0 0 0.5rem;
+  }
+
+  .calendar-crumb a {
+    color: var(--stoa-primary);
+    text-decoration: none;
+  }
+
+  .calendar-crumb a:hover {
+    text-decoration: underline;
+  }
+
+  /* ── Subscribe actions ── */
+  .calendar-subscribe {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .calendar-subscribe__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .calendar-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font: inherit;
+    font-size: 0.82rem;
+    font-weight: 600;
+    padding: 0.4rem 0.8rem;
+    border: 1px solid var(--stoa-border);
+    border-radius: var(--stoa-radius, 6px);
+    background: var(--stoa-card);
+    color: var(--stoa-foreground);
+    text-decoration: none;
+    cursor: pointer;
+    transition: border-color 0.15s;
+  }
+
+  .calendar-action:hover {
+    border-color: var(--stoa-primary);
+  }
+
+  .calendar-action:focus-visible {
+    outline: 2px solid var(--stoa-ring);
+    outline-offset: 2px;
+  }
+
+  .calendar-action--primary {
+    background: var(--stoa-primary);
+    border-color: var(--stoa-primary);
+    color: var(--stoa-primary-foreground);
+  }
+
+  .calendar-action--primary:hover {
+    background: color-mix(in srgb, var(--stoa-primary) 88%, var(--stoa-foreground));
+  }
+
+  .calendar-action__icon {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+  }
+
+  .calendar-action .prose-ext-icon {
+    margin-left: 0;
+  }
+
+  .calendar-url {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .calendar-url__label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--stoa-muted-foreground);
+  }
+
+  .calendar-url__row {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .calendar-url__input {
+    flex: 1;
+    min-width: 0;
+    font-family: var(--stoa-font-mono, monospace);
+    font-size: 0.78rem;
+    padding: 0.4rem 0.6rem;
+    border: 1px solid var(--stoa-input, var(--stoa-border));
+    border-radius: var(--stoa-radius, 6px);
+    background: var(--stoa-background);
+    color: var(--stoa-foreground);
+  }
+
+  .calendar-url__input:focus-visible {
+    outline: 2px solid var(--stoa-ring);
+    outline-offset: 1px;
+  }
+
+  .calendar-steps {
+    font-size: 0.82rem;
+    color: var(--stoa-muted-foreground);
+    line-height: 1.55;
+  }
+
+  .calendar-steps summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--stoa-foreground);
+  }
+
+  .calendar-steps ul {
+    margin: 0.5rem 0;
+    padding-left: 1.1rem;
+    list-style: disc;
+  }
+
+  .calendar-steps li + li {
+    margin-top: 0.35rem;
+  }
+
+  .calendar-steps strong {
+    color: var(--stoa-foreground);
+  }
+
+  .calendar-steps p {
+    margin: 0;
+  }
+
+  /* ── The month list ── */
+  .calendar-month {
+    margin-top: 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid var(--stoa-border);
+  }
+
+  /* ── A calendar with no dates yet: still subscribable ── */
+  .calendar-empty {
+    margin: 0;
+    padding: 0.75rem 1rem;
+    border: 1px dashed var(--stoa-border);
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--stoa-muted-foreground);
+  }
+
+  .calendar-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .calendar-entry {
+    display: grid;
+    grid-template-columns: 11.5rem 1fr;
+    gap: 0.25rem 1rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--stoa-border);
+    scroll-margin-top: calc(var(--stoa-sticky-top) + 1rem);
+  }
+
+  .calendar-entry:last-child {
+    border-bottom: none;
+  }
+
+  .calendar-entry:target {
+    background: color-mix(in srgb, var(--stoa-primary) 8%, transparent);
+    box-shadow: -0.5rem 0 0 color-mix(in srgb, var(--stoa-primary) 8%, transparent);
+  }
+
+  .calendar-entry__date {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--stoa-foreground);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* A timed entry's time in each of its zones, under its date. */
+  .calendar-entry__time {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 400;
+    color: var(--stoa-muted-foreground);
+  }
+
+  .calendar-entry__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem 0.6rem;
+  }
+
+  .calendar-entry__title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--stoa-foreground);
+  }
+
+  .calendar-entry__desc {
+    font-size: 0.85rem;
+    color: var(--stoa-muted-foreground);
+    margin: 0.3rem 0 0.45rem;
+    line-height: 1.5;
+  }
+
+  .calendar-entry__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem 0.6rem;
+  }
+
+  .calendar-kind {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--stoa-foreground);
+  }
+
+  .calendar-kind__icon {
+    width: 13px;
+    height: 13px;
+    color: var(--stoa-primary);
+  }
+
+  /* Busy or free: the kind label's muted type, with a solid square for busy
+     and a dashed one for free, as calendar apps draw them. No new colour. */
+  .calendar-availability {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--stoa-muted-foreground);
+  }
+
+  .calendar-availability__icon {
+    width: 13px;
+    height: 13px;
+    color: var(--stoa-foreground);
+  }
+
+  .calendar-availability--busy .calendar-availability__icon {
+    fill: currentColor;
+  }
+
+  .calendar-availability-key {
+    margin: 0.6rem 0 0;
+    font-size: 0.78rem;
+    color: var(--stoa-muted-foreground);
+    line-height: 1.6;
+  }
+
+  .calendar-availability-key .calendar-availability {
+    color: var(--stoa-foreground);
+  }
+
+  .calendar-entry__source {
+    font-size: 0.75rem;
+    color: var(--stoa-muted-foreground);
+  }
+
+  /* Past: still readable, but stepped back behind what is ahead. */
+  .calendar-entry.is-past .calendar-entry__date,
+  .calendar-entry.is-past .calendar-entry__title {
+    color: var(--stoa-muted-foreground);
+    font-weight: 500;
+  }
+
+  .calendar-entry.is-past .calendar-entry__date::after {
+    content: " · past";
+    font-weight: 500;
+  }
+
+  .calendar-entry.is-past .calendar-status,
+  .calendar-entry.is-past .calendar-kind__icon {
+    filter: grayscale(1);
+  }
+
+  /* ── Statuses ── */
+  .calendar-status {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 2px 7px;
+    border-radius: 999px;
+    flex-shrink: 0;
+  }
+
+  .calendar-status--confirmed {
+    background: var(--stoa-status-pass-bg);
+    color: var(--stoa-status-pass-fg);
+  }
+
+  .calendar-status--planned,
+  .calendar-status--target {
+    background: var(--stoa-status-risk-bg);
+    color: var(--stoa-status-risk-fg);
+  }
+
+  .calendar-status--proposed {
+    background: var(--stoa-status-ns-bg);
+    color: var(--stoa-status-ns-fg);
+  }
+
+  /* Not yet dated by its owner: an outline, so it never reads as settled. */
+  .calendar-status--to-confirm {
+    background: transparent;
+    color: var(--stoa-muted-foreground);
+    box-shadow: inset 0 0 0 1px var(--stoa-border);
+  }
+
+  @media (max-width: 640px) {
+    .calendar-entry {
+      grid-template-columns: 1fr;
+    }
+
+    .calendar-url__row {
+      flex-direction: column;
+    }
+  }
+}
+
+@layer stoa-components {
+  .cal-slot-1 {
+    --cal-fill: var(--stoa-cal-1-fill);
+    --cal-soft: var(--stoa-cal-1-soft);
+    --cal-text: var(--stoa-cal-1-text);
+    --cal-ink: var(--stoa-cal-1-ink);
+  }
+  .cal-slot-2 {
+    --cal-fill: var(--stoa-cal-2-fill);
+    --cal-soft: var(--stoa-cal-2-soft);
+    --cal-text: var(--stoa-cal-2-text);
+    --cal-ink: var(--stoa-cal-2-ink);
+  }
+  .cal-slot-3 {
+    --cal-fill: var(--stoa-cal-3-fill);
+    --cal-soft: var(--stoa-cal-3-soft);
+    --cal-text: var(--stoa-cal-3-text);
+    --cal-ink: var(--stoa-cal-3-ink);
+  }
+  .cal-slot-4 {
+    --cal-fill: var(--stoa-cal-4-fill);
+    --cal-soft: var(--stoa-cal-4-soft);
+    --cal-text: var(--stoa-cal-4-text);
+    --cal-ink: var(--stoa-cal-4-ink);
+  }
+  .cal-slot-5 {
+    --cal-fill: var(--stoa-cal-5-fill);
+    --cal-soft: var(--stoa-cal-5-soft);
+    --cal-text: var(--stoa-cal-5-text);
+    --cal-ink: var(--stoa-cal-5-ink);
+  }
+  .cal-slot-6 {
+    --cal-fill: var(--stoa-cal-6-fill);
+    --cal-soft: var(--stoa-cal-6-soft);
+    --cal-text: var(--stoa-cal-6-text);
+    --cal-ink: var(--stoa-cal-6-ink);
+  }
+  .cal-slot-7 {
+    --cal-fill: var(--stoa-cal-7-fill);
+    --cal-soft: var(--stoa-cal-7-soft);
+    --cal-text: var(--stoa-cal-7-text);
+    --cal-ink: var(--stoa-cal-7-ink);
+  }
+  .cal-slot-8 {
+    --cal-fill: var(--stoa-cal-8-fill);
+    --cal-soft: var(--stoa-cal-8-soft);
+    --cal-text: var(--stoa-cal-8-text);
+    --cal-ink: var(--stoa-cal-8-ink);
+  }
+
+  .cal-page {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1.5rem var(--stoa-page-pad, 1.5rem) 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  /* Embedded in a page of the site's own, the view takes that page's column
+     width and padding. */
+  .cal-page--embedded {
+    max-width: none;
+    margin: 0 0 2rem;
+    padding: 0;
+  }
+
+  /* Display rules below would otherwise override the hidden attribute. */
+  .cal-page [hidden] {
+    display: none !important;
+  }
+
+  .cal-page :focus-visible {
+    outline: 2px solid var(--stoa-ring);
+    outline-offset: 2px;
+  }
+
+  .cal-card {
+    background: var(--stoa-card);
+    border: 1px solid var(--stoa-border);
+    border-radius: calc(var(--stoa-radius) + 4px);
+    box-shadow: var(--stoa-shadow-sm);
+  }
+
+  /* ── Code chip: the calendar's short label on its colour ── */
+  .cal-code {
+    display: inline-grid;
+    place-items: center;
+    min-width: 26px;
+    height: 20px;
+    padding: 0 5px;
+    border-radius: 5px;
+    background: var(--cal-fill);
+    color: var(--cal-ink);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  /* A calendar with no dates yet: present and subscribable, just not filled. */
+  .cal-code--empty,
+  .cal-row.is-off .cal-code,
+  .cal-lane.is-off .cal-code {
+    background: transparent;
+    box-shadow: inset 0 0 0 1.5px var(--cal-fill);
+    color: var(--cal-text);
+  }
+
+  /* ── Top: introduction and the next date ── */
+  .cal-top {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem 2rem;
+    align-items: stretch;
+    justify-content: space-between;
+  }
+
+  .cal-intro {
+    flex: 1 1 380px;
+    margin: 0;
+    align-self: center;
+    max-width: 620px;
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: var(--stoa-muted-foreground);
+  }
+
+  .cal-next {
+    flex: 0 1 520px;
+    display: flex;
+    align-items: stretch;
+    overflow: hidden;
+    background: var(--stoa-card);
+    border: 1px solid var(--stoa-border);
+    border-radius: calc(var(--stoa-radius) + 4px);
+    box-shadow: var(--stoa-shadow-sm);
+    color: var(--stoa-foreground);
+    text-decoration: none;
+    transition: border-color 0.15s;
+  }
+
+  .cal-next:hover {
+    border-color: var(--stoa-primary);
+  }
+
+  .cal-next__date {
+    flex: 0 0 96px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    padding: 12px 0;
+    background: var(--stoa-primary);
+    color: var(--stoa-primary-foreground);
+  }
+
+  .cal-next__wd,
+  .cal-next__mon {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .cal-next__day {
+    font-size: 2.4rem;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+
+  .cal-next__body {
+    flex: 1;
+    min-width: 0;
+    padding: 12px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .cal-next__eyebrow {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--stoa-primary);
+  }
+
+  .cal-next__title {
+    font-size: 1.05rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+  }
+
+  .cal-next__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .cal-next__also {
+    font-size: 0.78rem;
+    color: var(--stoa-muted-foreground);
+    border-top: 1px solid var(--stoa-border);
+    padding-top: 6px;
+  }
+
+  .cal-next__also strong {
+    color: var(--stoa-foreground);
+  }
+
+  /* ── Layout: panel and views ── */
+  .cal-layout {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    align-items: flex-start;
+  }
+
+  .cal-main {
+    flex: 999 1 640px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background: var(--stoa-card);
+    border: 1px solid var(--stoa-border);
+    border-radius: calc(var(--stoa-radius) + 4px);
+    box-shadow: var(--stoa-shadow-sm);
+    padding: 1rem 1.25rem 1.25rem;
+  }
+
+  /* ── The calendar panel ── */
+  .cal-panel {
+    flex: 0 0 320px;
+    max-width: 100%;
+    position: relative;
+    z-index: 5;
+    background: var(--stoa-card);
+    border: 1px solid var(--stoa-border);
+    border-radius: calc(var(--stoa-radius) + 4px);
+    box-shadow: var(--stoa-shadow-sm);
+    padding: 0.6rem 0.5rem 0.9rem;
+  }
+
+  /* The panel toggle in the toolbar (src/calendar/element.js): its icon
+     follows aria-expanded, and the dates take the full width when collapsed. */
+  .cal-panel-toggle[aria-expanded="true"] .cal-panel-toggle__open,
+  .cal-panel-toggle[aria-expanded="false"] .cal-panel-toggle__close {
+    display: none;
+  }
+
+  .cal-layout.is-panel-collapsed .cal-main {
+    flex-basis: 100%;
+  }
+
+  .cal-panel__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.35rem 0.6rem 0;
+  }
+
+  .cal-panel__head h2 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 800;
+  }
+
+  .cal-panel__all,
+  .cal-link {
+    font: inherit;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--stoa-primary);
+    background: none;
+    border: 0;
+    padding: 4px 6px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  .cal-panel__all:hover,
+  .cal-link:hover {
+    text-decoration: underline;
+  }
+
+  .cal-panel__group-title {
+    margin: 0;
+    padding: 0.9rem 0.6rem 0.25rem;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--stoa-muted-foreground);
+  }
+
+  .cal-panel__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .cal-row {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 6px 7px 8px;
+    border-radius: 10px;
+  }
+
+  .cal-row:hover {
+    background: var(--stoa-muted);
+  }
+
+  .cal-row__text {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cal-row__title {
+    font-size: 0.84rem;
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--stoa-foreground);
+    text-decoration: none;
+  }
+
+  .cal-row__title:hover {
+    color: var(--stoa-primary);
+    text-decoration: underline;
+  }
+
+  .cal-row__meta {
+    font-size: 0.74rem;
+    color: var(--stoa-muted-foreground);
+  }
+
+  .cal-row__meta--empty {
+    font-style: italic;
+  }
+
+  .cal-row.is-off .cal-row__title {
+    color: var(--stoa-muted-foreground);
+  }
+
+  .cal-toggle {
+    appearance: none;
+    margin: 0;
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    display: inline-grid;
+    place-items: center;
+    border: 1.5px solid var(--cal-fill);
+    border-radius: 5px;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .cal-toggle:checked {
+    background: var(--cal-fill);
+  }
+
+  .cal-toggle:checked::after {
+    content: "";
+    width: 9px;
+    height: 5px;
+    border-left: 2px solid var(--cal-ink);
+    border-bottom: 2px solid var(--cal-ink);
+    transform: translateY(-1px) rotate(-45deg);
+  }
+
+  .cal-panel__note {
+    display: flex;
+    gap: 8px;
+    margin: 0.9rem 0.6rem 0;
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--stoa-border);
+    font-size: 0.76rem;
+    line-height: 1.5;
+    color: var(--stoa-muted-foreground);
+  }
+
+  .cal-panel__note-icon {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .cal-panel__steps {
+    margin: 0.6rem 0.6rem 0;
+  }
+
+  /* ── Subscribe menu: a disclosure, so it works without JavaScript ── */
+  .cal-sub summary {
+    list-style: none;
+  }
+
+  .cal-sub summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .cal-sub__button {
+    display: inline-grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    color: var(--stoa-muted-foreground);
+    cursor: pointer;
+  }
+
+  .cal-sub__button:hover,
+  .cal-sub[open] .cal-sub__button {
+    background: var(--stoa-muted);
+    color: var(--stoa-foreground);
+  }
+
+  .cal-sub__icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .cal-sub__menu {
+    position: absolute;
+    z-index: 40;
+    top: calc(100% + 2px);
+    left: 4px;
+    width: min(330px, calc(100vw - 2rem));
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 8px;
+    background: var(--stoa-popover);
+    color: var(--stoa-popover-foreground);
+    border: 1px solid var(--stoa-border);
+    border-radius: 14px;
+    box-shadow: var(--stoa-shadow-lg);
+  }
+
+  .cal-sub__head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 8px 10px;
+  }
+
+  .cal-sub__head > span:last-child {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .cal-sub__eyebrow {
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--stoa-muted-foreground);
+  }
+
+  .cal-sub__title {
+    font-size: 0.88rem;
+    font-weight: 800;
+  }
+
+  .cal-sub__primary {
+    justify-content: center;
+    min-height: 40px;
+    margin-bottom: 4px;
+  }
+
+  .cal-sub__item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 38px;
+    padding: 0 10px;
+    border-radius: 8px;
+    font-size: 0.84rem;
+    font-weight: 600;
+    color: var(--stoa-popover-foreground);
+    text-decoration: none;
+  }
+
+  .cal-sub__item:hover {
+    background: var(--stoa-muted);
+  }
+
+  .cal-sub__item .prose-ext-icon {
+    margin-left: auto;
+  }
+
+  .cal-sub__feed {
+    margin: 6px 2px 2px;
+  }
+
+  /* ── Toolbar and tabs ── */
+  .cal-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem 0.9rem;
+  }
+
+  .cal-toolbar__nav {
+    display: flex;
+    gap: 4px;
+  }
+
+  .cal-toolbar__range {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  .cal-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    height: 34px;
+    padding: 0 12px;
+    font: inherit;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--stoa-foreground);
+    background: var(--stoa-card);
+    border: 1px solid var(--stoa-border);
+    border-radius: var(--stoa-radius);
+    cursor: pointer;
+    transition: border-color 0.15s;
+  }
+
+  .cal-btn:hover {
+    border-color: var(--stoa-primary);
+  }
+
+  .cal-btn--icon {
+    width: 34px;
+    padding: 0;
+  }
+
+  .cal-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .cal-btn--hidden {
+    border-style: dashed;
+    color: var(--stoa-muted-foreground);
+  }
+
+  .cal-tabs {
+    display: inline-flex;
+    gap: 2px;
+    margin-left: auto;
+    padding: 3px;
+    background: var(--stoa-muted);
+    border: 1px solid var(--stoa-border);
+    border-radius: calc(var(--stoa-radius) + 2px);
+  }
+
+  .cal-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 30px;
+    padding: 0 12px;
+    font: inherit;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--stoa-muted-foreground);
+    background: transparent;
+    border: 0;
+    border-radius: var(--stoa-radius);
+    cursor: pointer;
+  }
+
+  .cal-tab svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .cal-tab[aria-selected="true"] {
+    background: var(--stoa-card);
+    color: var(--stoa-foreground);
+    box-shadow: var(--stoa-shadow-sm);
+  }
+
+  /* ── Months ── */
+  /* Each month spans four shared rows (heading, undated band, weekdays,
+     days), so the grids line up even when one month has a band and the
+     next does not. */
+  .cal-months {
+    display: grid;
+    grid-template-columns: repeat(var(--cal-month-count, 3), minmax(0, 1fr));
+    grid-template-rows: repeat(4, auto);
+    column-gap: 2rem;
+  }
+
+  .cal-month {
+    min-width: 0;
+    display: grid;
+    grid-row: span 4;
+    grid-template-rows: subgrid;
+    align-content: start;
+  }
+
+  .cal-month__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  .cal-month__name {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  .cal-month__name span {
+    font-weight: 500;
+    color: var(--stoa-muted-foreground);
+  }
+
+  .cal-month__count {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--stoa-muted-foreground);
+  }
+
+  .cal-month__floats {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-height: 38px;
+    margin-bottom: 10px;
+  }
+
+  .cal-float {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    min-height: 36px;
+    padding: 6px 10px;
+    font: inherit;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-align: left;
+    color: var(--stoa-foreground);
+    background: var(--cal-soft);
+    border: 1.5px dashed var(--cal-fill);
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  .cal-float__tbc {
+    margin-left: auto;
+    flex-shrink: 0;
+    font-size: 0.64rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--stoa-muted-foreground);
+  }
+
+  .cal-float[aria-expanded="true"] {
+    outline: 2px solid var(--stoa-foreground);
+    outline-offset: 1px;
+  }
+
+  .cal-float.is-past {
+    color: var(--stoa-muted-foreground);
+  }
+
+  .cal-dow,
+  .cal-days {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 4px;
+  }
+
+  .cal-dow {
+    margin-bottom: 4px;
+  }
+
+  .cal-days {
+    align-content: start;
+  }
+
+  .cal-dow abbr {
+    padding-left: 6px;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--stoa-muted-foreground);
+  }
+
+  .cal-day {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 0;
+    height: 56px;
+    padding: 6px 6px 7px;
+    font: inherit;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-align: left;
+    color: var(--stoa-muted-foreground);
+    background: transparent;
+    border: 0;
+    border-radius: 8px;
+  }
+
+  .cal-day--blank {
+    visibility: hidden;
+  }
+
+  .cal-day__num {
+    display: inline-flex;
+    align-self: flex-start;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    margin: -2px 0 0 -3px;
+    padding: 0 4px;
+    border-radius: 999px;
+  }
+
+  .cal-day.has-dates {
+    background: var(--cal-soft);
+    color: var(--stoa-foreground);
+    font-weight: 800;
+    cursor: pointer;
+  }
+
+  .cal-day.has-dates.is-past {
+    background: var(--stoa-muted);
+  }
+
+  .cal-day.has-dates:hover {
+    box-shadow: inset 0 0 0 1.5px var(--cal-fill);
+  }
+
+  .cal-day[aria-expanded="true"] {
+    box-shadow: inset 0 0 0 2px var(--stoa-foreground);
+  }
+
+  .cal-day.is-today .cal-day__num {
+    background: var(--stoa-primary);
+    color: var(--stoa-primary-foreground);
+    font-weight: 800;
+  }
+
+  .cal-day__marks {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .cal-mark {
+    display: block;
+    height: 6px;
+    border-radius: 3px;
+    background: var(--cal-fill);
+  }
+
+  /* Provisional: hatched and outlined, never solid. */
+  .cal-mark.is-prov {
+    background: repeating-linear-gradient(-45deg, var(--cal-fill) 0 2px, transparent 2px 4.5px);
+    box-shadow: inset 0 0 0 1.5px var(--cal-fill);
+  }
+
+  .cal-mark.is-past {
+    opacity: 0.45;
+  }
+
+  /* A span carries on into the next day: the cell padding plus half the gap. */
+  .cal-mark.cont-l {
+    margin-left: -8px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  .cal-mark.cont-r {
+    margin-right: -8px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .cal-yearband {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 12px;
+    margin-bottom: 1rem;
+    padding: 10px 12px;
+    border: 1.5px dashed var(--stoa-border);
+    border-radius: 10px;
+    background: var(--stoa-background);
+  }
+
+  .cal-yearband__year {
+    font-size: 0.85rem;
+    font-weight: 800;
+  }
+
+  .cal-yearband__note {
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--stoa-muted-foreground);
+  }
+
+  .cal-yearband .cal-float {
+    width: auto;
+  }
+
+  .cal-note {
+    margin: 0;
+    padding: 0.75rem 1rem;
+    border: 1px dashed var(--stoa-border);
+    border-radius: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--stoa-muted-foreground);
+  }
+
+  /* ── Runway: one lane per calendar ── */
+  .cal-runway-scroll {
+    overflow-x: auto;
+  }
+
+  .cal-runway {
+    min-width: 720px;
+    border: 1px solid var(--stoa-border);
+    border-radius: 12px;
+  }
+
+  .cal-runway__head,
+  .cal-lane {
+    display: grid;
+    grid-template-columns: 250px minmax(0, 1fr);
+  }
+
+  .cal-runway__head {
+    background: var(--stoa-muted);
+    border-radius: 12px 12px 0 0;
+  }
+
+  .cal-runway__label {
+    padding: 10px 14px;
+    align-self: end;
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--stoa-muted-foreground);
+  }
+
+  .cal-runway__scale {
+    position: relative;
+    height: 50px;
+    margin-right: 16px;
+  }
+
+  .cal-runway__month {
+    position: absolute;
+    top: 8px;
+    padding-left: 8px;
+    font-size: 0.8rem;
+    font-weight: 800;
+    white-space: nowrap;
+  }
+
+  .cal-runway__tick {
+    position: absolute;
+    bottom: 7px;
+    transform: translateX(-50%);
+    font-size: 0.66rem;
+    font-weight: 600;
+    color: var(--stoa-muted-foreground);
+  }
+
+  .cal-runway__today-flag {
+    position: absolute;
+    bottom: -9px;
+    z-index: 3;
+    transform: translateX(-50%);
+    padding: 2px 6px;
+    border-radius: 999px;
+    background: var(--stoa-primary);
+    color: var(--stoa-primary-foreground);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .cal-lane {
+    border-top: 1px solid var(--stoa-border);
+  }
+
+  .cal-lane.is-off {
+    background: var(--stoa-muted);
+  }
+
+  .cal-lane__head {
+    position: relative;
+    z-index: 6;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 8px 10px 14px;
+    border-right: 1px solid var(--stoa-border);
+  }
+
+  .cal-lane__text {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cal-lane__name {
+    font-size: 0.8rem;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+
+  .cal-lane__meta {
+    font-size: 0.72rem;
+    color: var(--stoa-muted-foreground);
+  }
+
+  .cal-lane__sub {
+    display: inline-grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    color: var(--stoa-muted-foreground);
+    background: transparent;
+    border: 0;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  .cal-lane__sub:hover,
+  .cal-lane__sub[aria-expanded="true"] {
+    background: var(--stoa-muted);
+    color: var(--stoa-foreground);
+  }
+
+  .cal-lane__sub svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .cal-lane__track {
+    position: relative;
+    min-height: 64px;
+    margin-right: 16px;
+  }
+
+  .cal-lane__sep {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--stoa-border);
+  }
+
+  .cal-lane__today {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+    width: 2px;
+    margin-left: -1px;
+    background: var(--stoa-primary);
+    opacity: 0.55;
+  }
+
+  .cal-lane__empty {
+    position: absolute;
+    inset: 12px 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 12px;
+    text-align: center;
+    font-size: 0.76rem;
+    font-weight: 600;
+    color: var(--stoa-muted-foreground);
+    border: 1.5px dashed var(--stoa-border);
+    border-radius: 10px;
+  }
+
+  .cal-rw {
+    position: absolute;
+    z-index: 2;
+  }
+
+  /* Past: the mark steps back; the words stay readable, in the muted colour. */
+  .cal-rw.is-past .cal-rw__label {
+    color: var(--stoa-muted-foreground);
+  }
+
+  .cal-rw--pin.is-past::before {
+    opacity: 0.45;
+  }
+
+  .cal-rw__hit {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    font: inherit;
+    color: var(--stoa-foreground);
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+  }
+
+  .cal-rw__label {
+    position: absolute;
+    top: 50%;
+    left: calc(100% + 6px);
+    transform: translateY(-50%);
+    padding: 1px 4px;
+    border-radius: 4px;
+    background: var(--stoa-card);
+    font-size: 0.75rem;
+    font-weight: 800;
+    white-space: nowrap;
+  }
+
+  /* Near the right edge the label sits to the left of its mark instead. */
+  .cal-rw.is-flip .cal-rw__label {
+    left: auto;
+    right: calc(100% + 8px);
+  }
+
+  .cal-rw__when {
+    margin-left: 6px;
+    font-weight: 600;
+    color: var(--stoa-muted-foreground);
+  }
+
+  .cal-rw--pin::before {
+    content: "";
+    position: absolute;
+    inset: 2px;
+    border-radius: 2px;
+    transform: rotate(45deg);
+    background: var(--cal-fill);
+    pointer-events: none;
+  }
+
+  .cal-rw--pin.is-prov::before {
+    background: var(--stoa-card);
+    box-shadow: inset 0 0 0 2px var(--cal-fill);
+  }
+
+  .cal-rw--bar .cal-rw__hit {
+    border-radius: 5px;
+    background: var(--cal-fill);
+  }
+
+  .cal-rw--bar.is-prov .cal-rw__hit {
+    background: var(--cal-soft);
+    box-shadow: inset 0 0 0 2px var(--cal-fill);
+  }
+
+  .cal-rw--bar.is-past .cal-rw__hit {
+    background: var(--cal-soft);
+    box-shadow: inset 0 0 0 2px var(--cal-fill);
+  }
+
+  .cal-rw--band .cal-rw__hit {
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    overflow: hidden;
+    text-align: left;
+    background: var(--cal-soft);
+    border: 1.5px dashed var(--cal-fill);
+    border-radius: 8px;
+  }
+
+  .cal-rw--band .cal-rw__label {
+    position: static;
+    transform: none;
+    padding: 0;
+    background: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .cal-rw__hit[aria-expanded="true"] {
+    outline: 2px solid var(--stoa-foreground);
+    outline-offset: 2px;
+  }
+
+  /* ── List ── */
+  .cal-list-month + .cal-list-month {
+    margin-top: 1.25rem;
+  }
+
+  .cal-list-month__title {
+    margin: 0;
+    padding-bottom: 0.4rem;
+    font-size: 0.95rem;
+    font-weight: 800;
+    border-bottom: 2px solid var(--stoa-border);
+  }
+
+  .cal-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .cal-item {
+    display: grid;
+    grid-template-columns: 11.5rem auto minmax(0, 1fr) auto;
+    gap: 0.25rem 0.9rem;
+    align-items: start;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--stoa-border);
+  }
+
+  .cal-item:last-child {
+    border-bottom: none;
+  }
+
+  .cal-item__date {
+    font-size: 0.84rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* A timed entry's time in each of its zones, under its date. */
+  .cal-item__time {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 400;
+    color: var(--stoa-muted-foreground);
+  }
+
+  .cal-item__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    min-width: 0;
+  }
+
+  .cal-item__title {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--stoa-foreground);
+    text-decoration: none;
+  }
+
+  .cal-item__title:hover {
+    color: var(--stoa-primary);
+    text-decoration: underline;
+  }
+
+  .cal-item__desc {
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: var(--stoa-muted-foreground);
+  }
+
+  .cal-item__source {
+    font-size: 0.72rem;
+    color: var(--stoa-muted-foreground);
+  }
+
+  .cal-item__tags {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.4rem 0.6rem;
+  }
+
+  .cal-item.is-past .cal-item__date,
+  .cal-item.is-past .cal-item__title {
+    color: var(--stoa-muted-foreground);
+    font-weight: 500;
+  }
+
+  .cal-item.is-past .cal-item__date::after {
+    content: " · past";
+    font-weight: 500;
+  }
+
+  .cal-item.is-past .cal-code {
+    background: transparent;
+    box-shadow: inset 0 0 0 1.5px var(--cal-fill);
+    color: var(--cal-text);
+  }
+
+  .cal-item.is-past .calendar-status {
+    filter: grayscale(1);
+  }
+
+  /* ── Legend ── */
+  .cal-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.25rem;
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--stoa-border);
+    font-size: 0.74rem;
+    font-weight: 600;
+    color: var(--stoa-muted-foreground);
+  }
+
+  .cal-legend__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .cal-legend__mark {
+    width: 26px;
+    height: 6px;
+    border-radius: 3px;
+    background: var(--stoa-foreground);
+  }
+
+  .cal-legend__mark--prov {
+    background: repeating-linear-gradient(-45deg, var(--stoa-foreground) 0 2px, transparent 2px 4.5px);
+    box-shadow: inset 0 0 0 1.5px var(--stoa-foreground);
+  }
+
+  .cal-legend__mark--past {
+    opacity: 0.4;
+  }
+
+  .cal-legend__band {
+    width: 26px;
+    height: 16px;
+    border: 1.5px dashed var(--stoa-muted-foreground);
+    border-radius: 5px;
+  }
+
+  .cal-legend__today {
+    width: 18px;
+    height: 18px;
+    border-radius: 999px;
+    background: var(--stoa-primary);
+  }
+
+  /* ── Entry detail: a popover beside the date, a sheet on a phone ── */
+  .cal-pop {
+    position: absolute;
+    z-index: 60;
+    width: min(380px, calc(100vw - 2rem));
+    max-height: calc(100vh - 2rem);
+    overflow: auto;
+    padding: 18px 18px 16px;
+    background: var(--stoa-popover);
+    color: var(--stoa-popover-foreground);
+    border: 1px solid var(--stoa-border);
+    border-radius: 14px;
+    box-shadow: var(--stoa-shadow-lg);
+  }
+
+  .cal-pop__close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: inline-grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    color: var(--stoa-muted-foreground);
+    background: transparent;
+    border: 0;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  .cal-pop__close:hover {
+    background: var(--stoa-muted);
+    color: var(--stoa-foreground);
+  }
+
+  .cal-pop__close svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .cal-pop__entry {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .cal-pop__entry + .cal-pop__entry {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--stoa-border);
+  }
+
+  .cal-pop__cal {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-right: 36px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--stoa-muted-foreground);
+  }
+
+  .cal-pop__title {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+  }
+
+  .cal-pop__when {
+    margin: 2px 0 0;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--stoa-muted-foreground);
+  }
+
+  .cal-pop__badges {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 10px;
+  }
+
+  .cal-pop__desc {
+    margin: 0;
+    font-size: 0.84rem;
+    line-height: 1.55;
+  }
+
+  .cal-pop__source {
+    display: flex;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: var(--stoa-muted);
+    font-size: 0.76rem;
+    line-height: 1.45;
+    color: var(--stoa-muted-foreground);
+  }
+
+  .cal-pop__source svg {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .cal-pop__source strong {
+    display: block;
+    color: var(--stoa-foreground);
+  }
+
+  .cal-pop__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--stoa-primary);
+    text-decoration: none;
+  }
+
+  .cal-pop__link:hover {
+    text-decoration: underline;
+  }
+
+  .cal-pop__link svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .cal-pop .cal-sub__menu {
+    position: static;
+    width: auto;
+    padding: 0;
+    border: 0;
+    box-shadow: none;
+    background: transparent;
+  }
+
+  /* ── Narrow screens: one month, the panel above, detail as a sheet ── */
+  @media (max-width: 768px) {
+    /* The dates come first on a phone; the calendars follow them. */
+    .cal-panel {
+      flex-basis: 100%;
+      order: 1;
+    }
+
+    .cal-next {
+      flex-basis: 100%;
+    }
+
+    .cal-main {
+      padding: 0.9rem;
+    }
+
+    .cal-tabs {
+      margin-left: 0;
+      width: 100%;
+    }
+
+    .cal-tab {
+      flex: 1;
+      justify-content: center;
+      height: 38px;
+    }
+
+    .cal-item {
+      grid-template-columns: auto minmax(0, 1fr);
+    }
+
+    .cal-item__date {
+      grid-column: 1 / -1;
+    }
+
+    .cal-item__tags {
+      grid-column: 2;
+      justify-content: flex-start;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .cal-pop {
+      position: fixed;
+      top: auto !important;
+      right: 0 !important;
+      bottom: 0;
+      left: 0 !important;
+      width: auto;
+      max-height: 82vh;
+      border-radius: 18px 18px 0 0;
+      padding-bottom: 28px;
+    }
+
+    .cal-sub__button,
+    .cal-lane__sub,
+    .cal-pop__close {
+      width: 44px;
+      height: 44px;
+    }
+
+    .cal-day {
+      height: 48px;
+    }
+  }
+}

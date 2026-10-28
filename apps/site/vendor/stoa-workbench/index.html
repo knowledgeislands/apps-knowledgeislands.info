@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stoa workbench</title>
+  <link rel="stylesheet" href="stoa/styles/index.css">
+  <link rel="stylesheet" href="themes.css">
+  <link rel="stylesheet" href="workbench.css">
+  <script type="module" src="workbench.js"></script>
+</head>
+<body class="wb">
+  <header class="wb-bar">
+    <strong>Stoa workbench</strong>
+    <fieldset class="wb-bar__widths">
+      <legend>Stage</legend>
+      <button type="button" data-width="390">Phone</button>
+      <button type="button" data-width="768">Tablet</button>
+      <button type="button" data-width="" aria-pressed="true">Full</button>
+    </fieldset>
+    <span class="wb-bar__mode" data-wb-mode></span>
+  </header>
+  <nav class="wb-list" aria-label="Units" data-wb-list></nav>
+  <main class="wb-main" id="main">
+    <h1 data-wb-title>Stoa workbench</h1>
+    <p class="wb-note" data-wb-note></p>
+    <div class="wb-stage"><iframe class="wb-frame" src="stage.html" title="Stage" data-wb-frame></iframe></div>
+  </main>
+  <aside class="wb-panel" aria-label="Inputs, events and state">
+    <section>
+      <h2>Inputs <small>JSON, applied as you type</small></h2>
+      <textarea data-wb-inputs spellcheck="false" aria-label="Inputs as JSON"></textarea>
+      <p class="wb-error" data-wb-error role="status"></p>
+      <button type="button" data-wb-reset>Reset inputs</button>
+    </section>
+    <section>
+      <h2>Events <button type="button" data-wb-clear>Clear</button></h2>
+      <ol class="wb-events" data-wb-events aria-live="polite"></ol>
+    </section>
+    <section>
+      <h2>State</h2>
+      <pre data-wb-state></pre>
+    </section>
+  </aside>
+</body>
+</html>

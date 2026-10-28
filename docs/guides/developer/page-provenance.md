@@ -55,7 +55,7 @@ This is a claim, not a default. It says someone decided the page has no source, 
 
 ### Vendored pages
 
-A third case sits between the two. A **vendored** page declares its `sources` in the ordinary way but does not restate them: it reproduces an upstream artefact and renders it. Four pages do this today, `/arcadia/` from three.
+A third case sits between the two. A **vendored** page declares its `sources` in the ordinary way but does not restate them: it reproduces an upstream artefact and renders it. Four pages and the Stoa section do this today, `/arcadia/` from three.
 
 | Page | Vendors | Sync script | Record |
 | --- | --- | --- | --- |
@@ -65,6 +65,7 @@ A third case sits between the two. A **vendored** page declares its `sources` in
 | `/arcadia/` | The chosen Arcadia painting, from `ki-design` `docs/briefs/references/arcadia.png`, as responsive images | `sync-ki-design.ts` → `src/_data/arcadiaPainting.json5` | KI-WEBSITE-SITE-045 |
 | `/arcadia/` | Arcadia's public islands with their roles, from `ki-principal` `Admin/Governance/Known Lands.md` and the `.ki.toml` roster, as a dated snapshot | `sync-arcadia-snapshot.ts` → `src/_data/arcadiaSnapshot.json5` | KI-WEBSITE-SITE-046 |
 | `/arcadia/` | The islands chart: that snapshot drawn as an archipelago by `ki-design`'s renderer, `packages/hexmap/src/archipelago.ts` | `sync-ki-design.ts` → `src/_data/arcadiaArchipelago.json5` and two SVGs | KI-WEBSITE-SITE-047 |
+| `/docs/stoa/` | The Stoa workbench, from `packages-portal-commons` `apps/workbench`, exported by its own `export.js` at a release tag and published at `/stoa/workbench/`; its stories, units and sample themes are listed from that export | `sync-stoa.ts` → `vendor/stoa-workbench/` and `src/_data/stoaWorkbench.json5` | This guide |
 
 The Field Guide and `/arcadia/` are hand-built Nunjucks pages rather than prose, so they cannot inherit the provenance footer from the prose layout. `verify:provenance` lists them explicitly, checks their declarations like any Markdown page's, and requires each to include `partials/sources.njk` itself. The same sync also vendors the design system the whole site is drawn in — the token CSS, the glyph sprite, the drawn Arcadia and the logo — each file headed with the `ki-design` commit it came from. It reads a clean local checkout rather than fetching, because the token CSS and the sprite are build outputs of `ki-design`'s own code. The Arcadia painting is the exception to taking the checkout's HEAD: it is chosen art rather than a build output, so the sync reads it from the commit it is pinned to and encodes it into AVIF, WebP and a JPEG fallback, never wider than the source. Its manifest records that the painting is generated reference art whose licence is still to be recorded:
 
@@ -79,6 +80,12 @@ bun run --cwd apps/site sync:arcadia   # reads ../ki-principal beside this repos
 ```
 
 The islands chart above that list is the snapshot drawn, not a second copy of it. `sync:design` loads `ki-design`'s archipelago renderer from the checkout, so that checkout needs its dependencies installed (`bun install` in `ki-design`). It draws the committed snapshot in two layouts and records the renderer's commit and the snapshot it drew in `src/_data/arcadiaArchipelago.json5`. The page cites the renderer at that commit like any vendored source. `verify:provenance` also holds the chart to the snapshot: the manifest's snapshot ref, charted date and island list must match the snapshot, and each SVG's header and islands must match the manifest. Re-charting the islands is therefore two steps, `sync:arcadia` and then `sync:design`, and a build between them fails.
+
+The Stoa pages frame live stories from the vendored **Stoa workbench**. `sync:stoa` reads a clean local `packages-portal-commons` checkout at a release tag, runs that tag's own workbench export over the tagged tree rather than the working one, and replaces `apps/site/vendor/stoa-workbench/` with the result. The folder sits outside `src/` so Eleventy copies its pages instead of rendering them. `verify:provenance` holds the export's `workbench.json` to the commit and version the snapshot records, and every page citing `apps/workbench/stories.js` to the snapshot's tag:
+
+```bash
+bun run --cwd apps/site sync:stoa -- --ref <tag>   # reads ../packages-portal-commons beside this repository; pass --from <path> for another checkout
+```
 
 These syncs follow the same shape, and the next one should too: fetch the upstream artefact at an immutable ref, parse it strictly, write a generated data file carrying its own provenance header, and render that file from a page whose prose is still the site's own. Regeneration replaces the inventory and never the framing around it.
 

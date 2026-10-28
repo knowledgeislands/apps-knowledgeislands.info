@@ -1,0 +1,49 @@
+/* The stage frame: a page of its own, so a unit's theme, mode and media queries apply only here. */
+body.wb-stage-page {
+  min-height: 0;
+  margin: 0;
+  padding: 1rem;
+  background: var(--stoa-background);
+  color: var(--stoa-foreground);
+  font: 400 0.95rem / 1.5 var(--stoa-font-sans, system-ui, sans-serif);
+}
+:root[data-density="compact"] {
+  --stoa-page-pad: 12px;
+}
+.wb-table {
+  width: 100%;
+  margin-top: 1rem;
+  border-collapse: collapse;
+}
+.wb-table th,
+.wb-table td {
+  padding: 0.4rem 0.6rem;
+  text-align: left;
+  border-bottom: 1px solid var(--stoa-border);
+}
+
+/* A row of controls; a div, since the units' markup is block content a <p> cannot hold. */
+.wb-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* The single-story view: the stage's theme and mode, and a way into the workbench, above the story. */
+.wb-solo__bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--stoa-border);
+}
+.wb-solo__bar:empty {
+  display: none;
+}
+.wb-solo__open {
+  margin-inline-start: auto;
+  color: var(--stoa-primary);
+}

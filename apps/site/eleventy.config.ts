@@ -49,6 +49,9 @@ export default function (eleventyConfig: UserConfig) {
   eleventyConfig.addPassthroughCopy({ '../../docs/diagrams/*.html': 'diagrams/site' })
   eleventyConfig.addPassthroughCopy({ '../../docs/diagrams/*.svg': 'diagrams/site' })
   eleventyConfig.addWatchTarget('../../docs/diagrams')
+  // The Stoa workbench, vendored by sync:stoa. It lives outside src/ so Eleventy copies its pages rather than
+  // rendering them, and it refers to its own files relatively, so it runs from /stoa/workbench/ or a dist/ folder.
+  eleventyConfig.addPassthroughCopy({ 'vendor/stoa-workbench': 'stoa/workbench' })
   const escapeHtml = (value: string): string =>
     value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
 
@@ -102,6 +105,34 @@ export default function (eleventyConfig: UserConfig) {
     return `<figure class="figure-diagram"><div class="figure-diagram-panel">${svg}</div><figcaption>${escapeHtml(caption)} <a href="${files.html}" target="_blank" rel="noopener">Interactive</a></figcaption></figure>`
   }
   eleventyConfig.addShortcode('figure', figure)
+
+  // ── Live Stoa stories ────────────────────────────────────────────────────
+  // A story from the vendored workbench, live in a frame: the frame shows story.html#<id>, which draws the
+  // story's sample inputs with its own theme and mode controls. site.js sets the frame's light or dark to match
+  // this page and sizes it to the story. `stoaThemes` shows one story once per sample theme, side by side.
+  const stoaWorkbench = (): {
+    stories: { id: string; title: string }[]
+    themes: { id: string; name: string; description: string }[]
+  } => JSON5.parse(readFileSync('src/_data/stoaWorkbench.json5', 'utf8'))
+  const stoaStoryFor = (id: string) => {
+    const story = stoaWorkbench().stories.find((entry) => entry.id === id)
+    if (!story) throw new Error(`Unknown Stoa story: ${id}`)
+    return story
+  }
+  eleventyConfig.addShortcode('stoaStory', (id: string, caption: string) => {
+    const story = stoaStoryFor(id)
+    return `<figure class="stoa-story"><iframe class="stoa-story__frame" src="/stoa/workbench/story.html#${id}" title="${escapeHtml(`${story.title}, live`)}" loading="lazy" data-stoa-story></iframe><figcaption>${escapeHtml(caption)} <a href="/stoa/workbench/index.html#${id}">Edit its inputs in the workbench</a></figcaption></figure>`
+  })
+  eleventyConfig.addShortcode('stoaThemes', (id: string) => {
+    const story = stoaStoryFor(id)
+    const frames = stoaWorkbench()
+      .themes.map(
+        (theme) =>
+          `<figure class="stoa-story"><iframe class="stoa-story__frame" src="/stoa/workbench/story.html?preview-theme=${theme.id}#${id}" title="${escapeHtml(`${story.title} in ${theme.name}`)}" loading="lazy" data-stoa-story></iframe><figcaption><strong>${escapeHtml(theme.name)}</strong>: ${escapeHtml(theme.description)}</figcaption></figure>`
+      )
+      .join('')
+    return `<div class="stoa-themes">${frames}</div>`
+  })
 
   // Passthrough copies bypass transforms. Guard viewer URLs too if they ever enter the template pipeline.
   const isPage = (path: string | undefined): path is string =>

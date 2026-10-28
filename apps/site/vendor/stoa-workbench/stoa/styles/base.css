@@ -1,0 +1,223 @@
+/* ─── Stoa base: global typography ────────────────────────────────────────── */
+
+/* Element defaults for a Stoa site, lifted from the reference site. Optional:
+   a site with its own base styles leaves this file out, and the units still
+   style themselves from styles/tokens.css. */
+
+@layer stoa-base {
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    font-family: var(--stoa-font-sans);
+    background: var(--stoa-background);
+    color: var(--stoa-foreground);
+    font-size: 14px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
+  }
+
+  /* ── Focus rings ── */
+  *:focus-visible {
+    outline: 2px solid var(--stoa-ring);
+    outline-offset: 2px;
+    border-radius: var(--stoa-radius-sm);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5em;
+  }
+
+  h1 {
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+  }
+  h2 {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  h3 {
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  h4 {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0;
+  }
+  h5,
+  h6 {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+  }
+
+  p {
+    margin-bottom: 1em;
+  }
+
+  a {
+    color: var(--stoa-primary);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  a:hover {
+    /* Towards the foreground, not black: black moves the hover towards the
+       page in dark mode and can take it below AA contrast. */
+    color: color-mix(in srgb, var(--stoa-primary) 75%, var(--stoa-foreground));
+    text-decoration: underline;
+  }
+
+  code {
+    font-family: var(--stoa-font-mono);
+    font-size: 13px;
+    background: var(--stoa-muted);
+    padding: 2px 6px;
+    border-radius: calc(var(--stoa-radius) - 4px);
+    border: 1px solid var(--stoa-border);
+  }
+
+  pre {
+    background: var(--stoa-muted);
+    border: 1px solid var(--stoa-border);
+    border-radius: var(--stoa-radius);
+    padding: 12px;
+    overflow-x: auto;
+    margin-bottom: 1em;
+  }
+
+  pre code {
+    background: none;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+  }
+
+  hr {
+    border: none;
+    border-top: 1px solid var(--stoa-border);
+    margin: 2em 0;
+  }
+
+  ul,
+  ol {
+    margin-left: 1.5em;
+    margin-bottom: 1em;
+    list-style: revert;
+  }
+
+  ul ul,
+  ol ul {
+    list-style: revert;
+  }
+  ol ol,
+  ul ol {
+    list-style: revert;
+  }
+
+  li {
+    margin-bottom: 0.5em;
+  }
+
+  blockquote {
+    margin: 1em 0;
+    padding: 0.5em 1em;
+    border-left: 3px solid var(--stoa-primary);
+    background: var(--stoa-accent);
+    border-radius: 0 var(--stoa-radius) var(--stoa-radius) 0;
+    color: var(--stoa-foreground);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1em;
+    border: 1px solid var(--stoa-border);
+    border-radius: var(--stoa-radius);
+    overflow: hidden;
+    font-size: 13px;
+  }
+
+  table thead {
+    background: var(--stoa-muted);
+    color: var(--stoa-foreground);
+  }
+
+  table th,
+  table td {
+    padding: 10px 14px;
+    text-align: left;
+  }
+
+  table th {
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  table tbody tr {
+    border-bottom: 1px solid var(--stoa-border);
+  }
+
+  table tbody tr:last-child {
+    border-bottom: none;
+  }
+
+  table tbody tr:hover {
+    background: var(--stoa-accent);
+  }
+
+  /* ── The reader's computer settings ──
+     Reduced motion stops animation; more contrast strengthens borders and secondary text; forced colours (such as
+     Windows contrast themes) keep focus visible in system colours; reduced transparency makes translucent surfaces
+     solid through --stoa-translucency, which units multiply into their alpha. Site tokens in later layers should
+     honour the same queries. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms;
+      animation-iteration-count: 1;
+      transition-duration: 0.01ms;
+      scroll-behavior: auto;
+    }
+  }
+  @media (prefers-contrast: more) {
+    :root {
+      --stoa-border: var(--stoa-muted-foreground);
+      --stoa-muted-foreground: var(--stoa-foreground);
+    }
+  }
+  @media (forced-colors: active) {
+    *:focus-visible {
+      outline-color: Highlight;
+    }
+  }
+  :root {
+    --stoa-translucency: 0.88;
+  }
+  @media (prefers-reduced-transparency: reduce) {
+    :root {
+      --stoa-translucency: 1;
+    }
+  }
+}

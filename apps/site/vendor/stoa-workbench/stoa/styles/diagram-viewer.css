@@ -1,0 +1,93 @@
+@layer stoa-components {
+  stoa-diagram-viewer {
+    display: block;
+  }
+  stoa-diagram-viewer[hidden] {
+    display: none;
+  }
+  stoa-diagram-viewer figure {
+    margin: 0;
+  }
+  stoa-diagram-viewer [data-diagram-preview] img,
+  stoa-diagram-viewer [data-diagram-preview] svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+  stoa-diagram-viewer[data-ready] [data-diagram-preview] {
+    cursor: zoom-in;
+  }
+  stoa-diagram-viewer dialog {
+    width: 94vw;
+    height: 90dvh;
+    max-width: none;
+    max-height: 94dvh;
+    box-sizing: border-box;
+    padding: var(--stoa-diagram-padding, 1rem);
+    border: 1px solid var(--stoa-border);
+    border-radius: var(--stoa-radius);
+    color: var(--stoa-foreground);
+    background: var(--stoa-diagram-background, var(--stoa-background));
+  }
+  stoa-diagram-viewer dialog[open] {
+    display: flex;
+    flex-direction: column;
+    gap: var(--stoa-diagram-gap, 0.5rem);
+  }
+  stoa-diagram-viewer dialog::backdrop {
+    background: var(--stoa-diagram-backdrop, rgb(0 0 0 / 65%));
+  }
+  stoa-diagram-viewer .stoa-diagram__toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--stoa-diagram-gap, 0.5rem);
+  }
+  stoa-diagram-viewer button {
+    color: var(--stoa-foreground);
+    background: var(--stoa-card);
+    border: 1px solid var(--stoa-border);
+    border-radius: var(--stoa-radius);
+    padding: 0.5rem;
+    font: inherit;
+    cursor: pointer;
+  }
+  stoa-diagram-viewer button:focus-visible,
+  stoa-diagram-viewer [data-diagram-viewport]:focus-visible {
+    outline: 2px solid var(--stoa-ring);
+    outline-offset: 2px;
+  }
+  stoa-diagram-viewer [hidden] {
+    display: none;
+  }
+  stoa-diagram-viewer [data-diagram-viewport] {
+    position: relative;
+    flex: 1;
+    min-height: 4rem;
+    overflow: hidden;
+    touch-action: none;
+    cursor: grab;
+  }
+  stoa-diagram-viewer [data-diagram-viewport]:active {
+    cursor: grabbing;
+  }
+  stoa-diagram-viewer [data-diagram-canvas] {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform-origin: center;
+  }
+  stoa-diagram-viewer [data-diagram-canvas] [data-diagram-image],
+  stoa-diagram-viewer [data-diagram-canvas] img,
+  stoa-diagram-viewer [data-diagram-canvas] svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+  }
+  /* Direct manipulation is instantaneous, including under reduced motion. */
+  stoa-diagram-viewer [data-diagram-canvas] {
+    transition: none;
+    animation: none;
+  }
+}

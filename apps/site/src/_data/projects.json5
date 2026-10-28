@@ -536,6 +536,35 @@
     accent: 'teal'
   },
   {
+    slug: 'stoa',
+    name: 'packages-portal-commons',
+    kind: 'platform',
+    tagline: 'Stoa: web components and styles that static sites share, rendered at build time.',
+    description:
+      'Stoa is a small set of light-DOM web components and styles for static sites: a header, a page foot, a theme engine, search, filters, calendars, issue tables and a diagram viewer. Each unit has a pure renderer that writes complete markup at build time and an element that upgrades it in the browser, so every page reads without script. Sites vendor the whole package at a release, under a lock, rather than installing it.',
+    problem:
+      'Sites built by the same people drift apart one component at a time: each grows its own header, its own theme switch, its own search, and a fix made in one never reaches the others. Copying code between them spreads the drift; a shared package from a registry makes every build depend on something it fetches. Stoa holds the shared parts in one place and lets each site take a reviewed release into its own repository, checked file by file.',
+    audience:
+      'Reach for it if you build static sites, especially with Eleventy, and want them to share a frame, themes, search and dated content without a framework or a runtime dependency. It is not a design system for a single-page application, and it brings no brand: a site supplies its own identity.',
+    capabilities: [
+      'A Theme Engine that resolves themes and System, Light, Dark or Solar mode, with a pre-paint script and keys named from a prefix.',
+      'A responsive Header and a Page Foot that frame a page, with site-owned brand, navigation, sources and footer.',
+      'A Command Bar searching a build-time index from the keyboard, a shortcut registry and a Filter Bar that keeps its query in the address.',
+      'Calendar views with subscribable feeds, a Timeline and a Today board, all from one calendar set.',
+      'A validated Issues List and an accessible Diagram Viewer, and a workbench that shows every unit live with editable inputs.'
+    ],
+    state:
+      'In use by several static sites, released in tagged versions with a changelog and a consumer register. Most units are marked as candidates to stand alone later; until then they ship together in one package.',
+    limits:
+      'It ships no site identity: brand, palettes, navigation, content and source registers stay with each site. It is not published to a package registry, and nothing in a site\'s build fetches it. Public visibility does not grant a licence to use, copy or redistribute.',
+    role: 'Canonical source of the shared Stoa units and of the tool sites use to vendor and verify them.',
+    usage: 'Vendor packages/stoa into a site at a release with its own tool, then render the units at build time and define their elements in the browser. Try each one first in the workbench.',
+    repository: 'https://github.com/knowledgeislands/packages-portal-commons',
+    availability: 'source',
+    icon: 'weave',
+    accent: 'teal'
+  },
+  {
     slug: 'ki-website',
     name: 'ki-website',
     kind: 'platform',

@@ -52,6 +52,36 @@
     toggle.hidden = false
   }
 
+  // Live Stoa stories (the stoaStory and stoaThemes shortcodes). Each frame starts in this page's light or night,
+  // following the toggle and the system; a choice the reader makes inside a frame still wins there. The frame
+  // reports its height, and takes it, so the story is never cut off or framed in empty space.
+  const stories = [...document.querySelectorAll('iframe[data-stoa-story]')]
+  if (stories.length) {
+    const root = document.documentElement
+    const osNight = window.matchMedia('(prefers-color-scheme: dark)')
+    const scheme = () => {
+      const forced = root.getAttribute('data-theme')
+      return forced === 'night' || (forced !== 'light' && osNight.matches) ? 'dark' : 'light'
+    }
+    const point = () => {
+      for (const frame of stories) {
+        const url = new URL(frame.getAttribute('src') ?? '', location.href)
+        const key = url.searchParams.has('preview-theme') ? 'preview-mode' : 'mode'
+        if (url.searchParams.get(key) === scheme()) continue
+        url.searchParams.set(key, scheme())
+        frame.setAttribute('src', url.href)
+      }
+    }
+    new MutationObserver(point).observe(root, { attributes: true, attributeFilter: ['data-theme'] })
+    osNight.addEventListener('change', point)
+    point()
+    window.addEventListener('message', (event) => {
+      if (event.origin !== location.origin || event.data?.wb !== 'height') return
+      const frame = stories.find((candidate) => candidate.contentWindow === event.source)
+      if (frame) frame.style.height = `${Math.min(Math.max(Number(event.data.height) || 0, 160), 2400)}px`
+    })
+  }
+
   // Field Guide: filter the symbol groups by category. Without script the filter row is hidden and
   // every group shows.
   const filters = document.querySelector('.guide-filters')

@@ -1,0 +1,289 @@
+@layer stoa-components {
+  stoa-header {
+    display: block;
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    container: stoa-header / inline-size;
+    background: var(--stoa-header-bg, var(--stoa-background));
+    color: var(--stoa-header-fg, var(--stoa-foreground));
+    border-bottom: 1px solid var(--stoa-header-border, var(--stoa-border));
+  }
+  stoa-header[hidden] {
+    display: none;
+  }
+  .stoa-header__row,
+  .stoa-header__panel,
+  .stoa-header__links,
+  .stoa-header__prefs,
+  .stoa-header__end {
+    display: flex;
+    align-items: center;
+    gap: var(--stoa-header-gap, 0.75rem);
+    min-width: 0;
+  }
+  .stoa-header__row {
+    /* The anchor for the profile panel, whether or not a site keeps the header sticky. */
+    position: relative;
+    padding: var(--stoa-header-pad, 0.75rem 1rem);
+  }
+  .stoa-header__panel {
+    flex: 1;
+  }
+  .stoa-header__panel nav {
+    flex: 1;
+  }
+  .stoa-header__links,
+  .stoa-header__group-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  /* The base styles space list items apart; in the header that margin would push every link above the row's
+     centre line, so items have none and are flex boxes centred on the row. */
+  .stoa-header__links > li,
+  .stoa-header__group-links > li {
+    margin: 0;
+  }
+  .stoa-header__links > li {
+    display: flex;
+    align-items: center;
+  }
+  .stoa-header__links a,
+  .stoa-header__group-toggle,
+  .stoa-header__burger,
+  .stoa-header__brand,
+  .stoa-header__end a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    min-width: 24px;
+    min-height: 24px;
+    color: inherit;
+    text-decoration: none;
+  }
+  .stoa-header__brand {
+    flex-shrink: 0;
+    color: var(--stoa-brand, var(--stoa-primary));
+    border-radius: var(--stoa-radius);
+  }
+  .stoa-header__brand img,
+  .stoa-header__brand > svg {
+    max-width: 100%;
+    height: auto;
+    max-height: 2.5rem;
+    background: var(--stoa-brand-backdrop, transparent);
+    border-radius: var(--stoa-radius);
+  }
+  .stoa-header__tag {
+    white-space: nowrap;
+    padding: 0.15rem 0.35rem;
+    border-radius: var(--stoa-radius);
+    background: var(--stoa-brand, var(--stoa-primary));
+    color: var(--stoa-brand-foreground, var(--stoa-primary-foreground));
+  }
+  .stoa-header__burger,
+  .stoa-header__group-toggle {
+    font: inherit;
+    border: 1px solid var(--stoa-header-border, var(--stoa-border));
+    border-radius: var(--stoa-radius);
+    padding: 0.35rem 0.5rem;
+    background: var(--stoa-header-bg, var(--stoa-background));
+    cursor: pointer;
+  }
+  .stoa-header__group {
+    position: relative;
+  }
+  .stoa-header__group-links {
+    padding: 0.5rem;
+  }
+  .stoa-header__group-links a {
+    padding: 0.35rem 0.5rem;
+  }
+  .stoa-header__group-toggle,
+  .stoa-header__burger,
+  .stoa-header__compact-search {
+    display: none;
+  }
+  .stoa-header__compact-search .command-bar-trigger__label,
+  .stoa-header__compact-search .command-bar-trigger__key {
+    display: none;
+  }
+  stoa-header[data-ready] .stoa-header__group-toggle {
+    display: inline-flex;
+  }
+  stoa-header[data-ready] .stoa-header__group-label {
+    display: none;
+  }
+  stoa-header[data-ready] .stoa-header__group-links {
+    display: none;
+    position: absolute;
+    inset-inline-start: 0;
+    min-width: 12rem;
+    z-index: 1;
+    background: var(--stoa-card);
+    color: var(--stoa-card-foreground);
+    border: 1px solid var(--stoa-border);
+    border-radius: var(--stoa-radius);
+    box-shadow: var(--stoa-shadow-md);
+  }
+  stoa-header[data-ready] [data-open] > .stoa-header__group-links {
+    display: block;
+  }
+  .stoa-header__separator {
+    align-self: stretch;
+    border-inline-start: 1px solid var(--stoa-border);
+  }
+  .stoa-header__full-search {
+    border-inline-start: 1px solid var(--stoa-border);
+    padding-inline-start: 0.75rem;
+  }
+  .stoa-header__icon,
+  .stoa-header__icon svg {
+    display: inline-flex;
+    width: 1em;
+    height: 1em;
+  }
+  .stoa-header__links [aria-current] {
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+  }
+  .stoa-header__row :focus-visible {
+    outline: 2px solid var(--stoa-ring);
+    outline-offset: 3px;
+  }
+  /* The signed-in person: a round profile button with the person's initial, at the end of the row (outside the
+     panel, so it stays when the navigation folds). It opens a small panel: "Signed in as", the email, a separator
+     and Sign out. A long address wraps inside the panel. --stoa-header-identity-size sets the button's size. */
+  .stoa-header__identity {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+  }
+  .stoa-header__identity[hidden] {
+    display: none;
+  }
+  .stoa-header__identity-trigger {
+    display: inline-grid;
+    place-items: center;
+    width: var(--stoa-header-identity-size, 2.25rem);
+    height: var(--stoa-header-identity-size, 2.25rem);
+    padding: 0;
+    border: 1px solid color-mix(in srgb, currentColor 35%, transparent);
+    border-radius: 50%;
+    background: color-mix(in srgb, currentColor 10%, transparent);
+    color: inherit;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .stoa-header__identity-trigger:hover,
+  .stoa-header__identity-trigger[aria-expanded="true"] {
+    background: color-mix(in srgb, currentColor 20%, transparent);
+  }
+  /* The button's name, for assistive technology only. */
+  .stoa-header__identity-name {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .stoa-header__identity-panel {
+    /* Placed against the row, under its end, so it fits however narrow the header is. */
+    position: absolute;
+    top: calc(100% + 0.25rem);
+    inset-inline-end: var(--stoa-header-identity-inset, 1rem);
+    z-index: 300;
+    box-sizing: border-box;
+    display: grid;
+    gap: 0.25rem;
+    width: max-content;
+    min-width: min(13rem, calc(100% - 2rem));
+    max-width: min(22rem, calc(100% - 2rem));
+    padding: 0.75rem;
+    color: var(--stoa-popover-foreground);
+    background: var(--stoa-popover);
+    border: 1px solid var(--stoa-border);
+    border-radius: var(--stoa-radius-lg);
+    box-shadow: var(--stoa-shadow-md);
+    font-size: 0.875rem;
+    line-height: 1.4;
+    text-align: start;
+  }
+  .stoa-header__identity-panel[hidden] {
+    display: none;
+  }
+  .stoa-header__identity-label,
+  .stoa-header__identity-email {
+    margin: 0;
+  }
+  .stoa-header__identity-label {
+    color: var(--stoa-muted-foreground);
+    font-size: 0.8125rem;
+  }
+  .stoa-header__identity-email {
+    font-weight: 600;
+    overflow-wrap: anywhere;
+  }
+  .stoa-header__identity-separator {
+    width: 100%;
+    margin: 0.5rem 0 0.25rem;
+    border: 0;
+    border-top: 1px solid var(--stoa-border);
+  }
+  .stoa-header__row .stoa-header__identity-signout {
+    display: flex;
+    align-items: center;
+    min-height: 2.25rem;
+    margin-inline: -0.5rem;
+    padding: 0 0.5rem;
+    border-radius: var(--stoa-radius);
+    color: inherit;
+    text-decoration: none;
+  }
+  .stoa-header__row .stoa-header__identity-signout:hover {
+    background: var(--stoa-accent);
+    color: var(--stoa-accent-foreground);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .stoa-header__identity-panel {
+      animation: stoa-identity-in 0.14s ease-out;
+    }
+  }
+  @keyframes stoa-identity-in {
+    from {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+  }
+  .stoa-header__skip {
+    position: absolute;
+    inset-inline-start: 1rem;
+    top: 0;
+    padding: 0.5rem;
+    background: var(--stoa-background);
+    color: var(--stoa-foreground);
+    z-index: 2;
+  }
+  /* Hidden until focused, wherever the header sits on the page. */
+  .stoa-header__skip:not(:focus) {
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  @container stoa-header (width < 480px) {
+    .stoa-header__tag {
+      display: none;
+    }
+    .stoa-header__brand {
+      flex-shrink: 1;
+      min-width: 0;
+    }
+  }
+}

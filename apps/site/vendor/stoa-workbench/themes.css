@@ -1,0 +1,14 @@
+/* The sample themes' hue anchors, as a site's own theme blocks would set them. Harbour is the tokens' default.
+   The workbench, its stage and the single-story view all load this, so each can wear any of the three. */
+:root[data-theme="meadow"] {
+  --stoa-h-primary: 145;
+  --stoa-c-primary: 0.11;
+  --stoa-h-accent: 85;
+  --stoa-h-neutral: 120;
+}
+:root[data-theme="ember"] {
+  --stoa-h-primary: 30;
+  --stoa-c-primary: 0.13;
+  --stoa-h-accent: 70;
+  --stoa-h-neutral: 40;
+}

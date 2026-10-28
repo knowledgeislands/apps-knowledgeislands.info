@@ -1,0 +1,31 @@
+@layer stoa-components {
+  .stoa-timeline {
+    color: var(--stoa-foreground);
+    font-family: var(--stoa-font-sans);
+  }
+  .stoa-timeline ol {
+    list-style: none;
+    padding-inline-start: 1rem;
+    border-inline-start: 2px solid var(--stoa-border);
+  }
+  .stoa-timeline__entry {
+    padding: 0.5rem 1rem;
+    margin-block: 1rem;
+    border: 1px solid var(--stoa-border);
+    border-radius: var(--stoa-radius);
+    overflow-wrap: anywhere;
+  }
+  .stoa-timeline__entry[data-next="true"] {
+    border-color: var(--stoa-primary);
+  }
+  .stoa-timeline__meta {
+    color: var(--stoa-muted-foreground);
+  }
+  .stoa-timeline a {
+    color: var(--stoa-primary);
+  }
+  .stoa-timeline a:focus-visible {
+    outline: 2px solid var(--stoa-ring);
+    outline-offset: 3px;
+  }
+}

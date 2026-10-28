@@ -1,0 +1,57 @@
+@layer stoa-components {
+  .issues-list {
+    color: var(--stoa-foreground);
+    font-family: var(--stoa-font-sans);
+  }
+  .issues-list__scroll {
+    overflow-x: auto;
+    margin-block: 1.5rem;
+    border: 1px solid var(--stoa-border);
+    border-radius: var(--stoa-radius);
+  }
+  .issues-list table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+  .issues-list caption {
+    text-align: start;
+    padding: 0.75rem;
+    font-weight: 700;
+    background: var(--stoa-muted);
+  }
+  .issues-list th,
+  .issues-list td {
+    padding: 0.75rem;
+    text-align: start;
+    vertical-align: top;
+    border-block-start: 1px solid var(--stoa-border);
+    overflow-wrap: anywhere;
+    min-width: 6rem;
+  }
+  .issues-list th[scope="row"] {
+    min-width: 12rem;
+  }
+  .issues-list__note {
+    min-width: 14rem;
+    white-space: pre-line;
+  }
+  .issues-list__rich {
+    white-space: normal;
+  }
+  .issues-list__id {
+    color: var(--stoa-muted-foreground);
+  }
+  .issues-list time {
+    white-space: nowrap;
+  }
+  .issues-list a {
+    color: var(--stoa-primary);
+    text-decoration: underline;
+  }
+  .issues-list a:focus-visible,
+  .issues-list__scroll:focus-visible {
+    outline: 2px solid var(--stoa-ring);
+    outline-offset: 3px;
+  }
+}

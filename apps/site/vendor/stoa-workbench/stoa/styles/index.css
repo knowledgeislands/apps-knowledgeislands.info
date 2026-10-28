@@ -1,0 +1,26 @@
+/* ─── Stoa: every stylesheet ──────────────────────────────────────── */
+
+/* The layer order is declared once here, so a site's own layers can sit
+   around it: tokens and base first, the bridge over them, components last. */
+
+@layer stoa-base, stoa-bridge, stoa-components;
+
+@import url("./tokens.css");
+@import url("./base.css");
+@import url("./calendar.css");
+@import url("./command-bar.css");
+@import url("./shortcuts.css");
+@import url("./filter-bar.css");
+@import url("./theme-menu.css");
+
+@import url("./theme-engine.css");
+
+@import url("./page-foot.css");
+
+@import url("./header.css");
+
+@import "./diagram-viewer.css";
+@import "./issues-list.css";
+
+@import "./timeline.css";
+@import "./today-board.css";

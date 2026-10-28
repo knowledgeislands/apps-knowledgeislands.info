@@ -1,0 +1,28 @@
+@layer stoa-components {
+  stoa-today-board {
+    display: block;
+    color: var(--stoa-foreground);
+    font-family: var(--stoa-font-sans);
+  }
+  .stoa-today-board__calendars {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+    gap: 1rem;
+  }
+  .stoa-today-board__calendars section {
+    padding: 1rem;
+    border: 1px solid var(--stoa-border);
+    border-radius: var(--stoa-radius);
+    overflow-wrap: anywhere;
+  }
+  .stoa-today-board__calendars li + li {
+    margin-block-start: 1rem;
+  }
+  .stoa-today-board__calendars a {
+    color: var(--stoa-primary);
+  }
+  .stoa-today-board__calendars a:focus-visible {
+    outline: 2px solid var(--stoa-ring);
+    outline-offset: 3px;
+  }
+}

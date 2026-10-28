@@ -1,0 +1,244 @@
+@layer stoa-components {
+  stoa-mode-switch[hidden],
+  stoa-axis-switch[hidden] {
+    display: none;
+  }
+  stoa-mode-switch,
+  stoa-axis-switch {
+    display: inline-block;
+  }
+  .mode-group {
+    display: inline-flex;
+    gap: 0.25rem;
+  }
+  .mode-group button {
+    font: inherit;
+    cursor: pointer;
+    border: 1px solid var(--stoa-border);
+    border-radius: var(--stoa-radius);
+    padding: 0.35rem 0.6rem;
+    background: var(--stoa-background);
+    color: var(--stoa-foreground);
+  }
+  .mode-group button:focus-visible {
+    outline: 2px solid var(--stoa-ring);
+    outline-offset: 2px;
+  }
+  /* A compact switch of icons: one joined row. */
+  .mode-group--icons {
+    gap: 0.125rem;
+    padding: 0.125rem;
+    border: 1px solid var(--stoa-border);
+    border-radius: 999px;
+  }
+  .mode-group--icons button {
+    display: inline-grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: inherit;
+  }
+  /* The Mode Switch's own Solar panel: shown only while Solar is the selection. */
+  .mode-solar {
+    display: none;
+    margin-block-start: 0.5rem;
+  }
+  :root[data-mode-preference="solar"] .mode-solar {
+    display: block;
+  }
+  stoa-solar-dial {
+    display: block;
+    flex: 1 1 100%;
+  }
+  stoa-solar-dial[hidden] {
+    display: none;
+  }
+  .solar-dial {
+    display: grid;
+    gap: 0.75rem;
+    min-width: min(20rem, 100%);
+  }
+  .solar-dial p {
+    margin: 0;
+  }
+  .solar-dial__now {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    font-weight: 600;
+  }
+  .solar-dial__held {
+    padding: 0 0.4rem;
+    border-radius: 999px;
+    font-size: 0.75em;
+    font-weight: 600;
+    background: var(--stoa-accent);
+    color: var(--stoa-accent-foreground);
+  }
+  /* The track is the sky through the day, from midnight to midnight. */
+  .solar-dial__track {
+    position: relative;
+    padding-block-end: 1.5rem;
+    --solar-dial-thumb: 1.125rem;
+  }
+  .solar-dial__range {
+    display: block;
+    width: 100%;
+    height: 0.5rem;
+    margin: 0.5rem 0;
+    appearance: none;
+    border-radius: 999px;
+    background: var(
+      --solar-dial-sky,
+      linear-gradient(
+        90deg,
+        #0c1433 0%,
+        #1d2a5c 22%,
+        #e7a07c 34%,
+        #f5cf7c 42%,
+        #9fd2f2 52%,
+        #9fd2f2 60%,
+        #f4b96a 72%,
+        #c0607a 78%,
+        #2b3270 88%,
+        #0c1433 100%
+      )
+    );
+    cursor: pointer;
+  }
+  .solar-dial__range::-webkit-slider-thumb {
+    appearance: none;
+    width: var(--solar-dial-thumb);
+    height: var(--solar-dial-thumb);
+    border: 2px solid var(--stoa-background);
+    border-radius: 50%;
+    background: var(--stoa-primary);
+    box-shadow: 0 0 0 1px var(--stoa-primary);
+  }
+  .solar-dial__range::-moz-range-thumb {
+    width: var(--solar-dial-thumb);
+    height: var(--solar-dial-thumb);
+    border: 2px solid var(--stoa-background);
+    border-radius: 50%;
+    background: var(--stoa-primary);
+  }
+  .solar-dial__range:focus-visible {
+    outline: 2px solid var(--stoa-ring);
+    outline-offset: 4px;
+  }
+  .solar-dial__ticks,
+  .solar-dial__scale {
+    position: absolute;
+    inset-inline: calc(var(--solar-dial-thumb) / 2);
+    pointer-events: none;
+  }
+  .solar-dial__ticks {
+    top: 1.375rem;
+    height: 0.375rem;
+  }
+  .solar-dial__tick {
+    position: absolute;
+    width: 1px;
+    height: 0.25rem;
+    background: var(--stoa-muted-foreground);
+  }
+  .solar-dial__tick--moment {
+    width: 2px;
+    height: 0.5rem;
+  }
+  .solar-dial__scale {
+    top: 1.875rem;
+    font-size: 0.75em;
+    color: var(--stoa-muted-foreground);
+  }
+  .solar-dial__scale span {
+    position: absolute;
+    transform: translateX(-50%);
+    white-space: nowrap;
+  }
+  .solar-dial__scale span:first-child {
+    transform: none;
+  }
+  .solar-dial__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  /* Follow the sun is a switch: a small sky with the sun at its end when on. */
+  .solar-dial__follow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875em;
+    color: var(--stoa-muted-foreground);
+    cursor: pointer;
+  }
+  .solar-dial__follow input {
+    position: relative;
+    flex: none;
+    width: 2.5rem;
+    height: 1.375rem;
+    margin: 0;
+    appearance: none;
+    border: 1px solid var(--stoa-border);
+    border-radius: 999px;
+    background: var(--stoa-muted);
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  .solar-dial__follow input::before {
+    content: "";
+    position: absolute;
+    top: 0.125rem;
+    left: 0.125rem;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    background: var(--stoa-muted-foreground);
+    transition:
+      transform 0.2s,
+      background-color 0.2s,
+      box-shadow 0.2s;
+  }
+  .solar-dial__follow input:checked {
+    border-color: transparent;
+    background: linear-gradient(90deg, #9fd2f2, #f5cf7c);
+  }
+  .solar-dial__follow input:checked::before {
+    transform: translateX(1.125rem);
+    background: #ffd25a;
+    box-shadow:
+      0 0 0 2px #fff8,
+      0 0 8px 2px #ffc94d;
+  }
+  .solar-dial__follow input:focus-visible {
+    outline: 2px solid var(--stoa-ring);
+    outline-offset: 2px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .solar-dial__follow input,
+    .solar-dial__follow input::before {
+      transition: none;
+    }
+  }
+  .solar-dial__times {
+    font-size: 0.875em;
+    color: var(--stoa-muted-foreground);
+    font-variant-numeric: tabular-nums;
+  }
+  .solar-dial__locate {
+    justify-self: start;
+    font: inherit;
+    border: 1px solid var(--stoa-border);
+    border-radius: var(--stoa-radius);
+    padding: 0.35rem 0.6rem;
+    background: var(--stoa-background);
+    color: var(--stoa-foreground);
+    cursor: pointer;
+  }
+}

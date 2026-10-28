@@ -1,0 +1,348 @@
+/* ─── Stoa Command Bar ────────────────────────────────────────────────────── */
+
+/* Styles for <stoa-command-bar>: its trigger button and its modal dialog.
+   Every colour is a --stoa-* token, so the dialog follows the site's theme
+   in light and dark. The active option carries a --stoa-primary bar at its start
+   and aria-selected, so it is never shown by colour alone. Where the trigger
+   sits in a header is the site's layout, not this file's. Motion is only for
+   readers who have not asked for less. */
+
+@layer stoa-components {
+  /* ── Trigger button ── */
+  .command-bar-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+    flex-shrink: 0;
+    height: 36px;
+    padding: 0 8px 0 10px;
+    color: var(--stoa-muted-foreground);
+    font: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    background: var(--stoa-card);
+    border: 1px solid var(--stoa-border);
+    border-radius: var(--stoa-radius-sm);
+    cursor: pointer;
+    transition:
+      color 0.15s,
+      border-color 0.15s;
+  }
+
+  .command-bar-trigger[hidden] {
+    display: none;
+  }
+
+  .command-bar-trigger:hover {
+    color: var(--stoa-foreground);
+    border-color: var(--stoa-foreground);
+  }
+
+  .command-bar-trigger:focus-visible {
+    outline: 2px solid var(--stoa-ring);
+    outline-offset: 2px;
+  }
+
+  .command-bar-trigger__icon {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+  }
+
+  /* On a phone the button is a 44px target with its icon and label; the key
+     hint means nothing without a keyboard. */
+  @media (max-width: 640px) {
+    .command-bar-trigger {
+      height: 44px;
+      padding: 0 12px;
+    }
+
+    .command-bar-trigger .command-bar-trigger__key {
+      display: none;
+    }
+  }
+
+  .command-bar kbd,
+  .command-bar-trigger kbd,
+  .stoa-shortcuts kbd {
+    display: inline-block;
+    min-width: 1.6em;
+    padding: 0.1em 0.4em;
+    font-family: var(--stoa-font-sans);
+    font-size: 0.72rem;
+    font-weight: 600;
+    line-height: 1.4;
+    text-align: center;
+    color: var(--stoa-muted-foreground);
+    background: var(--stoa-muted);
+    border: 1px solid var(--stoa-border);
+    border-radius: 4px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ── Dialogs ── */
+  .command-bar {
+    width: min(640px, calc(100vw - 24px));
+    max-width: none;
+    max-height: none;
+    margin: 12vh auto auto;
+    padding: 0;
+    color: var(--stoa-popover-foreground);
+    background: transparent;
+    border: 0;
+    overflow: visible;
+  }
+
+  .command-bar::backdrop {
+    background: var(--stoa-overlay);
+  }
+
+  .command-bar__panel {
+    display: flex;
+    flex-direction: column;
+    max-height: min(70vh, 640px);
+    background: var(--stoa-popover);
+    border: 1px solid var(--stoa-border);
+    border-radius: var(--stoa-radius-lg);
+    box-shadow: var(--stoa-shadow-lg);
+    overflow: hidden;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .command-bar[open] .command-bar__panel {
+      animation: command-bar-in 0.14s ease-out;
+    }
+
+    @keyframes command-bar-in {
+      from {
+        opacity: 0;
+        transform: translateY(-6px) scale(0.99);
+      }
+    }
+  }
+
+  .command-bar__field {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 12px 0 16px;
+    border-bottom: 1px solid var(--stoa-border);
+  }
+
+  .command-bar__search-icon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    stroke: var(--stoa-muted-foreground);
+  }
+
+  .command-bar__input {
+    flex: 1;
+    min-width: 0;
+    height: 52px;
+    padding: 0;
+    color: var(--stoa-popover-foreground);
+    font: inherit;
+    font-size: 1rem;
+    background: transparent;
+    border: 0;
+    outline: none;
+  }
+
+  .command-bar__input::placeholder {
+    color: var(--stoa-muted-foreground);
+    opacity: 1;
+  }
+
+  .command-bar__close,
+  .command-bar__text-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px;
+    color: var(--stoa-muted-foreground);
+    font: inherit;
+    font-size: 0.78rem;
+    text-decoration: none;
+    background: transparent;
+    border: 0;
+    border-radius: var(--stoa-radius-sm);
+    cursor: pointer;
+  }
+
+  .command-bar__close:hover,
+  .command-bar__text-button:hover {
+    color: var(--stoa-popover-foreground);
+    text-decoration: underline;
+  }
+
+  .command-bar__close:focus-visible,
+  .command-bar__text-button:focus-visible {
+    outline: 2px solid var(--stoa-ring);
+    outline-offset: 2px;
+  }
+
+  /* The input sits flush in its row; the ring goes round the row instead. */
+  .command-bar__field:focus-within {
+    box-shadow: inset 0 -2px 0 var(--stoa-ring);
+  }
+
+  .command-bar__input:focus-visible {
+    outline: none;
+  }
+
+  /* ── Results ── */
+  .command-bar__list {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 6px;
+  }
+
+  .command-bar__list:empty {
+    display: none;
+  }
+
+  .command-bar__group + .command-bar__group {
+    margin-top: 6px;
+  }
+
+  .command-bar__group-label {
+    display: block;
+    padding: 8px 10px 4px;
+    color: var(--stoa-muted-foreground);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+
+  .command-bar__option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    color: var(--stoa-popover-foreground);
+    text-decoration: none;
+    border-radius: var(--stoa-radius-sm);
+    outline: 2px solid transparent;
+    outline-offset: -2px;
+    cursor: pointer;
+  }
+
+  .command-bar__option:hover {
+    color: var(--stoa-popover-foreground);
+    text-decoration: none;
+  }
+
+  .command-bar__option[aria-selected="true"] {
+    background: var(--stoa-muted);
+    box-shadow: inset 3px 0 0 var(--stoa-primary);
+  }
+
+  .command-bar__pills {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 3px;
+    flex: 0 0 auto;
+    max-width: 40%;
+    font-size: 0.8rem;
+  }
+
+  .command-bar__text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .command-bar__line {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    min-width: 0;
+  }
+
+  /* A long action title stops at two lines; its page has the rest. */
+  .command-bar__name {
+    display: -webkit-box;
+    overflow: hidden;
+    font-size: 0.9rem;
+    font-weight: 600;
+    line-height: 1.35;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+  }
+
+  .command-bar__code,
+  .command-bar__detail {
+    color: var(--stoa-muted-foreground);
+    font-size: 0.74rem;
+    font-weight: 500;
+  }
+
+  .command-bar__code {
+    flex-shrink: 0;
+    font-family: var(--stoa-font-mono);
+  }
+
+  .command-bar__detail {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .command-bar__status {
+    margin: 0;
+    padding: 8px 16px;
+    color: var(--stoa-muted-foreground);
+    font-size: 0.74rem;
+    border-top: 1px solid var(--stoa-border);
+  }
+
+  .command-bar__status:empty {
+    display: none;
+  }
+
+  .command-bar__foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px 16px;
+    padding: 8px 12px 8px 16px;
+    color: var(--stoa-muted-foreground);
+    font-size: 0.74rem;
+    border-top: 1px solid var(--stoa-border);
+  }
+
+  .command-bar__keys,
+  .command-bar__more {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 14px;
+    margin: 0;
+  }
+
+  .command-bar__keys kbd + kbd {
+    margin-left: 2px;
+  }
+
+  /* Without a keyboard the key list is noise; the buttons stay. */
+  @media (max-width: 640px) {
+    .command-bar {
+      margin-top: 8px;
+    }
+
+    .command-bar__keys {
+      display: none;
+    }
+
+    .command-bar__option {
+      min-height: 44px;
+    }
+  }
+}

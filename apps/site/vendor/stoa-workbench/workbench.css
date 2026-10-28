@@ -1,0 +1,170 @@
+/* The workbench's own frame. The units bring their own styles. */
+.wb {
+  display: grid;
+  grid-template: auto 1fr / 13rem minmax(0, 1fr) 24rem;
+  grid-template-areas: "bar bar bar" "list main panel";
+  min-height: 100vh;
+  margin: 0;
+  background: var(--stoa-background);
+  color: var(--stoa-foreground);
+  font: 400 0.95rem / 1.5 var(--stoa-font-sans, system-ui, sans-serif);
+}
+.wb button {
+  font: inherit;
+  cursor: pointer;
+}
+.wb-bar__widths button,
+.wb-panel button {
+  padding: 0.2rem 0.6rem;
+  border: 1px solid var(--stoa-border);
+  border-radius: var(--stoa-radius, 6px);
+  background: var(--stoa-background);
+  color: var(--stoa-foreground);
+}
+.wb-bar__widths button:hover,
+.wb-panel button:hover {
+  background: var(--stoa-accent);
+}
+.wb-bar {
+  grid-area: bar;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid var(--stoa-border);
+}
+.wb-bar__widths {
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+  margin: 0 0 0 auto;
+  padding: 0;
+  border: 0;
+}
+.wb-bar__widths legend {
+  float: left;
+  margin-right: 0.25rem;
+  color: var(--stoa-muted-foreground);
+}
+.wb-bar__widths [aria-pressed="true"] {
+  font-weight: 700;
+}
+.wb-list {
+  grid-area: list;
+  padding: 0.75rem;
+  border-right: 1px solid var(--stoa-border);
+}
+.wb-list h2 {
+  margin: 1rem 0 0.25rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--stoa-muted-foreground);
+}
+.wb-list a {
+  display: block;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  color: inherit;
+  text-decoration: none;
+}
+.wb-list a[aria-current="page"] {
+  background: var(--stoa-accent);
+  font-weight: 600;
+}
+.wb-main {
+  grid-area: main;
+  min-width: 0;
+  padding: 1rem 1.5rem 3rem;
+}
+.wb-main h1 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+.wb-note {
+  color: var(--stoa-muted-foreground);
+}
+.wb-stage {
+  margin-inline: auto;
+  padding: 1rem;
+  border: 1px dashed var(--stoa-border);
+  border-radius: 8px;
+}
+.wb-panel {
+  grid-area: panel;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 0;
+  padding: 0.75rem;
+  border-left: 1px solid var(--stoa-border);
+}
+.wb-panel h2 {
+  display: flex;
+  gap: 0.5rem;
+  align-items: baseline;
+  margin: 0 0 0.25rem;
+  font-size: 0.9rem;
+}
+.wb-panel h2 small {
+  font-weight: 400;
+  color: var(--stoa-muted-foreground);
+}
+.wb-panel h2 button {
+  margin-left: auto;
+}
+.wb-panel textarea {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 18rem;
+  resize: vertical;
+  font:
+    0.8rem / 1.4 ui-monospace,
+    monospace;
+  background: var(--stoa-card);
+  color: inherit;
+  border: 1px solid var(--stoa-border);
+}
+.wb-panel pre,
+.wb-events {
+  max-height: 16rem;
+  margin: 0;
+  overflow: auto;
+  font:
+    0.75rem / 1.4 ui-monospace,
+    monospace;
+  white-space: pre-wrap;
+}
+.wb-events {
+  padding-left: 1.5rem;
+  overflow-wrap: anywhere;
+}
+.wb-error {
+  min-height: 1.2em;
+  margin: 0.25rem 0;
+  color: var(--stoa-destructive, crimson);
+}
+@media (max-width: 1100px) {
+  .wb {
+    grid-template: auto auto 1fr auto / 1fr;
+    grid-template-areas: "bar" "list" "main" "panel";
+  }
+  .wb-list {
+    border: 0;
+  }
+}
+
+/* The stage frame: the unit's own page, sized by the workbench. */
+.wb-frame {
+  display: block;
+  width: 100%;
+  height: 240px;
+  margin-inline: auto;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+}
+.wb-bar__mode {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}

@@ -60,6 +60,11 @@
     description: 'The tools on a reader\'s own machine that make working this way easier, and which are genuinely optional.'
   },
   {
+    slug: 'stoa',
+    title: 'Stoa',
+    description: 'The web components the sites share, each shown live: themes and modes, the page frame, search, dates and content.'
+  },
+  {
     slug: 'contribute',
     title: 'Contribute',
     description: 'How an island proposes an improvement to the shared model through the Contribution Process.'

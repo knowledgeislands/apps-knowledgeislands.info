@@ -1,0 +1,230 @@
+/* ─── Stoa tokens ─────────────────────────────────────────────────────────── */
+/* Every Stoa unit styles itself from these custom properties alone, so a    */
+/* site themes the units by setting them. Lifted from the reference site's     */
+/* three-axis token architecture:                                               */
+/*                                                                              */
+/*   IDENTITY  hue and chroma anchors (--stoa-h-*, --stoa-c-*)              */
+/*   MEANING   status and calendar-slot hues, the same in every identity        */
+/*   MODE      data-mode on <html>, light | dark — owns lightness only          */
+/*                                                                              */
+/* A mode supplies brightness and never hue. The identity here is one neutral   */
+/* default; a site sets its own anchors, or maps the composed colours from its  */
+/* own tokens (see ./bridge-shadcn.css). Choosing among identities is the Theme */
+/* Engine's work.                         */
+/*                                                                              */
+/* Every calendar slot is also a short code on the page, so colour is never the */
+/* only signal.                                                                 */
+
+@layer stoa-base {
+  /* ─── Non-colour tokens ─────────────────────────────────────────────────── */
+  :root {
+    --stoa-radius: 0.5rem;
+    --stoa-brand: var(--stoa-primary);
+    --stoa-brand-foreground: var(--stoa-primary-foreground);
+    --stoa-brand-backdrop: var(--stoa-background);
+    --stoa-radius-sm: calc(var(--stoa-radius) - 2px);
+    --stoa-radius-lg: calc(var(--stoa-radius) + 4px);
+    --stoa-font-sans: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    --stoa-font-mono: ui-monospace, "SF Mono", "Cascadia Code", monospace;
+    /* The height of anything fixed above the page, for what sticks beneath it. */
+    --stoa-sticky-top: 0px;
+    --stoa-page-pad: 24px;
+  }
+
+  /* ─── Identity: hue and chroma anchors (the default) ─────────────────────── */
+  :root {
+    --stoa-h-primary: 224;
+    --stoa-c-primary: 0.105;
+    --stoa-h-accent: 175;
+    --stoa-c-accent: 0.11;
+    --stoa-h-neutral: 258;
+  }
+
+  /* ─── Meaning: hue and chroma anchors ────────────────────────────────────── */
+  :root {
+    --stoa-sh-pass: 171.1;
+    --stoa-sc-pass: 0.124;
+    --stoa-sh-risk: 81.8;
+    --stoa-sc-risk: 0.119;
+    --stoa-sh-fail: 26.1;
+    --stoa-sc-fail: 0.136;
+    --stoa-sh-ns: 261.7;
+    --stoa-sc-ns: 0.022;
+
+    /* Calendar slots: a fixed hue per slot, so a calendar keeps its colour */
+    /* whichever identity the site wears.                                    */
+    --stoa-cal-c: 0.15;
+    --stoa-cal-h-1: 255;
+    --stoa-cal-h-2: 168;
+    --stoa-cal-h-3: 78;
+    --stoa-cal-h-4: 312;
+    --stoa-cal-h-5: 32;
+    --stoa-cal-h-6: 130;
+    --stoa-cal-h-7: 210;
+    --stoa-cal-h-8: 350;
+  }
+
+  /* ─── Mode: lightness steps ──────────────────────────────────────────────── */
+  :root {
+    color-scheme: light;
+    --stoa-l-background: 0.975;
+    --stoa-l-foreground: 0.215;
+    --stoa-l-card: 1;
+    --stoa-l-card-foreground: 0.215;
+    --stoa-l-popover: 1;
+    --stoa-l-popover-foreground: 0.215;
+    --stoa-l-primary: 0.485;
+    --stoa-l-primary-foreground: 1;
+    --stoa-l-muted: 0.948;
+    --stoa-l-muted-foreground: 0.47;
+    --stoa-l-accent: 0.955;
+    --stoa-l-accent-foreground: 0.5;
+    --stoa-l-border: 0.908;
+    --stoa-l-input: 0.908;
+    --stoa-l-ring: 0.485;
+    --stoa-l-status-fg: 0.47;
+    --stoa-l-status-bg: 0.955;
+    --stoa-l-cal-fill: 0.62;
+    --stoa-l-cal-soft: 0.963;
+    --stoa-c-cal-soft: 0.03;
+    --stoa-l-cal-text: 0.42;
+    --stoa-shadow-ink-l: 0.2;
+    --stoa-shadow-ink-c: 0.03;
+    --stoa-shadow-a-sm: 8%;
+    --stoa-shadow-a-md: 12%;
+    --stoa-shadow-a-lg: 18%;
+    --stoa-overlay-a: 45%;
+  }
+
+  :root[data-mode="dark"] {
+    color-scheme: dark;
+    --stoa-l-background: 0.185;
+    --stoa-l-foreground: 0.935;
+    --stoa-l-card: 0.225;
+    --stoa-l-card-foreground: 0.935;
+    --stoa-l-popover: 0.255;
+    --stoa-l-popover-foreground: 0.935;
+    --stoa-l-primary: 0.765;
+    --stoa-l-primary-foreground: 0.225;
+    --stoa-l-muted: 0.25;
+    --stoa-l-muted-foreground: 0.715;
+    --stoa-l-accent: 0.295;
+    --stoa-l-accent-foreground: 0.79;
+    --stoa-l-border: 0.297;
+    --stoa-l-input: 0.297;
+    --stoa-l-ring: 0.765;
+    --stoa-l-status-fg: 0.8;
+    --stoa-l-status-bg: 0.235;
+    --stoa-l-cal-fill: 0.78;
+    --stoa-l-cal-soft: 0.285;
+    --stoa-c-cal-soft: 0.05;
+    --stoa-l-cal-text: 0.86;
+    --stoa-shadow-ink-l: 0;
+    --stoa-shadow-ink-c: 0;
+    --stoa-shadow-a-sm: 40%;
+    --stoa-shadow-a-md: 50%;
+    --stoa-shadow-a-lg: 60%;
+    --stoa-overlay-a: 70%;
+  }
+
+  /* With no data-mode, the reader's own preference decides. */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-mode]) {
+      color-scheme: dark;
+      --stoa-l-background: 0.185;
+      --stoa-l-foreground: 0.935;
+      --stoa-l-card: 0.225;
+      --stoa-l-card-foreground: 0.935;
+      --stoa-l-popover: 0.255;
+      --stoa-l-popover-foreground: 0.935;
+      --stoa-l-primary: 0.765;
+      --stoa-l-primary-foreground: 0.225;
+      --stoa-l-muted: 0.25;
+      --stoa-l-muted-foreground: 0.715;
+      --stoa-l-accent: 0.295;
+      --stoa-l-accent-foreground: 0.79;
+      --stoa-l-border: 0.297;
+      --stoa-l-input: 0.297;
+      --stoa-l-ring: 0.765;
+      --stoa-l-status-fg: 0.8;
+      --stoa-l-status-bg: 0.235;
+      --stoa-l-cal-fill: 0.78;
+      --stoa-l-cal-soft: 0.285;
+      --stoa-c-cal-soft: 0.05;
+      --stoa-l-cal-text: 0.86;
+      --stoa-shadow-ink-l: 0;
+      --stoa-shadow-ink-c: 0;
+      --stoa-shadow-a-sm: 40%;
+      --stoa-shadow-a-md: 50%;
+      --stoa-shadow-a-lg: 60%;
+      --stoa-overlay-a: 70%;
+    }
+  }
+
+  /* ─── Composition: written once, resolved per identity and per mode ─────── */
+  :root {
+    --stoa-background: oklch(var(--stoa-l-background) 0.006 var(--stoa-h-neutral));
+    --stoa-foreground: oklch(var(--stoa-l-foreground) 0.02 var(--stoa-h-neutral));
+    --stoa-card: oklch(var(--stoa-l-card) 0.01 var(--stoa-h-neutral));
+    --stoa-card-foreground: oklch(var(--stoa-l-card-foreground) 0.02 var(--stoa-h-neutral));
+    --stoa-popover: oklch(var(--stoa-l-popover) 0.012 var(--stoa-h-neutral));
+    --stoa-popover-foreground: oklch(var(--stoa-l-popover-foreground) 0.02 var(--stoa-h-neutral));
+    --stoa-primary: oklch(var(--stoa-l-primary) var(--stoa-c-primary) var(--stoa-h-primary));
+    --stoa-primary-foreground: oklch(var(--stoa-l-primary-foreground) 0.04 var(--stoa-h-primary));
+    --stoa-muted: oklch(var(--stoa-l-muted) 0.01 var(--stoa-h-neutral));
+    --stoa-muted-foreground: oklch(var(--stoa-l-muted-foreground) 0.026 var(--stoa-h-neutral));
+    --stoa-accent: oklch(var(--stoa-l-accent) 0.016 var(--stoa-h-accent));
+    --stoa-accent-foreground: oklch(var(--stoa-l-accent-foreground) var(--stoa-c-accent) var(--stoa-h-accent));
+    --stoa-border: oklch(var(--stoa-l-border) 0.012 var(--stoa-h-neutral));
+    --stoa-input: oklch(var(--stoa-l-input) 0.012 var(--stoa-h-neutral));
+    --stoa-ring: oklch(var(--stoa-l-ring) var(--stoa-c-primary) var(--stoa-h-primary));
+
+    --stoa-status-pass-fg: oklch(var(--stoa-l-status-fg) var(--stoa-sc-pass) var(--stoa-sh-pass));
+    --stoa-status-pass-bg: oklch(var(--stoa-l-status-bg) calc(var(--stoa-sc-pass) * 0.18) var(--stoa-sh-pass));
+    --stoa-status-risk-fg: oklch(var(--stoa-l-status-fg) var(--stoa-sc-risk) var(--stoa-sh-risk));
+    --stoa-status-risk-bg: oklch(var(--stoa-l-status-bg) calc(var(--stoa-sc-risk) * 0.18) var(--stoa-sh-risk));
+    --stoa-status-fail-fg: oklch(var(--stoa-l-status-fg) var(--stoa-sc-fail) var(--stoa-sh-fail));
+    --stoa-status-fail-bg: oklch(var(--stoa-l-status-bg) calc(var(--stoa-sc-fail) * 0.18) var(--stoa-sh-fail));
+    --stoa-status-ns-fg: oklch(var(--stoa-l-status-fg) var(--stoa-sc-ns) var(--stoa-sh-ns));
+    --stoa-status-ns-bg: oklch(var(--stoa-l-status-bg) calc(var(--stoa-sc-ns) * 0.18) var(--stoa-sh-ns));
+
+    --stoa-shadow-ink: oklch(var(--stoa-shadow-ink-l) var(--stoa-shadow-ink-c) var(--stoa-h-neutral));
+    --stoa-shadow-sm: 0 1px 4px color-mix(in srgb, var(--stoa-shadow-ink) var(--stoa-shadow-a-sm), transparent);
+    --stoa-shadow-md: 0 4px 16px color-mix(in srgb, var(--stoa-shadow-ink) var(--stoa-shadow-a-md), transparent);
+    --stoa-shadow-lg: 0 6px 24px color-mix(in srgb, var(--stoa-shadow-ink) var(--stoa-shadow-a-lg), transparent);
+    --stoa-overlay: color-mix(in srgb, var(--stoa-shadow-ink) var(--stoa-overlay-a), transparent);
+
+    --stoa-cal-1-fill: oklch(var(--stoa-l-cal-fill) var(--stoa-cal-c) var(--stoa-cal-h-1));
+    --stoa-cal-1-soft: oklch(var(--stoa-l-cal-soft) var(--stoa-c-cal-soft) var(--stoa-cal-h-1));
+    --stoa-cal-1-text: oklch(var(--stoa-l-cal-text) 0.12 var(--stoa-cal-h-1));
+    --stoa-cal-1-ink: oklch(0.15 0.04 var(--stoa-cal-h-1));
+    --stoa-cal-2-fill: oklch(var(--stoa-l-cal-fill) var(--stoa-cal-c) var(--stoa-cal-h-2));
+    --stoa-cal-2-soft: oklch(var(--stoa-l-cal-soft) var(--stoa-c-cal-soft) var(--stoa-cal-h-2));
+    --stoa-cal-2-text: oklch(var(--stoa-l-cal-text) 0.12 var(--stoa-cal-h-2));
+    --stoa-cal-2-ink: oklch(0.15 0.04 var(--stoa-cal-h-2));
+    --stoa-cal-3-fill: oklch(var(--stoa-l-cal-fill) var(--stoa-cal-c) var(--stoa-cal-h-3));
+    --stoa-cal-3-soft: oklch(var(--stoa-l-cal-soft) var(--stoa-c-cal-soft) var(--stoa-cal-h-3));
+    --stoa-cal-3-text: oklch(var(--stoa-l-cal-text) 0.12 var(--stoa-cal-h-3));
+    --stoa-cal-3-ink: oklch(0.15 0.04 var(--stoa-cal-h-3));
+    --stoa-cal-4-fill: oklch(var(--stoa-l-cal-fill) var(--stoa-cal-c) var(--stoa-cal-h-4));
+    --stoa-cal-4-soft: oklch(var(--stoa-l-cal-soft) var(--stoa-c-cal-soft) var(--stoa-cal-h-4));
+    --stoa-cal-4-text: oklch(var(--stoa-l-cal-text) 0.12 var(--stoa-cal-h-4));
+    --stoa-cal-4-ink: oklch(0.15 0.04 var(--stoa-cal-h-4));
+    --stoa-cal-5-fill: oklch(var(--stoa-l-cal-fill) var(--stoa-cal-c) var(--stoa-cal-h-5));
+    --stoa-cal-5-soft: oklch(var(--stoa-l-cal-soft) var(--stoa-c-cal-soft) var(--stoa-cal-h-5));
+    --stoa-cal-5-text: oklch(var(--stoa-l-cal-text) 0.12 var(--stoa-cal-h-5));
+    --stoa-cal-5-ink: oklch(0.15 0.04 var(--stoa-cal-h-5));
+    --stoa-cal-6-fill: oklch(var(--stoa-l-cal-fill) var(--stoa-cal-c) var(--stoa-cal-h-6));
+    --stoa-cal-6-soft: oklch(var(--stoa-l-cal-soft) var(--stoa-c-cal-soft) var(--stoa-cal-h-6));
+    --stoa-cal-6-text: oklch(var(--stoa-l-cal-text) 0.12 var(--stoa-cal-h-6));
+    --stoa-cal-6-ink: oklch(0.15 0.04 var(--stoa-cal-h-6));
+    --stoa-cal-7-fill: oklch(var(--stoa-l-cal-fill) var(--stoa-cal-c) var(--stoa-cal-h-7));
+    --stoa-cal-7-soft: oklch(var(--stoa-l-cal-soft) var(--stoa-c-cal-soft) var(--stoa-cal-h-7));
+    --stoa-cal-7-text: oklch(var(--stoa-l-cal-text) 0.12 var(--stoa-cal-h-7));
+    --stoa-cal-7-ink: oklch(0.15 0.04 var(--stoa-cal-h-7));
+    --stoa-cal-8-fill: oklch(var(--stoa-l-cal-fill) var(--stoa-cal-c) var(--stoa-cal-h-8));
+    --stoa-cal-8-soft: oklch(var(--stoa-l-cal-soft) var(--stoa-c-cal-soft) var(--stoa-cal-h-8));
+    --stoa-cal-8-text: oklch(var(--stoa-l-cal-text) 0.12 var(--stoa-cal-h-8));
+    --stoa-cal-8-ink: oklch(0.15 0.04 var(--stoa-cal-h-8));
+  }
+}
