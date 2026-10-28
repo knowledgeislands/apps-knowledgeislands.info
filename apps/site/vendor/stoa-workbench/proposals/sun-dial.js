@@ -6,6 +6,11 @@
 // the moon moves on a day for each turn. Lunar: one turn is one lunation, new moon at the bottom and full moon at
 // the top, in sixteenths. The Track view lays the same turn out straight, midnight to midnight or new to new. The
 // sky beside or inside shows the sun or the moon, where it is, and the phase's name.
+//
+// The cycle chart, after PhotoPills' planner: one day across, the sun's and the moon's height over bands of day,
+// golden hour, the twilights and night. The moon's curve is the sun's, a moon's-age later, so it slides on about
+// fifty minutes a day: a waxing moon is up in the evening, a waning one in the morning. The Track view shows it
+// under the track; the Lunar dial shows it in the lower half of its sky, where the Solar dial has its lake.
 
 import { solarScrub } from '../stoa/src/theme-engine/element.js'
 import { stoaTheme } from '../stoa/src/theme-engine/engine.js'
@@ -113,6 +118,21 @@ const SOLAR_RING = [
   '#2b3270 310deg',
   '#0c1433 360deg'
 ]
+/** The chart's bands by the sun's height, after the phase bands: night, the twilights, blue and golden hour, day. */
+const BANDS = [
+  [-18, '#0c1433'],
+  [-12, '#1d2a5c'],
+  [-6, '#2b3270'],
+  [-4, '#4a5a9c'],
+  [0, '#c98a7c'],
+  [6, '#f2c46d'],
+  [Infinity, '#8fc4e6']
+]
+const bandOf = (/** @type {number} */ e) =>
+  /** @type {string} */ (BANDS.find(([top]) => e < /** @type {number} */ (top))?.[1])
+/** Samples across a day for the chart. */
+const SAMPLES = 96
+
 const LUNAR_RING = ['#0b0f1e 0deg', '#3a4466 90deg', '#c9d2ea 180deg', '#3a4466 270deg', '#0b0f1e 360deg']
 
 export class WbSunDial extends HTMLElement {
@@ -126,6 +146,8 @@ export class WbSunDial extends HTMLElement {
   /** The moon's age when the dial was opened; turning the solar dial moves it on a day per turn. */
   #baseAge = moonAge(new Date())
   #reduced = matchMedia('(prefers-reduced-motion: reduce)')
+  /** The sun's height through one turn of the day, sampled once: the chart's bands and both its curves read it. */
+  #sunDay = /** @type {number[]} */ ([])
 
   connectedCallback() {
     this.innerHTML = this.#markup()
@@ -226,6 +248,12 @@ export class WbSunDial extends HTMLElement {
     // Start where the engine is: the held phase, or the sun now.
     const solar = stoaTheme.state?.solar
     this.#total = solar ? wrap(turnOf(solar) - 1.5 * Math.PI) : 0
+    const sky = stoaTheme.system?.solar?.sky
+    this.#sunDay = Array.from(
+      { length: SAMPLES + 1 },
+      (_, i) => solarScrub(positionAt((i / SAMPLES) * TAU), sky).elevation
+    )
+    for (const chart of this.querySelectorAll('[data-chart]')) this.#buildChart(/** @type {SVGGElement} */ (chart))
     this.#paint()
     this.#show()
   }
@@ -341,6 +369,8 @@ export class WbSunDial extends HTMLElement {
               ? `In ${offset} days`
               : `${-offset} days ago`
     const moonUp = this.#drawSky(solar, moon, solarMode)
+    for (const chart of this.querySelectorAll('[data-chart]'))
+      this.#drawChart(/** @type {SVGGElement} */ (chart), moon, solarMode ? a : null)
     const lit = `${Math.round(moon.illumination * 100)}% lit`
     const moonWords = `${lit}, ${moon.waxing ? 'waxing' : 'waning'}`
     const title = this.querySelector('[data-title]')
@@ -418,6 +448,10 @@ export class WbSunDial extends HTMLElement {
       el.setAttribute('transform', `translate(${x.toFixed(1)} ${(horizon + (horizon - y) * 0.7).toFixed(1)})`)
       el.setAttribute('opacity', strength.toFixed(2))
     }
+    // The Lunar dial shows the cycle chart where the lake would be; the Track view has its own chart below.
+    const chartInSky = !solarMode && this.#view === 'dial'
+    this.querySelector('[data-lake]')?.toggleAttribute('hidden', chartInSky)
+    this.querySelector('[data-chart="dial"]')?.toggleAttribute('hidden', !chartInSky)
     reflect('sun', sx, sy, solar.elevation > -2 ? 0.55 : 0)
     reflect('moon', mx, my, up ? (solar.daylight ? 0.15 : 0.25 + moon.illumination * 0.5) : 0)
     // The lit part: a terminator ellipse whose width follows the phase; waxing is lit on the right.
@@ -431,6 +465,92 @@ export class WbSunDial extends HTMLElement {
     const stars = /** @type {SVGElement} */ (this.querySelector('[data-stars]'))
     stars.setAttribute('opacity', String(Math.max(0, Math.min(1, (-e - 6) / 10)) * (1 - moon.illumination * 0.6)))
     return solarMode ? Math.max(0, Math.min(1, Math.sin(moonTurn) * 4)) : 1
+  }
+
+  /** The sun's height at an angle through the day, from the sampled turn. */
+  #sunAt(/** @type {number} */ angle) {
+    const x = (wrap(angle) / TAU) * SAMPLES
+    const i = Math.floor(x)
+    return this.#sunDay[i] + (this.#sunDay[i + 1] - this.#sunDay[i]) * (x - i)
+  }
+
+  /** The chart's fixed parts: the day's bands, the horizon and the sun's curve. Its box comes from its data-box. */
+  #buildChart(/** @type {SVGGElement} */ chart) {
+    const [x, y, w, h] = /** @type {string} */ (chart.getAttribute('data-box')).split(' ').map(Number)
+    const id = chart.getAttribute('data-chart')
+    const el = (/** @type {string} */ name, /** @type {Record<string, string | number>} */ attrs) => {
+      const node = document.createElementNS(SVG, name)
+      for (const [k, v] of Object.entries(attrs)) node.setAttribute(k, String(v))
+      return node
+    }
+    const top = Math.max(...this.#sunDay) + 8
+    const bottom = -30
+    const yOf = (/** @type {number} */ e) => y + ((top - Math.max(bottom, Math.min(top, e))) / (top - bottom)) * h
+    const xOf = (/** @type {number} */ i) => x + (i / SAMPLES) * w
+    chart.dataset.horizon = String(yOf(0))
+    const bands = el('g', { class: 'wb-sun-dial__bands' })
+    for (let i = 0; i < SAMPLES; i++)
+      bands.append(
+        el('rect', {
+          x: xOf(i),
+          y,
+          width: w / SAMPLES + 0.8,
+          height: h,
+          fill: bandOf(this.#sunAt(((i + 0.5) / SAMPLES) * TAU))
+        })
+      )
+    const above = `wb-sun-dial-above-${id}`
+    const clip = el('clipPath', { id: above })
+    clip.append(el('rect', { x, y, width: w, height: yOf(0) - y }))
+    const points = (/** @type {(i: number) => number} */ at) =>
+      Array.from({ length: SAMPLES + 1 }, (_, i) => `${xOf(i).toFixed(1)},${yOf(at(i)).toFixed(1)}`).join(' ')
+    const sun = points((i) => this.#sunDay[i])
+    chart.replaceChildren(
+      clip,
+      bands,
+      el('line', { x1: x, x2: x + w, y1: yOf(0), y2: yOf(0), class: 'wb-sun-dial__horizon' }),
+      el('polyline', { points: sun, class: 'wb-sun-dial__curve wb-sun-dial__curve--sun wb-sun-dial__curve--below' }),
+      el('polyline', {
+        points: sun,
+        class: 'wb-sun-dial__curve wb-sun-dial__curve--sun',
+        'clip-path': `url(#${above})`
+      }),
+      el('polyline', {
+        class: 'wb-sun-dial__curve wb-sun-dial__curve--moon wb-sun-dial__curve--below',
+        'data-moon-curve': ''
+      }),
+      el('polyline', {
+        class: 'wb-sun-dial__curve wb-sun-dial__curve--moon',
+        'clip-path': `url(#${above})`,
+        'data-moon-curve': ''
+      }),
+      el('line', { x1: x, x2: x, y1: y, y2: y + h, class: 'wb-sun-dial__cursor', 'data-cursor': '' })
+    )
+    chart.dataset.scale = JSON.stringify({ x, y, w, h, top, bottom })
+  }
+
+  /** The moon's curve for its age, and the cursor at the dial's time of day (none in Lunar: it turns through days). */
+  #drawChart(/** @type {SVGGElement} */ chart, /** @type {any} */ moon, /** @type {number | null} */ angle) {
+    if (!this.#sunDay.length) return
+    const { x, y, w, h, top, bottom } = JSON.parse(chart.dataset.scale ?? '{}')
+    const yOf = (/** @type {number} */ e) => y + ((top - Math.max(bottom, Math.min(top, e))) / (top - bottom)) * h
+    // The moon stands where the sun stood a moon's-age earlier in the day.
+    const lag = moon.cycle * TAU
+    const points = Array.from({ length: SAMPLES + 1 }, (_, i) => {
+      const a = (i / SAMPLES) * TAU
+      return `${(x + (i / SAMPLES) * w).toFixed(1)},${yOf(this.#sunAt(a - lag)).toFixed(1)}`
+    }).join(' ')
+    for (const line of chart.querySelectorAll('[data-moon-curve]')) {
+      line.setAttribute('points', points)
+      line.setAttribute('opacity', (0.35 + 0.65 * moon.illumination).toFixed(2))
+    }
+    const cursor = /** @type {SVGElement} */ (chart.querySelector('[data-cursor]'))
+    cursor.toggleAttribute('hidden', angle === null)
+    if (angle !== null) {
+      const cx = (x + (wrap(angle) / TAU) * w).toFixed(1)
+      cursor.setAttribute('x1', cx)
+      cursor.setAttribute('x2', cx)
+    }
   }
 
   /** Ticks and labels for the mode, on the ring and the track alike, from one list of angles. */
@@ -531,9 +651,10 @@ export class WbSunDial extends HTMLElement {
         <g class="wb-sun-dial__stars" data-stars>${stars}</g>
         <circle r="8" class="wb-sun-dial__sun" data-sun/>
         <g data-moon><circle r="7" class="wb-sun-dial__moon-dark"/><path class="wb-sun-dial__moon-lit" data-moon-lit/></g>
-        <rect x="${C - 80}" y="${C + 2}" width="160" height="80" data-water/>
+        <g data-lake><rect x="${C - 80}" y="${C + 2}" width="160" height="80" data-water/>
         <g class="wb-sun-dial__reflection wb-sun-dial__reflection--sun" data-reflection-sun><ellipse rx="7" ry="3"/><rect x="-9" y="5" width="18" height="1.5"/><rect x="-6" y="10" width="12" height="1.2"/><rect x="-4" y="15" width="8" height="1"/></g>
-        <g class="wb-sun-dial__reflection wb-sun-dial__reflection--moon" data-reflection-moon><ellipse rx="6" ry="2.5"/><rect x="-7" y="5" width="14" height="1.4"/><rect x="-5" y="10" width="10" height="1.1"/><rect x="-3" y="15" width="6" height="1"/></g>
+        <g class="wb-sun-dial__reflection wb-sun-dial__reflection--moon" data-reflection-moon><ellipse rx="6" ry="2.5"/><rect x="-7" y="5" width="14" height="1.4"/><rect x="-5" y="10" width="10" height="1.1"/><rect x="-3" y="15" width="6" height="1"/></g></g>
+        <g data-chart="dial" data-box="${C - 78} ${C + 2} 156 76" class="wb-sun-dial__chart" hidden></g>
         <path d="M${C - 80} ${C + 2} h160" class="wb-sun-dial__shore"/>
       </g>
       <circle cx="${C}" cy="${C}" r="78" class="wb-sun-dial__rim"/>
@@ -548,6 +669,12 @@ export class WbSunDial extends HTMLElement {
     <g data-track-ticks></g>
     ${'<text class="wb-sun-dial__label" y="58" data-track-label></text>'.repeat(5)}
     ${knob(0, 25, 10)}
+  </svg>
+  <svg class="wb-sun-dial__cycle" viewBox="0 0 320 96" role="img" aria-label="The sun's and the moon's height through the day">
+    <g data-chart="track" data-box="${TRACK.x0} 4 ${TRACK.x1 - TRACK.x0} 78" class="wb-sun-dial__chart"></g>
+    <text class="wb-sun-dial__legend wb-sun-dial__legend--sun" x="${TRACK.x0}" y="93">Sun</text>
+    <text class="wb-sun-dial__legend wb-sun-dial__legend--moon" x="${TRACK.x0 + 28}" y="93">Moon</text>
+    <text class="wb-sun-dial__legend" x="${TRACK.x1}" y="93" text-anchor="end">Day, golden hour, twilights, night</text>
   </svg>
 </div>
 <p class="wb-sun-dial__readout" aria-hidden="true"><strong data-title></strong><span data-detail></span></p>`

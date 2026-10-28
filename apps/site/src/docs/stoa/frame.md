@@ -6,12 +6,12 @@ permalink: /docs/stoa/frame/
 sources:
   - repository: knowledgeislands/packages-portal-commons
     path: packages/stoa/README.md
-    ref: v0.27.1
+    ref: v0.27.2
     governs: 'The Header frame, its slots, collapse and identity area; the Page Foot, its data keys and the site strip; the build commit helper'
     reviewed: '2026-10-28'
   - repository: knowledgeislands/packages-portal-commons
     path: apps/workbench/stories.js
-    ref: v0.27.1
+    ref: v0.27.2
     governs: 'The live stories framed on this page and their sample inputs'
     reviewed: '2026-10-28'
 ---

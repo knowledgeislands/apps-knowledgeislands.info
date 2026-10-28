@@ -6,17 +6,17 @@ permalink: /docs/stoa/workbench/
 sources:
   - repository: knowledgeislands/packages-portal-commons
     path: apps/workbench/stories.js
-    ref: v0.27.1
+    ref: v0.27.2
     governs: 'The live stories framed on this page and their sample inputs'
     reviewed: '2026-10-28'
   - repository: knowledgeislands/packages-portal-commons
     path: docs/decisions/ADR-STOA-053-preview-overrides-and-isolated-workbench.md
-    ref: v0.27.1
+    ref: v0.27.2
     governs: 'The isolated stage frame and its separate keys'
     reviewed: '2026-10-28'
   - repository: knowledgeislands/packages-portal-commons
     path: README.md
-    ref: v0.27.1
+    ref: v0.27.2
     governs: 'The workbench, its story view and its export'
     reviewed: '2026-10-28'
 ---

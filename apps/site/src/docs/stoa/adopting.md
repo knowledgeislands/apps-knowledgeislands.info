@@ -6,7 +6,7 @@ permalink: /docs/stoa/adopting/
 sources:
   - repository: knowledgeislands/packages-portal-commons
     path: packages/stoa/README.md
-    ref: v0.27.1
+    ref: v0.27.2
     governs: 'Vendoring, the lock, the self:stoa scripts, drift, deferral and the Eleventy plugins'
     reviewed: '2026-10-28'
 ---

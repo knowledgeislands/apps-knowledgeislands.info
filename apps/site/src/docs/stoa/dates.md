@@ -6,12 +6,12 @@ permalink: /docs/stoa/dates/
 sources:
   - repository: knowledgeislands/packages-portal-commons
     path: packages/stoa/README.md
-    ref: v0.27.1
+    ref: v0.27.2
     governs: 'The calendar set, its views, feeds and recurrence; the Timeline; the Today board'
     reviewed: '2026-10-28'
   - repository: knowledgeislands/packages-portal-commons
     path: apps/workbench/stories.js
-    ref: v0.27.1
+    ref: v0.27.2
     governs: 'The live stories framed on this page and their sample inputs'
     reviewed: '2026-10-28'
 ---

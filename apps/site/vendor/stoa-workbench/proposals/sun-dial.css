@@ -224,3 +224,52 @@ wb-sun-dial[data-turning] .wb-sun-dial__knob {
 [data-view-track][hidden] {
   display: none;
 }
+
+/* The cycle chart: day, golden hour, the twilights and night as bands; the sun's and moon's height over them. */
+.wb-sun-dial__cycle {
+  width: 100%;
+  height: auto;
+}
+.wb-sun-dial__chart [hidden],
+.wb-sun-dial__chart[hidden],
+[data-lake][hidden] {
+  display: none;
+}
+.wb-sun-dial__horizon {
+  stroke: rgb(255 255 255 / 0.55);
+  stroke-width: 0.6;
+}
+.wb-sun-dial__curve {
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.wb-sun-dial__curve--sun {
+  stroke: #ffd257;
+}
+.wb-sun-dial__curve--moon {
+  stroke: #eef2ff;
+}
+.wb-sun-dial__curve--below {
+  stroke-width: 1;
+  stroke-dasharray: 2 2;
+  opacity: 0.45;
+}
+.wb-sun-dial__cursor {
+  stroke: #fff;
+  stroke-width: 1;
+}
+.wb-sun-dial__legend {
+  font-size: 8px;
+  fill: var(--stoa-muted-foreground, currentColor);
+}
+.wb-sun-dial__legend--sun {
+  fill: #c9921a;
+}
+.wb-sun-dial__legend--moon {
+  fill: var(--stoa-foreground, currentColor);
+}
+.wb-sun-dial__bands rect {
+  shape-rendering: crispEdges;
+}

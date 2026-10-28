@@ -6,12 +6,12 @@ permalink: /docs/stoa/content/
 sources:
   - repository: knowledgeislands/packages-portal-commons
     path: packages/stoa/README.md
-    ref: v0.27.1
+    ref: v0.27.2
     governs: 'The Issues List, its data, statuses, columns and strict validation; the Diagram Viewer'
     reviewed: '2026-10-28'
   - repository: knowledgeislands/packages-portal-commons
     path: apps/workbench/stories.js
-    ref: v0.27.1
+    ref: v0.27.2
     governs: 'The live stories framed on this page and their sample inputs'
     reviewed: '2026-10-28'
 ---

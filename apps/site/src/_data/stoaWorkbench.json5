@@ -1,14 +1,14 @@
 // GENERATED FILE - do not edit.
-// bun run --cwd apps/site sync:stoa -- --ref v0.27.1
-// The Stoa workbench at v0.27.1 (2d58048dbb2c161c3fa1583bfcf62265c839d032); vendor/stoa-workbench/ holds its export, and pages citing it must cite this tag.
+// bun run --cwd apps/site sync:stoa -- --ref v0.27.2
+// The Stoa workbench at v0.27.2 (659dca27d6244021a5c3dbfb723e0caa6dcc69ad); vendor/stoa-workbench/ holds its export, and pages citing it must cite this tag.
 {
   "source": {
     "repository": "knowledgeislands/packages-portal-commons",
     "path": "apps/workbench/stories.js",
-    "ref": "v0.27.1"
+    "ref": "v0.27.2"
   },
-  "commit": "2d58048dbb2c161c3fa1583bfcf62265c839d032",
-  "version": "0.27.1",
+  "commit": "659dca27d6244021a5c3dbfb723e0caa6dcc69ad",
+  "version": "0.27.2",
   "synced": "2026-10-28",
   "stories": [
     {
