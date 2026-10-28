@@ -4,17 +4,17 @@ order: 2
 description: How the Theme Engine resolves a reader's theme and light or dark mode, what a site supplies, and the sample themes side by side.
 permalink: /docs/stoa/themes/
 sources:
-  - repository: knowledgeislands/packages-portal-commons
+  - repository: knowledgeislands/packages-stoa
     path: docs/guides/theme-engine.md
     ref: v0.27.2
     governs: 'Mode selection, themes and Solar, and what the site and the engine each own'
     reviewed: '2026-10-28'
-  - repository: knowledgeislands/packages-portal-commons
+  - repository: knowledgeislands/packages-stoa
     path: packages/stoa/README.md
     ref: v0.27.2
     governs: 'Keys from a prefix, previous keys, the pre-paint script, Reset to default and the CSS bridge'
     reviewed: '2026-10-28'
-  - repository: knowledgeislands/packages-portal-commons
+  - repository: knowledgeislands/packages-stoa
     path: apps/workbench/stories.js
     ref: v0.27.2
     governs: 'The live stories framed on this page and their sample inputs'

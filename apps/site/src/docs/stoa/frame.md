@@ -4,12 +4,12 @@ order: 3
 description: The responsive header and the notes, sources and footer strip that frame a Stoa page, and what stays the site's own.
 permalink: /docs/stoa/frame/
 sources:
-  - repository: knowledgeislands/packages-portal-commons
+  - repository: knowledgeislands/packages-stoa
     path: packages/stoa/README.md
     ref: v0.27.2
     governs: 'The Header frame, its slots, collapse and identity area; the Page Foot, its data keys and the site strip; the build commit helper'
     reviewed: '2026-10-28'
-  - repository: knowledgeislands/packages-portal-commons
+  - repository: knowledgeislands/packages-stoa
     path: apps/workbench/stories.js
     ref: v0.27.2
     governs: 'The live stories framed on this page and their sample inputs'

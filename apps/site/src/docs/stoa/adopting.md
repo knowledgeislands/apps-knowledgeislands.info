@@ -4,7 +4,7 @@ order: 8
 description: Vendor Stoa into a site at a reviewed release, keep the copy honest with its lock, and take later releases deliberately.
 permalink: /docs/stoa/adopting/
 sources:
-  - repository: knowledgeislands/packages-portal-commons
+  - repository: knowledgeislands/packages-stoa
     path: packages/stoa/README.md
     ref: v0.27.2
     governs: 'Vendoring, the lock, the self:stoa scripts, drift, deferral and the Eleventy plugins'
@@ -20,8 +20,8 @@ A site adopts Stoa by vendoring it: copying the whole package into its own repos
 Start from a clean site checkout and a local checkout of the Stoa repository at the release you mean to take. Run Stoa's own tool from that checkout, at the site's root:
 
 ```sh
-STOA_CHECKOUT=/path/to/packages-portal-commons \
-  bun /path/to/packages-portal-commons/packages/stoa/tooling/stoa.js sync --to <version> --no-commit
+STOA_CHECKOUT=/path/to/packages-stoa \
+  bun /path/to/packages-stoa/packages/stoa/tooling/stoa.js sync --to <version> --no-commit
 ```
 
 It writes the whole `packages/stoa/` tree and `stoa-lock.json`. Review both, commit them with the site's adoption change, and never edit the vendored files: a change belongs upstream, and the site takes it with the next release.

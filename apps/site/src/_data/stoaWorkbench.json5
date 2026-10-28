@@ -3,7 +3,7 @@
 // The Stoa workbench at v0.27.2 (659dca27d6244021a5c3dbfb723e0caa6dcc69ad); vendor/stoa-workbench/ holds its export, and pages citing it must cite this tag.
 {
   "source": {
-    "repository": "knowledgeislands/packages-portal-commons",
+    "repository": "knowledgeislands/packages-stoa",
     "path": "apps/workbench/stories.js",
     "ref": "v0.27.2"
   },

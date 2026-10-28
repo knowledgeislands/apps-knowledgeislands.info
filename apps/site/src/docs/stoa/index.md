@@ -4,17 +4,17 @@ order: 1
 description: What Stoa is, the units it holds, and how a static site shares them without a package registry or a build-time fetch.
 permalink: /docs/stoa/
 sources:
-  - repository: knowledgeislands/packages-portal-commons
+  - repository: knowledgeislands/packages-stoa
     path: packages/stoa/README.md
     ref: v0.27.2
     governs: 'The units, their entries and elements, light DOM and the no-dependency modules'
     reviewed: '2026-10-28'
-  - repository: knowledgeislands/packages-portal-commons
+  - repository: knowledgeislands/packages-stoa
     path: packages/stoa/units.json5
     ref: v0.27.2
     governs: 'The unit list and each unit''s one-line purpose'
     reviewed: '2026-10-28'
-  - repository: knowledgeislands/packages-portal-commons
+  - repository: knowledgeislands/packages-stoa
     path: apps/workbench/stories.js
     ref: v0.27.2
     governs: 'The live stories framed on this page and their sample inputs'

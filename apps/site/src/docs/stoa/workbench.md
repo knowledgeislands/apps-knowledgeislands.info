@@ -4,17 +4,17 @@ order: 7
 description: Try every Stoa unit with its inputs open to edit, watch the events it sends and the state it leaves, in phone, tablet and full widths.
 permalink: /docs/stoa/workbench/
 sources:
-  - repository: knowledgeislands/packages-portal-commons
+  - repository: knowledgeislands/packages-stoa
     path: apps/workbench/stories.js
     ref: v0.27.2
     governs: 'The live stories framed on this page and their sample inputs'
     reviewed: '2026-10-28'
-  - repository: knowledgeislands/packages-portal-commons
+  - repository: knowledgeislands/packages-stoa
     path: docs/decisions/ADR-STOA-053-preview-overrides-and-isolated-workbench.md
     ref: v0.27.2
     governs: 'The isolated stage frame and its separate keys'
     reviewed: '2026-10-28'
-  - repository: knowledgeislands/packages-portal-commons
+  - repository: knowledgeislands/packages-stoa
     path: README.md
     ref: v0.27.2
     governs: 'The workbench, its story view and its export'

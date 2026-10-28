@@ -43,6 +43,7 @@ test('sync exports the tagged tree, records its stories and refuses a dirty chec
     await assert.rejects(syncStoa(from, 'main', destination), /release tag/)
     const snapshot = await syncStoa(from, 'v0.27.1', destination)
     assert.equal(snapshot.version, '0.27.1')
+    assert.equal(snapshot.source.repository, 'knowledgeislands/packages-stoa')
     assert.equal(snapshot.source.ref, 'v0.27.1')
     assert.equal(snapshot.commit, git('rev-parse', 'v0.27.1'))
     assert.deepEqual(

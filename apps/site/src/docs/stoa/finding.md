@@ -4,12 +4,12 @@ order: 4
 description: Search a Stoa site from the keyboard with the Command Bar, list its shortcuts, and filter the items a page already shows.
 permalink: /docs/stoa/finding/
 sources:
-  - repository: knowledgeislands/packages-portal-commons
+  - repository: knowledgeislands/packages-stoa
     path: packages/stoa/README.md
     ref: v0.27.2
     governs: 'The Command Bar, its configuration and base, the Shortcut Registry, the Search Index Contract and the Filter Bar'
     reviewed: '2026-10-28'
-  - repository: knowledgeislands/packages-portal-commons
+  - repository: knowledgeislands/packages-stoa
     path: apps/workbench/stories.js
     ref: v0.27.2
     governs: 'The live stories framed on this page and their sample inputs'

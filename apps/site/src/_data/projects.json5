@@ -537,7 +537,7 @@
   },
   {
     slug: 'stoa',
-    name: 'packages-portal-commons',
+    name: 'packages-stoa',
     kind: 'platform',
     tagline: 'Stoa: web components and styles that static sites share, rendered at build time.',
     description:
@@ -559,7 +559,7 @@
       'It ships no site identity: brand, palettes, navigation, content and source registers stay with each site. It is not published to a package registry, and nothing in a site\'s build fetches it. Public visibility does not grant a licence to use, copy or redistribute.',
     role: 'Canonical source of the shared Stoa units and of the tool sites use to vendor and verify them.',
     usage: 'Vendor packages/stoa into a site at a release with its own tool, then render the units at build time and define their elements in the browser. Try each one first in the workbench.',
-    repository: 'https://github.com/knowledgeislands/packages-portal-commons',
+    repository: 'https://github.com/knowledgeislands/packages-stoa',
     availability: 'source',
     icon: 'weave',
     accent: 'teal'

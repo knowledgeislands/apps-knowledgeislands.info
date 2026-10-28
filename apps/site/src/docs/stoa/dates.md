@@ -4,12 +4,12 @@ order: 5
 description: Show a site's dated entries as calendar views, a month-by-month timeline and today's board, all from one calendar set with subscribable feeds.
 permalink: /docs/stoa/dates/
 sources:
-  - repository: knowledgeislands/packages-portal-commons
+  - repository: knowledgeislands/packages-stoa
     path: packages/stoa/README.md
     ref: v0.27.2
     governs: 'The calendar set, its views, feeds and recurrence; the Timeline; the Today board'
     reviewed: '2026-10-28'
-  - repository: knowledgeislands/packages-portal-commons
+  - repository: knowledgeislands/packages-stoa
     path: apps/workbench/stories.js
     ref: v0.27.2
     governs: 'The live stories framed on this page and their sample inputs'

@@ -1,5 +1,5 @@
 /**
- * Vendor the Stoa workbench from a clean local `packages-portal-commons` checkout at a release tag. No network.
+ * Vendor the Stoa workbench from a clean local `packages-stoa` checkout at a release tag. No network.
  *
  * Stoa's own export (`apps/workbench/export.js`, from v0.27.0) writes the workbench, its stage and its single-story
  * view as static files that run from any folder. This runs that export over the tagged tree, not the working one,
@@ -14,7 +14,7 @@ import { pathToFileURL } from 'node:url'
 import JSON5 from 'json5'
 import { repositoryRoot, siteRoot } from './lib/diagrams.ts'
 
-export const stoaRepository = 'knowledgeislands/packages-portal-commons'
+export const stoaRepository = 'knowledgeislands/packages-stoa'
 const tagPattern = /^v\d+\.\d+\.\d+$/
 
 interface Story {
@@ -90,7 +90,7 @@ export async function syncStoa(from: string, tag: string, destination = siteRoot
 
 if (import.meta.main) {
   const args = process.argv.slice(2).filter((arg) => arg !== '--')
-  let from = resolve(repositoryRoot, '../packages-portal-commons')
+  let from = resolve(repositoryRoot, '../packages-stoa')
   let ref = ''
   for (let i = 0; i < args.length; i++) {
     if (args[i] === '--from' && args[i + 1]) from = resolve(args[++i])
