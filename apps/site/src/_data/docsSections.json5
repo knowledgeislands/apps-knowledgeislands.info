@@ -25,6 +25,11 @@
     description: 'What a skill is, how the sixty-four fit together, which one serves which outcome.'
   },
   {
+    slug: 'working-with-agents',
+    title: 'Working with agents',
+    description: 'A plain-English course in how work is held, handed to agents, reviewed and kept safe, one feature at a time.'
+  },
+  {
     slug: 'ways-of-working',
     title: 'Ways of working',
     description: 'How work is defined, held, moved, delegated, traded, tended and finished.'
