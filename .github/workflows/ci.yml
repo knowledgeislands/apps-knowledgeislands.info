@@ -6,12 +6,18 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      KI_VERSION: v0.13.0
     steps:
       - uses: actions/checkout@v7
       - uses: jdx/mise-action@v4
       - run: bun install --frozen-lockfile
+      # The released ki tag lives in .github/ki-version so that the
+      # update-ki-pin.yml receiver can propose its bump.
+      - name: Read released KI pin
+        run: |
+          set -euo pipefail
+          KI_VERSION=$(tr -d '[:space:]' < .github/ki-version)
+          [[ "$KI_VERSION" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]
+          printf 'KI_VERSION=%s\n' "$KI_VERSION" >> "$GITHUB_ENV"
       - name: Install released KI
         env:
           KI_ROOT: ${{ runner.temp }}/ki-fnd-001
