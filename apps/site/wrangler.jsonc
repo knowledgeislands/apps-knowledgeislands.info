@@ -1,6 +1,7 @@
 {
-  // ki-website — Cloudflare Workers Static Assets deployment, not Pages.
-  "name": "ki-website",
+  // info-knowledgeislands — Cloudflare Workers Static Assets deployment, not Pages.
+  // The Worker name is the hostname reversed, as every Personal-account Worker is.
+  "name": "info-knowledgeislands",
   "compatibility_date": "2026-06-19",
   // Eleventy builds to dist/ inside this workspace; the Worker serves it directly.
   "assets": { "directory": "dist" },
@@ -9,6 +10,10 @@
     { "pattern": "knowledgeislands.info", "custom_domain": true },
     { "pattern": "www.knowledgeislands.info", "custom_domain": true }
   ],
-  // Persist Workers logs in the dashboard (Workers & Pages → ki-website → Logs).
+  // The custom domains are the only addresses: no workers.dev or preview URL.
+  // Both default to on.
+  "workers_dev": false,
+  "preview_urls": false,
+  // Persist Workers logs in the dashboard (Workers & Pages → info-knowledgeislands → Logs).
   "observability": { "enabled": true }
 }
