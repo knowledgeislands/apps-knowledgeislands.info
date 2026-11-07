@@ -78,9 +78,6 @@ budgets.mcp_servers = 20
 # Change management
 # -----------------------------------------------------------------------------
 
-[skills.ki-delegation-paperclip]
-organisation_code = "KIS"
-
 [skills.ki-git]
 
 [skills.ki-work]
