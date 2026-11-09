@@ -1,5 +1,6 @@
 ---
 areas: { SITE: 47 }
+work: ki.sop.main
 ---
 
 # Roadmap issue ledger
