@@ -64,11 +64,11 @@ External source stores are managed separately with `ki repo store`. `ki repo sto
 
 ## Repository-local governance
 
-**You need this if** a repository has auditable rules that are genuinely specific to it and do not belong in a portable harness skill.
+**You need this if** a repository has auditable rules that are genuinely specific to it and do not belong in a portable backpack skill.
 
 Declaring an empty `[skills.ki-self]` table in `.ki.toml` grants native-operation authority to a canonical source tree under the repository root - `SKILL.md`, a `references/` rubric, and the scripts that implement it. The repository then audits and conforms against its own rules through the same `ki repo audit` and `ki repo conform` commands as any other skill.
 
-**The boundary that matters:** `ki-self` is treated as one narrow repository-owned provider, not as installed harness content, and its authority stops at that repository's root. It is the escape hatch for rules that should not be portable - not a way to fork a harness skill locally.
+**The boundary that matters:** `ki-self` is treated as one narrow repository-owned provider, not as installed backpack content, and its authority stops at that repository's root. It is the escape hatch for rules that should not be portable - not a way to fork a backpack skill locally.
 
 The source layout is fixed rather than conventional - `SKILL.md`, a `references/` rubric, and the scripts the skill registers, under the canonical `.agents/skills/ki-self/` path the operation resolves - and [the repository-local governance procedure at `v0.13.0`](https://github.com/knowledgeislands/tools-ki/blob/v0.13.0/docs/guides/user/repository-local-governance.md) gives it file by file.
 
@@ -86,7 +86,7 @@ The source layout is fixed rather than conventional - `SKILL.md`, a `references/
 
 **You need this if** you want read-only meeting evidence from Granola brought into a registered repository as an acquisition package.
 
-The adapter runs through a locally installed `mcporter` executable with a configured `granola` server, which you authenticate once beforehand. The installed harness must publish a verified `ki-acquire-granola` skill, and the repository must both select that harness and declare the skill - `ki acquire list` tells you where you stand.
+The adapter runs through a locally installed `mcporter` executable with a configured `granola` server, which you authenticate once beforehand. The installed backpack must publish a verified `ki-acquire-granola` skill, and the repository must both select that backpack and declare the skill - `ki acquire list` tells you where you stand.
 
 **The boundary that matters:** acquisition passes `--no-oauth` on every provider call, so missing or expired credentials fail visibly rather than opening a browser mid-run. Tokens never enter repository configuration, staged documents, journals, or checkpoints. The capture and its Git history are the record. Existing captures are kept unless refresh is explicit, and incomplete source evidence stays visible for review.
 
@@ -94,7 +94,7 @@ The adapter runs through a locally installed `mcporter` executable with a config
 
 ## Standing knowledge intake
 
-New trade submissions are currently on hold under the pinned harness. Existing records remain supported; the standing-intake commands below describe the declared mechanics and do not lift that hold.
+New trade submissions are currently on hold under the pinned backpack. Existing records remain supported; the standing-intake commands below describe the declared mechanics and do not lift that hold.
 
 **You need this if** one repository should keep receiving a narrow class of knowledge from another, and raising an itemised trade for every capture is too much ceremony.
 

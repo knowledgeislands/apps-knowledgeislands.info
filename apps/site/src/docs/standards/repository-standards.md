@@ -110,7 +110,7 @@ Every repository explicitly declares `repo_type`, either `project` or `kb`, and 
 The universal contract covers the root README, licence, ignore rules and configuration, alongside repository identity and GitHub settings. A README explains purpose and entry points. Visibility and licence are separate declarations. The applicable shape then governs the artefact the repository holds:
 
 - A Knowledge Base keeps indexed zones for records, knowledge, references, work and administration, described in [Knowledge bases](/docs/knowledge/knowledge-bases/).
-- A general Project supplies the non-Knowledge-Base baseline. A harness holds skills, subagents, evals and hooks, and distinguishes source from a verified installed payload.
+- A general Project supplies the non-Knowledge-Base baseline. A backpack holds skills, subagents, evals and hooks, and distinguishes source from a verified installed payload.
 - A tools repository holds one command-line tool and its delivery surface. A Homebrew tap holds formulae for released tools. An MCP repository governs server source, configuration injection and access boundaries.
 - A Specifications repository separates proposals, specifications, schemas, templates, examples, documentation and tooling. A chezmoi repository governs configuration source and rendering discipline.
 - A website declares the neutral build seam, then exactly one content or app implementation. Content uses Eleventy; an app uses React and Vite. Cloudflare hosting is an independent overlay consuming the built `dist/`.
@@ -147,7 +147,7 @@ Mara starts the fictional Tern Holm survey repository by describing its purpose 
 3. **Conform:** review the proposed repairs, apply the authorised local changes and handle judgement-led content gaps. Live GitHub settings require their own explicit approval.
 4. **Re-audit:** check that the gaps have closed and review the parts a mechanical checker cannot assess, such as whether the description fits the repository.
 
-The [repository and territory commands](/docs/ki/repositories-and-territory/) explain how registration, harness selection and repository operations fit together. Registration records a physical checkout; it is inventory, not a compliance verdict.
+The [repository and territory commands](/docs/ki/repositories-and-territory/) explain how registration, backpack selection and repository operations fit together. Registration records a physical checkout; it is inventory, not a compliance verdict.
 
 ## What it provides
 

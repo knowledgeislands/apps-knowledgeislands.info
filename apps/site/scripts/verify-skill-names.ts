@@ -1,8 +1,8 @@
 /**
- * Verifies that every `ki-...` name the Docs pages mention is a name the harness still has.
+ * Verifies that every `ki-...` name the Docs pages mention is a name the backpack still has.
  *
  * A skill token in prose is a claim: `ki-delegation` tells the reader there is a skill they can
- * reach for by that name. The harness renames and retires skills, and the catalogue the site
+ * reach for by that name. The backpack renames and retires skills, and the catalogue the site
  * vendors (`src/_data/skillCatalogue.json5`) follows it at a pinned ref, but the prose that named
  * the old skill does not: a page written when the skill was `ki-delegate` kept saying so after
  * the rename and nothing failed. This gate reads every `ki-[a-z-]+` token in `src/docs/**\/*.md`,
@@ -16,8 +16,9 @@
  *
  * Fenced code blocks are skipped: a code block quotes output, configuration or a transcript as
  * it is, and a historical name inside one is a fact about that artefact rather than a claim about
- * the harness. Inline code spans are checked, because a span in a sentence is the sentence
- * naming a thing.
+ * the backpack. Inline code spans are checked, because a span in a sentence is the sentence
+ * naming a thing. The `path:` of each frontmatter source is skipped too: it names a file at the
+ * commit its `ref` pins, which stays true after a rename, and verify:provenance owns its drift.
  *
  * See docs/guides/developer/feature-areas.md.
  */
@@ -37,11 +38,11 @@ export const ALLOWED_NAMES: ReadonlyMap<string, string> = new Map([
   ['ki-principal', 'repository: Knowledge Islands Principal'],
   ['ki-design', 'repository: the design system and site structure'],
   ['ki-specifications', 'repository: KI Specifications'],
-  ['ki-agentic-harness', 'repository: the KI Agentic Harness'],
+  ['ki-agent-backpack', 'repository: the KI Agent Backpack'],
   ['ki-techne-harness', 'repository: the Techne Harness'],
   ['ki-website', 'repository: this site'],
   // Configuration and convention names a reader types as written.
-  ['ki-self', 'the [skills.ki-self] table in .ki.toml, a repository-owned provider rather than a harness skill'],
+  ['ki-self', 'the [skills.ki-self] table in .ki.toml, a repository-owned provider rather than a backpack skill'],
   ['ki-depends-on', 'the SKILL.md frontmatter key that declares composition'],
   ['ki-chatgpt-capture', 'the ChatGPT local-capture configuration value a reader sets'],
   ['ki-mcporter', 'the mcporter MCP bridge server name as it appears in a client configuration']
@@ -57,10 +58,17 @@ export const SKILL_TOKEN = /\bki-[a-z][a-z-]*[a-z]\b(?![-*])/g
 export const stripFences = (markdown: string): string =>
   markdown.replace(/^(`{3,}|~{3,})[^\n]*\n[\s\S]*?^\1[ \t]*$/gm, '')
 
-/** Every distinct `ki-...` token in `markdown`, outside fenced code blocks, in first-seen order. */
+/** The body with each source's pinned `path:` line removed from the leading frontmatter. */
+export const stripSourcePaths = (markdown: string): string =>
+  markdown.replace(/^---\n[\s\S]*?\n---$/m, (frontmatter) => frontmatter.replace(/^ {4}path: .*$/gm, ''))
+
+/**
+ * Every distinct `ki-...` token in `markdown`, outside fenced code blocks and pinned source paths, in
+ * first-seen order.
+ */
 export const skillTokens = (markdown: string): string[] => {
   const seen = new Set<string>()
-  for (const match of stripFences(markdown).matchAll(SKILL_TOKEN)) seen.add(match[0])
+  for (const match of stripFences(stripSourcePaths(markdown)).matchAll(SKILL_TOKEN)) seen.add(match[0])
   return [...seen]
 }
 

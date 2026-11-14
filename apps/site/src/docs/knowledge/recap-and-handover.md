@@ -24,7 +24,7 @@ You can finish a live session with a grounded account of its changes and decisio
 
 ## What it is
 
-`ki-recap` is a process skill for the live session in which it runs. It covers the whole current thread through the invocation, including every repository touched. An earlier recap or compaction does not reset that scope. Historical session acquisition and the [coordinator's summaries](/docs/ways-of-working/coordination/) have their own procedures.
+`ki-work recap` is the `ki-work` subcommand for the live session in which it runs. It covers the whole current thread through the invocation, including every repository touched. An earlier recap or compaction does not reset that scope. Historical session acquisition and the [coordinator's summaries](/docs/ways-of-working/coordination/) have their own procedures.
 
 ## How it works
 
@@ -60,9 +60,9 @@ An explicitly requested **portable checkpoint hand-off** supplies repository ide
 
 ## How you use it
 
-Mara finishes a session on fictional Tern Holm in which she changed a survey note and agreed a later diagram correction. She asks for `ki-recap`. The agent checks the actual note changes, verifies the correction's roadmap home and reports it as a recorded deferral. A useful convention still awaiting her approval remains an undecided learning route and an Action.
+Mara finishes a session on fictional Tern Holm in which she changed a survey note and agreed a later diagram correction. She asks for `ki-work recap`. The agent checks the actual note changes, verifies the correction's roadmap home and reports it as a recorded deferral. A useful convention still awaiting her approval remains an undecided learning route and an Action.
 
-If Mara wants another agent to resume an exact work thread from portable evidence, she explicitly requests `ki-recap checkpoint <thread>` with that thread's identifier. Merely assigning the correction to another person would not preserve an agreed handoff.
+If Mara wants another agent to resume an exact work thread from portable evidence, she explicitly requests a checkpoint of that thread through `ki-work-package`, with the thread's identifier. Merely assigning the correction to another person would not preserve an agreed handoff.
 
 ## What it provides
 
@@ -70,6 +70,6 @@ You get a session account tied to current evidence, a precise distinction betwee
 
 ## Boundaries
 
-Recap does not select or sequence future work; a separate request goes to `ki-next`. It does not promote learning without confirmation or claim unavailable evidence is complete. Normal recap applies the narrowly authorised Batch retention rule to eligible inactive batch records and reports exact removals; it never prunes roadmap records.
+Recap does not select or sequence future work; a separate request goes to `ki-work next`. It does not promote learning without confirmation or claim unavailable evidence is complete. It never prunes roadmap records.
 
-A work-record mini recap requested by `ki-accept` stays within that record's delivered outputs, verification evidence, outstanding concerns and proposed learning routes. Closing the record grants no permission to write learning elsewhere. A [session digest](/docs/knowledge/query-save-update/) and an [acquired source package](/docs/knowledge/acquiring-knowledge/) serve different purposes and retain their own formats.
+A work-record mini recap requested by `ki-work accept` stays within that record's delivered outputs, verification evidence, outstanding concerns and proposed learning routes. Closing the record grants no permission to write learning elsewhere. A [session digest](/docs/knowledge/query-save-update/) and an [acquired source package](/docs/knowledge/acquiring-knowledge/) serve different purposes and retain their own formats.

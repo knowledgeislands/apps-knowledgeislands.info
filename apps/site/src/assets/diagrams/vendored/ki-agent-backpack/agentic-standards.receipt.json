@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "slug": "agentic-standards",
+  "type": "architecture",
+  "source": {
+    "file": "agentic-standards.architecture.json",
+    "sha256": "8bca9ca671fbdd0e50413a5f6411cd07bfd108c626e68b6137f699b591204eca",
+    "bytes": 6501
+  },
+  "html": {
+    "file": "agentic-standards.html",
+    "sha256": "5b2386da44ece141055189c44df89aa63b16203aef9d4eda6b78f78e9a77f339",
+    "bytes": 854163
+  },
+  "renderer": {
+    "name": "archify",
+    "version": "3.2.0"
+  }
+}

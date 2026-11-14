@@ -95,30 +95,30 @@
 
   // ── Agentic capabilities ────────────────────────────────────────────────
   {
-    slug: 'ki-agentic-harness',
-    name: 'ki-agentic-harness',
+    slug: 'ki-agent-backpack',
+    name: 'ki-agent-backpack',
     kind: 'capability',
-    tagline: 'The canonical source of reusable agentic capabilities and compatible harnesses.',
+    tagline: 'The canonical source of reusable agentic capabilities and compatible backpacks.',
     description:
-      'A capability here is a typed published member of a compatible harness: a skill, an agent, an MCP server, a hook, an eval, or a future registered kind. The harness defines what each capability contains and what it means. It does not implement the ki executable, and it does not originate portable normative contracts.',
+      'A capability here is a typed published member of a compatible backpack: a skill, an agent, an MCP server, a hook, an eval, or a future registered kind. The backpack defines what each capability contains and what it means. It does not implement the ki executable, and it does not originate portable normative contracts.',
     problem:
       'Working conventions that live only in prose erode. An agent applies them if it happens to be told to, and nobody finds out when it was not; a reviewer catches what they have time to read. Holding each standard as a skill that registers its own mechanical checks makes the clear-cut cases deterministic, so attention goes to the parts that genuinely need judgement.',
     audience:
-      'Install it if you want the Knowledge Islands standards applied and checked in your own repositories. It is what ki bootstrap installs, and what ki repo audit resolves its checks from — you do not read this repository to use it. Outside a Knowledge Islands setup, npx skills add knowledgeislands/ki-agentic-harness installs individual skills directly.',
+      'Install it if you want the Knowledge Islands standards applied and checked in your own repositories. It is what ki bootstrap installs, and what ki repo audit resolves its checks from — you do not read this repository to use it. Outside a Knowledge Islands setup, npx skills add knowledgeislands/ki-agent-backpack installs individual skills directly.',
     capabilities: [
       'Skills — reusable standards, each registering the operations that audit and conform a target against it.',
       'Subagents — focused specialist roles an agent can delegate a piece of work to.',
       'Hooks — optional automation around a coding session, such as plan-mode lifecycle and stale Git-lock recovery.',
       'Evals — scenarios that check a skill changes behaviour, rather than only that it installed.',
-      'A declared capability-prefix namespace, which is how two installed harnesses are stopped from both claiming to supply the same skill.'
+      'A declared capability-prefix namespace, which is how two installed backpacks are stopped from both claiming to supply the same skill.'
     ],
     state:
-      'The canonical harness: it is what ki bootstrap installs, and it supplies the core user skills an installation needs to describe itself. It cannot be uninstalled, because an installation without it could not report what it has. The skills are the most built-out part; the MCP shelf is scaffolded, and the servers it will hold currently live in their own repositories.',
+      'The canonical backpack: it is what ki bootstrap installs, and it supplies the core user skills an installation needs to describe itself. It cannot be uninstalled, because an installation without it could not report what it has. The skills are the most built-out part; the MCP shelf is scaffolded, and the servers it will hold currently live in their own repositories.',
     limits:
-      'It publishes capability content and installs nothing. Acquisition, verification and activation belong to the ki CLI, and which capabilities govern a repository belongs to that repository\'s own declaration — installing a harness activates nothing. Public visibility does not grant a licence to use, copy or redistribute.',
-    role: 'Canonical source of capability content and semantics, and of the compatible-harness contract that ki installs against.',
-    usage: 'Install a compatible harness with the ki CLI, then activate only the capabilities a piece of work needs.',
-    repository: 'https://github.com/knowledgeislands/ki-agentic-harness',
+      'It publishes capability content and installs nothing. Acquisition, verification and activation belong to the ki CLI, and which capabilities govern a repository belongs to that repository\'s own declaration — installing a backpack activates nothing. Public visibility does not grant a licence to use, copy or redistribute.',
+    role: 'Canonical source of capability content and semantics, and of the compatible-backpack contract that ki installs against.',
+    usage: 'Install a compatible backpack with the ki CLI, then activate only the capabilities a piece of work needs.',
+    repository: 'https://github.com/knowledgeislands/ki-agent-backpack',
     availability: 'source',
     icon: 'archipelago',
     accent: 'teal'
@@ -146,7 +146,7 @@
       'The process, the registries and the governance are in place; no KIP or KIS document is registered yet. The series start afresh at KIP-000001 and KIS-0001, so today this repository is the mechanism rather than the corpus. It is MIT licensed, text and schemas alike.',
     limits:
       'It formalises what implementations have already proved rather than designing ahead of them, which is why it is deliberately empty rather than speculatively full. The corpus is not published on this site: with nothing Active, there would be nothing to read.',
-    role: 'Canonical source of portable normative contracts. Active specifications constrain the harness and the CLI; neither of them constrains a specification.',
+    role: 'Canonical source of portable normative contracts. Active specifications constrain the backpack and the CLI; neither of them constrains a specification.',
     usage: 'Read the canonical documents and schemas in the repository. The corpus is not yet published on this site.',
     repository: 'https://github.com/knowledgeislands/ki-specifications',
     availability: 'source',
@@ -161,13 +161,13 @@
     kind: 'tool',
     tagline: 'The Knowledge Islands command-line interface.',
     description:
-      'Installs verified compatible harnesses, activates skills in explicit scopes, and hosts the native repository operations that govern a Knowledge Islands checkout.',
+      'Installs verified compatible backpacks, activates skills in explicit scopes, and hosts the native repository operations that govern a Knowledge Islands checkout.',
     problem:
-      'Agent capabilities usually arrive as files copied into place, after which nobody can say which version is where or which rules a given repository is actually subject to. ki replaces copying with declaration: it installs verified harnesses, activates capabilities in explicit scopes, and runs exactly the checks a repository declares — so the governance travels with the code rather than with your machine.',
+      'Agent capabilities usually arrive as files copied into place, after which nobody can say which version is where or which rules a given repository is actually subject to. ki replaces copying with declaration: it installs verified backpacks, activates capabilities in explicit scopes, and runs exactly the checks a repository declares — so the governance travels with the code rather than with your machine.',
     audience:
       'You want this if you work across more than one repository with an agent, or with anyone else, and the answer to "what governs this code" needs to be the same on every clone. For a single personal project with no rules to share, it is more machinery than the problem needs.',
     capabilities: [
-      'bootstrap: one command that detects your installed agent runtimes, installs the verified canonical harness, and links the core user skills.',
+      'bootstrap: one command that detects your installed agent runtimes, installs the verified canonical backpack, and links the core user skills.',
       'skill add and repo skill add: activate a capability for you, or for a repository, in an explicit scope that is never implied.',
       'repo educate, audit and conform: explain what the declared skills expect, check it read-only, then apply the repairs.',
       'manage doctor, diag, outdated and repair: what is installed, what is behind, what is broken, and what to do about it.',
@@ -176,9 +176,9 @@
     state:
       'Published and labelled preview. The command surface is settled enough to build habits on — bootstrap, skill activation and the audit loop have been stable for several releases — and the version number is the honest signal that it is still moving.',
     limits:
-      'It runs only the operations a repository\'s declared skills register, from harnesses whose payloads verified. It will not run a repository-local wrapper script, a copied rubric runner, a package alias, or a checkout that happens to be nearby. That is what makes "the audit passed" a precise claim and a narrow one: it says nothing about rules nobody declared. It originates no capability content and no standard.',
+      'It runs only the operations a repository\'s declared skills register, from backpacks whose payloads verified. It will not run a repository-local wrapper script, a copied rubric runner, a package alias, or a checkout that happens to be nearby. That is what makes "the audit passed" a precise claim and a narrow one: it says nothing about rules nobody declared. It originates no capability content and no standard.',
     role: 'Canonical implementation of the ki command surface. It installs and governs; it originates neither capability content nor portable standards.',
-    usage: 'Install it from the Homebrew tap or the pinned installer below, then run ki bootstrap to install a verified harness and activate the core user skills.',
+    usage: 'Install it from the Homebrew tap or the pinned installer below, then run ki bootstrap to install a verified backpack and activate the core user skills.',
     repository: 'https://github.com/knowledgeislands/tools-ki',
     availability: 'published',
     version: 'v0.13.0',
@@ -485,7 +485,7 @@
     kind: 'platform',
     tagline: 'A runnable personal-controller execution fabric for the ecosystem.',
     description:
-      'Where the agentic harness publishes capabilities an agent can use, the Techne harness provides somewhere for work to actually run: a Kubernetes-based personal controller and execution fabric that a single operator can stand up and keep. It is infrastructure for the ecosystem rather than a source of knowledge or capability semantics.',
+      'Where the agent backpack publishes capabilities an agent can use, the Techne harness provides somewhere for work to actually run: a Kubernetes-based personal controller and execution fabric that a single operator can stand up and keep. It is infrastructure for the ecosystem rather than a source of knowledge or capability semantics.',
     problem:
       'Agentic work eventually needs somewhere to run that is not a terminal you have to keep open. The Techne Harness is that somewhere: a Kubernetes-based personal controller and execution fabric sized for one operator to stand up and keep running, rather than for a platform team to administer.',
     audience:

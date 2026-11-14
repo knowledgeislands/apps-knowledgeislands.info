@@ -44,7 +44,7 @@ The fix is a link, and the question is which one. In order of preference:
 
 1. **From its project's page.** A project guide needs no link written by hand: the Guides block on `/projects/<slug>/` is generated from the `guides` collection, so a page in the right directory with the right directory data is listed automatically. An unreachable guide here nearly always means the binding is wrong, not that a link is missing.
 2. **From its collection index.** For a prompting guide, `/prompting/` is where a reader looking for that page will be.
-3. **From a page that has a reason to send the reader there.** `optional-tools` is reached from the `ki` getting-started guide and from the harness tuning guide, because those are where a reader needs it. That is a better link than one written to satisfy the gate.
+3. **From a page that has a reason to send the reader there.** `optional-tools` is reached from the `ki` getting-started guide and from the backpack tuning guide, because those are where a reader needs it. That is a better link than one written to satisfy the gate.
 4. **From the navigation.** Reserved for a collection index. The navigation is a small fixed set, and a page that needs an entry there is making a claim about the shape of the site, not about its own reachability.
 
 Resist the further option of linking a page from wherever is convenient. A link that exists only to satisfy the gate satisfies the gate and not the reader; if no page has a reason to link to it, the real question is whether the page should exist.

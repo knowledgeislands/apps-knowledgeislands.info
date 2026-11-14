@@ -50,9 +50,9 @@
     description: 'The commands that operate installations, repositories, territory, work and knowledge, and when to use them.'
   },
   {
-    slug: 'ki-agentic-harness',
-    title: 'The Agentic Harness',
-    description: 'How to install, govern and tune the harness, use its skills and maintain the agent environment.'
+    slug: 'ki-agent-backpack',
+    title: 'The Agent Backpack',
+    description: 'How to install, govern and tune the backpack, use its skills and maintain the agent environment.'
   },
   {
     slug: 'prompting',

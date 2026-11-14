@@ -1,4 +1,4 @@
-/** Repository-owned entry point for the harness builder and canonical SVG exporter. */
+/** Repository-owned entry point for the diagram skill's builder and canonical SVG exporter. */
 import { execFileSync } from 'node:child_process'
 import { copyFileSync, existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'

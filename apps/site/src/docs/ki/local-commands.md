@@ -27,7 +27,7 @@ You can inspect what is installed, diagnose a broken user-skill link and preview
 
 ## Find installed capabilities
 
-`ki inventory` lists verified installed harnesses and capabilities alongside declared user skills and registered repositories. `ki harness search <query>` searches only verified installed capability names, kinds and harness identifiers, case-insensitively. A non-empty query is required; no match is a successful empty result.
+`ki inventory` lists verified installed backpacks and capabilities alongside declared user skills and registered repositories. `ki harness search <query>` searches only verified installed capability names, kinds and backpack identifiers, case-insensitively. A non-empty query is required; no match is a successful empty result.
 
 `ki harness outdated` reports comparable newer release evidence and names unavailable evidence rather than claiming freshness. `ki harness missing` reports desired user capabilities without an installed provider. [Update and upgrade](/docs/ki/update-upgrade/) explains the next step when something is stale.
 
@@ -39,9 +39,9 @@ ki doctor
 ki repair --dry-run
 ```
 
-`diag` gives a share-safe installation summary. Add `--full` for resolved paths and identities. `doctor` evaluates user configuration, installed harnesses and managed user-skill links, reports direct-current-directory legacy state and validates a direct `.ki.toml` without resolving its providers. Its complete report distinguishes passes, warnings, failures and skipped checks; health does not establish release freshness.
+`diag` gives a share-safe installation summary. Add `--full` for resolved paths and identities. `doctor` evaluates user configuration, installed backpacks and managed user-skill links, reports direct-current-directory legacy state and validates a direct `.ki.toml` without resolving its providers. Its complete report distinguishes passes, warnings, failures and skipped checks; health does not establish release freshness.
 
-Repair previews by default. After reviewing the plan, `ki repair --apply` creates missing managed user-skill links and repoints stale or dangling symbolic links. It can remove a recognised legacy user-configuration schema marker. It never installs a harness or overwrites an unsafe ordinary file. A repository projection needs `ki repo repair` instead.
+Repair previews by default. After reviewing the plan, `ki repair --apply` creates missing managed user-skill links and repoints stale or dangling symbolic links. It can remove a recognised legacy user-configuration schema marker. It never installs a backpack or overwrites an unsafe ordinary file. A repository projection needs `ki repo repair` instead.
 
 `ki cleanup` currently reports that no eligible managed stale state exists and changes no files. It recognises only a persisted, versioned KI-owned stale format; it does not guess that unfamiliar caches or directories are disposable.
 

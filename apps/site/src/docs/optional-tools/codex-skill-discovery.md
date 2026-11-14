@@ -13,7 +13,7 @@ The `skills` command-line tool can install third-party skills into a user's Code
 
 ## Caveman in Codex
 
-[Caveman](https://github.com/JuliusBrussee/caveman) is an optional agent-local response-compression skill, not a model-traffic proxy or a KI harness dependency.
+[Caveman](https://github.com/JuliusBrussee/caveman) is an optional agent-local response-compression skill, not a model-traffic proxy or a KI backpack dependency.
 
 Use it as a narrow Codex trial first:
 

@@ -15,9 +15,9 @@ sources:
 
 # Prompting OpenAI GPT-5.6 (Sol / Terra / Luna)
 
-How to prompt OpenAI's GPT-5.6 family in Codex CLI. Read the shared [Prompting guides](/docs/prompting/) principles first, then [Prompting OpenAI GPT-5.5](/docs/prompting/gpt-5-5/) — GPT-5.6 inherits the GPT-5-line prompt contract (outcome-first, effort-as-lever, verbosity param, tool preambles); this guide carries only what is distinctive to the 5.6 tiers. The canonical mapping of the portable model _types_ ([`ki-tokenomics`](https://github.com/knowledgeislands/ki-agentic-harness/blob/main/skills/environment/ki-tokenomics/references/standards-tokenomics.md), [ADR-KI-HARNESS-009](https://github.com/knowledgeislands/ki-agentic-harness/blob/main/docs/decisions/ADR-KI-HARNESS-009-portable-model-types-not-vendor-model-names-in-governance-config.md)) is shared, while `ki-tokenomics-chatgpt` owns Codex-hosted runtime evidence.
+How to prompt OpenAI's GPT-5.6 family in Codex CLI. Read the shared [Prompting guides](/docs/prompting/) principles first, then [Prompting OpenAI GPT-5.5](/docs/prompting/gpt-5-5/) — GPT-5.6 inherits the GPT-5-line prompt contract (outcome-first, effort-as-lever, verbosity param, tool preambles); this guide carries only what is distinctive to the 5.6 tiers. The canonical mapping of the portable model _types_ ([`ki-env-tokenomics`](https://github.com/knowledgeislands/ki-agent-backpack/blob/main/skills/environment/ki-env-tokenomics/references/standards-tokenomics.md), [ADR-KI-HARNESS-009](https://github.com/knowledgeislands/ki-agent-backpack/blob/main/docs/decisions/ADR-KI-HARNESS-009-portable-model-types-not-vendor-model-names-in-governance-config.md)) is shared, while `ki-env-tokenomics-chatgpt` owns Codex-hosted runtime evidence.
 
-> **Limited preview (2026-07).** GPT-5.6 is in limited preview (a small set of approved orgs; broader access expected shortly). Tier names, effort rungs, and pricing here are preview-sourced and **volatile** — reconfirm against OpenAI's own docs before relying on them (this file's Sources, and `ki-tokenomics`' `sources.md`, track the reconfirmation).
+> **Limited preview (2026-07).** GPT-5.6 is in limited preview (a small set of approved orgs; broader access expected shortly). Tier names, effort rungs, and pricing here are preview-sourced and **volatile** — reconfirm against OpenAI's own docs before relying on them (this file's Sources, and `ki-env-tokenomics`' `sources.md`, track the reconfirmation).
 
 ## The two axes: tier × effort
 
@@ -44,10 +44,10 @@ There is no separate Codex model for long-horizon autonomy the way Claude has Fa
 | `standard`    | Terra @ `Medium`                  |
 | `fast`        | Luna @ `Light` / `Low`            |
 
-A repo running under Codex declares these in `["knowledgeislands/ki-agentic-harness:ki-tokenomics".model_tier_bindings]` (e.g. `reasoning = "gpt-5.6-sol"`); a config that lists both Claude and Codex models per type (`reasoning = "opus, gpt-5.6-sol"`) is portable across both runtimes, each resolving to the first model it supports.
+A repo running under Codex declares these in `[skills.ki-env-tokenomics.model_tier_bindings]` (e.g. `reasoning = "gpt-5.6-sol"`); a config that lists both Claude and Codex models per type (`reasoning = "opus, gpt-5.6-sol"`) is portable across both runtimes, each resolving to the first model it supports.
 
 ## Prompting notes
 
 - **Re-evaluate effort downward first.** As with GPT-5.5, a sharper prompt plus clear stop rules often recovers what a higher effort would buy — reach for `Extra High` / `Max` / `Ultra` only when the task genuinely needs it, since the top modes consume usage limits fastest.
-- **Match tier to the step, not the session.** Run a bulk fan-out on Luna and escalate only the irreducible reasoning step to Sol — the same barbell discipline `ki-tokenomics` prescribes for Claude tiers.
+- **Match tier to the step, not the session.** Run a bulk fan-out on Luna and escalate only the irreducible reasoning step to Sol — the same barbell discipline `ki-env-tokenomics` prescribes for Claude tiers.
 - **Everything in [Prompting OpenAI GPT-5.5](/docs/prompting/gpt-5-5/) still applies** — the Responses API, `phase` field, verbosity param, and tool-preamble guidance are unchanged across the GPT-5 line.

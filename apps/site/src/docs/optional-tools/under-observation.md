@@ -9,7 +9,7 @@ sources: original
 
 Nothing on this page is adopted here, and a link on it is not a recommendation. These are the areas where something better than the current arrangement might appear — routing requests between models, consolidating MCP servers, compressing context, and other people's answers to the problem Knowledge Islands exists to solve. Each entry is a place an evaluation could start; the five questions on [Optional tools](/docs/optional-tools/) are how one would finish.
 
-These are research leads, not harness dependencies or recommendations. Nothing on this page has been assessed by this site, and a link here is a record of where an evaluation could start — not evidence that a project is secure, active, maintained, compatible, or suitable for Knowledge Islands use.
+These are research leads, not backpack dependencies or recommendations. Nothing on this page has been assessed by this site, and a link here is a record of where an evaluation could start — not evidence that a project is secure, active, maintained, compatible, or suitable for Knowledge Islands use.
 
 ## Model routing and identity
 

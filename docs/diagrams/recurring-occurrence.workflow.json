@@ -7,7 +7,7 @@
     "quality_profile": "showcase",
     "output": "docs/diagrams/recurring-occurrence.html",
     "repository": {
-      "url": "https://github.com/knowledgeislands/ki-agentic-harness",
+      "url": "https://github.com/knowledgeislands/ki-agent-backpack",
       "revision": "8897008fcee7b2c71a22115735ed038efccf7f32"
     }
   },
@@ -180,7 +180,7 @@
       "dot": "emerald",
       "title": "Success needs reviewed evidence",
       "items": [
-        "Only approved closure through ki-accept advances successful-run evidence.",
+        "Only approved closure through ki-work accept advances successful-run evidence.",
         "Failed or cancelled runs never advance it; a scheduler owns no separate backlog."
       ]
     }

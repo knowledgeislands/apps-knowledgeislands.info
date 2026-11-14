@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "slug": "agentic-terms-by-example",
+  "type": "architecture",
+  "source": {
+    "file": "agentic-terms-by-example.architecture.json",
+    "sha256": "5bc8dd87d21dfc6bd8702c6e4a8bf11cc2b07d9d8c6fb5abdd69d5594371e501",
+    "bytes": 8424
+  },
+  "html": {
+    "file": "agentic-terms-by-example.html",
+    "sha256": "b4d8573c45c41b54759423fc98bb7fbf455bb9edb99a9ada120f61723577dbf8",
+    "bytes": 864905
+  },
+  "renderer": {
+    "name": "archify",
+    "version": "3.2.0"
+  }
+}

@@ -24,17 +24,17 @@ eleventyExcludeFromCollections: true
 # estate rename, so its project page moved with the slug.
 /projects/ki-arcadia-principal /projects/ki-principal/ 301
 
-# ki-plugins was retired and archived (KI-ARCADIA-ECO-010); the harness is installed
-# through the ki CLI or npx skills add, so its project page points to the harness.
-/projects/ki-plugins /projects/ki-agentic-harness/ 301
+# ki-plugins was retired and archived (KI-ARCADIA-ECO-010); the backpack is installed
+# through the ki CLI or npx skills add, so its project page points to the backpack.
+/projects/ki-plugins /projects/ki-agent-backpack/ 301
 
 # Tooling was merged into Projects (KI-WEBSITE-SITE-020). A tool is a project that
 # ships a binary, so /tooling/<slug>/ becomes /projects/<slug>/. The two pages
 # that were task guidance filed under released tools follow the guidance move
 # below, so they point at their final home rather than at a redirect.
 # Cloudflare takes the first matching rule, so the named paths precede the splat.
-/tooling/harnesses /docs/ki-agentic-harness/installing-a-harness/ 301
-/tooling/guidance /docs/ki-agentic-harness/repositories/ 301
+/tooling/harnesses /docs/ki-agent-backpack/installing-a-backpack/ 301
+/tooling/guidance /docs/ki-agent-backpack/repositories/ 301
 {% for tool in tools %}/tooling/{{ tool.slug }} /projects/{{ tool.slug }}/ 301
 {% endfor %}/tooling / 301
 
@@ -51,18 +51,18 @@ eleventyExcludeFromCollections: true
 /guidance/cli/update-upgrade /docs/ki/update-upgrade/ 301
 /guidance/cli/operator-guides /docs/ki/operator-guides/ 301
 /guidance/cli/chatgpt-local-capture /docs/ki/chatgpt-local-capture/ 301
-/guidance/harnesses /docs/ki-agentic-harness/installing-a-harness/ 301
-/guidance/repositories /docs/ki-agentic-harness/repositories/ 301
+/guidance/harnesses /docs/ki-agent-backpack/installing-a-backpack/ 301
+/guidance/repositories /docs/ki-agent-backpack/repositories/ 301
 /guidance/skills /docs/skills/what-a-skill-is/ 301
 /guidance/skills/by-outcome /docs/skills/by-outcome/ 301
 /guidance/skills/catalogue /docs/skills/catalogue/ 301
-/guidance/using-ki /docs/ki-agentic-harness/how-the-harness-works/ 301
+/guidance/using-ki /docs/ki-agent-backpack/how-the-backpack-works/ 301
 /guidance/using-ki/command-line-interface /docs/ki/naming-and-locations/ 301
 /guidance/using-ki/getting-started /docs/ki/getting-started/ 301
-/guidance/using-ki/onboarding /docs/ki-agentic-harness/onboarding/ 301
+/guidance/using-ki/onboarding /docs/ki-agent-backpack/onboarding/ 301
 /guidance/using-ki/planning-and-delivery /docs/ways-of-working/roadmap-lifecycle/ 301
-/guidance/using-ki/tuning /docs/ki-agentic-harness/tuning/ 301
-/guidance/using-ki/using-skills /docs/ki-agentic-harness/using-skills/ 301
+/guidance/using-ki/tuning /docs/ki-agent-backpack/tuning/ 301
+/guidance/using-ki/using-skills /docs/ki-agent-backpack/using-skills/ 301
 /guidance/using-ki/recommended-tools /docs/optional-tools/ 301
 
 # What guidance had left was not a collection (KI-WEBSITE-SITE-028). Once the project
@@ -94,16 +94,16 @@ eleventyExcludeFromCollections: true
 /projects/ki/naming-and-locations /docs/ki/naming-and-locations/ 301
 /projects/ki/operator-guides /docs/ki/operator-guides/ 301
 /projects/ki/update-upgrade /docs/ki/update-upgrade/ 301
-/projects/ki-agentic-harness/how-the-harness-works /docs/ki-agentic-harness/how-the-harness-works/ 301
-/projects/ki-agentic-harness/installing-a-harness /docs/ki-agentic-harness/installing-a-harness/ 301
-/projects/ki-agentic-harness/onboarding /docs/ki-agentic-harness/onboarding/ 301
+/projects/ki-agentic-harness/how-the-harness-works /docs/ki-agent-backpack/how-the-backpack-works/ 301
+/projects/ki-agentic-harness/installing-a-harness /docs/ki-agent-backpack/installing-a-backpack/ 301
+/projects/ki-agentic-harness/onboarding /docs/ki-agent-backpack/onboarding/ 301
 /projects/ki-agentic-harness/planning-and-delivery /docs/ways-of-working/roadmap-lifecycle/ 301
-/projects/ki-agentic-harness/repositories /docs/ki-agentic-harness/repositories/ 301
+/projects/ki-agentic-harness/repositories /docs/ki-agent-backpack/repositories/ 301
 /projects/ki-agentic-harness/skill-catalogue /docs/skills/catalogue/ 301
 /projects/ki-agentic-harness/skills /docs/skills/what-a-skill-is/ 301
 /projects/ki-agentic-harness/skills-by-outcome /docs/skills/by-outcome/ 301
-/projects/ki-agentic-harness/tuning /docs/ki-agentic-harness/tuning/ 301
-/projects/ki-agentic-harness/using-skills /docs/ki-agentic-harness/using-skills/ 301
+/projects/ki-agentic-harness/tuning /docs/ki-agent-backpack/tuning/ 301
+/projects/ki-agentic-harness/using-skills /docs/ki-agent-backpack/using-skills/ 301
 
 # The prompting guides, Get Started, Contribute and Optional Tools kept their page names and
 # gained the /docs/ prefix. A splat covers the thirteen model pages; the bare path needs its
@@ -122,3 +122,16 @@ eleventyExcludeFromCollections: true
 /docs/ki-agentic-harness/skills-by-outcome /docs/skills/by-outcome/ 301
 /docs/ki-agentic-harness/skill-catalogue /docs/skills/catalogue/ 301
 /docs/ki-agentic-harness/planning-and-delivery /docs/ways-of-working/roadmap-lifecycle/ 301
+
+# The KI Agentic Harness was renamed the KI Agent Backpack on 14 November 2026, and its
+# Docs section and project page moved with it. The named rules above already point at the
+# new addresses, and the two pages named for the harness took the backpack's name; these
+# catch the rest. Cloudflare takes the first matching rule, so the
+# named /docs/ki-agentic-harness/ and /projects/ki-agentic-harness/ paths above precede
+# these splats, and each bare path needs its own rule because a splat does not match it.
+/docs/ki-agentic-harness/installing-a-harness /docs/ki-agent-backpack/installing-a-backpack/ 301
+/docs/ki-agentic-harness/how-the-harness-works /docs/ki-agent-backpack/how-the-backpack-works/ 301
+/docs/ki-agentic-harness/* /docs/ki-agent-backpack/:splat 301
+/docs/ki-agentic-harness /docs/ki-agent-backpack/how-the-backpack-works/ 301
+/projects/ki-agentic-harness/* /projects/ki-agent-backpack/ 301
+/projects/ki-agentic-harness /projects/ki-agent-backpack/ 301

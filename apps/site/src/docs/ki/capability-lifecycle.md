@@ -20,35 +20,35 @@ sources:
 
 Two things happen when a capability starts working for you, and `ki` keeps them apart on purpose.
 
-**Installing a harness** puts a set of capabilities on your machine, verified and inventoried. Nothing about your repositories changes; nothing starts applying.
+**Installing a backpack** puts a set of capabilities on your machine, verified and inventoried. Nothing about your repositories changes; nothing starts applying.
 
 **Activating a skill** declares that one of those capabilities applies - either to you, in every repository you work in, or to one repository, for everyone who works in it.
 
-A capability that is installed but not activated is available and inert. That is the normal, intended resting state for most of what a harness ships.
+A capability that is installed but not activated is available and inert. That is the normal, intended resting state for most of what a backpack ships.
 
 ## Why the split exists
 
 The alternative - install implies activate - fails in both directions.
 
-It over-applies: a harness ships dozens of skills, and installing it to get one would silently subject every repository on the machine to the rest. Governance you did not choose is governance you cannot reason about, and an audit that fails on rules you never adopted teaches you to ignore audits.
+It over-applies: a backpack ships dozens of skills, and installing it to get one would silently subject every repository on the machine to the rest. Governance you did not choose is governance you cannot reason about, and an audit that fails on rules you never adopted teaches you to ignore audits.
 
 And it under-records: if installation were the declaration, a repository could not state what governs it. It states that in its own `.ki.toml`, which travels with the repository, so a colleague cloning it gets the same governance without having made any choices on their machine.
 
-So the harness is a _supply_ of capability and the declaration is the _decision_. The commands below are two vocabularies over that one distinction.
+So the backpack is a _supply_ of capability and the declaration is the _decision_. The commands below are two vocabularies over that one distinction.
 
-## Installing and inspecting harnesses
+## Installing and inspecting backpacks
 
-Harnesses are addressed by identifier in `owner/name` form - `knowledgeislands/ki-agentic-harness`, for instance. These commands never accept a bare skill name or a capability-qualified target; a lifecycle operation acts on a whole payload.
+Backpacks are addressed by identifier in `owner/name` form - `knowledgeislands/ki-agent-backpack`, for instance. These commands never accept a bare skill name or a capability-qualified target; a lifecycle operation acts on a whole payload.
 
 | Command | Effect |
 | --- | --- |
-| `ki harness list` | Lists the compatible harnesses already installed. Changes nothing. |
-| `ki harness info <harness-id>` | Shows one installed harness's capability inventory. Changes nothing. |
-| `ki harness install <harness-id>` | Installs a configured harness, making its skills and subagents available to add. |
-| `ki harness reinstall <harness-id>` | Replaces one inactive installed harness from its verified archive. |
-| `ki harness uninstall <harness-id>` | Removes one non-canonical harness whose payload directories `ki` recognises. |
+| `ki harness list` | Lists the compatible backpacks already installed. Changes nothing. |
+| `ki harness info <harness-id>` | Shows one installed backpack's capability inventory. Changes nothing. |
+| `ki harness install <harness-id>` | Installs a configured backpack, making its skills and subagents available to add. |
+| `ki harness reinstall <harness-id>` | Replaces one inactive installed backpack from its verified archive. |
+| `ki harness uninstall <harness-id>` | Removes one non-canonical backpack whose payload directories `ki` recognises. |
 
-`reinstall` replaces a harness only after the replacement archive passes integrity and capability inspection, so a corrupted or capability-losing archive cannot take the place of a working one.
+`reinstall` replaces a backpack only after the replacement archive passes integrity and capability inspection, so a corrupted or capability-losing archive cannot take the place of a working one.
 
 Lifecycle commands apply once validation passes and have no `--dry-run`. Commands that offer previews include `ki repair`, `ki repo conform`, acquisition imports and repository store operations; check the selected command's help before expecting a preview.
 
@@ -74,15 +74,15 @@ The two scopes are managed independently. Removing a user skill does not touch a
 
 Three refusals enforce the boundary. Each looks like an obstruction the first time and is the mechanism working.
 
-**A harness that supplies an active user skill cannot be reinstalled or uninstalled.** The declaration would be left pointing at nothing. Remove it first with `ki skill remove`, then repeat the lifecycle command. Repository declarations are managed separately, through `ki repo skill remove`.
+**A backpack that supplies an active user skill cannot be reinstalled or uninstalled.** The declaration would be left pointing at nothing. Remove it first with `ki skill remove`, then repeat the lifecycle command. Repository declarations are managed separately, through `ki repo skill remove`.
 
-**The canonical harness cannot be uninstalled.** `knowledgeislands/ki-agentic-harness` is what `ki bootstrap` installs and what the core user skills come from; removing it would leave an installation that cannot describe itself.
+**The canonical backpack cannot be uninstalled.** `knowledgeislands/ki-agent-backpack` is what `ki bootstrap` installs and what the core user skills come from; removing it would leave an installation that cannot describe itself.
 
-**A development-linked harness must be restored before it is reinstalled.** If `ki dev local on` has replaced a harness's root with a local checkout, run `ki dev local off` to reinstate the verified archive first. Otherwise the reinstall would be operating on a working tree rather than on a payload with integrity evidence.
+**A development-linked backpack must be restored before it is reinstalled.** If `ki dev local on` has replaced a backpack's root with a local checkout, run `ki dev local off` to reinstate the verified archive first. Otherwise the reinstall would be operating on a working tree rather than on a payload with integrity evidence.
 
 ## A worked sequence
 
-Adding a capability from a harness you do not yet have:
+Adding a capability from a backpack you do not yet have:
 
 ```bash
 ki harness install example/harness     # make its capabilities available

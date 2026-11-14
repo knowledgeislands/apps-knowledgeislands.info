@@ -4,13 +4,13 @@
   "type": "workflow",
   "source": {
     "file": "decision-to-record.workflow.json",
-    "sha256": "261567451c4c8b32c82ce9a7ce7fb7707c941bf47dfeb9cb38a2b344be09451d",
-    "bytes": 2903
+    "sha256": "42c2af7bf51ca3f4de1f2dfa6e6315e6ddab26c51793dda9a8ee1d4767cd32a5",
+    "bytes": 2902
   },
   "html": {
     "file": "decision-to-record.html",
-    "sha256": "f16f112870e845a5244a705991e72a6afd78d27965661f954aba3ad674235874",
-    "bytes": 816698
+    "sha256": "8acdd1c04e24c4da2ce61435e8d4477b479de73b86ee383cdd6c2e8bc2b4cf74",
+    "bytes": 816689
   },
   "renderer": {
     "name": "archify",

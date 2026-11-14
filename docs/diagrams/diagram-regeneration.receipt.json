@@ -4,13 +4,13 @@
   "type": "workflow",
   "source": {
     "file": "diagram-regeneration.workflow.json",
-    "sha256": "7eee0f5ccfbc7cc39ae142dd8d24479d581d568ae0c9d0182e81dd227cf4e35e",
-    "bytes": 2901
+    "sha256": "87f284e5da8ae9d6fddbf63a3a096559d96a7cf4efc798b5372c0258dd7644ab",
+    "bytes": 2900
   },
   "html": {
     "file": "diagram-regeneration.html",
-    "sha256": "31bc4dd458a944261d06b5be6cba2a3cc11ac83fc0201223f689ea405dbadea7",
-    "bytes": 816004
+    "sha256": "44e0b22ebe088c029e90f0e6ed79c11018b5036331138a7ed1c481db38b56823",
+    "bytes": 815995
   },
   "renderer": {
     "name": "archify",

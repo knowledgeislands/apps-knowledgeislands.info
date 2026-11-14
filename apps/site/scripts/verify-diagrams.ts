@@ -35,7 +35,7 @@ export function checkPage(
   const failures: string[] = []
   const frontmatter = readFrontmatter(markdown)
   const block = frontmatter.kind === 'block' ? frontmatter.block : ''
-  // Read each source independently: a ref on a tools-ki entry cannot satisfy a harness citation.
+  // Read each source independently: a ref on a tools-ki entry cannot satisfy a backpack citation.
   const sources = block.match(/^sources:\s*\n((?:[ \t]+[^\n]*\n?)*)/m)?.[1] ?? ''
   const entries = sources.split(/^ {2}- /m).slice(1)
   const unquote = (value: string) => value.trim().replace(/^(['"])(.*)\1$/, '$2')
@@ -51,7 +51,7 @@ export function checkPage(
     if (!isSite && !isVendored) failures.push(`${path}: unknown figure ${slug}`)
     if (isSite && isVendored) failures.push(`${path}: ambiguous figure ${slug}`)
     if (isVendored && !matchingSource)
-      failures.push(`${path}: ${slug} requires a harness source at ${vendored.source.ref}`)
+      failures.push(`${path}: ${slug} requires a backpack source at ${vendored.source.ref}`)
   }
   return failures
 }
@@ -89,7 +89,7 @@ export function verifyDiagrams(root = repositoryRoot): string[] {
   }
   for (const [slug, entry] of Object.entries(vendored.diagrams)) {
     for (const name of [entry.svg, entry.html, entry.receipt]) {
-      if (!existsSync(resolve(site, 'src/assets/diagrams/vendored/ki-agentic-harness', name)))
+      if (!existsSync(resolve(site, 'src/assets/diagrams/vendored/ki-agent-backpack', name)))
         failures.push(`${slug}: missing vendored ${name}`)
     }
   }
@@ -110,7 +110,7 @@ export function verifyDiagrams(root = repositoryRoot): string[] {
       failures.push(...inlineFigureFailures(readFileSync(file, 'utf8'), relative(site, file)))
     }
   }
-  // The canonical receipt checker cross-checks the same fingerprints where the harness skill is installed. The
+  // The canonical receipt checker cross-checks the same fingerprints where the backpack skill is installed. The
   // deploy environment holds only this repository, so its gate is the in-repo check above.
   const skill = findDiagramSkill()
   if (skill) {

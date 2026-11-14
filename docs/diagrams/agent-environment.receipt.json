@@ -4,13 +4,13 @@
   "type": "architecture",
   "source": {
     "file": "agent-environment.architecture.json",
-    "sha256": "c1a74a5518f60f77dce72a8d084229bc4e49bd59cdcf198c0fc69b4d4bc39e32",
-    "bytes": 5439
+    "sha256": "08c782a6fdcf83978b2b3a01a8425b861c52d06215f32c3c2c36aa617da62673",
+    "bytes": 5442
   },
   "html": {
     "file": "agent-environment.html",
-    "sha256": "6134f0f0175bdb93ef4f9123aec8d7cd4d6f1947a3b1f652d8de6466b907eda5",
-    "bytes": 825343
+    "sha256": "ded9e07f2331ebfec48248119e8c08531b1026a73520c38376651bbb193df970",
+    "bytes": 825335
   },
   "renderer": {
     "name": "archify",

@@ -6,7 +6,7 @@
     "locale": "en",
     "output": "+/diagrams/coordinating-turn/coordinating-turn.html",
     "quality_profile": "showcase",
-    "repository": {"url": "https://github.com/knowledgeislands/ki-agentic-harness", "revision": "8897008fcee7b2c71a22115735ed038efccf7f32"}
+    "repository": {"url": "https://github.com/knowledgeislands/ki-agent-backpack", "revision": "8897008fcee7b2c71a22115735ed038efccf7f32"}
   },
   "participants": [
     {"id": "owner", "type": "external", "label": "Owner", "sublabel": "the supervisor", "icon": "person", "sources": [{"path": "skills/change-management/ki-coordination/references/standards-coordination.md", "line": 68, "end_line": 89}]},

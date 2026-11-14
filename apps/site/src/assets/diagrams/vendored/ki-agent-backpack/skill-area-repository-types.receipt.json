@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "slug": "skill-area-repository-types",
+  "type": "architecture",
+  "source": {
+    "file": "skill-area-repository-types.architecture.json",
+    "sha256": "80b44aa54c60d55eeab669c4c69d3b4f3833e5a63a58a098055765e69653e5eb",
+    "bytes": 15375
+  },
+  "html": {
+    "file": "skill-area-repository-types.html",
+    "sha256": "6d21aee336cf35e3b2b3a8ffff417452c7991dd8d51d730b1ccc2b153c35a67b",
+    "bytes": 858571
+  },
+  "renderer": {
+    "name": "archify",
+    "version": "3.2.0"
+  }
+}

@@ -57,7 +57,7 @@ You can inspect an exchange between islands, preserve an authorised source captu
 
 ## What it is
 
-A trade is a directional exchange of work or knowledge between registered repositories. `ki-trades` governs it and `ki-trade` operates one repository's side. New trade submissions are currently on hold under the pinned harness. Existing records remain supported for receipt, decisions, observation and release.
+A trade is a directional exchange of work or knowledge between registered repositories. `ki-trades` governs it and `ki-trade` operates one repository's side. New trade submissions are currently on hold under the pinned backpack. Existing records remain supported for receipt, decisions, observation and release.
 
 Acquisition preserves selected source material as a capture package. `ki-acquire` governs its scope, fidelity and omissions; `ki acquire` runs enabled adapters. Knowledge Base search serves a third need: finding evidence already held in local notes, using a rebuildable index governed by `ki-repo-kb`.
 
@@ -69,7 +69,7 @@ Trade routes and standing grants come from the territory Capital's policy. Sende
 
 The inventory retains `prepare`, `submit` and `abandon` for the preparation lifecycle, but their presence does not lift the current hold. Standing knowledge intake likewise needs an active Capital grant and commit-pinned source evidence; it gives no general peer-write authority.
 
-Acquisition adapters are published by installed harness skills and enabled by repository declarations. ChatGPT consumes a user-prepared local directory. Granola reads a configured connection and routes meeting captures by the receiver's declared selectors. At this release, the committed capture and Git history are the record: import does not maintain a separate ledger, checkpoint or journal.
+Acquisition adapters are published by installed backpack skills and enabled by repository declarations. ChatGPT consumes a user-prepared local directory. Granola reads a configured connection and routes meeting captures by the receiver's declared selectors. At this release, the committed capture and Git history are the record: import does not maintain a separate ledger, checkpoint or journal.
 
 Search requires an explicitly registered KB with its own assigned trust boundary and independently provisioned qmd engine. `index` builds a derived generation; `search` validates candidates against current local source content before exposing bounded results; `status` reports the configured mapping and endpoint reachability.
 

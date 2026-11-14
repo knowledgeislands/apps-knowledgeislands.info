@@ -48,7 +48,7 @@ So a tool is a `kind: 'tool'` entry like any other, rendered by the same templat
 
 One project has a richer home on this site than a generated page: `ki-website` is the site itself. That entry declares `route`, its card links there, and no `/projects/ki-website/` page is generated. Without `route`, a page is generated and the card points at it.
 
-`ki-agentic-harness` used to declare one too, pointing at the harness guidance. It does not any more: the guides moved into a Docs section rather than the project pointing at a guide, so it is an ordinary generated page with the reader fields every other entry needs ([Docs sections](docs-sections.md)). Reach for `route` only when the destination is genuinely not a project page — a `route` to a guide is a sign the guide belongs in a section.
+`ki-agent-backpack` used to declare one too, pointing at the backpack guidance. It does not any more: the guides moved into a Docs section rather than the project pointing at a guide, so it is an ordinary generated page with the reader fields every other entry needs ([Docs sections](docs-sections.md)). Reach for `route` only when the destination is genuinely not a project page — a `route` to a guide is a sign the guide belongs in a section.
 
 ### What a generated page needs
 

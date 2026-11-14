@@ -4,13 +4,13 @@
   "type": "sequence",
   "source": {
     "file": "coordinating-turn.sequence.json",
-    "sha256": "753d03b3ad057aedcf3d1faf309585d640db931d4d65cba7bc474b21e2693f7f",
-    "bytes": 4537
+    "sha256": "9725fbbe10cfa62469ca10a0f76aa9bd3402e04f7b4df4456c6014a70ac75b4c",
+    "bytes": 4536
   },
   "html": {
     "file": "coordinating-turn.html",
-    "sha256": "3d883fdc11b8d319af5c0e59cf5a84d8e0ddada7ff1cac86a940a52900bbf682",
-    "bytes": 820890
+    "sha256": "9b88745be770d26f884bd13b22dc91a14cf5488ce7341ca99e1f7ce2ed7079e4",
+    "bytes": 820882
   },
   "renderer": {
     "name": "archify",

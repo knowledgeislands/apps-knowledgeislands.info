@@ -1,6 +1,6 @@
 # Website diagrams
 
-This directory holds the website-owned Archify sources, SVG figures, interactive HTML viewers and their receipts. The manifest records what each diagram answers and when to review it. Harness diagrams are vendored separately into the site assets.
+This directory holds the website-owned Archify sources, SVG figures, interactive HTML viewers and their receipts. The manifest records what each diagram answers and when to review it. Backpack diagrams are vendored separately into the site assets.
 
 Regenerate a site diagram with `bun run --cwd apps/site diagrams:build -- --svg <slug>`. See [the diagram pipeline](../guides/developer/diagrams.md) for vendoring, embedding and verification.
 
@@ -12,7 +12,7 @@ What are the eighteen `ki` command groups, and what does each operate on? The fi
 
 ## Agent environment
 
-How do portable MCP inventory and context policy reach Claude and Codex? The figure shows intended configuration and bounded repository evidence, not live-session health. It follows the binding and tokenomics skills at harness `8897008f`.
+How do portable MCP inventory and context policy reach Claude and Codex? The figure shows intended configuration and bounded repository evidence, not live-session health. It follows the binding and tokenomics skills at backpack `8897008f`.
 
 [![Portable inventory, bindings and context policy](agent-environment.svg)](agent-environment.html)
 
@@ -30,43 +30,43 @@ What are the seven states a piece of work can be in, and which move takes it fro
 
 ## Work folder
 
-What does a work folder hold, how long does each file stay, and who may write into it? The figure follows the work-package standard at harness `8897008f`: the closed list inside the folder, and the entry points outside it.
+What does a work folder hold, how long does each file stay, and who may write into it? The figure follows the work-package standard at backpack `8897008f`: the closed list inside the folder, and the entry points outside it.
 
 [![The work folder's closed list and its entry points](work-folder.svg)](work-folder.html)
 
 ## Coordinating turn
 
-What happens in one coordinating turn, from an owner message through launch, wake and receive to the owner report? The figure follows the coordination standard at harness `8897008f`.
+What happens in one coordinating turn, from an owner message through launch, wake and receive to the owner report? The figure follows the coordination standard at backpack `8897008f`.
 
 [![One coordinating turn from owner message to owner report](coordinating-turn.svg)](coordinating-turn.html)
 
 ## Background run
 
-How does a background run travel from brief to prune, and which file carries each step? The figure follows the background-run standard at harness `8897008f`.
+How does a background run travel from brief to prune, and which file carries each step? The figure follows the background-run standard at backpack `8897008f`.
 
 [![A background run from brief to prune](background-run.svg)](background-run.html)
 
 ## Record lifecycle
 
-Which statuses does a work record pass through from capture to pruning, and which skill owns each move? The figure follows the repository roadmaps standard at harness `8897008f`.
+Which statuses does a work record pass through from capture to pruning, and which skill owns each move? The figure follows the repository roadmaps standard at backpack `8897008f`.
 
 [![A work record from triage to pruned](record-lifecycle.svg)](record-lifecycle.html)
 
 ## Work design loop
 
-How does an undecided proposal become owner decisions and a piloted rollout? The workflow follows the work-design standard at harness `8897008f`.
+How does an undecided proposal become owner decisions and a piloted rollout? The workflow follows the work-design standard at backpack `8897008f`.
 
 [![Work design loop](work-design-loop.svg)](work-design-loop.html)
 
 ## Trade
 
-How do local trade copies reach receipt, receiver disposition and eligible release without transferring ownership? The sequence follows the trade standard at harness `8897008f`.
+How do local trade copies reach receipt, receiver disposition and eligible release without transferring ownership? The sequence follows the trade standard at backpack `8897008f`.
 
 [![Trade](trade.svg)](trade.html)
 
 ## Recurring occurrence
 
-How is a recurring obligation adopted, scheduled, run, evidenced and reviewed? The workflow follows the recurring-work and Activity standards at harness `8897008f`.
+How is a recurring obligation adopted, scheduled, run, evidenced and reviewed? The workflow follows the recurring-work and Activity standards at backpack `8897008f`.
 
 [![Recurring occurrence](recurring-occurrence.svg)](recurring-occurrence.html)
 
@@ -90,54 +90,54 @@ How does one tending pass run, from the owner asking for it to the light report 
 
 ## Knowledge Base zones
 
-How do an island's five zones, directional working areas, index notes and principal overlay fit together? The figure follows the pinned harness at `8897008f`.
+How do an island's five zones, directional working areas, index notes and principal overlay fit together? The figure follows the pinned backpack at `8897008f`.
 
 [![Five zones, working areas and the principal overlay](kb-zones.svg)](kb-zones.html)
 
 ## Query, save and update
 
-How does a session query evidence, save or update a note, and produce a digest? The figure follows the pinned harness at `8897008f`.
+How does a session query evidence, save or update a note, and produce a digest? The figure follows the pinned backpack at `8897008f`.
 
 [![The knowledge loop in a session](query-save-update.svg)](query-save-update.html)
 
 ## Acquisition flow
 
-How do selected source captures and bounded public signals reach an island without granting adoption authority? The figure follows the pinned harness at `8897008f`.
+How do selected source captures and bounded public signals reach an island without granting adoption authority? The figure follows the pinned backpack at `8897008f`.
 
 [![Selected sources and authorised signals into an island](acquisition-flow.svg)](acquisition-flow.html)
 
 ## Recap and handover
 
-How does a grounded live-session recap reconcile changes, decisions, unfinished work and learning routes? The figure follows the pinned harness at `8897008f`.
+How does a grounded live-session recap reconcile changes, decisions, unfinished work and learning routes? The figure follows the pinned backpack at `8897008f`.
 
 [![A grounded recap and its learning routes](recap-handover.svg)](recap-handover.html)
 
 ## Repository contract, shapes and overlays
 
-How do the universal repository contract, primary shapes and supporting overlays compose? This figure follows the governing skills at harness `8897008f`.
+How do the universal repository contract, primary shapes and supporting overlays compose? This figure follows the governing skills at backpack `8897008f`.
 
 [![Repository contract, shapes and overlays](repository-shapes.svg)](repository-shapes.html)
 
 ## Educate, audit, conform and re-audit
 
-How does a repository move from declared foundations through approved repairs to a checked result? This figure follows the governing skills at harness `8897008f`.
+How does a repository move from declared foundations through approved repairs to a checked result? This figure follows the governing skills at backpack `8897008f`.
 
 [![Educate, audit, conform and re-audit](audit-conform.svg)](audit-conform.html)
 
 ## From a logged decision to durable rationale
 
-When does a logged decision warrant a typed record, and how is its rationale kept durable? This figure follows the governing skills at harness `8897008f`.
+When does a logged decision warrant a typed record, and how is its rationale kept durable? This figure follows the governing skills at backpack `8897008f`.
 
 [![From a logged decision to durable rationale](decision-to-record.svg)](decision-to-record.html)
 
 ## Three layers of repository standards
 
-Which rules come from the universal contract, applicable shapes and capabilities, and repository choices? This figure follows the governing skills at harness `8897008f`.
+Which rules come from the universal contract, applicable shapes and capabilities, and repository choices? This figure follows the governing skills at backpack `8897008f`.
 
 [![Three layers of repository standards](standards-layers.svg)](standards-layers.html)
 
 ## Source, build, export, receipt and freshness
 
-How is a traced diagram rebuilt and checked as a complete maintained set? This figure follows the governing skills at harness `8897008f`.
+How is a traced diagram rebuilt and checked as a complete maintained set? This figure follows the governing skills at backpack `8897008f`.
 
 [![Source, build, export, receipt and freshness](diagram-regeneration.svg)](diagram-regeneration.html)

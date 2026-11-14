@@ -24,7 +24,7 @@ When a new Project or shared model still has an undecided shape, you can test th
 
 ## What it is
 
-Work design is a five-stage loop for a subject whose shape is open and whose wrong choices would be costly to unwind. It can shape a new Project, a theme, a model shared by several repositories or an estate-wide migration before any finite work record exists. `ki-work-design` carries that loop from the owner's proposal to approved decisions and a rollout of ordinary work records.
+Work design is a five-stage loop for a subject whose shape is open and whose wrong choices would be costly to unwind. It can shape a new Project, a theme, a model shared by several repositories or an estate-wide migration before any finite work record exists. `ki-work design` carries that loop from the owner's proposal to approved decisions and a rollout of ordinary work records.
 
 The loop belongs to named work. A Project's design sits with that Project's work; a new Project or a concern that no Project holds yet sits with territory work. Its brief, reviews, report and decisions share a descriptive filename prefix in `+/_WORK/<id>/design/`. Each is committed as it is produced, so another session can resume from the first missing stage.
 
@@ -34,7 +34,7 @@ The loop belongs to named work. A Project's design sits with that Project's work
 2. **Independent reviews.** At least two reviewers, using different models or runtimes, form their views before reading another review. They work read-only, check the brief against its sources and mark Agree, Differ or Add against every numbered point. A difference needs evidence.
 3. **Merged report.** The orchestrator settles disputes using cited evidence and governing standards. The report gives corrections, the proposed model, an agree-and-differ table, a rollout plan and a changes-after-review log. Unsettled choices go to the owner as tagged decisions with lettered options and a recommendation, normally no more than about eight.
 4. **Owner decisions.** A decisions file keeps the owner's words verbatim against the report's tags. It quotes any authority grant, its completion target and its push and prune scope. The owner's words govern wherever they differ from the report.
-5. **Piloted rollout.** `ki-next` captures the records the decisions call for and selects one pilot. The pilot is delivered before any parallel wave, and its lessons go into every wave's brief before it starts.
+5. **Piloted rollout.** `ki-work next` captures the records the decisions call for and selects one pilot. The pilot is delivered before any parallel wave, and its lessons go into every wave's brief before it starts.
 
 The report is a synthesis of evidence, not a vote. Review diversity tests the proposal from different positions; neither agreement between reviewers nor an orchestrator's preference decides for the owner.
 
@@ -42,7 +42,7 @@ The report is a synthesis of evidence, not a vote. Review diversity tests the pr
 
 On the fictional Tern Holm island, Mara wants a shared harbour-observation model for several repositories. She names the territory work that holds the design and supplies her proposal. An agent writes the brief, two independent reviewers test it, and the merged report makes the unresolved choices clear enough for Mara to decide.
 
-Mara approves a model and a bounded pilot. The agent records her words, captures the pilot through `ki-next` and readies it through `ki-plan`. A pilot that exposes a missing boundary supplies a lesson for the next brief; it does not silently expand the grant. Later waves use `ki-batch` only within the approved envelope, and closure uses `ki-accept` only under the authority given.
+Mara approves a model and a bounded pilot. The agent records her words, captures the pilot through `ki-work next` and readies it through `ki-work plan`. A pilot that exposes a missing boundary supplies a lesson for the next brief; it does not silently expand the grant. Later waves are delivered as frozen waves only within an unattended window's recorded grant, and closure uses `ki-work accept` only under the authority given.
 
 The design stops if the proposal, owning work or work folder is missing, if fewer than two independent reviews exist, or if continuing would make a decision on the owner's behalf. A delivery record that still needs a choice returns that choice to the owner.
 

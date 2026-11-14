@@ -93,7 +93,7 @@ describe('checkFeatureAreas', () => {
     const failures = checkFeatureAreas([area()], skills, [
       page('ways-of-working', 'roadmap-lifecycle'),
       page('skills', 'catalogue'),
-      page('ki-agentic-harness', 'tuning')
+      page('ki-agent-backpack', 'tuning')
     ])
     assert.deepEqual(failures, [])
   })

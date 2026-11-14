@@ -51,7 +51,7 @@ A committed preparation has `phase: preparing` and remains mutable. The receiver
 
 The receiver explicitly receives the submitted record into `+/_TRADES/<sender-owner>/<sender-repository>/TRD-01234567.md`, preserving the sender's content and adding only permitted local fields. Its copy has `phase: received`, starts at `decision_status: unconsidered` and records the committed sender reference when available. **Receipt proves delivery only.**
 
-The receiver then uses `ki-next` for an exact human-confirmed disposition. It may consider the record, park it or request clarification. A work trade may be applied as one bounded local change or adopted into separately governed local work. A knowledge trade may be retained in a named canonical artefact. Either kind may be declined or superseded. Adoption does not complete the linked work, and receipt does not adopt it.
+The receiver then uses `ki-work next` for an exact human-confirmed disposition. It may consider the record, park it or request clarification. A work trade may be applied as one bounded local change or adopted into separately governed local work. A knowledge trade may be retained in a named canonical artefact. Either kind may be declined or superseded. Adoption does not complete the linked work, and receipt does not adopt it.
 
 The sender chooses what it needs to observe before releasing its outbound copy:
 

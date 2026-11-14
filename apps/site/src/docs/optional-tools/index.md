@@ -8,7 +8,7 @@ sources: original
 
 # Optional tools
 
-Optional user- and system-level tools that affect a person's machine rather than a governed repository. Skills, MCP servers, and day-to-day sessions can benefit from them, but none is required merely to read or audit the harness. [Install and get started](/docs/ki/getting-started/) explains `ki bootstrap`, explicit skill activation, and when optional user-environment setup is appropriate.
+Optional user- and system-level tools that affect a person's machine rather than a governed repository. Skills, MCP servers, and day-to-day sessions can benefit from them, but none is required merely to read or audit the backpack. [Install and get started](/docs/ki/getting-started/) explains `ki bootstrap`, explicit skill activation, and when optional user-environment setup is appropriate.
 
 The pages that follow cover one tool or one class of tool each: [chezmoi](/docs/optional-tools/chezmoi/) for machine configuration, [headroom-ai](/docs/optional-tools/headroom-ai/) for context cost, [MCP access](/docs/optional-tools/mcp-access/) for the servers an agent can reach, [Codex skill discovery](/docs/optional-tools/codex-skill-discovery/) for a gap in one runtime, and [what is being watched](/docs/optional-tools/under-observation/) but not adopted. Read this page first, because the questions below are what decided each of them.
 

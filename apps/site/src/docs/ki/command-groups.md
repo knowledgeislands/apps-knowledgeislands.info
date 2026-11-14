@@ -32,7 +32,7 @@ The root invocation and `ki help` operate on the command tree. Use them to disco
 
 ## Installation
 
-`ki bootstrap` establishes your user environment: detected agents, the canonical harness and core user skills. Use it on a new machine, or add `--refresh` after changing the agent runtimes you use; [getting started](/docs/ki/getting-started/) carries the first-run sequence.
+`ki bootstrap` establishes your user environment: detected agents, the canonical backpack and core user skills. Use it on a new machine, or add `--refresh` after changing the agent runtimes you use; [getting started](/docs/ki/getting-started/) carries the first-run sequence.
 
 ## Local management
 
@@ -62,13 +62,13 @@ Repository selectors choose the physical checkouts a `ki repo` action will opera
 
 `ki registry` records and lists canonical repository identities and their local checkout roots. Use it when a checkout must become visible to territory selection, trades or KB search, remembering that registration records presence rather than conformance.
 
-## Harness management
+## Backpack management
 
 `ki harness` installs, inspects, reinstalls or removes compatible capability payloads. Use it when a skill's provider is missing or needs inspection; installing its payload and activating its skills remain separate decisions.
 
 ## Trades
 
-`ki repo trade` inspects routes and operates each repository's local side of an exchange. New submissions are currently on hold under the pinned harness; use the supported receipt and observation commands for existing records, with [trades and acquisition](/docs/ki/trades-and-acquisition/) explaining the boundary.
+`ki repo trade` inspects routes and operates each repository's local side of an exchange. New submissions are currently on hold under the pinned backpack; use the supported receipt and observation commands for existing records, with [trades and acquisition](/docs/ki/trades-and-acquisition/) explaining the boundary.
 
 ## Territory management
 
@@ -92,6 +92,6 @@ Repository selectors choose the physical checkouts a `ki repo` action will opera
 
 ## Development
 
-`ki dev` switches installed harnesses between verified archives and remembered local development checkouts, and checks or regenerates skill surfaces. Use it while maintaining a harness; ordinary users normally stay on the verified installation.
+`ki dev` switches installed backpacks between verified archives and remembered local development checkouts, and checks or regenerates skill surfaces. Use it while maintaining a backpack; ordinary users normally stay on the verified installation.
 
 [Every ki command](/docs/ki/commands/) publishes all {{ cliCommands.counts.commands }} entries from the release manual, including arguments and options. Your installed executable's `--help` remains the authority for the version on your machine.

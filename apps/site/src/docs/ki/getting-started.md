@@ -49,7 +49,7 @@ ki diag
 ki bootstrap
 ```
 
-This detects which agent runtimes are installed on your machine, creates the KI configuration, installs the verified canonical harness `knowledgeislands/ki-agentic-harness`, and links the core user skills - `ki-bootstrap`, `ki-next`, `ki-plan` and `ki-recap` - into your agent's user skill directory. Existing agent configuration is reused rather than replaced.
+This detects which agent runtimes are installed on your machine, creates the KI configuration, installs the verified canonical backpack `knowledgeislands/ki-agent-backpack`, and links the core user skills - `ki-keystone` and `ki-work` - into your agent's user skill directory. Existing agent configuration is reused rather than replaced.
 
 **Check it worked:**
 
@@ -57,7 +57,7 @@ This detects which agent runtimes are installed on your machine, creates the KI 
 ki doctor
 ```
 
-`doctor` checks your configuration, the agents it found, the installed harnesses, and the user-skill links, and tells you what to do about anything broken. If it reports that no agent runtime was detected, that is the usual first-run surprise: `ki` configures agents it can see, so install your agent first and then run `ki bootstrap --refresh`.
+`doctor` checks your configuration, the agents it found, the installed backpacks, and the user-skill links, and tells you what to do about anything broken. If it reports that no agent runtime was detected, that is the usual first-run surprise: `ki` configures agents it can see, so install your agent first and then run `ki bootstrap --refresh`.
 
 `--refresh` is also the command for later, when you add an agent or want the recorded inventory reconciled against reality.
 
@@ -90,11 +90,11 @@ ki repo diag
 Scope is the decision, and it is not subtle: **user scope is about you, repository scope is about the codebase.**
 
 ```bash
-ki skill add ki-recap              # user scope: how you work, everywhere
+ki skill add ki-coordination       # user scope: how you work, everywhere
 ki repo skill add ki-authoring     # repository scope: what governs this code
 ```
 
-Use a **bare skill name**. Harness-qualified keys such as `knowledgeislands/ki-agentic-harness:ki-authoring` are invalid - the provider is declared once under `[repo]` in `.ki.toml`, and the skill is declared by name under `[skills]`. A bare name resolves when exactly one installed harness provides it; if two do, the command stops rather than guessing.
+Use a **bare skill name**. Backpack-qualified keys such as `knowledgeislands/ki-agent-backpack:ki-authoring` are invalid - the provider is declared once under `[repo]` in `.ki.toml`, and the skill is declared by name under `[skills]`. A bare name resolves when exactly one installed backpack provides it; if two do, the command stops rather than guessing.
 
 Add `--replace` to overwrite an existing declaration rather than fail on it, and `--repo <path>` to act on a repository other than the one you are standing in.
 
@@ -133,7 +133,7 @@ Two situations come up often enough to name.
 
 **An existing `.ki/` directory.** Repository-vendored `.ki/` state is migration evidence from an older layout, not an execution fallback - the host never runs anything from it. Leave unfamiliar legacy state in place until its native replacement is proven rather than recreating it or removing it piecemeal.
 
-**A skill that needs a harness you do not have.** Install the harness first, then declare the skill:
+**A skill that needs a backpack you do not have.** Install the backpack first, then declare the skill:
 
 ```bash
 ki harness install <harness-id>
@@ -144,7 +144,7 @@ Installing makes capabilities available for explicit activation; it activates no
 
 ## Where to go next
 
-- [Use skills](/docs/ki-agentic-harness/using-skills/) - how a skill actually fires once it is active, which is the part that changes your day.
-- [Onboard a repository](/docs/ki-agentic-harness/onboarding/) - the trust, activation, CI, and migration boundaries in full.
+- [Use skills](/docs/ki-agent-backpack/using-skills/) - how a skill actually fires once it is active, which is the part that changes your day.
+- [Onboard a repository](/docs/ki-agent-backpack/onboarding/) - the trust, activation, CI, and migration boundaries in full.
 - [How the command groups divide](/docs/ki/command-groups/) - what each group of commands can change, and [every command there is](/docs/ki/commands/).
 - [Optional tools](/docs/optional-tools/) - machine-level additions such as chezmoi and mcporter, and whether you need them.

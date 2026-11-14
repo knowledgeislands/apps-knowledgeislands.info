@@ -4,7 +4,7 @@
  * `src/_data/featureAreas.json5` is the planning view of the documentation: the areas a reader
  * must be able to understand, each mapped to the skills and commands that provide it and to the
  * page that explains it. The Docs sections are the reading view. Nothing in the build would
- * notice the two drifting apart: an area could name a skill the harness has since renamed, point
+ * notice the two drifting apart: an area could name a skill the backpack has since renamed, point
  * at a page that was moved, or a page could be written in Ways of working that no area claims
  * and so carries no Provided by box. This gate holds the two views together.
  *
@@ -13,7 +13,7 @@
  *   - every area has a unique slug and a title;
  *   - every skill an area names exists in the vendored catalogue, `src/_data/skillCatalogue.json5`,
  *     so a rename upstream fails here when the catalogue is refreshed rather than publishing a
- *     name the harness no longer has;
+ *     name the backpack no longer has;
  *   - every `page` an area names resolves to a Markdown page under `src/docs/` whose permalink
  *     is that path;
  *   - every Markdown page under the Skills, Ways of working, Knowledge and Standards sections is
@@ -22,7 +22,7 @@
  *
  * Commands are not checked against the CLI inventory. The inventory is vendored at its own pin,
  * and an area may name a command group the pinned release spells differently; the skill names
- * are the contract the harness guarantees.
+ * are the contract the backpack guarantees.
  *
  * See docs/guides/developer/feature-areas.md.
  */

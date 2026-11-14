@@ -102,7 +102,7 @@
           <rect x="658.425" y="428" width="137.39999999999998" height="18" rx="3" fill="#f5efe0"/>
           <text x="727.125" y="438" font-size="11px" text-anchor="middle" fill="#4a5568">Confirm disposition</text>
         </g>
-        <text x="660.75" y="466" font-size="7px" fill="#4a5568">Human-confirmed through ki-next</text>
+        <text x="660.75" y="466" font-size="7px" fill="#4a5568"><tspan x="660.75" dy="0">Human-confirmed through ki-work</tspan><tspan x="660.75" dy="11">next</tspan></text>
         </g>
 
         <g data-edge-from="sender" data-edge-to="inbound" data-edge-label="Read policy evidence" data-edge-key="8" data-edge-id="observe">

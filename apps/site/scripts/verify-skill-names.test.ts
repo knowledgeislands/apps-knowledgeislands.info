@@ -1,6 +1,13 @@
 import assert from 'node:assert/strict'
 import { describe, test } from 'node:test'
-import { ALLOWED_NAMES, checkPage, inventoryTokens, skillTokens, stripFences } from './verify-skill-names.ts'
+import {
+  ALLOWED_NAMES,
+  checkPage,
+  inventoryTokens,
+  skillTokens,
+  stripFences,
+  stripSourcePaths
+} from './verify-skill-names.ts'
 
 const catalogue = new Set(['ki-work', 'ki-delegation', 'ki-repo-kb'])
 const inventory = new Set(['ki-meta', 'ki-checkpoint'])
@@ -15,6 +22,25 @@ describe('stripFences', () => {
     const body = '~~~\nki-gone\n~~~\nkept\n````\n```\nki-also-gone\n```\n````\n'
     assert.equal(stripFences(body).includes('ki-gone'), false)
     assert.equal(stripFences(body).includes('kept'), true)
+  })
+})
+
+describe('stripSourcePaths', () => {
+  test('skips a pinned source path but still reads the rest of the frontmatter and the body', () => {
+    const body = [
+      '---',
+      'title: Using ki-work',
+      'sources:',
+      '  - repository: knowledgeislands/ki-agent-backpack',
+      '    path: skills/change-management/ki-gone/SKILL.md',
+      '    ref: 0000000000000000000000000000000000000000',
+      '---',
+      '',
+      '    path: ki-kept in an indented body line',
+      ''
+    ].join('\n')
+    assert.equal(stripSourcePaths(body).includes('ki-gone'), false)
+    assert.deepEqual(skillTokens(body), ['ki-work', 'ki-agent-backpack', 'ki-kept'])
   })
 })
 
@@ -40,7 +66,7 @@ describe('inventoryTokens', () => {
 
 describe('checkPage', () => {
   test('passes catalogue skills, inventory tokens and allowed names', () => {
-    const body = '`ki-work`, `.ki-meta/`, `ki-agentic-harness`, `[skills.ki-self]`'
+    const body = '`ki-work`, `.ki-meta/`, `ki-agent-backpack`, `[skills.ki-self]`'
     assert.deepEqual(checkPage('src/docs/x.md', body, catalogue, inventory), [])
   })
 

@@ -7,7 +7,7 @@ import JSON5 from 'json5'
 
 export const siteRoot = resolve(dirname(fileURLToPath(import.meta.url)), '../..')
 export const repositoryRoot = resolve(siteRoot, '../..')
-export const harnessRepository = 'knowledgeislands/ki-agentic-harness'
+export const harnessRepository = 'knowledgeislands/ki-agent-backpack'
 export const slugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
 const types = ['architecture', 'workflow', 'sequence', 'dataflow', 'lifecycle']
 
@@ -80,7 +80,7 @@ export function findDiagramSkill(): string | undefined {
 export function diagramSkill(): string {
   const found = findDiagramSkill()
   if (!found)
-    throw new Error('Install the KI harness diagram skill or set KI_DIAGRAMS_HOME to its ki-diagrams directory')
+    throw new Error('Install the KI backpack diagram skill or set KI_DIAGRAMS_HOME to its ki-diagrams directory')
   return found
 }
 

@@ -4,13 +4,13 @@
   "type": "lifecycle",
   "source": {
     "file": "record-lifecycle.lifecycle.json",
-    "sha256": "7624bfbbb9c802461767add33690aaf61f5512f1860fab79dcd480ab67a27572",
-    "bytes": 4791
+    "sha256": "a293f4af00cf94caa21dc96d166dbc8472ce1f02b07ab8e26eb501a991a8e324",
+    "bytes": 4823
   },
   "html": {
     "file": "record-lifecycle.html",
-    "sha256": "9e36b3679edb0ea1027ee612a4d9f5c0259da941536b73bbf51a2513d6ecda2d",
-    "bytes": 830949
+    "sha256": "ee6d52db24192a7221664a569afaf1759ed0a1a3d98bb3dbab7229cee831f6a6",
+    "bytes": 830970
   },
   "renderer": {
     "name": "archify",

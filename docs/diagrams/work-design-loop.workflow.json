@@ -7,7 +7,7 @@
     "quality_profile": "showcase",
     "output": "docs/diagrams/work-design-loop.html",
     "repository": {
-      "url": "https://github.com/knowledgeislands/ki-agentic-harness",
+      "url": "https://github.com/knowledgeislands/ki-agent-backpack",
       "revision": "8897008fcee7b2c71a22115735ed038efccf7f32"
     }
   },

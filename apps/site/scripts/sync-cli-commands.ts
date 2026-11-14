@@ -21,7 +21,7 @@
  * by the ordinary provenance sweep, because the page still declares `man/ki.1`
  * at this ref in its `sources`.
  *
- * Unlike the harness catalogue, roff carries no marker naming this block as a
+ * Unlike the backpack catalogue, roff carries no marker naming this block as a
  * published contract, so the parse asserts on structure it can check and
  * refuses anything it does not recognise rather than degrading quietly. The
  * durable fix is a machine-readable command projection from `tools-ki`; see

@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "slug": "skill-area-environment",
+  "type": "architecture",
+  "source": {
+    "file": "skill-area-environment.architecture.json",
+    "sha256": "6323acd97dd8769c4bea4c6336495b11ae956ea4359bd5cefccf14f03f342353",
+    "bytes": 9358
+  },
+  "html": {
+    "file": "skill-area-environment.html",
+    "sha256": "84db86e3bf6e0d46dc01c086a5c2323c7b7acbf6400dab44431448b02e1e8cb6",
+    "bytes": 832921
+  },
+  "renderer": {
+    "name": "archify",
+    "version": "3.2.0"
+  }
+}

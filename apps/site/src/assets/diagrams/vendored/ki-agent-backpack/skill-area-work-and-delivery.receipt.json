@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "slug": "skill-area-work-and-delivery",
+  "type": "architecture",
+  "source": {
+    "file": "skill-area-work-and-delivery.architecture.json",
+    "sha256": "5b5b75dde8ac37f4209052e61c304a0788c54593c19c518d6bd55f84953ebab4",
+    "bytes": 7790
+  },
+  "html": {
+    "file": "skill-area-work-and-delivery.html",
+    "sha256": "57fd3e1cf3b9367f47f3800ef5832f7b142b8191c67bf7104fcc11dbfdc02bd6",
+    "bytes": 829490
+  },
+  "renderer": {
+    "name": "archify",
+    "version": "3.2.0"
+  }
+}

@@ -3,9 +3,9 @@
 // GENERATED FILE — do not edit. Regenerate with:
 //   bun run --cwd apps/site sync:skills -- --ref <tag-or-commit>
 //
-// Parsed from knowledgeislands/ki-agentic-harness skills/README.md between the
-// ki-repo-harness:capability-catalogue markers, which that standard names normatively, and from
-// skills/repo-structure/ki-repo-harness/scripts/rubric/contexts/skill-functions.ts,
+// Parsed from knowledgeislands/ki-agent-backpack skills/README.md between the
+// ki-repo-backpack:capability-catalogue markers, which that standard names normatively, and from
+// skills/repository/ki-repo-backpack/scripts/rubric/contexts/skill-functions.ts,
 // the functional-area table its skill diagrams are drawn from, read at the same commit. The second
 // file is recorded as the snapshot's `roster`, the key verify:provenance holds a second file under.
 //
@@ -13,18 +13,19 @@
 // src/docs/skills/catalogue.md; verify:provenance fails the build when they disagree.
 // See docs/guides/developer/page-provenance.md.
 //
-// Snapshot taken at 8897008fcee7b2c71a22115735ed038efccf7f32.
+// Snapshot taken at bb232e00707bd7c5c1fc261c514f7cbcdf7ab545.
 {
   "source": {
-    "repository": "knowledgeislands/ki-agentic-harness",
+    "repository": "knowledgeislands/ki-agent-backpack",
     "path": "skills/README.md",
-    "roster": "skills/repo-structure/ki-repo-harness/scripts/rubric/contexts/skill-functions.ts",
-    "ref": "8897008fcee7b2c71a22115735ed038efccf7f32"
+    "roster": "skills/repository/ki-repo-backpack/scripts/rubric/contexts/skill-functions.ts",
+    "ref": "bb232e00707bd7c5c1fc261c514f7cbcdf7ab545"
   },
   "counts": {
-    "total": 64,
-    "governance": 53,
-    "process": 11
+    "total": 65,
+    "governance": 60,
+    "process": 4,
+    "knowledge": 1
   },
   "areas": [
     {
@@ -46,12 +47,22 @@
           "title": "Skills and harness",
           "skills": [
             "ki-skills",
-            "ki-repo-harness"
+            "ki-repo-backpack"
           ]
         },
         {
+          "title": "Knowledge",
           "skills": [
-            "ki-bootstrap"
+            "ki-knowledge-graph",
+            "ki-agentic-systems"
+          ]
+        },
+        {
+          "title": "Guilds",
+          "skills": [
+            "ki-keystone",
+            "ki-design",
+            "ki-env"
           ]
         }
       ]
@@ -97,7 +108,7 @@
             "ki-delegation",
             "ki-work-package",
             "ki-coordination",
-            "ki-work-design"
+            "ki-meeting"
           ]
         },
         {
@@ -123,17 +134,6 @@
             "ki-work-github-issues",
             "ki-work-linear",
             "ki-work-recurring"
-          ]
-        },
-        {
-          "title": "Delivery cycle",
-          "skills": [
-            "ki-next",
-            "ki-plan",
-            "ki-batch",
-            "ki-implement",
-            "ki-accept",
-            "ki-recap"
           ]
         }
       ]
@@ -174,8 +174,9 @@
           "skills": [
             "ki-repo-specifications",
             "ki-repo-mcp",
-            "ki-repo-harness",
+            "ki-repo-backpack",
             "ki-repo-tools",
+            "ki-repo-packages",
             "ki-repo-homebrew-tap",
             "ki-repo-dotfiles-chezmoi"
           ]
@@ -193,7 +194,7 @@
             "ki-subagents",
             "ki-subagents-claude",
             "ki-subagents-chatgpt",
-            "ki-agent-coordination-paperclip"
+            "ki-delegation-orca"
           ]
         }
       ]
@@ -207,25 +208,26 @@
         {
           "title": "MCP binding",
           "skills": [
-            "ki-binding",
-            "ki-binding-claude",
-            "ki-binding-chatgpt",
-            "ki-binding-chezmoi"
+            "ki-env-binding",
+            "ki-env-binding-claude",
+            "ki-env-binding-chatgpt",
+            "ki-env-binding-chezmoi"
           ]
         },
         {
           "title": "Tokenomics",
           "skills": [
-            "ki-tokenomics",
-            "ki-tokenomics-claude",
-            "ki-tokenomics-chatgpt"
+            "ki-env-tokenomics",
+            "ki-env-tokenomics-claude",
+            "ki-env-tokenomics-chatgpt"
           ]
         },
         {
           "title": "Housekeeping",
           "skills": [
-            "ki-housekeeping-claude",
-            "ki-housekeeping-chatgpt"
+            "ki-env-housekeeping",
+            "ki-env-housekeeping-claude",
+            "ki-env-housekeeping-chatgpt"
           ]
         }
       ]
@@ -238,9 +240,12 @@
       "groups": [
         {
           "skills": [
+            "ki-dodecakrisis",
             "ki-acquire",
             "ki-acquire-chatgpt",
-            "ki-acquire-granola"
+            "ki-acquire-granola",
+            "ki-knowledge-graph",
+            "ki-exchange-dynamics"
           ]
         }
       ]
@@ -253,7 +258,7 @@
       "groups": [
         {
           "skills": [
-            "ki-pulse",
+            "ki-acquire",
             "ki-agentic-radar",
             "ki-model-radar"
           ]
@@ -268,6 +273,7 @@
       "groups": [
         {
           "skills": [
+            "ki-design",
             "ki-design-system",
             "ki-design-inspiration"
           ]
@@ -279,39 +285,6 @@
     {
       "name": "Acquire",
       "skills": [
-        {
-          "name": "ki-acquire",
-          "description": "Govern source-independent knowledge capture: supplied scope, honest coverage, faithful preservation, exact required originals, verified destinations and dispatch by Git move, with the capture package as the only record. Use for common acquisition rules; ki-acquire-chatgpt and ki-acquire-granola own their provider contracts.",
-          "kind": "Governance",
-          "fields": [
-            {
-              "label": "Kind",
-              "value": "Governance"
-            },
-            {
-              "label": "Applicability",
-              "value": "Declaration Only"
-            },
-            {
-              "label": "Arguments",
-              "value": "`audit <repo> | conform <repo> | educate <repo> | help | refresh`"
-            },
-            {
-              "label": "Dependencies",
-              "value": "None"
-            },
-            {
-              "label": "Runtime",
-              "value": "Portable"
-            }
-          ],
-          "areas": [
-            {
-              "slug": "acquire",
-              "title": "Acquire"
-            }
-          ]
-        },
         {
           "name": "ki-acquire-chatgpt",
           "description": "Govern ChatGPT conversation capture: honest digest or full-thread coverage, routing from project and conversation evidence, and the capture end point recorded in the digest's README front matter. Use for ChatGPT capture or audit; `ki-acquire` owns the common contract.",
@@ -347,7 +320,7 @@
         },
         {
           "name": "ki-acquire-granola",
-          "description": "Acquire Granola meetings through read-only MCP calls: complete date windows, folder routing, transcripts and screenshots, one capture per meeting UUID, skipping on Acquired-folder membership. Use for Granola import or audit; `ki-acquire` owns the common contract, tools-ki owns CLI execution, and marking or retirement needs separate approval.",
+          "description": "Acquire Granola meetings through read-only MCP calls: complete date windows, folder routing, transcripts and screenshots, one capture per meeting UUID, skipping on Acquired or Captured membership. Use for Granola import or audit; `ki-acquire` owns the common contract, the Inbox's `ki-muninn` owns CLI execution, and marking or retirement needs separate approval.",
           "kind": "Governance",
           "fields": [
             {
@@ -379,21 +352,92 @@
           ]
         },
         {
-          "name": "ki-pulse",
-          "description": "Capture a submitted link or scan bounded public sources, then triage current signals into read or learn, watch, act, or discard. Use for link intake or what changed; `ki-agentic-radar` and `ki-model-radar` own durable landscape posture, while `ki-next` owns follow-on work.",
-          "kind": "Process",
+          "name": "ki-dodecakrisis",
+          "description": "Govern D12, the Dodecakrisis: the ten sorting rules, mailbox queues and tags, guarded rules with a D12 prefix, protected labels read from the mail server, age-based sweeps, Deposit routes and the learning loop that turns corrections into proposed rules. Use to set up, audit, sort, sweep or improve a D12 mailbox; `ki-acquire` owns what happens after Deposit.",
+          "kind": "Governance",
           "fields": [
             {
               "label": "Kind",
-              "value": "Process"
+              "value": "Governance"
             },
             {
               "label": "Applicability",
-              "value": "Invocation Only"
+              "value": "Declaration Only"
             },
             {
               "label": "Arguments",
-              "value": "`capture <url-or-source> [reason] | help | scan <interest-or-query> [sources] | triage [current-signals]`"
+              "value": "`audit <repo> | conform <repo> | educate <repo> | sort <mailbox> | sweep <mailbox> | learn <mailbox> | help | refresh`"
+            },
+            {
+              "label": "Dependencies",
+              "value": "None"
+            },
+            {
+              "label": "Runtime",
+              "value": "Portable"
+            }
+          ],
+          "areas": [
+            {
+              "slug": "acquire",
+              "title": "Acquire"
+            }
+          ]
+        },
+        {
+          "name": "ki-exchange-dynamics",
+          "description": "Analyse a conversation, chat, thread, meeting or negotiation for its dynamics: chronology, sentiment kept apart from tension, phases and participants, as one evidence-linked analysis validated against a schema, then render it as an infographic or report. Use to analyse an exchange or audit an analysis; `ki-acquire` owns capture and `ki-diagrams` system diagrams.",
+          "kind": "Governance",
+          "fields": [
+            {
+              "label": "Kind",
+              "value": "Governance"
+            },
+            {
+              "label": "Applicability",
+              "value": "Declaration Only"
+            },
+            {
+              "label": "Arguments",
+              "value": "`audit <repo> | conform <repo> | educate <repo> | analyse <exchange> | render <analysis> | help | refresh`"
+            },
+            {
+              "label": "Dependencies",
+              "value": "None"
+            },
+            {
+              "label": "Runtime",
+              "value": "Portable"
+            }
+          ],
+          "areas": [
+            {
+              "slug": "acquire",
+              "title": "Acquire"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Agentic Systems",
+      "skills": [
+        {
+          "name": "ki-agentic-radar",
+          "description": "Maintain an evidence-backed radar for agentic protocols, interfaces, organisations, architectures, research, and vendor terms. Use for maturity, interoperability, or stance; `ki-agentic-systems` defines the terms, `ki-model-radar` owns models, `ki-acquire pulse` discovers signals, and `ki-work next` owns follow-on work.",
+          "kind": "Governance",
+          "fields": [
+            {
+              "label": "Kind",
+              "value": "Governance"
+            },
+            {
+              "label": "Applicability",
+              "value": "Declaration Only"
+            },
+            {
+              "label": "Arguments",
+              "value": "`audit | conform | educate | help | refresh`"
             },
             {
               "label": "Dependencies",
@@ -410,15 +454,10 @@
               "title": "Signals"
             }
           ]
-        }
-      ]
-    },
-    {
-      "name": "Agentic Systems",
-      "skills": [
+        },
         {
-          "name": "ki-agent-coordination-paperclip",
-          "description": "Govern how Paperclip coordinates agents around a Knowledge Island group or archipelago while repositories remain knowledge and work authority. Use for Company Operational Review, bootstrap/rebootstrap, or designing and auditing Paperclip projects, agents, tasks, direct sessions, or execution workspaces for KI; not for Paperclip API mechanics.",
+          "name": "ki-delegation",
+          "description": "Govern agent delegation: routine background runs on the agent host's own subagents (run packet, prompt shape, authority footers, decisions log, coordination, concurrency, monitoring) and durable packets for approved high-risk handoffs. Use when delegating to background agents or writing a delegation brief; `ki-coordination` governs the coordinating work that starts them.",
           "kind": "Governance",
           "fields": [
             {
@@ -431,11 +470,45 @@
             },
             {
               "label": "Arguments",
-              "value": "`audit <arrangement> | conform <arrangement> | educate <arrangement> | help | refresh`"
+              "value": "`audit <repo> | conform <repo> | educate <work-item> | help | refresh`"
             },
             {
               "label": "Dependencies",
-              "value": "`ki-git`"
+              "value": "None"
+            },
+            {
+              "label": "Runtime",
+              "value": "Portable"
+            }
+          ],
+          "areas": [
+            {
+              "slug": "coordination",
+              "title": "Coordination",
+              "group": "Delegation and programme"
+            }
+          ]
+        },
+        {
+          "name": "ki-delegation-orca",
+          "description": "Start, wait on, steer, stop and close Orca supervised workers as a KI delegation launcher, on attended Macs for a work package that opts in. Use when a coordinator dispatches runs through `orca orchestration`; `ki-delegation` owns the portable run contract, `ki-coordination` the coordinating work, and Orca's own `orchestration` skill its command mechanics.",
+          "kind": "Process",
+          "fields": [
+            {
+              "label": "Kind",
+              "value": "Process"
+            },
+            {
+              "label": "Applicability",
+              "value": "Invocation Only"
+            },
+            {
+              "label": "Arguments",
+              "value": "`start <brief> | wait | status | steer <dispatch> | stop <dispatch> | close <dispatch> | recover | help`"
+            },
+            {
+              "label": "Dependencies",
+              "value": "`ki-delegation`, `ki-coordination`"
             },
             {
               "label": "Runtime",
@@ -450,8 +523,41 @@
           ]
         },
         {
+          "name": "ki-model-radar",
+          "description": "Maintain an evidence-backed radar for models and model-agent routes. Use for model comparisons, benchmark relevance, recommendations, or retirements. Use `ki-agentic-radar` for broader agentic standards, `ki-acquire pulse` for signal discovery, and `ki-env-tokenomics` for model purpose.",
+          "kind": "Governance",
+          "fields": [
+            {
+              "label": "Kind",
+              "value": "Governance"
+            },
+            {
+              "label": "Applicability",
+              "value": "Declaration Only"
+            },
+            {
+              "label": "Arguments",
+              "value": "`audit | conform | educate | help | refresh`"
+            },
+            {
+              "label": "Dependencies",
+              "value": "None"
+            },
+            {
+              "label": "Runtime",
+              "value": "Portable"
+            }
+          ],
+          "areas": [
+            {
+              "slug": "signals",
+              "title": "Signals"
+            }
+          ]
+        },
+        {
           "name": "ki-subagents",
-          "description": "Define or assess runtime-neutral KI subagent roles: identity, delegation purpose, instructions, lane, grounding, hand-offs, orchestration, and evidence. Use before a native projection; use `ki-subagents-claude` or `ki-subagents-chatgpt` for runtime files.",
+          "description": "Define or assess runtime-neutral KI subagent roles: identity, delegation purpose, instructions, lane, grounding, hand-offs, orchestration, and evidence. Use before a native projection; use `ki-subagents-claude` or `ki-subagents-chatgpt` for runtime files, and `ki-agentic-systems` for what a subagent is.",
           "kind": "Governance",
           "fields": [
             {
@@ -551,24 +657,24 @@
       ]
     },
     {
-      "name": "Change Management",
+      "name": "Authoring",
       "skills": [
         {
-          "name": "ki-accept",
-          "description": "Close a reviewed local work record as done, cancel an open record with an approved resolution, or prune explicitly selected eligible terminal records. Use only with human approval; use `ki-implement` for delivery, `ki-plan` for readiness, and `ki-next` for selection or adoption.",
-          "kind": "Process",
+          "name": "ki-decision-records",
+          "description": "Create or audit typed KI Decision Records for durable rationale and authority. Use `ki-specs` for accepted behaviour, `ki-guides` for procedures, and `ki-work-roadmap` for future delivery.",
+          "kind": "Governance",
           "fields": [
             {
               "label": "Kind",
-              "value": "Process"
+              "value": "Governance"
             },
             {
               "label": "Applicability",
-              "value": "Invocation Only"
+              "value": "Detected"
             },
             {
               "label": "Arguments",
-              "value": "`accept <work> | prune <work-record-or-glob>... | help`"
+              "value": "`audit [dir] | conform [dir] | consolidate [dir] | educate [dir] | help | new <scope> \"<title>\" | refresh`"
             },
             {
               "label": "Dependencies",
@@ -581,49 +687,15 @@
           ],
           "areas": [
             {
-              "slug": "work-and-delivery",
-              "title": "Work and delivery",
-              "group": "Delivery cycle"
+              "slug": "records-and-code",
+              "title": "Records and code",
+              "group": "Records"
             }
           ]
         },
         {
-          "name": "ki-batch",
-          "description": "Prepare and run one bounded authority envelope over an exact set of Ready work records in one repository. Use for an approved autonomous roadmap window or synergistic independent set; individual planning, delivery, and closure remain governed by `ki-plan`, `ki-implement`, and `ki-accept`.",
-          "kind": "Process",
-          "fields": [
-            {
-              "label": "Kind",
-              "value": "Process"
-            },
-            {
-              "label": "Applicability",
-              "value": "Invocation Only"
-            },
-            {
-              "label": "Arguments",
-              "value": "`batch <work>... | batch outcome <outcome> | run <batch-authorisation> | help`"
-            },
-            {
-              "label": "Dependencies",
-              "value": "None"
-            },
-            {
-              "label": "Runtime",
-              "value": "Portable"
-            }
-          ],
-          "areas": [
-            {
-              "slug": "work-and-delivery",
-              "title": "Work and delivery",
-              "group": "Delivery cycle"
-            }
-          ]
-        },
-        {
-          "name": "ki-coordination",
-          "description": "Govern coordinating work under the Knowledge Islands work model: the responsive coordinator and its turn budget, the work levels and forms with their ids, openers and bootstrap, the seven states and the receive words, the Summary, recap since the mark and full summary, the report heading, the closing glyph banner and thread line, On hold with its hold report, the work package and its message queue, route receipt and the inbox check, re-anchoring after compaction, decision classes and their life cycle, design notes, Finished, the working rules, and the three reply forms every session uses. Use while coordinating territory or Project work to give a summary, recap, full summary or banner or strike the mark, or to decide how any session replies; `ki-delegation` owns the background runs the coordinator launches.",
+          "name": "ki-diagrams",
+          "description": "Create, audit or refresh a repository's living Archify diagrams: committed sources and SVGs, the manifest, privacy, type choice and freshness. Use to keep diagrams that explain a system; use `ki-authoring` for prose and `ki-guides` for where a guide embeds a figure.",
           "kind": "Governance",
           "fields": [
             {
@@ -636,41 +708,7 @@
             },
             {
               "label": "Arguments",
-              "value": "`audit <repo> | conform <repo> | drain | educate <repo> | full-summary | help | hold | mark | recap | receive | refresh | resume | send | summary`"
-            },
-            {
-              "label": "Dependencies",
-              "value": "`ki-delegation`, `ki-work-package`"
-            },
-            {
-              "label": "Runtime",
-              "value": "Portable"
-            }
-          ],
-          "areas": [
-            {
-              "slug": "coordination",
-              "title": "Coordination",
-              "group": "Delegation and programme"
-            }
-          ]
-        },
-        {
-          "name": "ki-implement",
-          "description": "Deliver one approved Ready local work record from immutable baseline through verification and Awaiting review. Use to implement planned work; it never selects, replans, self-accepts, prunes, pushes, releases, or expands authority.",
-          "kind": "Process",
-          "fields": [
-            {
-              "label": "Kind",
-              "value": "Process"
-            },
-            {
-              "label": "Applicability",
-              "value": "Invocation Only"
-            },
-            {
-              "label": "Arguments",
-              "value": "`implement <work-item> | help`"
+              "value": "`audit [dir] | conform [dir] | help | educate [dir] | refresh`"
             },
             {
               "label": "Dependencies",
@@ -683,117 +721,20 @@
           ],
           "areas": [
             {
-              "slug": "work-and-delivery",
-              "title": "Work and delivery",
-              "group": "Delivery cycle"
+              "slug": "fundamentals",
+              "title": "Fundamentals",
+              "group": "Repository and writing"
+            },
+            {
+              "slug": "records-and-code",
+              "title": "Records and code",
+              "group": "Writing and figures"
             }
           ]
         },
         {
-          "name": "ki-next",
-          "description": "Capture substantive prospective work as unadopted triage records, or select, adopt, promote, defer, hold, and release work in the shared queue. Use when new work emerges or deciding what comes next; use `ki-plan` for readiness and `ki-trades` for trade transport.",
-          "kind": "Process",
-          "fields": [
-            {
-              "label": "Kind",
-              "value": "Process"
-            },
-            {
-              "label": "Applicability",
-              "value": "Invocation Only"
-            },
-            {
-              "label": "Arguments",
-              "value": "`next [--review] | defer <item> <horizon> | help`"
-            },
-            {
-              "label": "Dependencies",
-              "value": "None"
-            },
-            {
-              "label": "Runtime",
-              "value": "Portable"
-            }
-          ],
-          "areas": [
-            {
-              "slug": "work-and-delivery",
-              "title": "Work and delivery",
-              "group": "Delivery cycle"
-            }
-          ]
-        },
-        {
-          "name": "ki-plan",
-          "description": "Shape selected Now or Next draft work in the local roadmap or KB Streams adapter until it is Ready. Use to plan or prepare implementation; it does not capture, select, implement, close, or prune work.",
-          "kind": "Process",
-          "fields": [
-            {
-              "label": "Kind",
-              "value": "Process"
-            },
-            {
-              "label": "Applicability",
-              "value": "Invocation Only"
-            },
-            {
-              "label": "Arguments",
-              "value": "`plan <work>... | help`"
-            },
-            {
-              "label": "Dependencies",
-              "value": "None"
-            },
-            {
-              "label": "Runtime",
-              "value": "Portable"
-            }
-          ],
-          "areas": [
-            {
-              "slug": "work-and-delivery",
-              "title": "Work and delivery",
-              "group": "Delivery cycle"
-            }
-          ]
-        },
-        {
-          "name": "ki-recap",
-          "description": "Recap the live session by summarising changes, decisions, touched files, unfinished work, and durable learning routes. Use for a session recap or outstanding-work handoff; use `ki-next` to select backlog work and housekeeping skills for historical session acquisition.",
-          "kind": "Process",
-          "fields": [
-            {
-              "label": "Kind",
-              "value": "Process"
-            },
-            {
-              "label": "Applicability",
-              "value": "Invocation Only"
-            },
-            {
-              "label": "Arguments",
-              "value": "`checkpoint <thread> | help | recap [--runtime detect|claude|codex] [--transcript <session-file>]`"
-            },
-            {
-              "label": "Dependencies",
-              "value": "`ki-authoring`"
-            },
-            {
-              "label": "Runtime",
-              "value": "Portable"
-            }
-          ],
-          "areas": [
-            {
-              "slug": "work-and-delivery",
-              "title": "Work and delivery",
-              "group": "Delivery cycle"
-            }
-          ]
-        },
-        {
-          "name": "ki-work",
-          "description": "Select and audit a repository's KI forward-work adapter and shared lifecycle vocabulary. Use when choosing between local roadmap, KB Streams, GitHub Issues, or Linear; the selected adapter owns record shape and process skills own lifecycle actions.",
+          "name": "ki-guides",
+          "description": "Create or audit repository-local guides for the practical how of using, operating, contributing to, or maintaining a system. Use `ki-decision-records` for why, `ki-specs` for accepted behaviour, `ki-work-roadmap` for future work, and `ki-authoring` for style.",
           "kind": "Governance",
           "fields": [
             {
@@ -802,11 +743,11 @@
             },
             {
               "label": "Applicability",
-              "value": "Declaration Only"
+              "value": "Detected"
             },
             {
               "label": "Arguments",
-              "value": "`audit <repo> | conform <repo> | educate <repo> | help | refresh`"
+              "value": "`audit [dir] | conform [dir] | help | educate [dir] | refresh`"
             },
             {
               "label": "Dependencies",
@@ -819,49 +760,15 @@
           ],
           "areas": [
             {
-              "slug": "work-and-delivery",
-              "title": "Work and delivery",
-              "group": "Work items"
+              "slug": "records-and-code",
+              "title": "Records and code",
+              "group": "Records"
             }
           ]
         },
         {
-          "name": "ki-work-design",
-          "description": "Shape a new Project, theme or cross-cutting model before any work record exists, through a brief, independent reviews, one merged report, the owner's decisions and a piloted rollout, with every artefact committed in the work folder's `design/`, `+/_WORK/<id>/design/`. Use when the shape itself is undecided; use `ki-next` to capture or select known work, `ki-plan` to ready one record, `ki-design-inspiration` for website visual design, and `ki-design-system` for interface design work.",
-          "kind": "Process",
-          "fields": [
-            {
-              "label": "Kind",
-              "value": "Process"
-            },
-            {
-              "label": "Applicability",
-              "value": "Invocation Only"
-            },
-            {
-              "label": "Arguments",
-              "value": "`start <subject> | resume <id> | help`"
-            },
-            {
-              "label": "Dependencies",
-              "value": "None"
-            },
-            {
-              "label": "Runtime",
-              "value": "Portable"
-            }
-          ],
-          "areas": [
-            {
-              "slug": "coordination",
-              "title": "Coordination",
-              "group": "Delegation and programme"
-            }
-          ]
-        },
-        {
-          "name": "ki-work-github-issues",
-          "description": "Define GitHub Issues configuration, lifecycle mapping, hierarchy, dependencies, review, closure, and remote-write safety as a KI work adapter. Use when GitHub Issues is selected; remote execution is unavailable, while local files use `ki-work-roadmap` and Linear uses `ki-work-linear`.",
+          "name": "ki-specs",
+          "description": "Create or audit repository Specifications: accepted behaviour and quality requirements with conformance state, verification plans, and evidence. Use `ki-decision-records` for why, `ki-guides` for procedures, and `ki-work-roadmap` for future delivery.",
           "kind": "Governance",
           "fields": [
             {
@@ -870,11 +777,11 @@
             },
             {
               "label": "Applicability",
-              "value": "Declaration Only"
+              "value": "Detected"
             },
             {
               "label": "Arguments",
-              "value": "`audit <repo> | conform <repo> | educate <repo> | help | refresh`"
+              "value": "`audit [dir] | conform [dir] | help | educate [dir] | new <area> \"<title>\" | refresh`"
             },
             {
               "label": "Dependencies",
@@ -887,111 +794,9 @@
           ],
           "areas": [
             {
-              "slug": "work-and-delivery",
-              "title": "Work and delivery",
-              "group": "Work items"
-            }
-          ]
-        },
-        {
-          "name": "ki-work-linear",
-          "description": "Define Linear configuration, lifecycle mapping, hierarchy, dependencies, review, closure, and remote-write safety as a KI work adapter. Use when Linear is selected; remote execution is unavailable, while local files use `ki-work-roadmap` and GitHub Issues uses `ki-work-github-issues`.",
-          "kind": "Governance",
-          "fields": [
-            {
-              "label": "Kind",
-              "value": "Governance"
-            },
-            {
-              "label": "Applicability",
-              "value": "Declaration Only"
-            },
-            {
-              "label": "Arguments",
-              "value": "`audit <repo> | conform <repo> | educate <repo> | help | refresh`"
-            },
-            {
-              "label": "Dependencies",
-              "value": "None"
-            },
-            {
-              "label": "Runtime",
-              "value": "Portable"
-            }
-          ],
-          "areas": [
-            {
-              "slug": "work-and-delivery",
-              "title": "Work and delivery",
-              "group": "Work items"
-            }
-          ]
-        },
-        {
-          "name": "ki-work-recurring",
-          "description": "Govern recurring-work identity, cadence, due-run reservation, and successful-run evidence for Project templates and opted-in KB Activities. Use for recurring maintenance; `ki-repo-kb-activities` owns Activity notes and `ki-housekeeping-*` skills own runtime cleanup.",
-          "kind": "Governance",
-          "fields": [
-            {
-              "label": "Kind",
-              "value": "Governance"
-            },
-            {
-              "label": "Applicability",
-              "value": "Declaration Only"
-            },
-            {
-              "label": "Arguments",
-              "value": "`audit <repo> | conform <repo> | educate <repo> | help | refresh`"
-            },
-            {
-              "label": "Dependencies",
-              "value": "None"
-            },
-            {
-              "label": "Runtime",
-              "value": "Portable"
-            }
-          ],
-          "areas": [
-            {
-              "slug": "work-and-delivery",
-              "title": "Work and delivery",
-              "group": "Work items"
-            }
-          ]
-        },
-        {
-          "name": "ki-work-roadmap",
-          "description": "Govern flat local work items, roadmap horizons, lifecycle detail, dependencies, root orientation, and done-before-prune commit boundaries. Use to audit or shape roadmap records; `ki-next`, `ki-plan`, `ki-implement`, and `ki-accept` apply the lifecycle, while Decision Records own durable rationale.",
-          "kind": "Governance",
-          "fields": [
-            {
-              "label": "Kind",
-              "value": "Governance"
-            },
-            {
-              "label": "Applicability",
-              "value": "Declaration Only"
-            },
-            {
-              "label": "Arguments",
-              "value": "`audit <repo> | conform <repo> | help | educate <repo> | refresh`"
-            },
-            {
-              "label": "Dependencies",
-              "value": "None"
-            },
-            {
-              "label": "Runtime",
-              "value": "Portable"
-            }
-          ],
-          "areas": [
-            {
-              "slug": "work-and-delivery",
-              "title": "Work and delivery",
-              "group": "Work items"
+              "slug": "records-and-code",
+              "title": "Records and code",
+              "group": "Records"
             }
           ]
         }
@@ -1035,7 +840,7 @@
         },
         {
           "name": "ki-design-system",
-          "description": "Create, audit or refresh how a repository keeps its user-interface design: the token source, the design guide, design Specifications and Decision Records, the checks, and design work from brief to rule. Use for design-system method; use `ki-design-inspiration` for visual references and `ki-work-design` for project shape.",
+          "description": "Create, audit or refresh how a repository keeps its user-interface design: the token source, the design guide, the component library sorted by atomic design, shells and their state, design Specifications and Decision Records, the checks, the annotated board, and design work from brief to rule, drawn as information architecture, wireframes and mock-ups. Use for visual design method; use `ki-design` for design of any kind, `ki-design-inspiration` for visual references, and `ki-repo-packages` for packaging a web component library.",
           "kind": "Governance",
           "fields": [
             {
@@ -1072,8 +877,8 @@
       "name": "Environment",
       "skills": [
         {
-          "name": "ki-binding",
-          "description": "Govern the portable KI MCP inventory in XDG `mcp-servers.yaml`: schema, client targeting, and mcporter drift. Use runtime binding skills for Claude or Codex surfaces and `ki-binding-chezmoi` for chezmoi rendering.",
+          "name": "ki-env-binding",
+          "description": "Govern the portable KI MCP inventory in XDG `mcp-servers.yaml`: schema, client targeting, and mcporter drift. Use runtime binding skills for Claude or Codex surfaces and `ki-env-binding-chezmoi` for chezmoi rendering.",
           "kind": "Governance",
           "fields": [
             {
@@ -1106,8 +911,8 @@
           ]
         },
         {
-          "name": "ki-binding-chatgpt",
-          "description": "Audit or safely render KI-targeted MCP servers into Codex native `[mcp_servers]` without taking over unrelated configuration. Use for Codex MCP drift or rendering; `ki-binding` owns portable source and `ki-binding-claude` owns Claude surfaces.",
+          "name": "ki-env-binding-chatgpt",
+          "description": "Audit or safely render KI-targeted MCP servers into Codex native `[mcp_servers]` without taking over unrelated configuration. Use for Codex MCP drift or rendering; `ki-env-binding` owns portable source and `ki-env-binding-claude` owns Claude surfaces.",
           "kind": "Governance",
           "fields": [
             {
@@ -1124,7 +929,7 @@
             },
             {
               "label": "Dependencies",
-              "value": "`ki-binding`"
+              "value": "`ki-env-binding`"
             },
             {
               "label": "Runtime",
@@ -1140,8 +945,8 @@
           ]
         },
         {
-          "name": "ki-binding-chezmoi",
-          "description": "Audit or conform the chezmoi rendering path from canonical KI `mcp-servers.yaml` through a renderer partial and `chezmoi apply`. Use for that portable-source-to-dotfiles pipeline; `ki-binding` owns the source contract and `ki-repo-dotfiles-chezmoi` owns general chezmoi structure.",
+          "name": "ki-env-binding-chezmoi",
+          "description": "Audit or conform the chezmoi rendering path from canonical KI `mcp-servers.yaml` through a renderer partial and `chezmoi apply`. Use for that portable-source-to-dotfiles pipeline; `ki-env-binding` owns the source contract and `ki-repo-dotfiles-chezmoi` owns general chezmoi structure.",
           "kind": "Governance",
           "fields": [
             {
@@ -1158,7 +963,7 @@
             },
             {
               "label": "Dependencies",
-              "value": "`ki-binding`, `ki-repo-dotfiles-chezmoi`"
+              "value": "`ki-env-binding`, `ki-repo-dotfiles-chezmoi`"
             },
             {
               "label": "Runtime",
@@ -1174,8 +979,8 @@
           ]
         },
         {
-          "name": "ki-binding-claude",
-          "description": "Audit or safely conform Claude-native MCP configuration across Claude Code, Claude Desktop, and the claude.ai web convention. Use when Claude MCP surfaces drift; `ki-binding` owns portable source and `ki-binding-chatgpt` owns Codex.",
+          "name": "ki-env-binding-claude",
+          "description": "Audit or safely conform Claude-native MCP configuration across Claude Code, Claude Desktop, and the claude.ai web convention. Use when Claude MCP surfaces drift; `ki-env-binding` owns portable source and `ki-env-binding-chatgpt` owns Codex.",
           "kind": "Governance",
           "fields": [
             {
@@ -1192,7 +997,7 @@
             },
             {
               "label": "Dependencies",
-              "value": "`ki-binding`"
+              "value": "`ki-env-binding`"
             },
             {
               "label": "Runtime",
@@ -1208,8 +1013,8 @@
           ]
         },
         {
-          "name": "ki-housekeeping-chatgpt",
-          "description": "Audit ChatGPT opaque local-store evidence and Codex local memory or repository-scoped sessions. Use for ChatGPT store change detection, Codex memory reconciliation, or reviewed Codex thread cleanup; `ki-acquire-chatgpt` owns readable ChatGPT conversation acquisition.",
+          "name": "ki-env-housekeeping",
+          "description": "Hold the housekeeping rules every agent host shares: an explicit native-memory policy, durable learning routed into reviewed guidance, read-only session sources, bounded evidence and separately authorised deletion. Use for portable housekeeping policy; `ki-env-housekeeping-claude` and `ki-env-housekeeping-chatgpt` own each host's state and `ki-acquire` session capture.",
           "kind": "Governance",
           "fields": [
             {
@@ -1230,6 +1035,40 @@
             },
             {
               "label": "Runtime",
+              "value": "Portable"
+            }
+          ],
+          "areas": [
+            {
+              "slug": "environment",
+              "title": "Environment",
+              "group": "Housekeeping"
+            }
+          ]
+        },
+        {
+          "name": "ki-env-housekeeping-chatgpt",
+          "description": "Audit ChatGPT opaque local-store evidence and Codex local memory or repository-scoped sessions. Use for ChatGPT store change detection, Codex memory reconciliation, or reviewed Codex thread cleanup; `ki-acquire-chatgpt` owns readable ChatGPT conversation acquisition.",
+          "kind": "Governance",
+          "fields": [
+            {
+              "label": "Kind",
+              "value": "Governance"
+            },
+            {
+              "label": "Applicability",
+              "value": "Declaration Only"
+            },
+            {
+              "label": "Arguments",
+              "value": "`audit <repo> | conform <repo> | educate <repo> | help | refresh`"
+            },
+            {
+              "label": "Dependencies",
+              "value": "`ki-env-housekeeping`"
+            },
+            {
+              "label": "Runtime",
               "value": "Runtime-bound: `chatgpt-codex`"
             }
           ],
@@ -1242,8 +1081,8 @@
           ]
         },
         {
-          "name": "ki-housekeeping-claude",
-          "description": "Audit Claude Desktop, Cowork, Claude Code and VSCode state: memory, storage hygiene, plugins, caches and backups. Use for local Claude housekeeping; `ki-acquire` owns exception-based agent-session capture, `ki-repo-kb` KB structure and `ki-tokenomics` context budgets.",
+          "name": "ki-env-housekeeping-claude",
+          "description": "Audit Claude Desktop, Cowork, Claude Code and VSCode state: memory, storage hygiene, plugins, caches and backups. Use for local Claude housekeeping; `ki-acquire` owns exception-based agent-session capture, `ki-repo-kb` KB structure and `ki-env-tokenomics` context budgets.",
           "kind": "Governance",
           "fields": [
             {
@@ -1260,7 +1099,7 @@
             },
             {
               "label": "Dependencies",
-              "value": "None"
+              "value": "`ki-env-housekeeping`"
             },
             {
               "label": "Runtime",
@@ -1276,7 +1115,7 @@
           ]
         },
         {
-          "name": "ki-tokenomics",
+          "name": "ki-env-tokenomics",
           "description": "Govern portable agent-context budgets, standing-surface attribution, and model-purpose policy. Use runtime adapters for observed Claude or Codex evidence and `ki-skills` for description quality.",
           "kind": "Governance",
           "fields": [
@@ -1310,8 +1149,8 @@
           ]
         },
         {
-          "name": "ki-tokenomics-chatgpt",
-          "description": "Audit non-secret Codex repository evidence—configuration, AGENTS.md, skills, and custom agents—for portable tokenomics. Use `ki-tokenomics` for policy and `ki-tokenomics-claude` for Claude evidence; effective session state is outside this filesystem audit.",
+          "name": "ki-env-tokenomics-chatgpt",
+          "description": "Audit non-secret Codex repository evidence—configuration, AGENTS.md, skills, and custom agents—for portable tokenomics. Use `ki-env-tokenomics` for policy and `ki-env-tokenomics-claude` for Claude evidence; effective session state is outside this filesystem audit.",
           "kind": "Governance",
           "fields": [
             {
@@ -1328,7 +1167,7 @@
             },
             {
               "label": "Dependencies",
-              "value": "`ki-tokenomics`"
+              "value": "`ki-env-tokenomics`"
             },
             {
               "label": "Runtime",
@@ -1344,8 +1183,8 @@
           ]
         },
         {
-          "name": "ki-tokenomics-claude",
-          "description": "Audit non-secret Claude Code repository evidence—instructions, rules, settings, imports, and MCP declarations—for portable tokenomics. Use `ki-tokenomics` for policy and `ki-tokenomics-chatgpt` for Codex evidence; effective session state is outside this filesystem audit.",
+          "name": "ki-env-tokenomics-claude",
+          "description": "Audit non-secret Claude Code repository evidence—instructions, rules, settings, imports, and MCP declarations—for portable tokenomics. Use `ki-env-tokenomics` for policy and `ki-env-tokenomics-chatgpt` for Codex evidence; effective session state is outside this filesystem audit.",
           "kind": "Governance",
           "fields": [
             {
@@ -1362,7 +1201,7 @@
             },
             {
               "label": "Dependencies",
-              "value": "`ki-tokenomics`"
+              "value": "`ki-env-tokenomics`"
             },
             {
               "label": "Runtime",
@@ -1380,11 +1219,11 @@
       ]
     },
     {
-      "name": "Governance",
+      "name": "Keystone",
       "skills": [
         {
-          "name": "ki-agentic-radar",
-          "description": "Maintain an evidence-backed radar for agentic protocols, interfaces, organisations, architectures, research, and vendor terms. Use for maturity, interoperability, or stance; `ki-model-radar` owns models, `ki-pulse` discovers signals, and `ki-next` owns follow-on work.",
+          "name": "ki-acquire",
+          "description": "Lead the Acquire guild and govern source-independent knowledge capture and curation: supplied scope, honest coverage, faithful lean preservation, verified destinations, incremental curation into a staging knowledge graph, with the transient capture package as the only record. Use for common acquisition or curation rules, and for `pulse`: capture a submitted link, scan bounded public sources for what changed, or triage signals. ki-acquire-chatgpt and ki-acquire-granola own their provider contracts.",
           "kind": "Governance",
           "fields": [
             {
@@ -1392,12 +1231,16 @@
               "value": "Governance"
             },
             {
+              "label": "Leads",
+              "value": "Acquire"
+            },
+            {
               "label": "Applicability",
               "value": "Declaration Only"
             },
             {
               "label": "Arguments",
-              "value": "`audit | conform | educate | help | refresh`"
+              "value": "`audit <repo> | conform <repo> | educate <repo> | help | pulse capture <source> | pulse scan <query> | pulse triage | refresh`"
             },
             {
               "label": "Dependencies",
@@ -1410,19 +1253,65 @@
           ],
           "areas": [
             {
+              "slug": "acquire",
+              "title": "Acquire"
+            },
+            {
               "slug": "signals",
               "title": "Signals"
             }
           ]
         },
         {
+          "name": "ki-agentic-systems",
+          "description": "Define the words of agentic systems as a knowledge graph: industry cards from model, agent harness, agent, session, subagent and skill to environment, machine, agent host and client, with Anthropic's, OpenAI's, Google's and Microsoft's own words in vendor subgraphs linked to them. Use to learn what an agentic term means, which sense a vendor name such as Claude or Codex carries, how vendors' words compare, or which card to link instead of redefining a term; `ki-agentic-radar` owns maturity and stance, and `ki-subagents` how to run subagents.",
+          "kind": "Knowledge",
+          "fields": [
+            {
+              "label": "Kind",
+              "value": "Knowledge"
+            },
+            {
+              "label": "Leads",
+              "value": "Agentic Systems"
+            },
+            {
+              "label": "Applicability",
+              "value": "Invocation Only"
+            },
+            {
+              "label": "Arguments",
+              "value": "`educate <term> | help | refresh`"
+            },
+            {
+              "label": "Dependencies",
+              "value": "None"
+            },
+            {
+              "label": "Runtime",
+              "value": "Portable"
+            }
+          ],
+          "areas": [
+            {
+              "slug": "fundamentals",
+              "title": "Fundamentals",
+              "group": "Knowledge"
+            }
+          ]
+        },
+        {
           "name": "ki-authoring",
-          "description": "Govern KI Markdown, TOML, README composition, industry white papers, and durable knowledge placement. Use to format or audit authored documents, shape a README, or decide where learning belongs; use `ki-skills` for SKILL.md quality, `ki-repo` for repository contracts, and `ki-engineering` for code toolchains.",
+          "description": "Govern KI document formats, Markdown, TOML, README composition, industry white papers, and durable knowledge placement. Use to format or audit authored documents, shape a README, or decide where learning belongs; use `ki-skills` for SKILL.md quality, `ki-repo` for repository contracts, and `ki-engineering` for code toolchains.",
           "kind": "Governance",
           "fields": [
             {
               "label": "Kind",
               "value": "Governance"
+            },
+            {
+              "label": "Leads",
+              "value": "Authoring"
             },
             {
               "label": "Applicability",
@@ -1455,8 +1344,8 @@
           ]
         },
         {
-          "name": "ki-decision-records",
-          "description": "Create or audit typed KI Decision Records for durable rationale and authority. Use `ki-specs` for accepted behaviour, `ki-guides` for procedures, and `ki-work-roadmap` for future delivery.",
+          "name": "ki-design",
+          "description": "Lead the Design guild: how any design, technical or visual, is shaped before it is written down, from a brief through options and review, and each kind's levels. Use to start or review a design, or to find the design skill for it; `ki-design-system` owns interface design, `ki-work design` shaping a Project, and Authoring's skills the records a design leaves.",
           "kind": "Governance",
           "fields": [
             {
@@ -1464,38 +1353,8 @@
               "value": "Governance"
             },
             {
-              "label": "Applicability",
-              "value": "Detected"
-            },
-            {
-              "label": "Arguments",
-              "value": "`audit [dir] | conform [dir] | consolidate [dir] | educate [dir] | help | new <scope> \"<title>\" | refresh`"
-            },
-            {
-              "label": "Dependencies",
-              "value": "None"
-            },
-            {
-              "label": "Runtime",
-              "value": "Portable"
-            }
-          ],
-          "areas": [
-            {
-              "slug": "records-and-code",
-              "title": "Records and code",
-              "group": "Records"
-            }
-          ]
-        },
-        {
-          "name": "ki-delegation",
-          "description": "Govern agent delegation: routine detached background runs (run packet, prompt shape, authority footers, decisions log, coordination, run queue, monitoring) and durable packets for approved high-risk handoffs. Use when delegating to background agents or writing a delegation brief; `ki agent` launches runs and `ki-coordination` governs the coordinating work that launches them.",
-          "kind": "Governance",
-          "fields": [
-            {
-              "label": "Kind",
-              "value": "Governance"
+              "label": "Leads",
+              "value": "Design"
             },
             {
               "label": "Applicability",
@@ -1503,41 +1362,7 @@
             },
             {
               "label": "Arguments",
-              "value": "`audit <repo> | conform <repo> | educate <work-item> | help | refresh`"
-            },
-            {
-              "label": "Dependencies",
-              "value": "None"
-            },
-            {
-              "label": "Runtime",
-              "value": "Portable"
-            }
-          ],
-          "areas": [
-            {
-              "slug": "coordination",
-              "title": "Coordination",
-              "group": "Delegation and programme"
-            }
-          ]
-        },
-        {
-          "name": "ki-diagrams",
-          "description": "Create, audit or refresh a repository's living Archify diagrams: committed sources and SVGs, the manifest, privacy, type choice and freshness. Use to keep diagrams that explain a system; use `ki-authoring` for prose and `ki-guides` for where a guide embeds a figure.",
-          "kind": "Governance",
-          "fields": [
-            {
-              "label": "Kind",
-              "value": "Governance"
-            },
-            {
-              "label": "Applicability",
-              "value": "Declaration Only"
-            },
-            {
-              "label": "Arguments",
-              "value": "`audit [dir] | conform [dir] | help | educate [dir] | refresh`"
+              "value": "`audit <repo> | conform <repo> | educate <repo> | help | refresh`"
             },
             {
               "label": "Dependencies",
@@ -1552,15 +1377,247 @@
             {
               "slug": "fundamentals",
               "title": "Fundamentals",
-              "group": "Repository and writing"
+              "group": "Guilds"
             },
             {
-              "slug": "records-and-code",
-              "title": "Records and code",
-              "group": "Writing and figures"
+              "slug": "design",
+              "title": "Design"
             }
           ]
         },
+        {
+          "name": "ki-env",
+          "description": "Lead the Environment guild: where agents run, the tools and access bound to them, the limits on their context, and the state agent hosts leave on a machine. Use to find the environment skill for MCP binding, context budgets or local housekeeping; each family's lead owns its portable rules and its runtime skills each agent host's delta.",
+          "kind": "Governance",
+          "fields": [
+            {
+              "label": "Kind",
+              "value": "Governance"
+            },
+            {
+              "label": "Leads",
+              "value": "Environment"
+            },
+            {
+              "label": "Applicability",
+              "value": "Declaration Only"
+            },
+            {
+              "label": "Arguments",
+              "value": "`audit <repo> | conform <repo> | educate <repo> | help | refresh`"
+            },
+            {
+              "label": "Dependencies",
+              "value": "None"
+            },
+            {
+              "label": "Runtime",
+              "value": "Portable"
+            }
+          ],
+          "areas": [
+            {
+              "slug": "fundamentals",
+              "title": "Fundamentals",
+              "group": "Guilds"
+            }
+          ]
+        },
+        {
+          "name": "ki-keystone",
+          "description": "Lead the Keystone guild, the guild of guilds: the guild map of every KI skill by guild and lead, where a session starts in a repository, and the rule for joining Keystone. Use to find which guild and lead skill own a piece of work, to audit a skill collection's guild tree, or for `bootstrap`: first-time KI setup and activation through the `ki` CLI, or setup and audit-activation problems. `ki-skills` owns the guild rules and skill shape.",
+          "kind": "Governance",
+          "fields": [
+            {
+              "label": "Kind",
+              "value": "Governance"
+            },
+            {
+              "label": "Leads",
+              "value": "Keystone"
+            },
+            {
+              "label": "Applicability",
+              "value": "Baseline"
+            },
+            {
+              "label": "Arguments",
+              "value": "`audit <repo> | bootstrap | conform <repo> | educate <repo> | help | refresh`"
+            },
+            {
+              "label": "Dependencies",
+              "value": "None"
+            },
+            {
+              "label": "Runtime",
+              "value": "Portable"
+            }
+          ],
+          "areas": [
+            {
+              "slug": "fundamentals",
+              "title": "Fundamentals",
+              "group": "Guilds"
+            }
+          ]
+        },
+        {
+          "name": "ki-knowledge-graph",
+          "description": "Govern knowledge graphs: Semantic Markdown cards named by readable ids, a `_graph.md` root definition, typed links with SKOS by default, subgraphs, layered graphs with shadow nodes, and curating captured material through a staging graph to dispatch. Use to define a graph, curate, tend or dispatch knowledge; `ki-acquire` owns capture, `ki-dodecakrisis` sorting and `ki-repo-kb` knowledge-base structure.",
+          "kind": "Governance",
+          "fields": [
+            {
+              "label": "Kind",
+              "value": "Governance"
+            },
+            {
+              "label": "Applicability",
+              "value": "Declaration Only"
+            },
+            {
+              "label": "Arguments",
+              "value": "`audit <repo> | conform <repo> | educate <repo> | curate <capture> | tend <area> | dispatch <package> | help | refresh`"
+            },
+            {
+              "label": "Dependencies",
+              "value": "None"
+            },
+            {
+              "label": "Runtime",
+              "value": "Portable"
+            }
+          ],
+          "areas": [
+            {
+              "slug": "fundamentals",
+              "title": "Fundamentals",
+              "group": "Knowledge"
+            },
+            {
+              "slug": "acquire",
+              "title": "Acquire"
+            }
+          ]
+        },
+        {
+          "name": "ki-repo",
+          "description": "Audit or conform the universal KI repository contract declared by `.ki.toml`, including setup, GitHub settings, and top-level `+` and `-` working areas. Use for whole-repository review; specialised `ki-repo-*`, `ki-engineering`, and `ki-work-roadmap` skills own their narrower structures.",
+          "kind": "Governance",
+          "fields": [
+            {
+              "label": "Kind",
+              "value": "Governance"
+            },
+            {
+              "label": "Leads",
+              "value": "Repository"
+            },
+            {
+              "label": "Applicability",
+              "value": "Baseline"
+            },
+            {
+              "label": "Detects",
+              "value": "`ki-decision-records`, `ki-engineering`, `ki-guides`, `ki-repo-homebrew-tap`, `ki-repo-kb`, `ki-repo-kb-streams`, `ki-repo-mcp`, `ki-repo-specifications`, `ki-repo-tools`, `ki-repo-website`, `ki-repo-website-app`, `ki-repo-website-cloudflare`, `ki-repo-website-content`, `ki-skills`, `ki-specs`, `ki-subagents`, `ki-subagents-chatgpt`, `ki-subagents-claude`, `ki-work-package`"
+            },
+            {
+              "label": "Arguments",
+              "value": "`audit | conform <repo> | educate <repo> | help | refresh | review [scope] | review close <REV-NNN>`"
+            },
+            {
+              "label": "Dependencies",
+              "value": "`ki-authoring`, `ki-git`"
+            },
+            {
+              "label": "Runtime",
+              "value": "Runtime-bound; supported runtimes are resolved by its host contract"
+            }
+          ],
+          "areas": [
+            {
+              "slug": "fundamentals",
+              "title": "Fundamentals",
+              "group": "Repository and writing"
+            }
+          ]
+        },
+        {
+          "name": "ki-skills",
+          "description": "Create, audit, review, extract, or optimise Agent Skills. Use for SKILL.md scope, descriptions, progressive disclosure, scripts, references, rubrics, or reusable capability analysis; use `ki-subagents` for agent roles and `ki-repo-backpack` for bundle layout.",
+          "kind": "Governance",
+          "fields": [
+            {
+              "label": "Kind",
+              "value": "Governance"
+            },
+            {
+              "label": "Applicability",
+              "value": "Detected"
+            },
+            {
+              "label": "Arguments",
+              "value": "`audit <skill-or-repo> | conform <skill> | educate <description> | extract <repo> [--history <path>...] | help | optimise <skill> | refresh | review <skill-or-repo>`"
+            },
+            {
+              "label": "Dependencies",
+              "value": "None"
+            },
+            {
+              "label": "Runtime",
+              "value": "Portable"
+            }
+          ],
+          "areas": [
+            {
+              "slug": "fundamentals",
+              "title": "Fundamentals",
+              "group": "Skills and harness"
+            }
+          ]
+        },
+        {
+          "name": "ki-work",
+          "description": "Lead the Work guild: choose, plan, deliver, accept and recap work. Use `next` to capture prospective work or decide what comes next, `plan` to make selected work Ready, `implement` to deliver one Ready record to review, `accept` to close, cancel or prune records with human approval, `recap` for a live-session recap or handoff, and `design` to shape a new Project or model before any record exists; audit or choose a repository's forward-work adapter: local roadmap, KB Streams, GitHub Issues or Linear.",
+          "kind": "Governance",
+          "fields": [
+            {
+              "label": "Kind",
+              "value": "Governance"
+            },
+            {
+              "label": "Leads",
+              "value": "Work"
+            },
+            {
+              "label": "Applicability",
+              "value": "Declaration Only"
+            },
+            {
+              "label": "Arguments",
+              "value": "`accept <work> | accept prune <record-or-glob>... | audit <repo> | conform <repo> | design start <subject> | design resume <id> | educate <repo> | help | implement <work> | next [--review] | next defer <item> <horizon> | plan <work>... | recap [--runtime <runtime>] [--transcript <session-file>] | refresh`"
+            },
+            {
+              "label": "Dependencies",
+              "value": "None"
+            },
+            {
+              "label": "Runtime",
+              "value": "Portable"
+            }
+          ],
+          "areas": [
+            {
+              "slug": "work-and-delivery",
+              "title": "Work and delivery",
+              "group": "Work items"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Repository",
+      "skills": [
         {
           "name": "ki-engineering",
           "description": "Audit or conform KI TypeScript/Bun engineering: modularity, reuse, boundary testing, package scripts, tsconfig, Biome, and toolchain consistency. Use `ki-repo` for repository configuration, `ki-authoring` for documents, and `ki-repo-mcp` for MCP specifics.",
@@ -1630,359 +1687,7 @@
           ]
         },
         {
-          "name": "ki-guides",
-          "description": "Create or audit repository-local guides for the practical how of using, operating, contributing to, or maintaining a system. Use `ki-decision-records` for why, `ki-specs` for accepted behaviour, `ki-work-roadmap` for future work, and `ki-authoring` for style.",
-          "kind": "Governance",
-          "fields": [
-            {
-              "label": "Kind",
-              "value": "Governance"
-            },
-            {
-              "label": "Applicability",
-              "value": "Detected"
-            },
-            {
-              "label": "Arguments",
-              "value": "`audit [dir] | conform [dir] | help | educate [dir] | refresh`"
-            },
-            {
-              "label": "Dependencies",
-              "value": "None"
-            },
-            {
-              "label": "Runtime",
-              "value": "Portable"
-            }
-          ],
-          "areas": [
-            {
-              "slug": "records-and-code",
-              "title": "Records and code",
-              "group": "Records"
-            }
-          ]
-        },
-        {
-          "name": "ki-model-radar",
-          "description": "Maintain an evidence-backed radar for models and model-agent routes. Use for model comparisons, benchmark relevance, recommendations, or retirements. Use `ki-agentic-radar` for broader agentic standards, `ki-pulse` for signal discovery, and `ki-tokenomics` for model purpose.",
-          "kind": "Governance",
-          "fields": [
-            {
-              "label": "Kind",
-              "value": "Governance"
-            },
-            {
-              "label": "Applicability",
-              "value": "Declaration Only"
-            },
-            {
-              "label": "Arguments",
-              "value": "`audit | conform | educate | help | refresh`"
-            },
-            {
-              "label": "Dependencies",
-              "value": "None"
-            },
-            {
-              "label": "Runtime",
-              "value": "Portable"
-            }
-          ],
-          "areas": [
-            {
-              "slug": "signals",
-              "title": "Signals"
-            }
-          ]
-        },
-        {
-          "name": "ki-specs",
-          "description": "Create or audit repository Specifications: accepted behaviour and quality requirements with conformance state, verification plans, and evidence. Use `ki-decision-records` for why, `ki-guides` for procedures, and `ki-work-roadmap` for future delivery.",
-          "kind": "Governance",
-          "fields": [
-            {
-              "label": "Kind",
-              "value": "Governance"
-            },
-            {
-              "label": "Applicability",
-              "value": "Detected"
-            },
-            {
-              "label": "Arguments",
-              "value": "`audit [dir] | conform [dir] | help | educate [dir] | new <area> \"<title>\" | refresh`"
-            },
-            {
-              "label": "Dependencies",
-              "value": "None"
-            },
-            {
-              "label": "Runtime",
-              "value": "Portable"
-            }
-          ],
-          "areas": [
-            {
-              "slug": "records-and-code",
-              "title": "Records and code",
-              "group": "Records"
-            }
-          ]
-        },
-        {
-          "name": "ki-trade",
-          "description": "Operate one repository's side of a declared cross-repository trade: prepare, inspect, submit, receive, release, or prune a work or knowledge record. Use for one concrete trade action; `ki-trades` owns record and route governance, while `ki-next` owns receiver disposition.",
-          "kind": "Process",
-          "fields": [
-            {
-              "label": "Kind",
-              "value": "Process"
-            },
-            {
-              "label": "Applicability",
-              "value": "Invocation Only"
-            },
-            {
-              "label": "Arguments",
-              "value": "`prepare <receiver> | observe <TRD> | submit <TRD> | abandon <TRD> | receive <TRD> | release <TRD> | prune <TRD> | routes <list|check> | standing <list|check|capture> | list | show <TRD> | help`"
-            },
-            {
-              "label": "Dependencies",
-              "value": "`ki-trades`"
-            },
-            {
-              "label": "Runtime",
-              "value": "Portable"
-            }
-          ],
-          "areas": [
-            {
-              "slug": "coordination",
-              "title": "Coordination",
-              "group": "Trades"
-            }
-          ]
-        },
-        {
-          "name": "ki-trades",
-          "description": "Govern directional work and knowledge trades between KI repositories: routes, records, authority, receipt, decisions, release, and pruning. Use to design or audit the system; `ki-trade` performs one side and `ki-next` owns receiver disposition.",
-          "kind": "Governance",
-          "fields": [
-            {
-              "label": "Kind",
-              "value": "Governance"
-            },
-            {
-              "label": "Applicability",
-              "value": "Declaration Only"
-            },
-            {
-              "label": "Arguments",
-              "value": "`audit <repo> | conform <repo> | educate <repo> | help | refresh`"
-            },
-            {
-              "label": "Dependencies",
-              "value": "None"
-            },
-            {
-              "label": "Runtime",
-              "value": "Portable"
-            }
-          ],
-          "areas": [
-            {
-              "slug": "coordination",
-              "title": "Coordination",
-              "group": "Trades"
-            }
-          ]
-        },
-        {
-          "name": "ki-work-package",
-          "description": "Own the work package of one piece of work, its five files in its work folder `+/_WORK/<id>/`: the definition `work.md` with its routing description, goals and scope, `state.md`, `queries.md`, the `messages.md` queue and `decisions.md`, plus the folder's closed list, entry points, tidy and close-out rules and the `+/_WORK_REVIEW/` holding area. Use to create, update, resume, audit, tidy or remove a package, or to pick work up without a transcript or vendor session; Git is the logbook, durable knowledge stays with its owners, and single-file work folders and old `+/_CHECKPOINTS/` records stay readable for the tolerance window.",
-          "kind": "Governance",
-          "fields": [
-            {
-              "label": "Kind",
-              "value": "Governance"
-            },
-            {
-              "label": "Applicability",
-              "value": "Detected"
-            },
-            {
-              "label": "Arguments",
-              "value": "`audit <repo> | conform <repo> | educate <repo> | help | refresh | remove <id> | resume <id> | update <id>`"
-            },
-            {
-              "label": "Dependencies",
-              "value": "None"
-            },
-            {
-              "label": "Runtime",
-              "value": "Portable"
-            }
-          ],
-          "areas": [
-            {
-              "slug": "coordination",
-              "title": "Coordination",
-              "group": "Delegation and programme"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Keystone",
-      "skills": [
-        {
-          "name": "ki-bootstrap",
-          "description": "Explain first-time KI activation through the `ki` CLI: user bootstrap, verified harness selection, skills, and repository governance. Use for setup or audit-activation problems; `ki --help` owns command mechanics and `ki-repo` repository coverage.",
-          "kind": "Process",
-          "fields": [
-            {
-              "label": "Kind",
-              "value": "Process"
-            },
-            {
-              "label": "Applicability",
-              "value": "Invocation Only"
-            },
-            {
-              "label": "Arguments",
-              "value": "`help | refresh`"
-            },
-            {
-              "label": "Dependencies",
-              "value": "None"
-            },
-            {
-              "label": "Runtime",
-              "value": "Portable"
-            }
-          ],
-          "areas": [
-            {
-              "slug": "fundamentals",
-              "title": "Fundamentals"
-            }
-          ]
-        },
-        {
-          "name": "ki-repo",
-          "description": "Audit or conform the universal KI repository contract declared by `.ki.toml`, including setup, GitHub settings, and top-level `+` and `-` working areas. Use for whole-repository review; specialised `ki-repo-*`, `ki-engineering`, and `ki-work-roadmap` skills own their narrower structures.",
-          "kind": "Governance",
-          "fields": [
-            {
-              "label": "Kind",
-              "value": "Governance"
-            },
-            {
-              "label": "Applicability",
-              "value": "Baseline"
-            },
-            {
-              "label": "Detects",
-              "value": "`ki-decision-records`, `ki-engineering`, `ki-guides`, `ki-repo-homebrew-tap`, `ki-repo-kb`, `ki-repo-kb-streams`, `ki-repo-mcp`, `ki-repo-specifications`, `ki-repo-tools`, `ki-repo-website`, `ki-repo-website-app`, `ki-repo-website-cloudflare`, `ki-repo-website-content`, `ki-skills`, `ki-specs`, `ki-subagents`, `ki-subagents-chatgpt`, `ki-subagents-claude`, `ki-work-package`"
-            },
-            {
-              "label": "Arguments",
-              "value": "`audit | conform <repo> | educate <repo> | help | refresh | review [scope] | review close <REV-NNN>`"
-            },
-            {
-              "label": "Dependencies",
-              "value": "`ki-authoring`, `ki-git`"
-            },
-            {
-              "label": "Runtime",
-              "value": "Runtime-bound; supported runtimes are resolved by its host contract"
-            }
-          ],
-          "areas": [
-            {
-              "slug": "fundamentals",
-              "title": "Fundamentals",
-              "group": "Repository and writing"
-            }
-          ]
-        },
-        {
-          "name": "ki-skills",
-          "description": "Create, audit, review, extract, or optimise Agent Skills. Use for SKILL.md scope, descriptions, progressive disclosure, scripts, references, rubrics, or reusable capability analysis; use `ki-subagents` for agent roles and `ki-repo-harness` for bundle layout.",
-          "kind": "Governance",
-          "fields": [
-            {
-              "label": "Kind",
-              "value": "Governance"
-            },
-            {
-              "label": "Applicability",
-              "value": "Detected"
-            },
-            {
-              "label": "Arguments",
-              "value": "`audit <skill-or-repo> | conform <skill> | educate <description> | extract <repo> [--history <path>...] | help | optimise <skill> | refresh | review <skill-or-repo>`"
-            },
-            {
-              "label": "Dependencies",
-              "value": "None"
-            },
-            {
-              "label": "Runtime",
-              "value": "Portable"
-            }
-          ],
-          "areas": [
-            {
-              "slug": "fundamentals",
-              "title": "Fundamentals",
-              "group": "Skills and harness"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Repo Structure",
-      "skills": [
-        {
-          "name": "ki-repo-dotfiles-chezmoi",
-          "description": "Audit or conform KI chezmoi source repositories: source-versus-target editing, app-mutated configuration, shell and `bin/` layout, prefixes, fragments, comments, and reverse merges. Use for dotfiles structure, not a repository's personal tool choices.",
-          "kind": "Governance",
-          "fields": [
-            {
-              "label": "Kind",
-              "value": "Governance"
-            },
-            {
-              "label": "Applicability",
-              "value": "Declaration Only"
-            },
-            {
-              "label": "Arguments",
-              "value": "`audit <repo> | conform <repo> | help | educate <repo> | refresh`"
-            },
-            {
-              "label": "Dependencies",
-              "value": "`ki-authoring`"
-            },
-            {
-              "label": "Runtime",
-              "value": "Portable"
-            }
-          ],
-          "areas": [
-            {
-              "slug": "repository-types",
-              "title": "Repository types",
-              "group": "Single-type repositories"
-            }
-          ]
-        },
-        {
-          "name": "ki-repo-harness",
+          "name": "ki-repo-backpack",
           "description": "Audit or design a KI-compatible harness that publishes skills, subagents, evals, and hooks as a verified installed payload. Use for source layout, prefix identity, declarations, or catalogue publication; each capability skill owns content quality.",
           "kind": "Governance",
           "fields": [
@@ -2013,6 +1718,40 @@
               "title": "Fundamentals",
               "group": "Skills and harness"
             },
+            {
+              "slug": "repository-types",
+              "title": "Repository types",
+              "group": "Single-type repositories"
+            }
+          ]
+        },
+        {
+          "name": "ki-repo-dotfiles-chezmoi",
+          "description": "Audit or conform KI chezmoi source repositories: source-versus-target editing, app-mutated configuration, shell and `bin/` layout, prefixes, fragments, comments, and reverse merges. Use for dotfiles structure, not a repository's personal tool choices.",
+          "kind": "Governance",
+          "fields": [
+            {
+              "label": "Kind",
+              "value": "Governance"
+            },
+            {
+              "label": "Applicability",
+              "value": "Declaration Only"
+            },
+            {
+              "label": "Arguments",
+              "value": "`audit <repo> | conform <repo> | help | educate <repo> | refresh`"
+            },
+            {
+              "label": "Dependencies",
+              "value": "`ki-authoring`"
+            },
+            {
+              "label": "Runtime",
+              "value": "Portable"
+            }
+          ],
+          "areas": [
             {
               "slug": "repository-types",
               "title": "Repository types",
@@ -2192,7 +1931,7 @@
         },
         {
           "name": "ki-repo-kb-streams",
-          "description": "Govern the KI knowledge-base Streams container and flat Roadmap records. Use for KB forward-work structure or migration; lifecycle actions belong to `ki-next`, `ki-plan`, `ki-implement`, and `ki-accept`, while `ki-repo-kb` owns zones.",
+          "description": "Govern the KI knowledge-base Streams container and flat Roadmap records. Use for KB forward-work structure or migration; lifecycle actions belong to `ki-work next`, `ki-work plan`, `ki-work implement`, and `ki-work accept`, while `ki-repo-kb` owns zones.",
           "kind": "Governance",
           "fields": [
             {
@@ -2248,6 +1987,40 @@
             {
               "label": "Runtime",
               "value": "Runtime-bound; supported runtimes are resolved by its host contract"
+            }
+          ],
+          "areas": [
+            {
+              "slug": "repository-types",
+              "title": "Repository types",
+              "group": "Single-type repositories"
+            }
+          ]
+        },
+        {
+          "name": "ki-repo-packages",
+          "description": "Audit or conform a KI `packages-*` repository whose source trees consumers vendor whole: the vendored packages, one per layer, the Storybook, the custom elements manifest, locks and vendoring tools, sync paragraphs, consumers found by lock, and the release and re-vendor rule. Use `ki-repo-tools` for installed CLIs, `ki-engineering` for the toolchain, `ki-design-system` for component design, and `ki-repo` for universal files.",
+          "kind": "Governance",
+          "fields": [
+            {
+              "label": "Kind",
+              "value": "Governance"
+            },
+            {
+              "label": "Applicability",
+              "value": "Declaration Only"
+            },
+            {
+              "label": "Arguments",
+              "value": "`audit <repo> | conform <repo> | educate <repo> | help | refresh`"
+            },
+            {
+              "label": "Dependencies",
+              "value": "None"
+            },
+            {
+              "label": "Runtime",
+              "value": "Portable"
             }
           ],
           "areas": [
@@ -2493,6 +2266,317 @@
               "slug": "repository-types",
               "title": "Repository types",
               "group": "Websites"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Work",
+      "skills": [
+        {
+          "name": "ki-coordination",
+          "description": "Govern coordinating work under the Knowledge Islands work model: the responsive coordinator and its turn budget, the work levels and forms with their ids, openers and bootstrap, the seven states and the receive words, the mark and the one Summary with its status table and footer, the reply format, the closing glyph banner and thread line, On hold with its Stop, the work package and its message queue, route receipt and the inbox check, re-anchoring after compaction, decision classes and their life cycle, change documents, Finished, the working rules, and the three reply forms every session uses. Use while coordinating any explicitly opened work package to give a summary or banner or strike the mark, or to decide how any session replies; `ki-delegation` owns the background runs the coordinator launches.",
+          "kind": "Governance",
+          "fields": [
+            {
+              "label": "Kind",
+              "value": "Governance"
+            },
+            {
+              "label": "Applicability",
+              "value": "Declaration Only"
+            },
+            {
+              "label": "Arguments",
+              "value": "`audit <repo> | conform <repo> | drain | educate <repo> | help | hold | mark [only | status only] [no art] | receive | refresh | resume | send | status [no art] | summary [since <time>] [no art]`"
+            },
+            {
+              "label": "Dependencies",
+              "value": "`ki-delegation`, `ki-work-package`"
+            },
+            {
+              "label": "Runtime",
+              "value": "Portable"
+            }
+          ],
+          "areas": [
+            {
+              "slug": "coordination",
+              "title": "Coordination",
+              "group": "Delegation and programme"
+            }
+          ]
+        },
+        {
+          "name": "ki-meeting",
+          "description": "Call, hold and close a meeting: a room at one node of the work tree where named participants, each reaching it by the first route that works, make, review or look back on something together, in sittings with a roll call, one file per message, check-ins and minutes, while decisions go to a change document. Use to call a meeting, open, adjourn or join a sitting, or close one, and to choose a workshop, review or retrospective; use `ki-coordination` for coordinating work and its reports, and `ki-work-package` for the package a meeting serves.",
+          "kind": "Process",
+          "fields": [
+            {
+              "label": "Kind",
+              "value": "Process"
+            },
+            {
+              "label": "Applicability",
+              "value": "Invocation Only"
+            },
+            {
+              "label": "Arguments",
+              "value": "`adjourn <meeting> | call <node id> <slug> | close <meeting> | help | join <meeting> | sit <meeting>`"
+            },
+            {
+              "label": "Dependencies",
+              "value": "None"
+            },
+            {
+              "label": "Runtime",
+              "value": "Portable"
+            }
+          ],
+          "areas": [
+            {
+              "slug": "coordination",
+              "title": "Coordination",
+              "group": "Delegation and programme"
+            }
+          ]
+        },
+        {
+          "name": "ki-trade",
+          "description": "Operate one repository's side of a declared cross-repository trade: prepare, inspect, submit, receive, release, or prune a work or knowledge record. Use for one concrete trade action; `ki-trades` owns record and route governance, while `ki-work next` owns receiver disposition.",
+          "kind": "Process",
+          "fields": [
+            {
+              "label": "Kind",
+              "value": "Process"
+            },
+            {
+              "label": "Applicability",
+              "value": "Invocation Only"
+            },
+            {
+              "label": "Arguments",
+              "value": "`prepare <receiver> | observe <TRD> | submit <TRD> | abandon <TRD> | receive <TRD> | release <TRD> | prune <TRD> | routes <list|check> | standing <list|check|capture> | list | show <TRD> | help`"
+            },
+            {
+              "label": "Dependencies",
+              "value": "`ki-trades`"
+            },
+            {
+              "label": "Runtime",
+              "value": "Portable"
+            }
+          ],
+          "areas": [
+            {
+              "slug": "coordination",
+              "title": "Coordination",
+              "group": "Trades"
+            }
+          ]
+        },
+        {
+          "name": "ki-trades",
+          "description": "Govern directional work and knowledge trades between KI repositories: routes, records, authority, receipt, decisions, release, and pruning. Use to design or audit the system; `ki-trade` performs one side and `ki-work next` owns receiver disposition.",
+          "kind": "Governance",
+          "fields": [
+            {
+              "label": "Kind",
+              "value": "Governance"
+            },
+            {
+              "label": "Applicability",
+              "value": "Declaration Only"
+            },
+            {
+              "label": "Arguments",
+              "value": "`audit <repo> | conform <repo> | educate <repo> | help | refresh`"
+            },
+            {
+              "label": "Dependencies",
+              "value": "None"
+            },
+            {
+              "label": "Runtime",
+              "value": "Portable"
+            }
+          ],
+          "areas": [
+            {
+              "slug": "coordination",
+              "title": "Coordination",
+              "group": "Trades"
+            }
+          ]
+        },
+        {
+          "name": "ki-work-github-issues",
+          "description": "Define GitHub Issues configuration, lifecycle mapping, hierarchy, dependencies, review, closure, and remote-write safety as a KI work adapter. Use when GitHub Issues is selected; remote execution is unavailable, while local files use `ki-work-roadmap` and Linear uses `ki-work-linear`.",
+          "kind": "Governance",
+          "fields": [
+            {
+              "label": "Kind",
+              "value": "Governance"
+            },
+            {
+              "label": "Applicability",
+              "value": "Declaration Only"
+            },
+            {
+              "label": "Arguments",
+              "value": "`audit <repo> | conform <repo> | educate <repo> | help | refresh`"
+            },
+            {
+              "label": "Dependencies",
+              "value": "None"
+            },
+            {
+              "label": "Runtime",
+              "value": "Portable"
+            }
+          ],
+          "areas": [
+            {
+              "slug": "work-and-delivery",
+              "title": "Work and delivery",
+              "group": "Work items"
+            }
+          ]
+        },
+        {
+          "name": "ki-work-linear",
+          "description": "Define Linear configuration, lifecycle mapping, hierarchy, dependencies, review, closure, and remote-write safety as a KI work adapter. Use when Linear is selected; remote execution is unavailable, while local files use `ki-work-roadmap` and GitHub Issues uses `ki-work-github-issues`.",
+          "kind": "Governance",
+          "fields": [
+            {
+              "label": "Kind",
+              "value": "Governance"
+            },
+            {
+              "label": "Applicability",
+              "value": "Declaration Only"
+            },
+            {
+              "label": "Arguments",
+              "value": "`audit <repo> | conform <repo> | educate <repo> | help | refresh`"
+            },
+            {
+              "label": "Dependencies",
+              "value": "None"
+            },
+            {
+              "label": "Runtime",
+              "value": "Portable"
+            }
+          ],
+          "areas": [
+            {
+              "slug": "work-and-delivery",
+              "title": "Work and delivery",
+              "group": "Work items"
+            }
+          ]
+        },
+        {
+          "name": "ki-work-package",
+          "description": "Own the work package of one piece of work, `work/<territory>/<id>/` in the Cairn store: its `_index.md`, holding the definition with its routing description, goals, scope and repositories and the state for recovery, its `NN-<slug>.change.md` change documents, where decisions and open points live, and sub-packages of the same shape, plus the closed list, the writers and the tidy. Use to create, update, resume, audit, tidy or remove a package, or to pick work up without a transcript or vendor session; Git is the logbook, messages go through the Cairn store, and durable knowledge stays with its owners.",
+          "kind": "Governance",
+          "fields": [
+            {
+              "label": "Kind",
+              "value": "Governance"
+            },
+            {
+              "label": "Applicability",
+              "value": "Detected"
+            },
+            {
+              "label": "Arguments",
+              "value": "`audit <repo> | conform <repo> | educate <repo> | help | refresh | remove <id> | resume <id> | update <id>`"
+            },
+            {
+              "label": "Dependencies",
+              "value": "None"
+            },
+            {
+              "label": "Runtime",
+              "value": "Portable"
+            }
+          ],
+          "areas": [
+            {
+              "slug": "coordination",
+              "title": "Coordination",
+              "group": "Delegation and programme"
+            }
+          ]
+        },
+        {
+          "name": "ki-work-recurring",
+          "description": "Govern recurring-work identity, cadence, due-run reservation, and successful-run evidence for Project templates and opted-in KB Activities. Use for recurring maintenance; `ki-repo-kb-activities` owns Activity notes and `ki-env-housekeeping-*` skills own runtime cleanup.",
+          "kind": "Governance",
+          "fields": [
+            {
+              "label": "Kind",
+              "value": "Governance"
+            },
+            {
+              "label": "Applicability",
+              "value": "Declaration Only"
+            },
+            {
+              "label": "Arguments",
+              "value": "`audit <repo> | conform <repo> | educate <repo> | help | refresh`"
+            },
+            {
+              "label": "Dependencies",
+              "value": "None"
+            },
+            {
+              "label": "Runtime",
+              "value": "Portable"
+            }
+          ],
+          "areas": [
+            {
+              "slug": "work-and-delivery",
+              "title": "Work and delivery",
+              "group": "Work items"
+            }
+          ]
+        },
+        {
+          "name": "ki-work-roadmap",
+          "description": "Govern flat local work items, roadmap horizons, lifecycle detail, dependencies, root orientation, and done-before-prune commit boundaries. Use to audit or shape roadmap records; `ki-work next`, `ki-work plan`, `ki-work implement`, and `ki-work accept` apply the lifecycle, while Decision Records own durable rationale.",
+          "kind": "Governance",
+          "fields": [
+            {
+              "label": "Kind",
+              "value": "Governance"
+            },
+            {
+              "label": "Applicability",
+              "value": "Declaration Only"
+            },
+            {
+              "label": "Arguments",
+              "value": "`audit <repo> | conform <repo> | help | educate <repo> | refresh`"
+            },
+            {
+              "label": "Dependencies",
+              "value": "None"
+            },
+            {
+              "label": "Runtime",
+              "value": "Portable"
+            }
+          ],
+          "areas": [
+            {
+              "slug": "work-and-delivery",
+              "title": "Work and delivery",
+              "group": "Work items"
             }
           ]
         }

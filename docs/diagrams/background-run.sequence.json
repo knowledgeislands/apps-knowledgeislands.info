@@ -6,7 +6,7 @@
     "locale": "en",
     "output": "+/diagrams/background-run/background-run.html",
     "quality_profile": "showcase",
-    "repository": {"url": "https://github.com/knowledgeislands/ki-agentic-harness", "revision": "8897008fcee7b2c71a22115735ed038efccf7f32"}
+    "repository": {"url": "https://github.com/knowledgeislands/ki-agent-backpack", "revision": "8897008fcee7b2c71a22115735ed038efccf7f32"}
   },
   "participants": [
     {"id": "coordinator", "type": "backend", "label": "Coordinator", "sublabel": "the run's supervisor", "sources": [{"path": "skills/governance/ki-delegation/references/standards-background-runs.md", "line": 43, "end_line": 50}]},

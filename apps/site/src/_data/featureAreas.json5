@@ -58,12 +58,7 @@
       'ki-work',
       'ki-work-roadmap',
       'ki-work-github-issues',
-      'ki-work-linear',
-      'ki-next',
-      'ki-plan',
-      'ki-implement',
-      'ki-accept',
-      'ki-batch'
+      'ki-work-linear'
     ],
     commands: ['ki repo roadmap', 'ki repo batch'],
     page: '/docs/ways-of-working/roadmap-lifecycle/'
@@ -71,7 +66,7 @@
   {
     slug: 'work-design',
     title: 'Work design',
-    skills: ['ki-work-design'],
+    skills: ['ki-work'],
     commands: [],
     page: '/docs/ways-of-working/work-design/'
   },
@@ -100,7 +95,7 @@
   {
     slug: 'tending',
     title: 'Tending',
-    skills: ['ki-repo-kb', 'ki-work-roadmap', 'ki-accept'],
+    skills: ['ki-repo-kb', 'ki-work-roadmap', 'ki-work'],
     commands: [],
     page: '/docs/ways-of-working/tending/',
     interim: true
@@ -115,14 +110,14 @@
   {
     slug: 'acquisition',
     title: 'Acquisition',
-    skills: ['ki-acquire', 'ki-acquire-chatgpt', 'ki-acquire-granola', 'ki-pulse'],
+    skills: ['ki-acquire', 'ki-acquire-chatgpt', 'ki-acquire-granola'],
     commands: ['ki acquire'],
     page: '/docs/knowledge/acquiring-knowledge/'
   },
   {
     slug: 'recap',
     title: 'Recap',
-    skills: ['ki-recap'],
+    skills: ['ki-work'],
     commands: [],
     page: '/docs/knowledge/recap-and-handover/'
   },
@@ -133,7 +128,7 @@
     skills: [
       'ki-repo',
       'ki-repo-dotfiles-chezmoi',
-      'ki-repo-harness',
+      'ki-repo-backpack',
       'ki-repo-homebrew-tap',
       'ki-repo-kb',
       'ki-repo-kb-activities',
@@ -141,6 +136,7 @@
       'ki-repo-kb-principal',
       'ki-repo-kb-streams',
       'ki-repo-mcp',
+      'ki-repo-packages',
       'ki-repo-project',
       'ki-repo-specifications',
       'ki-repo-tools',
@@ -148,7 +144,7 @@
       'ki-repo-website-app',
       'ki-repo-website-cloudflare',
       'ki-repo-website-content',
-      'ki-bootstrap'
+      'ki-keystone'
     ],
     commands: ['ki registry', 'ki repo', 'ki harness', 'ki territory', 'ki estate converge'],
     page: ['/docs/standards/repository-standards/', '/docs/ki/repositories-and-territory/']
@@ -169,19 +165,21 @@
     slug: 'agent-environment',
     title: 'Agent environment',
     skills: [
-      'ki-binding',
-      'ki-binding-claude',
-      'ki-binding-chatgpt',
-      'ki-binding-chezmoi',
-      'ki-tokenomics',
-      'ki-tokenomics-claude',
-      'ki-tokenomics-chatgpt',
-      'ki-housekeeping-claude',
-      'ki-housekeeping-chatgpt',
+      'ki-env',
+      'ki-env-binding',
+      'ki-env-binding-claude',
+      'ki-env-binding-chatgpt',
+      'ki-env-binding-chezmoi',
+      'ki-env-tokenomics',
+      'ki-env-tokenomics-claude',
+      'ki-env-tokenomics-chatgpt',
+      'ki-env-housekeeping',
+      'ki-env-housekeeping-claude',
+      'ki-env-housekeeping-chatgpt',
       'ki-agentic-radar',
       'ki-model-radar'
     ],
     commands: ['ki mcp'],
-    page: '/docs/ki-agentic-harness/agent-environment/'
+    page: '/docs/ki-agent-backpack/agent-environment/'
   }
 ]

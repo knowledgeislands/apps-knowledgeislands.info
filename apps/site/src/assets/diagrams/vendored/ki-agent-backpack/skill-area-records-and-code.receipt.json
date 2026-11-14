@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "slug": "skill-area-records-and-code",
+  "type": "architecture",
+  "source": {
+    "file": "skill-area-records-and-code.architecture.json",
+    "sha256": "87c7a55e7e1c4af5cb0ea2ed4b14f6f0c665ede416b2ab56e71398880bfce563",
+    "bytes": 8146
+  },
+  "html": {
+    "file": "skill-area-records-and-code.html",
+    "sha256": "80418bea63d2df5f4c81f2a08d04f77dd1045315fa573397fcd7c9b0024bfe4d",
+    "bytes": 830125
+  },
+  "renderer": {
+    "name": "archify",
+    "version": "3.2.0"
+  }
+}

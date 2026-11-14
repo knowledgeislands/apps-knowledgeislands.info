@@ -72,7 +72,14 @@ describe('parseCatalogue', () => {
       catalogue.domains.map((domain) => domain.name),
       ['Governance', 'Change Management']
     )
-    assert.deepEqual(catalogue.counts, { total: 2, governance: 1, process: 1 })
+    assert.deepEqual(catalogue.counts, { total: 2, governance: 1, process: 1, knowledge: 0 })
+  })
+
+  test('reads the knowledge count when the preamble states one', () => {
+    const knowledge = processSkill.replace('- **Kind:** Process', '- **Kind:** Knowledge')
+    const counts = '2 skills: 1 governance skill, 0 process skills and 1 knowledge skill'
+    const catalogue = parseCatalogue(block(`${governance}\n${knowledge}`, counts))
+    assert.deepEqual(catalogue.counts, { total: 2, governance: 1, process: 0, knowledge: 1 })
   })
 
   test('carries every published field verbatim, in the order upstream lists them', () => {
@@ -396,7 +403,7 @@ describe('readCatalogueSources', () => {
     assert.deepEqual(
       fetch.mock.calls.map((call) => String(call.arguments[0])).sort(),
       ['skills/README.md', AREAS_PATH]
-        .map((path) => `https://raw.githubusercontent.com/knowledgeislands/ki-agentic-harness/${ref}/${path}`)
+        .map((path) => `https://raw.githubusercontent.com/knowledgeislands/ki-agent-backpack/${ref}/${path}`)
         .sort()
     )
     t.mock.restoreAll()

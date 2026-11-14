@@ -4,13 +4,13 @@
   "type": "sequence",
   "source": {
     "file": "background-run.sequence.json",
-    "sha256": "de75a5d24d40ad658b978cc81bb6a5ca8032212cd803f19ed01b29ac326592ef",
-    "bytes": 4508
+    "sha256": "e804afb25981a637899ab746c662fd2d7af879be4f0759f780815ae054188b57",
+    "bytes": 4507
   },
   "html": {
     "file": "background-run.html",
-    "sha256": "d9dce234b12ae4cd3771bb52408314268303aecd39ab80d75a9ac858bbb3d0a6",
-    "bytes": 820894
+    "sha256": "a4afb004fd315219157ef9d779358f976eae2ff0c4f4660e154fa6ffabee53e3",
+    "bytes": 820886
   },
   "renderer": {
     "name": "archify",

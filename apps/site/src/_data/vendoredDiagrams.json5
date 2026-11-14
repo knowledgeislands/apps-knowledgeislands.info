@@ -1,18 +1,18 @@
 // GENERATED FILE - do not edit.
-// bun run --cwd apps/site sync:diagrams -- --ref 8897008fcee7b2c71a22115735ed038efccf7f32
-// Copied byte for byte from knowledgeislands/ki-agentic-harness; source refs on embedding pages must match.
+// bun run --cwd apps/site sync:diagrams -- --ref bb232e00707bd7c5c1fc261c514f7cbcdf7ab545
+// Copied byte for byte from knowledgeislands/ki-agent-backpack; source refs on embedding pages must match.
 {
   "source": {
-    "repository": "knowledgeislands/ki-agentic-harness",
+    "repository": "knowledgeislands/ki-agent-backpack",
     "path": "docs/diagrams/diagrams.toml",
-    "ref": "8897008fcee7b2c71a22115735ed038efccf7f32"
+    "ref": "bb232e00707bd7c5c1fc261c514f7cbcdf7ab545"
   },
-  "synced": "2026-10-25",
+  "synced": "2026-11-14",
   "diagrams": {
     "skill-map": {
       "type": "architecture",
       "question": "What skills does the harness hold, in which source concern does each live, which functional areas does each serve, and what shape is each?",
-      "last_checked": "3d50e252ed12b1f5ce842999631d1939ed562935",
+      "last_checked": "80fde15b648d3a93ab4a0a16c46e4c0dcab05a1a",
       "svg": "skill-map.svg",
       "html": "skill-map.html",
       "receipt": "skill-map.receipt.json"
@@ -20,7 +20,7 @@
     "skill-area-fundamentals": {
       "type": "architecture",
       "question": "Which outside skills do the Fundamentals skills rely on, which outside skills rely on them, and how do they rely on each other?",
-      "last_checked": "8f4005240c3002a64af17add4bc8e878fd7e2ccd",
+      "last_checked": "ccbe690457da02b9d5ff7f6c07a94c4650b41ee5",
       "svg": "skill-area-fundamentals.svg",
       "html": "skill-area-fundamentals.html",
       "receipt": "skill-area-fundamentals.receipt.json"
@@ -36,7 +36,7 @@
     "skill-area-coordination": {
       "type": "architecture",
       "question": "Which outside skills do the Coordination skills rely on, which outside skills rely on them, and how do they rely on each other?",
-      "last_checked": "3d50e252ed12b1f5ce842999631d1939ed562935",
+      "last_checked": "940341c56fb8ee94c902f53a9ca80bd8dfd01eb1",
       "svg": "skill-area-coordination.svg",
       "html": "skill-area-coordination.html",
       "receipt": "skill-area-coordination.receipt.json"
@@ -52,7 +52,7 @@
     "skill-area-repository-types": {
       "type": "architecture",
       "question": "Which outside skills do the Repository types skills rely on, which outside skills rely on them, and how do they rely on each other?",
-      "last_checked": "8f4005240c3002a64af17add4bc8e878fd7e2ccd",
+      "last_checked": "80fde15b648d3a93ab4a0a16c46e4c0dcab05a1a",
       "svg": "skill-area-repository-types.svg",
       "html": "skill-area-repository-types.html",
       "receipt": "skill-area-repository-types.receipt.json"
@@ -60,7 +60,7 @@
     "skill-area-agentic-systems": {
       "type": "architecture",
       "question": "Which outside skills do the Agentic systems skills rely on, which outside skills rely on them, and how do they rely on each other?",
-      "last_checked": "8f4005240c3002a64af17add4bc8e878fd7e2ccd",
+      "last_checked": "940341c56fb8ee94c902f53a9ca80bd8dfd01eb1",
       "svg": "skill-area-agentic-systems.svg",
       "html": "skill-area-agentic-systems.html",
       "receipt": "skill-area-agentic-systems.receipt.json"
@@ -68,7 +68,7 @@
     "skill-area-environment": {
       "type": "architecture",
       "question": "Which outside skills do the Environment skills rely on, which outside skills rely on them, and how do they rely on each other?",
-      "last_checked": "8f4005240c3002a64af17add4bc8e878fd7e2ccd",
+      "last_checked": "ccbe690457da02b9d5ff7f6c07a94c4650b41ee5",
       "svg": "skill-area-environment.svg",
       "html": "skill-area-environment.html",
       "receipt": "skill-area-environment.receipt.json"
@@ -76,7 +76,7 @@
     "skill-area-acquire": {
       "type": "architecture",
       "question": "Which outside skills do the Acquire skills rely on, which outside skills rely on them, and how do they rely on each other?",
-      "last_checked": "8bc9d49d0e4c06490a7f8ec81d00e65e92167fc5",
+      "last_checked": "a24e05270da551dedb03b5724edd7b44eefe99b0",
       "svg": "skill-area-acquire.svg",
       "html": "skill-area-acquire.html",
       "receipt": "skill-area-acquire.receipt.json"
@@ -104,6 +104,22 @@
       "svg": "thread-model.svg",
       "html": "thread-model.html",
       "receipt": "thread-model.receipt.json"
+    },
+    "agentic-terms-by-example": {
+      "type": "architecture",
+      "question": "How do the agentic terms nest in practice, from machine and environment through agent host, agent and session to subagent threads and clients, with real examples?",
+      "last_checked": "a026fecbe018407c3c26673dd57c63786aee10bb",
+      "svg": "agentic-terms-by-example.svg",
+      "html": "agentic-terms-by-example.html",
+      "receipt": "agentic-terms-by-example.receipt.json"
+    },
+    "agentic-standards": {
+      "type": "architecture",
+      "question": "Which pair does each open agentic standard connect, MCP, ACP, AHP and A2A, and where do channels within and between agentic systems, and integrations, sit?",
+      "last_checked": "a026fecbe018407c3c26673dd57c63786aee10bb",
+      "svg": "agentic-standards.svg",
+      "html": "agentic-standards.html",
+      "receipt": "agentic-standards.receipt.json"
     }
   }
 }

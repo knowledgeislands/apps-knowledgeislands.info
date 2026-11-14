@@ -14,7 +14,7 @@ The [tool routes](tool-routes.md) contract already solved the same problem for v
 
 ## The declaration
 
-Every Markdown page under `apps/site/src/docs/` carries a `sources` key in its frontmatter. The sections hold different things — [the ki CLI and harness guides](docs-sections.md), the model prompting guides, and a page about the reader's own machine — but provenance does not distinguish them, because moving a page must not be a way to shed its declaration.
+Every Markdown page under `apps/site/src/docs/` carries a `sources` key in its frontmatter. The sections hold different things — [the ki CLI and backpack guides](docs-sections.md), the model prompting guides, and a page about the reader's own machine — but provenance does not distinguish them, because moving a page must not be a way to shed its declaration.
 
 ```yaml
 ---
@@ -59,7 +59,7 @@ A third case sits between the two. A **vendored** page declares its `sources` in
 
 | Page | Vendors | Sync script | Record |
 | --- | --- | --- | --- |
-| `/docs/skills/catalogue/` | The harness's generated capability inventory, from its marker-delimited block in `skills/README.md`, with each skill's functional areas from the generator table `skill-functions.ts` at the same commit | `sync-skill-catalogue.ts` → `src/_data/skillCatalogue.json5` | ADR-KI-WEBSITE-001 |
+| `/docs/skills/catalogue/` | The backpack's generated capability inventory, from its marker-delimited block in `skills/README.md`, with each skill's functional areas from the generator table `skill-functions.ts` at the same commit | `sync-skill-catalogue.ts` → `src/_data/skillCatalogue.json5` | ADR-KI-WEBSITE-001 |
 | `/projects/ki/commands/` | The `ki` command inventory, from `man/ki.1` | `sync-cli-commands.ts` → `src/_data/cliCommands.json5` | ADR-KI-WEBSITE-001 |
 | `/field-guide/` | The canon and decided entries of Tessera's symbol library, from `packages/tessera-symbols` | `sync-ki-design.ts` → `src/_data/kiSymbols.json5` | KI-WEBSITE-SITE-044 |
 | `/arcadia/` | The chosen Arcadia painting, from Tessera's `docs/briefs/references/arcadia.png`, as responsive images | `sync-ki-design.ts` → `src/_data/arcadiaPainting.json5` | KI-WEBSITE-SITE-045 |
@@ -91,7 +91,7 @@ These syncs follow the same shape, and the next one should too: fetch the upstre
 
 Vendoring is the right answer only where the upstream artefact is itself an inventory the site would add nothing by rewording — an inventory reworded is still an inventory, and it ages with every release. Most guidance is not like that, and [the ownership test](what-to-publish.md#the-test) still decides.
 
-**The two cases are not equally safe, and the difference is worth stating.** The catalogue vendors a _specified_ interface: `ki-repo-harness` names the markers, normatively fixes the fields, and the harness's own rubric tests assert them, so the site consumes a contract someone maintains. The command reference vendors a _published_ one: `man/ki.1` ships with every release and is complete, but nothing names it an interface and no upstream test asserts its shape.
+**The two cases are not equally safe, and the difference is worth stating.** The catalogue vendors a _specified_ interface: `ki-repo-backpack` names the markers, normatively fixes the fields, and the backpack's own rubric tests assert them, so the site consumes a contract someone maintains. The command reference vendors a _published_ one: `man/ki.1` ships with every release and is complete, but nothing names it an interface and no upstream test asserts its shape.
 
 Where the interface is only published, the parser carries the weight a contract would have carried. It throws on any construct it does not recognise, on a missing purpose or description, on a duplicate, and on a total below a structural floor — because an inventory that silently loses half its commands is worse than one that refuses to build, and nobody would notice the first. Where the manual's own two inventories disagree, the sync reconciles them and the page publishes the discrepancy rather than inheriting it. And the handoff asking for a real contract is recorded rather than assumed: `KI-TOOL-KI-CLI-080` in `tools-ki`.
 
@@ -105,7 +105,7 @@ bun run --cwd apps/site sync:cli    -- --ref <tag-or-commit>
 The skill catalogue sync also accepts an explicit local repository, with the same mandatory immutable `--ref`:
 
 ```bash
-bun run --cwd apps/site sync:skills -- --ref <tag-or-commit> --from /absolute/path/to/ki-agentic-harness
+bun run --cwd apps/site sync:skills -- --ref <tag-or-commit> --from /absolute/path/to/ki-agent-backpack
 ```
 
 `--from` resolves from the command's working directory (`apps/site` with the command above), so supply a path from there or an absolute path. It reads `skills/README.md` and the existing `skill-functions.ts` source from Git blobs at that exact ref, ignoring dirty working files. A missing ref or blob fails the sync, including in a partial clone; local mode never fetches or falls back to GitHub. Omit `--from` to keep the existing GitHub route. Both routes retain the same parsers, snapshot payload and provenance.

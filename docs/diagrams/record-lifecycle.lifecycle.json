@@ -6,7 +6,7 @@
     "locale": "en",
     "output": "+/diagrams/record-lifecycle/record-lifecycle.html",
     "quality_profile": "showcase",
-    "repository": {"url": "https://github.com/knowledgeislands/ki-agentic-harness", "revision": "8897008fcee7b2c71a22115735ed038efccf7f32"}
+    "repository": {"url": "https://github.com/knowledgeislands/ki-agent-backpack", "revision": "8897008fcee7b2c71a22115735ed038efccf7f32"}
   },
   "mainPath": ["triage", "draft", "ready", "in-progress", "awaiting-review", "done"],
   "states": [
@@ -37,7 +37,7 @@
   ],
   "cards": [
     {"dot": "cyan", "title": "Two independent axes", "items": ["Status says how far the work has got", "Horizon says when it is intended: now, next, soon, future or hold", "A horizon is present if and only if the record is adopted and open"]},
-    {"dot": "amber", "title": "One skill per move", "items": ["ki-next captures, adopts, selects, defers, holds and releases", "ki-plan shapes a draft to Ready; ki-implement starts and delivers", "ki-accept accepts, cancels and prunes, each with human approval"]},
+    {"dot": "amber", "title": "One ki-work subcommand per move", "items": ["ki-work next captures, adopts, selects, defers, holds and releases", "ki-work plan shapes a draft to Ready; ki-work implement starts and delivers", "ki-work accept accepts, cancels and prunes, each with human approval"]},
     {"dot": "rose", "title": "Pruning is the exception", "items": ["A record is deleted only after a commit holds it as done or cancelled", "The prune commit removes explicitly selected records and nothing else", "Its subject is chore(roadmap): prune N done work record(s)"]}
   ]
 }

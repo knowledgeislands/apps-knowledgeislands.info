@@ -4,16 +4,16 @@ description: Which Knowledge Islands skill to reach for by what you want to achi
 permalink: /docs/skills/by-outcome/
 order: 4
 sources:
-  - repository: knowledgeislands/ki-agentic-harness
+  - repository: knowledgeislands/ki-agent-backpack
     path: skills/README.md
-    ref: 8897008fcee7b2c71a22115735ed038efccf7f32
+    ref: bb232e00707bd7c5c1fc261c514f7cbcdf7ab545
     governs: 'The skill names and responsibilities each outcome resolves to'
-    reviewed: '2026-10-25'
-  - repository: knowledgeislands/ki-agentic-harness
-    path: skills/repo-structure/ki-repo-harness/scripts/rubric/contexts/skill-functions.ts
-    ref: 8897008fcee7b2c71a22115735ed038efccf7f32
+    reviewed: '2026-11-14'
+  - repository: knowledgeislands/ki-agent-backpack
+    path: skills/repository/ki-repo-backpack/scripts/rubric/contexts/skill-functions.ts
+    ref: bb232e00707bd7c5c1fc261c514f7cbcdf7ab545
     governs: 'The functional areas the outcomes are grouped by'
-    reviewed: '2026-10-25'
+    reviewed: '2026-11-14'
 ---
 
 # Choose a skill by outcome
@@ -22,7 +22,7 @@ After this page you can start from a plain-language result you want, name the on
 
 ## What it is
 
-Sixty-four skills is more than anyone remembers by name. This page turns the question round: it lists outcomes a reader actually wants, and beside each one names the skill to reach for and the page where the practice is explained. The skill names link to their entries in the [catalogue](/docs/skills/catalogue/), which carries each description in the harness's own words. Each outcome links to the published page explaining its practice, or to the catalogue entry for a design capability.
+Sixty-five skills is more than anyone remembers by name. This page turns the question round: it lists outcomes a reader actually wants, and beside each one names the skill to reach for and the page where the practice is explained. The skill names link to their entries in the [catalogue](/docs/skills/catalogue/), which carries each description in the backpack's own words. Each outcome links to the published page explaining its practice, or to the catalogue entry for a design capability.
 
 ## How it works
 
@@ -40,8 +40,8 @@ Find the group that matches the kind of result you want, read down to the outcom
 | Govern the principal knowledge base of a territory | [`ki-repo-kb-principal`][l3] | [Knowledge bases][l4] |
 | Keep a dashboard or tracker as a Markdown and HTML pair | [`ki-repo-kb-live-artifacts`][l5] | [Knowledge bases][l4] |
 | Capture an agent session or meeting into the knowledge base | Skills† | [Acquiring knowledge][l9] |
-| Capture a link or scan for public developments, and route the signal | [`ki-pulse`][l10] | [Acquiring knowledge][l9] |
-| Recap a live session and hand its unfinished work over | [`ki-recap`][l11] | [Recap and handover][l12] |
+| Capture a link or scan for public developments, and route the signal | [`ki-acquire pulse`][l10] | [Acquiring knowledge][l9] |
+| Recap a live session and hand its unfinished work over | [`ki-work recap`][l11] | [Recap and handover][l12] |
 
 † [`ki-acquire`][l6], with [`ki-acquire-chatgpt`][l7] or [`ki-acquire-granola`][l8] for the source
 
@@ -49,7 +49,7 @@ Find the group that matches the kind of result you want, read down to the outcom
 
 | Outcome | Skill | Explained in |
 | --- | --- | --- |
-| Start using Knowledge Islands on a machine | [`ki-bootstrap`][l13] | [Repository standards][repository-standards] |
+| Start using Knowledge Islands on a machine | [`ki-keystone bootstrap`][l13] | [Repository standards][repository-standards] |
 | Audit or conform the universal repository contract | [`ki-repo`][l14] | [Repository standards][repository-standards] |
 | Repository shape‡ | Skills† | [Repository standards][repository-standards] |
 | Record why a durable choice was made | [`ki-decision-records`][l16] | [Decision records][decision-records] |
@@ -63,7 +63,7 @@ Find the group that matches the kind of result you want, read down to the outcom
 
 † the matching `ki-repo-*` skill, such as [`ki-repo-website`][l15]
 
-‡ Shape a project, website, harness, MCP server, tools, specification, tap or dotfiles repository
+‡ Shape a project, website, backpack, MCP server, tools, packages, specification, tap or dotfiles repository
 
 ### Coordinate work between people, threads and repositories
 
@@ -72,25 +72,21 @@ Find the group that matches the kind of result you want, read down to the outcom
 | Coordinate a piece of territory or Project work and reply in the right form | [`ki-coordination`][l25] | [Coordination][l26] |
 | Keep a piece of work resumable from Git rather than a transcript | [`ki-work-package`][l27] | [Work packages][l28] |
 | Hand work to a detached background agent | [`ki-delegation`][l29] | [Background runs][l30] |
-| Shape a new Project or model | [`ki-work-design`][design-skill] | [Work design][design-page] |
+| Shape a new Project or model | [`ki-work design`][design-skill] | [Work design][design-page] |
 | Exchange work or knowledge | [`ki-trade`][trade-skill], [`ki-trades`][trades-skill] | [Trades][trades-page] |
 | Define a reusable agent role | Skills† | [Coordination][coordination-page] |
-| Coordinate agents around a group of repositories with Paperclip | Skills‡ | [Coordination][coordination-page] |
 
 † [`ki-subagents`][l31], then [`ki-subagents-claude`][l32] or [`ki-subagents-chatgpt`][l33] for the runtime
-
-‡ [`ki-agent-coordination-paperclip`][l34]
 
 ### Select, plan, deliver and close work
 
 | Outcome | Skill | Explained in |
 | --- | --- | --- |
 | Choose where a repository records its forward work | Skills† | [Roadmap lifecycle][l39] |
-| Capture new work or decide what comes next | [`ki-next`][l40] | [Roadmap lifecycle][l39] |
-| Make a selected record ready to implement | [`ki-plan`][l41] | [Roadmap lifecycle][l39] |
-| Deliver one approved record through to review | [`ki-implement`][l42] | [Roadmap lifecycle][l39] |
-| Close a reviewed record, or cancel one with approval | [`ki-accept`][l43] | [Roadmap lifecycle][l39] |
-| Run an authorised window over a set of ready records | [`ki-batch`][l44] | [Roadmap lifecycle][l39] |
+| Capture new work or decide what comes next | [`ki-work next`][l40] | [Roadmap lifecycle][l39] |
+| Make a selected record ready to implement | [`ki-work plan`][l41] | [Roadmap lifecycle][l39] |
+| Deliver one approved record through to review | [`ki-work implement`][l42] | [Roadmap lifecycle][l39] |
+| Close a reviewed record, or cancel one with approval | [`ki-work accept`][l43] | [Roadmap lifecycle][l39] |
 | Adopt and evidence recurring work | [`ki-work-recurring`][recurring-skill]† | [Recurring work][recurring-page] |
 
 † [`ki-work`][l35], then [`ki-work-roadmap`][l36], [`ki-work-github-issues`][l37] or [`ki-work-linear`][l38]
@@ -99,15 +95,15 @@ Find the group that matches the kind of result you want, read down to the outcom
 
 | Outcome | Skill | Explained in |
 | --- | --- | --- |
-| Keep one portable inventory of MCP servers | [`ki-binding`][l45] | [Agent environment][l46] |
+| Keep one portable inventory of MCP servers | [`ki-env-binding`][l45] | [Agent environment][l46] |
 | Project that inventory into Claude, Codex or chezmoi | Skills† | [Agent environment][l46] |
 | Set context budgets and model-purpose policy | Skills‡ | [Agent environment][l46] |
-| Tidy accumulated Claude or Codex state | [`ki-housekeeping-claude`][l53] or [`ki-housekeeping-chatgpt`][l54] | [Agent environment][l46] |
+| Tidy accumulated Claude or Codex state | [`ki-env-housekeeping-claude`][l53] or [`ki-env-housekeeping-chatgpt`][l54] | [Agent environment][l46] |
 | Assess language models or agentic protocols before adopting one | Skills§ | [Agent environment][l46] |
 
-† [`ki-binding-claude`][l47], [`ki-binding-chatgpt`][l48] or [`ki-binding-chezmoi`][l49]
+† [`ki-env-binding-claude`][l47], [`ki-env-binding-chatgpt`][l48] or [`ki-env-binding-chezmoi`][l49]
 
-‡ [`ki-tokenomics`][l50], with [`ki-tokenomics-claude`][l51] or [`ki-tokenomics-chatgpt`][l52] for observed evidence
+‡ [`ki-env-tokenomics`][l50], with [`ki-env-tokenomics-claude`][l51] or [`ki-env-tokenomics-chatgpt`][l52] for observed evidence
 
 § [`ki-model-radar`][l55] or [`ki-agentic-radar`][l56]
 
@@ -128,7 +124,7 @@ When none of the rows fits, describe the outcome to your agent and let the runti
 
 † Knowledge Base Activity notes are provided by [`ki-repo-kb-activities`](/docs/skills/catalogue/#ki-repo-kb-activities).
 
-[design-skill]: /docs/skills/catalogue/#ki-work-design
+[design-skill]: /docs/skills/catalogue/#ki-work
 [design-page]: /docs/ways-of-working/work-design/
 [trade-skill]: /docs/skills/catalogue/#ki-trade
 [trades-skill]: /docs/skills/catalogue/#ki-trades
@@ -161,10 +157,10 @@ When none of the rows fits, describe the outcome to your agent and let the runti
 [l7]: /docs/skills/catalogue/#ki-acquire-chatgpt
 [l8]: /docs/skills/catalogue/#ki-acquire-granola
 [l9]: /docs/knowledge/acquiring-knowledge/
-[l10]: /docs/skills/catalogue/#ki-pulse
-[l11]: /docs/skills/catalogue/#ki-recap
+[l10]: /docs/skills/catalogue/#ki-acquire
+[l11]: /docs/skills/catalogue/#ki-work
 [l12]: /docs/knowledge/recap-and-handover/
-[l13]: /docs/skills/catalogue/#ki-bootstrap
+[l13]: /docs/skills/catalogue/#ki-keystone
 [l14]: /docs/skills/catalogue/#ki-repo
 [l15]: /docs/skills/catalogue/#ki-repo-website
 [l16]: /docs/skills/catalogue/#ki-decision-records
@@ -185,27 +181,25 @@ When none of the rows fits, describe the outcome to your agent and let the runti
 [l31]: /docs/skills/catalogue/#ki-subagents
 [l32]: /docs/skills/catalogue/#ki-subagents-claude
 [l33]: /docs/skills/catalogue/#ki-subagents-chatgpt
-[l34]: /docs/skills/catalogue/#ki-agent-coordination-paperclip
 [l35]: /docs/skills/catalogue/#ki-work
 [l36]: /docs/skills/catalogue/#ki-work-roadmap
 [l37]: /docs/skills/catalogue/#ki-work-github-issues
 [l38]: /docs/skills/catalogue/#ki-work-linear
 [l39]: /docs/ways-of-working/roadmap-lifecycle/
-[l40]: /docs/skills/catalogue/#ki-next
-[l41]: /docs/skills/catalogue/#ki-plan
-[l42]: /docs/skills/catalogue/#ki-implement
-[l43]: /docs/skills/catalogue/#ki-accept
-[l44]: /docs/skills/catalogue/#ki-batch
-[l45]: /docs/skills/catalogue/#ki-binding
-[l46]: /docs/ki-agentic-harness/agent-environment/
-[l47]: /docs/skills/catalogue/#ki-binding-claude
-[l48]: /docs/skills/catalogue/#ki-binding-chatgpt
-[l49]: /docs/skills/catalogue/#ki-binding-chezmoi
-[l50]: /docs/skills/catalogue/#ki-tokenomics
-[l51]: /docs/skills/catalogue/#ki-tokenomics-claude
-[l52]: /docs/skills/catalogue/#ki-tokenomics-chatgpt
-[l53]: /docs/skills/catalogue/#ki-housekeeping-claude
-[l54]: /docs/skills/catalogue/#ki-housekeeping-chatgpt
+[l40]: /docs/skills/catalogue/#ki-work
+[l41]: /docs/skills/catalogue/#ki-work
+[l42]: /docs/skills/catalogue/#ki-work
+[l43]: /docs/skills/catalogue/#ki-work
+[l45]: /docs/skills/catalogue/#ki-env-binding
+[l46]: /docs/ki-agent-backpack/agent-environment/
+[l47]: /docs/skills/catalogue/#ki-env-binding-claude
+[l48]: /docs/skills/catalogue/#ki-env-binding-chatgpt
+[l49]: /docs/skills/catalogue/#ki-env-binding-chezmoi
+[l50]: /docs/skills/catalogue/#ki-env-tokenomics
+[l51]: /docs/skills/catalogue/#ki-env-tokenomics-claude
+[l52]: /docs/skills/catalogue/#ki-env-tokenomics-chatgpt
+[l53]: /docs/skills/catalogue/#ki-env-housekeeping-claude
+[l54]: /docs/skills/catalogue/#ki-env-housekeeping-chatgpt
 [l55]: /docs/skills/catalogue/#ki-model-radar
 [l56]: /docs/skills/catalogue/#ki-agentic-radar
 [l57]: /docs/skills/catalogue/#ki-design-inspiration

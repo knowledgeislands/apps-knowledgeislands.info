@@ -44,7 +44,7 @@ You can see who holds a piece of work, delegate a bounded task without keeping i
 
 A work package describes one piece of work under `+/_WORK/<id>/`. Its five files hold the definition in `work.md`, current state in `state.md`, outstanding queries, incoming messages and decisions. The `ki-work-package` skill governs that durable package, described under [work packages](/docs/ways-of-working/work-packages/); `ki work status` reads it.
 
-A detached run is a worker's execution of a supplied brief. `ki agent` provides the launcher and monitoring surface governed by `ki-delegation`, described under [background runs](/docs/ways-of-working/background-runs/). A batch envelope, governed by `ki-batch`, records authority for one exact set of Ready items in one repository. Neither a running process nor a batch ledger replaces the canonical work records.
+A detached run is a worker's execution of a supplied brief. `ki agent` provides the launcher and monitoring surface governed by `ki-delegation`, described under [background runs](/docs/ways-of-working/background-runs/). A batch envelope records authority for one exact set of Ready items in one repository. Neither a running process nor a batch ledger replaces the canonical work records.
 
 ## How it works
 
@@ -71,7 +71,7 @@ ki agent status lantern-writing
 ki agent wait lantern-writing --next
 ```
 
-The runtime must be installed and the canonical harness must supply the run assets. Choose `--runtime claude` or `--runtime codex` explicitly when needed; optional model and effort settings pass to that runtime. Use the lowest sufficient authority tier. A tier does not invent the owner's permission for a task.
+The runtime must be installed and the canonical backpack must supply the run assets. Choose `--runtime claude` or `--runtime codex` explicitly when needed; optional model and effort settings pass to that runtime. Use the lowest sufficient authority tier. A tier does not invent the owner's permission for a task.
 
 For several prepared tasks, queue their briefs and start a bounded dispatcher:
 

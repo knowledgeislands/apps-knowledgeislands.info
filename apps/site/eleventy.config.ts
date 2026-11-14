@@ -67,8 +67,8 @@ export default function (eleventyConfig: UserConfig) {
     const files = site[slug]
       ? { svg: `../../docs/diagrams/${slug}.svg`, html: `/diagrams/site/${slug}.html` }
       : {
-          svg: `src/assets/diagrams/vendored/ki-agentic-harness/${entry.svg}`,
-          html: `/diagrams/vendored/ki-agentic-harness/${entry.html}`
+          svg: `src/assets/diagrams/vendored/ki-agent-backpack/${entry.svg}`,
+          html: `/diagrams/vendored/ki-agent-backpack/${entry.html}`
         }
     // The figure lands in Markdown, where markdown-it treats it as one HTML block that ends at the first
     // blank line. Every exported SVG carries blank lines between its parts, so what followed the first one

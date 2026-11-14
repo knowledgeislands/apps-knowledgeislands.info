@@ -39,7 +39,7 @@ You can register an island once, select the checkouts you intend to maintain, an
 
 A repository's `.ki.toml` declares its identity, Capital, kind, shape and governing skills. The machine-local registry connects that canonical identity to a physical checkout. A territory's Capital declares its members; the registry tells this machine where to find them.
 
-Harnesses supply the skills those declarations select. `ki-repo` governs the repository contract and `ki-bootstrap` explains installation and activation. Registration, skill activation and a successful audit establish different facts: location, applicable governance and the result of the checks actually run.
+Backpacks supply the skills those declarations select. `ki-repo` governs the repository contract and `ki-keystone bootstrap` explains installation and activation. Registration, skill activation and a successful audit establish different facts: location, applicable governance and the result of the checks actually run.
 
 [Repository standards](/docs/standards/repository-standards/) explains the shapes, universal contract and review loop behind these commands.
 
@@ -85,7 +85,7 @@ ki repo conform --dry-run
 
 Apply conform only after reviewing the proposed changes. `ki repo repair --dry-run` previews reconciliation of managed projections; `ki repo upgrade` refreshes uniquely resolved providers. `ki repo roadmap list`, `summary` and `stats` inspect forward work, while lifecycle mutations retain their own approval rules. `ki repo store` lists or manages declared external source-store bindings and host availability; creating a store and binding an existing one are explicit operations.
 
-Inspect missing capability providers with `ki harness list` and `info`; install a configured provider with `install`. Activation still uses `ki skill add` or `ki repo skill add`, as [capability lifecycle](/docs/ki/capability-lifecycle/) explains. Reinstallation refuses active user-skill providers, and the canonical harness cannot be uninstalled.
+Inspect missing capability providers with `ki harness list` and `info`; install a configured provider with `install`. Activation still uses `ki skill add` or `ki repo skill add`, as [capability lifecycle](/docs/ki/capability-lifecycle/) explains. Reinstallation refuses active user-skill providers, and the canonical backpack cannot be uninstalled.
 
 For an approved estate rearrangement, run `ki estate converge <manifest>` to preview the target layout. `--apply` performs the validated moves and records a log; `--clone` separately permits missing checkouts to be cloned. `--rollback <log>` previews reversal and refuses recorded state that has since changed. The separate `--hooks` pass reconciles supported hook bindings.
 
@@ -95,6 +95,6 @@ The registry gives local resolution a stable inventory. Repository operations tu
 
 ## Boundaries
 
-Selecting a territory grants no new write authority, and registration proves no conformance. Repair reconciles managed links without inventing declarations. Harness installation supplies capabilities without activating every skill.
+Selecting a territory grants no new write authority, and registration proves no conformance. Repair reconciles managed links without inventing declarations. Backpack installation supplies capabilities without activating every skill.
 
 Source stores are opt-in and remain separate from repository content; an unavailable store is reported with its recovery route. Convergence never deletes repositories and previews by default. Its rollback is guarded by recorded state, so it cannot promise to undo later independent changes. [Every ki command](/docs/ki/commands/) carries the exact release grammar.

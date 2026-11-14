@@ -27,23 +27,23 @@ You can identify a capability by its bare name, find the machine-local state tha
 A skill is named by its bare name - `ki-work-roadmap`, `ki-authoring`, `ki-repo-mcp`:
 
 ```bash
-ki skill add ki-recap
+ki skill add ki-coordination
 ki repo skill add ki-work-roadmap
 ```
 
-**Harness-qualified keys are invalid.** Writing `knowledgeislands/ki-agentic-harness:ki-work-roadmap` will be rejected, and a declaration in `.ki.toml` written that way is not a valid declaration. The reason is that a repository declares _what governs it_, not _where that came from_: the provider is declared separately, under `[repo]`, and is a property of the installation rather than of the governance.
+**Backpack-qualified keys are invalid.** Writing `knowledgeislands/ki-agent-backpack:ki-work-roadmap` will be rejected, and a declaration in `.ki.toml` written that way is not a valid declaration. The reason is that a repository declares _what governs it_, not _where that came from_: the provider is declared separately, under `[repo]`, and is a property of the installation rather than of the governance.
 
 ```toml
 [repo]
-harnesses = ["knowledgeislands/ki-agentic-harness"]
+harnesses = ["knowledgeislands/ki-agent-backpack"]
 
 [skills.ki-work-roadmap]
 # this skill's own configuration goes here
 ```
 
-A provider must appear in that harness list before any of its skills can be added. Each installed harness declares which capability prefixes it owns, through `[skills.ki-repo-harness]` in its own root configuration, so two harnesses cannot both claim to supply the same skill name.
+A provider must appear in that backpack list before any of its skills can be added. Each installed backpack declares which capability prefixes it owns, through `[skills.ki-repo-backpack]` in its own root configuration, so two backpacks cannot both claim to supply the same skill name.
 
-If exactly one installed harness provides the name you ask for, the bare name resolves. If two do, the command stops rather than choosing - which is the same refusal `ki repo upgrade` makes, for the same reason.
+If exactly one installed backpack provides the name you ask for, the bare name resolves. If two do, the command stops rather than choosing - which is the same refusal `ki repo upgrade` makes, for the same reason.
 
 ## Where `ki` keeps things
 
@@ -51,7 +51,7 @@ Four locations, each resolved from the first non-empty value in its row:
 
 | Contents | Resolution order |
 | --- | --- |
-| Data - installed harness payloads | `$KI_DATA_HOME`, then `$XDG_DATA_HOME/ki`, then `~/.local/share/ki` |
+| Data - installed backpack payloads | `$KI_DATA_HOME`, then `$XDG_DATA_HOME/ki`, then `~/.local/share/ki` |
 | Configuration - your user-scope declarations | `$KI_CONFIG_HOME`, then `$XDG_CONFIG_HOME/ki`, then `~/.config/ki` |
 | Cache - recoverable working material | `$KI_CACHE_HOME`, then `$XDG_CACHE_HOME/ki`, then `~/.cache/ki` |
 | State - the repository registry, among other things | `$KI_STATE_HOME`, then `$XDG_STATE_HOME/ki`, then `~/.local/state/ki` |
@@ -62,11 +62,11 @@ The one file that does not live in any of them is `.ki.toml`, at each KI reposit
 
 ## What the host will and will not run
 
-`ki repo audit` and `ki repo conform` do not implement any checks. They resolve the operations a repository's declared skills register, verify them against the installed harness's integrity evidence, and run those.
+`ki repo audit` and `ki repo conform` do not implement any checks. They resolve the operations a repository's declared skills register, verify them against the installed backpack's integrity evidence, and run those.
 
 It will not run anything else. Not a repository-local wrapper script, not a copied rubric runner sitting in the tree, not a package alias, not a checkout that happens to be nearby. If you want a repository to have rules of its own, the supported route is a declared `ki-self` provider - see [operator guides](/docs/ki/operator-guides/) - and it is still resolved rather than discovered.
 
-This is why "the audit passed" is a precise claim: it means the operations registered by the skills this repository declared, from harnesses whose payloads verified, all succeeded. It does not mean the code is good, and it does not mean anything about rules nobody declared.
+This is why "the audit passed" is a precise claim: it means the operations registered by the skills this repository declared, from backpacks whose payloads verified, all succeeded. It does not mean the code is good, and it does not mean anything about rules nobody declared.
 
 ## When a command refuses
 

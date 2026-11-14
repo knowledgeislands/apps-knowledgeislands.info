@@ -1,20 +1,20 @@
 # Diagram pipeline
 
-The website publishes inline SVG figures and separate interactive Archify viewers. It owns diagrams that explain its pages and vendors the harness's committed diagrams at an immutable ref. A normal site build reads these committed files and checks their receipts; it never renders a diagram or contacts an upstream service.
+The website publishes inline SVG figures and separate interactive Archify viewers. It owns diagrams that explain its pages and vendors the backpack's committed diagrams at an immutable ref. A normal site build reads these committed files and checks their receipts; it never renders a diagram or contacts an upstream service.
 
-## Vendoring harness diagrams
+## Vendoring backpack diagrams
 
-Run the sync against a clean local harness checkout:
+Run the sync against a clean local backpack checkout:
 
 ```bash
-bun run --cwd apps/site sync:diagrams -- --ref 8897008f
+bun run --cwd apps/site sync:diagrams -- --ref bb232e00
 ```
 
 The default checkout is `../ki-agent-backpack` beside this repository. Pass `--from <path>` for another checkout. The ref must be a commit SHA; the script resolves it to forty characters and reads every file with `git show`, independently of the checkout's current revision.
 
-For every manifest entry with `commit_html = true`, the sync copies its SVG, HTML and receipt byte for byte into `apps/site/src/assets/diagrams/vendored/ki-agentic-harness/`. It replaces the snapshot, removing files no longer selected. The generated `apps/site/src/_data/vendoredDiagrams.json5` records the repository, manifest path, full ref, sync date, and each diagram's type, question, last-checked revision and file names. The twelve diagrams at the pin above retain the harness's `dual` SVG form. These immutable generated assets are excluded from Biome, alongside the vendored design assets; their contents must remain identical to upstream.
+For every manifest entry with `commit_html = true`, the sync copies its SVG, HTML and receipt byte for byte into `apps/site/src/assets/diagrams/vendored/ki-agent-backpack/`. It replaces the snapshot, removing files no longer selected. The generated `apps/site/src/_data/vendoredDiagrams.json5` records the repository, manifest path, full ref, sync date, and each diagram's type, question, last-checked revision and file names. The fourteen diagrams at the pin above retain the backpack's `dual` SVG form. These immutable generated assets are excluded from Biome, alongside the vendored design assets; their contents must remain identical to upstream.
 
-Every page embedding one declares a `knowledgeislands/ki-agentic-harness` source at exactly the snapshot's ref. A source for another repository, or the right ref on the wrong source entry, does not satisfy this requirement.
+Every page embedding one declares a `knowledgeislands/ki-agent-backpack` source at exactly the snapshot's ref. A source for another repository, or the right ref on the wrong source entry, does not satisfy this requirement.
 
 ## Site-owned diagrams
 
@@ -26,17 +26,17 @@ The `command-groups` source cites the eighteen headings in `tools-ki`'s `man/ki.
 
 ## Regeneration
 
-With the harness diagram skill, Archify and system Chrome or Chromium installed, run:
+With the backpack's diagram skill, Archify and system Chrome or Chromium installed, run:
 
 ```bash
 bun run --cwd apps/site diagrams:build -- --svg command-groups
 ```
 
-Replace the slug to build another site-owned diagram. The wrapper uses the harness's `build-html.ts`; its `--svg` option delegates to `export-svg.ts --form ki` from the manifest. Archify's validation, delivery, artifact and browser gates must pass before generated forms are copied back. The harness writes the portable source and HTML fingerprints in the receipt. Never edit that receipt by hand.
+Replace the slug to build another site-owned diagram. The wrapper uses the diagram skill's `build-html.ts`; its `--svg` option delegates to `export-svg.ts --form ki` from the manifest. Archify's validation, delivery, artifact and browser gates must pass before generated forms are copied back. The diagram skill writes the portable source and HTML fingerprints in the receipt. Never edit that receipt by hand.
 
 Generation runs in a temporary local clone outside the website checkout and removes it afterwards. When `meta.repository` identifies another public Knowledge Islands repository, its sibling checkout supplies the pinned evidence; no fetch occurs and the source checkout is unchanged. Model diagrams without repository metadata use the website checkout. `TMPDIR` can select the temporary-output parent directory for a background run.
 
-The wrapper finds the diagram skill in the installed agent skills, the installed KI harness or the sibling harness checkout. Set `KI_DIAGRAMS_HOME` to the skill directory for another installation; `ARCHIFY_HOME` and `ARCHIFY_CHROME` select the renderer and browser as the harness documents. Generation disables Archify's update request so this command stays local.
+The wrapper finds the diagram skill in the installed agent skills, the installed KI backpack or the sibling backpack checkout. Set `KI_DIAGRAMS_HOME` to the skill directory for another installation; `ARCHIFY_HOME` and `ARCHIFY_CHROME` select the renderer and browser as the backpack documents. Generation disables Archify's update request so this command stays local.
 
 After reviewing the facts, advance `last_checked` to the website commit reviewed. For an upstream model or manual, retain the upstream revision in the source's repository metadata too. Commit the JSON, SVG, HTML, receipt, manifest and README together.
 
@@ -54,13 +54,13 @@ Figures use a parchment panel under both site charts. Site-owned `ki` SVGs carry
 
 ## Viewer addresses and transforms
 
-Eleventy copies the assets directory to `/diagrams/`, giving vendored viewers addresses such as `/diagrams/vendored/ki-agentic-harness/skill-map.html`. It copies site-owned HTML and SVGs from `docs/diagrams/` to `/diagrams/site/`; the command-groups viewer is `/diagrams/site/command-groups.html`.
+Eleventy copies the assets directory to `/diagrams/`, giving vendored viewers addresses such as `/diagrams/vendored/ki-agent-backpack/skill-map.html`. It copies site-owned HTML and SVGs from `docs/diagrams/` to `/diagrams/site/`; the command-groups viewer is `/diagrams/site/command-groups.html`.
 
 These are passthrough copies, outside template rendering. Heading anchors, external-link icons and `explicit-index-links` never process them; the transforms also guard the diagram output directory explicitly. Viewer bytes therefore match the committed HTML, including scripts and source links. Links in the surrounding site page still receive the normal portable-output rewrite.
 
 ## Verification
 
-`verify:diagrams` runs after `verify:skill-names` in the site build. It refuses a figure absent from both inventories, a slug present in both, missing committed site forms, missing vendored artefacts, or a page whose harness citation differs from the vendored ref. It then checks each committed receipt against the source and viewer fingerprints it recorded, so the gate runs wherever only this repository is present, including the Cloudflare build. Where the harness skill is installed it also invokes the canonical `build-html.ts --check` as a cross-check; neither needs Archify or a browser.
+`verify:diagrams` runs after `verify:skill-names` in the site build. It refuses a figure absent from both inventories, a slug present in both, missing committed site forms, missing vendored artefacts, or a page whose backpack citation differs from the vendored ref. It then checks each committed receipt against the source and viewer fingerprints it recorded, so the gate runs wherever only this repository is present, including the Cloudflare build. Where the harness skill is installed it also invokes the canonical `build-html.ts --check` as a cross-check; neither needs Archify or a browser.
 
 ```bash
 bun run --cwd apps/site verify:diagrams

@@ -14,7 +14,7 @@ sources:
 
 How to prompt the leading models — one guide per model, distilled from that vendor's own model-specific prompting page and refreshed when the guidance changes. The guides support cross-model work: building on, targeting, self-hosting, or evaluating another model. Each guide carries only the deltas that are distinctive to its model — the cross-cutting principles are below, stated once.
 
-These are guides to other people's models, not to Knowledge Islands. Everything about using a project here — the `ki` command surface, installing a harness, governing a repository, choosing a skill — is a section of its own: [The ki CLI](/docs/ki/getting-started/) carries the command-line guides and [The Agentic Harness](/docs/ki-agentic-harness/how-the-harness-works/) carries the capability governance guides.
+These are guides to other people's models, not to Knowledge Islands. Everything about using a project here — the `ki` command surface, installing a backpack, governing a repository, choosing a skill — is a section of its own: [The ki CLI](/docs/ki/getting-started/) carries the command-line guides and [The Agent Backpack](/docs/ki-agent-backpack/how-the-backpack-works/) carries the capability governance guides.
 
 Filenames carry the model version (`opus-4-8`, `gpt-5-5`, `glm-5-2`) so a new generation adds a file rather than rewriting an old one in place.
 
@@ -29,11 +29,11 @@ Filenames carry the model version (`opus-4-8`, `gpt-5-5`, `glm-5-2`) so a new ge
 | Claude Sonnet 5 | [Guide](/docs/prompting/sonnet-5/) | Fast, cost-efficient tier: well-scoped coding and agentic tasks, high-volume or latency-sensitive workloads |
 | Claude Haiku 4.5 | [Guide](/docs/prompting/haiku/) | Fastest, lowest-cost tier: mechanical/bulk steps, sub-agent fan-out, scaffolding and conform-style edits |
 
-The model pick — how to trade cost against capability — is governed by the `ki-tokenomics` skill, while `ki-delegation` turns banked planning reasoning into bounded, cold-agent-ready execution briefs for background runs.
+The model pick — how to trade cost against capability — is governed by the `ki-env-tokenomics` skill, while `ki-delegation` turns banked planning reasoning into bounded, cold-agent-ready execution briefs for background runs.
 
 ### Portable model types — one vocabulary across runtimes
 
-The KI harness declares work by a portable **model type** (purpose), not a vendor's model name; each runtime resolves the type to a concrete model ([ADR-KI-HARNESS-009](https://github.com/knowledgeislands/ki-agentic-harness/blob/main/docs/decisions/ADR-KI-HARNESS-009-portable-model-types-not-vendor-model-names-in-governance-config.md), governed by `ki-tokenomics`). The type is the stable thing; the columns below are the volatile resolution.
+The KI backpack declares work by a portable **model type** (purpose), not a vendor's model name; each runtime resolves the type to a concrete model ([ADR-KI-HARNESS-009](https://github.com/knowledgeislands/ki-agent-backpack/blob/main/docs/decisions/ADR-KI-HARNESS-009-portable-model-types-not-vendor-model-names-in-governance-config.md), governed by `ki-env-tokenomics`). The type is the stable thing; the columns below are the volatile resolution.
 
 | Type | Purpose | Claude Code | Codex (GPT-5.6) |
 | --- | --- | --- | --- |

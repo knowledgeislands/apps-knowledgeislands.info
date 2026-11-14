@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "slug": "skill-area-coordination",
+  "type": "architecture",
+  "source": {
+    "file": "skill-area-coordination.architecture.json",
+    "sha256": "80f9ecc24274d7d1dfc0748a0b352fb5fada69b4703b8a6d88017a8c26fca146",
+    "bytes": 6973
+  },
+  "html": {
+    "file": "skill-area-coordination.html",
+    "sha256": "d5d29a247be8f16878e744bbc27c0b7b21fdf3bd7539ed2aa4f1131d925e0b08",
+    "bytes": 825933
+  },
+  "renderer": {
+    "name": "archify",
+    "version": "3.2.0"
+  }
+}

@@ -35,7 +35,7 @@ test('sync reads the requested commit, selects committed viewers and refuses a d
     assert.deepEqual(Object.keys(snapshot.diagrams), ['included'])
     assert.equal(snapshot.source.ref, original)
     assert.equal(
-      readFileSync(resolve(destination, 'src/assets/diagrams/vendored/ki-agentic-harness/included.svg'), 'utf8'),
+      readFileSync(resolve(destination, 'src/assets/diagrams/vendored/ki-agent-backpack/included.svg'), 'utf8'),
       'Original svg\n'
     )
     assert.throws(() => syncDiagrams(from, 'main', destination), /immutable commit SHA/)

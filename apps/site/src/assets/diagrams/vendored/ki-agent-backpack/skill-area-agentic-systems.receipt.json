@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "slug": "skill-area-agentic-systems",
+  "type": "architecture",
+  "source": {
+    "file": "skill-area-agentic-systems.architecture.json",
+    "sha256": "e58f90a6f82fcc2fc5776ef11c967378d73f9c047a3269aef0fa5fdf679d86c0",
+    "bytes": 6290
+  },
+  "html": {
+    "file": "skill-area-agentic-systems.html",
+    "sha256": "d33fe06421b2b39e485777295434176440c50c49470ca931fae5bf7e0d98fea3",
+    "bytes": 822383
+  },
+  "renderer": {
+    "name": "archify",
+    "version": "3.2.0"
+  }
+}

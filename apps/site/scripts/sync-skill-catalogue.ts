@@ -1,13 +1,13 @@
 /**
- * Vendors the harness's generated capability catalogue into site data.
+ * Vendors the backpack's generated capability catalogue into site data.
  *
  * `/docs/skills/catalogue/` used to restate every skill in hand-written prose, which is
  * the one guidance page where the derived account added nothing: it was the upstream inventory,
- * reworded, and it rotted accordingly. The harness already publishes that inventory as a specified
- * interface — `ki-repo-harness` names the two markers normatively and fixes the fields between them
+ * reworded, and it rotted accordingly. The backpack already publishes that inventory as a specified
+ * interface — `ki-repo-backpack` names the two markers normatively and fixes the fields between them
  * — so the site consumes it rather than paraphrasing it.
  *
- * The catalogue groups skills by source concern, the folder each lives in. The harness also keeps a
+ * The catalogue groups skills by guild, the folder each lives in. The backpack also keeps a
  * functional-area table — what each skill is for — as the reading aid its skill diagrams are drawn
  * from. That table lives in the generator, `skill-functions.ts`, not in `SKILL.md` frontmatter, so
  * this sync reads it from the same commit and attaches each skill's areas beside its entry. The two
@@ -28,13 +28,13 @@ import { promisify } from 'node:util'
 import JSON5 from 'json5'
 import { githubFetchOk } from './lib/github.ts'
 
-export const CATALOGUE_START = '<!-- ki-repo-harness:capability-catalogue:start -->'
-export const CATALOGUE_END = '<!-- ki-repo-harness:capability-catalogue:end -->'
+export const CATALOGUE_START = '<!-- ki-repo-backpack:capability-catalogue:start -->'
+export const CATALOGUE_END = '<!-- ki-repo-backpack:capability-catalogue:end -->'
 
-const SOURCE_REPOSITORY = 'knowledgeislands/ki-agentic-harness'
+const SOURCE_REPOSITORY = 'knowledgeislands/ki-agent-backpack'
 const SOURCE_PATH = 'skills/README.md'
-/** The functional-area table the harness skill diagrams are generated from; read at the same commit. */
-export const AREAS_PATH = 'skills/repo-structure/ki-repo-harness/scripts/rubric/contexts/skill-functions.ts'
+/** The functional-area table the backpack skill diagrams are generated from; read at the same commit. */
+export const AREAS_PATH = 'skills/repository/ki-repo-backpack/scripts/rubric/contexts/skill-functions.ts'
 
 const tagPattern = /^v\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$/
 const commitPattern = /^[0-9a-f]{40}$/
@@ -59,7 +59,7 @@ export interface ParsedDomain {
 
 /** The catalogue block alone, before the functional areas are attached. */
 export interface ParsedCatalogue {
-  counts: { total: number; governance: number; process: number }
+  counts: { total: number; governance: number; process: number; knowledge: number }
   domains: ParsedDomain[]
 }
 
@@ -69,7 +69,7 @@ export interface AreaGroup {
   skills: string[]
 }
 
-/** A functional area as the harness table states it, in drawing order. */
+/** A functional area as the backpack table states it, in drawing order. */
 export interface FunctionalArea {
   slug: string
   title: string
@@ -96,7 +96,7 @@ export interface CatalogueDomain {
 }
 
 export interface Catalogue {
-  counts: { total: number; governance: number; process: number }
+  counts: { total: number; governance: number; process: number; knowledge: number }
   areas: FunctionalArea[]
   domains: CatalogueDomain[]
 }
@@ -128,15 +128,15 @@ const parseSkill = (name: string, body: string): ParsedSkill => {
   }
 
   const kind = fields.find((field) => field.label === 'Kind')?.value as string
-  if (kind !== 'Governance' && kind !== 'Process') {
-    throw new Error(`${name}: Kind is "${kind}", expected Governance or Process`)
+  if (kind !== 'Governance' && kind !== 'Process' && kind !== 'Knowledge') {
+    throw new Error(`${name}: Kind is "${kind}", expected Governance, Process or Knowledge`)
   }
 
   return { name, description, kind, fields }
 }
 
 /**
- * Parses the marker-delimited block out of the harness's `skills/README.md`.
+ * Parses the marker-delimited block out of the backpack's `skills/README.md`.
  *
  * Every failure here is thrown rather than worked around. The block is a published contract, so a
  * shape this parser does not recognise means the contract changed — and a catalogue that silently
@@ -152,7 +152,10 @@ export function parseCatalogue(markdown: string): ParsedCatalogue {
   const block = markdown.slice(start + CATALOGUE_START.length, end)
 
   // The generator states its own totals in the block's preamble; they are checked against the parse.
-  const declared = block.match(/publishes (\d+) skills: (\d+) governance skills and (\d+) process skills/)
+  // A knowledge count joined the preamble when the first knowledge skill was published; its absence means none.
+  const declared = block.match(
+    /publishes (\d+) skills: (\d+) governance skills?(?:,| and) (\d+) process skills?(?: and (\d+) knowledge skills?)?/
+  )
   if (!declared) throw new Error('capability-catalogue preamble does not state its skill counts')
 
   const domains: ParsedDomain[] = []
@@ -192,13 +195,19 @@ export function parseCatalogue(markdown: string): ParsedCatalogue {
   const counts = {
     total: skills.length,
     governance: skills.filter((skill) => skill.kind === 'Governance').length,
-    process: skills.filter((skill) => skill.kind === 'Process').length
+    process: skills.filter((skill) => skill.kind === 'Process').length,
+    knowledge: skills.filter((skill) => skill.kind === 'Knowledge').length
   }
 
-  const [, total, governance, processed] = declared.map(Number)
-  if (counts.total !== total || counts.governance !== governance || counts.process !== processed) {
+  const [total, governance, processed, knowledge] = declared.slice(1).map((value) => Number(value ?? 0))
+  if (
+    counts.total !== total ||
+    counts.governance !== governance ||
+    counts.process !== processed ||
+    counts.knowledge !== knowledge
+  ) {
     throw new Error(
-      `parsed ${counts.total} skills (${counts.governance} governance, ${counts.process} process) but the block declares ${total} (${governance} governance, ${processed} process)`
+      `parsed ${counts.total} skills (${counts.governance} governance, ${counts.process} process, ${counts.knowledge} knowledge) but the block declares ${total} (${governance} governance, ${processed} process, ${knowledge} knowledge)`
     )
   }
 
@@ -244,12 +253,12 @@ const parseGroup = (where: string, value: unknown): AreaGroup => {
 }
 
 /**
- * Parses the functional-area table out of the harness's `skill-functions.ts`.
+ * Parses the functional-area table out of the backpack's `skill-functions.ts`.
  *
  * The table is a TypeScript array literal of plain values, which is also a JSON5 document, so it is
  * read as data rather than executed. Anything the table might one day gain — a computed value, a new
  * key, an identifier — fails here, because a silently narrowed reading would publish areas the
- * harness does not draw.
+ * backpack does not draw.
  */
 export function parseFunctionalAreas(source: string): FunctionalArea[] {
   const declaration = source.indexOf(AREAS_DECLARATION)
@@ -299,10 +308,10 @@ export function parseFunctionalAreas(source: string): FunctionalArea[] {
 /**
  * Attaches each skill's functional areas to the parsed catalogue.
  *
- * The same three agreements the harness tests hold between its table and its skills are held here
+ * The same three agreements the backpack tests hold between its table and its skills are held here
  * between the table and the catalogue: every skill is in at least one area, every listed skill is in
  * the catalogue, and no skill is in two groups of one area. The two files were taken at one commit,
- * so a disagreement means the snapshot is torn, not that the harness is.
+ * so a disagreement means the snapshot is torn, not that the backpack is.
  */
 export function withFunctionalAreas(catalogue: ParsedCatalogue, areas: FunctionalArea[]): Catalogue {
   const names = new Set(catalogue.domains.flatMap((domain) => domain.skills.map((skill) => skill.name)))
@@ -343,13 +352,13 @@ export function withFunctionalAreas(catalogue: ParsedCatalogue, areas: Functiona
 }
 
 /** Kept verbatim so the emitted file explains itself to whoever opens it next. */
-const header = (ref: string): string => `// Vendored snapshot of the harness's generated capability catalogue.
+const header = (ref: string): string => `// Vendored snapshot of the backpack's generated capability catalogue.
 //
 // GENERATED FILE — do not edit. Regenerate with:
 //   bun run --cwd apps/site sync:skills -- --ref <tag-or-commit>
 //
 // Parsed from ${SOURCE_REPOSITORY} ${SOURCE_PATH} between the
-// ki-repo-harness:capability-catalogue markers, which that standard names normatively, and from
+// ki-repo-backpack:capability-catalogue markers, which that standard names normatively, and from
 // ${AREAS_PATH},
 // the functional-area table its skill diagrams are drawn from, read at the same commit. The second
 // file is recorded as the snapshot's \`roster\`, the key verify:provenance holds a second file under.
@@ -412,7 +421,7 @@ async function main(): Promise<void> {
   await writeFile(target, `${header(ref)}${JSON.stringify(payload, null, 2)}\n`)
 
   console.log(
-    `sync-skill-catalogue: ${catalogue.counts.total} skills (${catalogue.counts.governance} governance, ${catalogue.counts.process} process) across ${catalogue.domains.length} domains and ${catalogue.areas.length} functional areas at ${ref}`
+    `sync-skill-catalogue: ${catalogue.counts.total} skills (${catalogue.counts.governance} governance, ${catalogue.counts.process} process, ${catalogue.counts.knowledge} knowledge) across ${catalogue.domains.length} domains and ${catalogue.areas.length} functional areas at ${ref}`
   )
 }
 

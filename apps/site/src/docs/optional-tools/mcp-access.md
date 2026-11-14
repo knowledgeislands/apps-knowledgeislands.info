@@ -61,7 +61,7 @@ Which route to prefer, per integration:
 
 † The KI-owned `mcp-*` servers (workspace MCPs with the annotation-driven access-level gate and audit logging) are always the local route — there is no managed equivalent.
 
-Do not wire the same integration **both** ways on the same surface — that loads two copies of its tool schemas. `ki-binding` governs which surface runs which server from the single `mcps.yaml` source and audits that the surfaces agree; see [Tuning](/docs/ki-agentic-harness/tuning/) for the leanness view of the same choice.
+Do not wire the same integration **both** ways on the same surface — that loads two copies of its tool schemas. `ki-env-binding` governs which surface runs which server from the single `mcps.yaml` source and audits that the surfaces agree; see [Tuning](/docs/ki-agent-backpack/tuning/) for the leanness view of the same choice.
 
 ## VS Code command-execution MCP servers — evaluate before installing
 

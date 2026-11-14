@@ -1,6 +1,6 @@
 ---
 title: Roadmap lifecycle
-description: How a work record moves from triage through draft, ready, in progress and awaiting review to done, which skill owns each move, and how horizons, holds and batches fit around it.
+description: How a work record moves from triage through draft, ready, in progress and awaiting review to done, which `ki-work` subcommand owns each move, and how horizons, holds and unattended waves fit around it.
 permalink: /docs/ways-of-working/roadmap-lifecycle/
 order: 5
 sources:
@@ -43,13 +43,13 @@ sources:
 
 # Roadmap lifecycle
 
-Every work record moves through the same seven statuses under four skills, so you can read any record's status and horizon and know what has happened to it, what may happen next and who is allowed to make that move.
+Every work record moves through the same seven statuses under four subcommands of one skill, so you can read any record's status and horizon and know what has happened to it, what may happen next and who is allowed to make that move.
 
 {% figure "record-lifecycle", "A record passes from triage through draft, ready, in progress and awaiting review to done; hold and cancelled sit beside the path, and a terminal record is pruned by its own commit." %}
 
 ## What it is
 
-A work record is one finite piece of forward work: a Markdown file in a repository's roadmap, or the equivalent record in a Knowledge Base's Streams. Its lifecycle is the shared vocabulary every KI repository uses to say how far a piece of work has got and when it is intended, whichever tracker holds it. The repository declares one work adapter in its configuration, local roadmap by default for a Project repository and Streams for a Knowledge Base, and that adapter owns where records live and how they are named. Four process skills own the moves between states, and no other skill closes or deletes a record.
+A work record is one finite piece of forward work: a Markdown file in a repository's roadmap, or the equivalent record in a Knowledge Base's Streams. Its lifecycle is the shared vocabulary every KI repository uses to say how far a piece of work has got and when it is intended, whichever tracker holds it. The repository declares one work adapter in its configuration, local roadmap by default for a Project repository and Streams for a Knowledge Base, and that adapter owns where records live and how they are named. Four subcommands of the `ki-work` skill own the moves between states, and nothing else closes or deletes a record.
 
 The vocabulary has two independent axes. `status` says how far the work has got and is one of `triage`, `draft`, `ready`, `in-progress`, `awaiting-review`, `done` or `cancelled`. `horizon` says when it is intended and is one of `now`, `next`, `soon`, `future` or `hold`. The horizon rule is one line: a record carries a horizon if and only if it is adopted and open. A triage record, a done record and a cancelled record have none.
 
@@ -65,7 +65,7 @@ Work enters as `triage`: a substantive outcome, concern or decision captured wit
 | `in-progress`, `awaiting-review` | `now`, `hold` | being delivered, or delivered and awaiting review |
 | `done`, `cancelled` | none | terminal, kept as history until pruned |
 
-Each move has one owner. `ki-next` adopts, defers, holds and releases: a defer changes the horizon and keeps the status, so ready work moves only among now, next and hold, and work in flight leaves now only for hold. A hold names its reason, a release condition and a review date, and keeps the record's status, baseline and completed steps. `ki-plan` shapes a now or next draft until it is `ready`, and a replan takes a ready record back to draft. `ki-implement` starts: `ready` to `in-progress`, moving the record to now in the same change, then delivers the approved plan from an immutable baseline, assembles the six-heading review packet and leaves the record at `awaiting-review`. `ki-accept` closes: `awaiting-review` to `done` with the horizon removed, a failed review back to `in-progress`, or any open record to `cancelled` with an approved resolution. Only `ki-accept` prunes, and only a record already committed as done or cancelled, in a commit of its own with the subject `chore(roadmap): prune <N> done work record(s)`.
+Each move has one owner. `ki-work next` adopts, defers, holds and releases: a defer changes the horizon and keeps the status, so ready work moves only among now, next and hold, and work in flight leaves now only for hold. A hold names its reason, a release condition and a review date, and keeps the record's status, baseline and completed steps. `ki-work plan` shapes a now or next draft until it is `ready`, and a replan takes a ready record back to draft. `ki-work implement` starts: `ready` to `in-progress`, moving the record to now in the same change, then delivers the approved plan from an immutable baseline, assembles the six-heading review packet and leaves the record at `awaiting-review`. `ki-work accept` closes: `awaiting-review` to `done` with the horizon removed, a failed review back to `in-progress`, or any open record to `cancelled` with an approved resolution. Only `ki-work accept` prunes, and only a record already committed as done or cancelled, in a commit of its own with the subject `chore(roadmap): prune <N> done work record(s)`.
 
 Git need not hold every intermediate state. A record may first land already `ready` when capture, shaping and approval form one unit, and the move to in progress is operational and needs no commit of its own. What must land is the terminal state, before any prune.
 
@@ -73,9 +73,9 @@ When nothing is immediately eligible, selection reads now and next first, then s
 
 ## How you use it
 
-Suppose the fictional Tern Holm archive repository keeps its roadmap locally. Mara notices during a run that the ferry timetable import fails on a leap day; it is a defect seen failing, so the coordinator captures it as a triage record. The owner reads it the next morning and adopts it to `draft` at `next`. When it is selected, `ki-plan` adds the execution sections, states the verification and, once the owner approves, marks it `ready`. A background run under `ki-implement` records the baseline, moves it to `in-progress` at `now`, delivers the fix, runs the checks, writes the review packet and leaves it at `awaiting-review`. The owner's acceptance, given in the coordination thread, lets `ki-accept` record `done` and remove the horizon. A later prune commit removes the file, and Git keeps it.
+Suppose the fictional Tern Holm archive repository keeps its roadmap locally. Mara notices during a run that the ferry timetable import fails on a leap day; it is a defect seen failing, so the coordinator captures it as a triage record. The owner reads it the next morning and adopts it to `draft` at `next`. When it is selected, `ki-work plan` adds the execution sections, states the verification and, once the owner approves, marks it `ready`. A background run under `ki-work implement` records the baseline, moves it to `in-progress` at `now`, delivers the fix, runs the checks, writes the review packet and leaves it at `awaiting-review`. The owner's acceptance, given in the coordination thread, lets `ki-work accept` record `done` and remove the horizon. A later prune commit removes the file, and Git keeps it.
 
-A set of ready records that share a bounded delivery advantage and stay independently executable may be run as a batch. `ki-batch` is an authority envelope, not another plan: one repository, one window, an exact human-approved set, with each record keeping its own baseline, delivery and review packet, and closure granted only when the authorisation names it. An item outside the envelope is parked, never admitted dynamically.
+A set of ready records that share a bounded delivery advantage and stay independently executable may be delivered together as a frozen wave. `ki-coordination` delivers it only within an unattended window's grant, recorded in the coordinating package's decisions log; the grant is an authority, not another plan. Each record keeps its own baseline, delivery and review packet, closure is granted only when the grant names it, and a record outside the frozen wave is never admitted dynamically.
 
 ## What it provides
 

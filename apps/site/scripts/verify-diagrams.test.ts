@@ -114,8 +114,8 @@ test('passthrough viewers and SVGs remain byte-identical after the site build', 
   for (const entry of Object.values(metadata.diagrams)) {
     for (const name of [entry.svg, entry.html]) {
       assert.deepEqual(
-        readFileSync(resolve(site, 'dist/diagrams/vendored/ki-agentic-harness', name)),
-        readFileSync(resolve(site, 'src/assets/diagrams/vendored/ki-agentic-harness', name))
+        readFileSync(resolve(site, 'dist/diagrams/vendored/ki-agent-backpack', name)),
+        readFileSync(resolve(site, 'src/assets/diagrams/vendored/ki-agent-backpack', name))
       )
     }
   }

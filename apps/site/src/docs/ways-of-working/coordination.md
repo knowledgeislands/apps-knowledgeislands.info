@@ -14,6 +14,11 @@ sources:
     ref: 8897008fcee7b2c71a22115735ed038efccf7f32
     governs: 'The responsive coordinator, reply forms, units of work, the owner report, the banner and thread line, report forms and the working rules'
     reviewed: '2026-10-25'
+  - repository: knowledgeislands/ki-agent-backpack
+    path: docs/diagrams/diagrams.toml
+    ref: bb232e00707bd7c5c1fc261c514f7cbcdf7ab545
+    governs: 'The thread-model figure this page embeds, vendored at this commit'
+    reviewed: '2026-11-14'
 ---
 
 # Coordination

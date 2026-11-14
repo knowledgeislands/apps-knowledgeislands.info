@@ -10,7 +10,7 @@ The Docs sections are the reading view of the documentation: a reader enters a s
 {
   slug: 'roadmap-lifecycle',
   title: 'Roadmap lifecycle',
-  skills: ['ki-work', 'ki-work-roadmap', 'ki-next', 'ki-plan', 'ki-implement', 'ki-accept', 'ki-batch'],
+  skills: ['ki-work', 'ki-work-roadmap', 'ki-work-github-issues', 'ki-work-linear'],
   commands: ['ki batch'],
   page: '/docs/ways-of-working/roadmap-lifecycle/'
 }
@@ -39,7 +39,7 @@ Both run in `build` after `verify:prose`, and both read source rather than `dist
 [`scripts/verify-feature-areas.ts`](../../../apps/site/scripts/verify-feature-areas.ts) holds the crosswalk and the Docs tree together. It fails when:
 
 - an area's slug is missing, malformed or declared twice, or its title is missing;
-- an area names a skill that is not in `src/_data/skillCatalogue.json5`, so a skill the harness has renamed fails here when the catalogue is next refreshed;
+- an area names a skill that is not in `src/_data/skillCatalogue.json5`, so a skill the backpack has renamed fails here when the catalogue is next refreshed;
 - an area's `page` matches no Markdown page under `src/docs/` by permalink;
 - a Markdown page in the Skills, Ways of working, Knowledge or Standards sections is claimed by no area, or by more than one. Skills pages are exempt: they are about skills in general rather than about one area, and carry no box.
 
@@ -53,7 +53,7 @@ Commands are not checked against the CLI inventory, which is vendored at its own
 - a token the vendored CLI inventory's own text uses, such as `.ki-meta/` or `ki-checkpoint`, which are conventions rather than skills and are correct to repeat;
 - a name on the script's allow-list, each entry with its reason: the ecosystem's repository names, which share the prefix, and configuration values a reader types as written, such as the `[skills.ki-self]` table.
 
-A token followed by `-` or `*` is a glob naming a family, such as `ki-repo-*`, and is not checked. Fenced blocks are skipped because a block quotes an artefact as it is, and a historical name inside one is a fact about that artefact rather than a claim about the harness.
+A token followed by `-` or `*` is a glob naming a family, such as `ki-repo-*`, and is not checked. Fenced blocks are skipped because a block quotes an artefact as it is, and a historical name inside one is a fact about that artefact rather than a claim about the backpack.
 
 When the gate fails on a page, the fix depends on what the sentence is about. If it is about a skill, name the skill the catalogue has now. If the token is a repository, a configuration value or a convention that is not a skill and is correct as written, add it to the allow-list with its reason. Do not add a retired skill name to the allow-list to make a page pass.
 

@@ -7,7 +7,7 @@ import { harnessRepository, parseManifest, repositoryRoot, siteRoot, type Vendor
 export function syncDiagrams(from: string, revision: string, destination = siteRoot): VendoredDiagrams {
   const git = (...args: string[]) => execFileSync('git', ['-C', from, ...args], { maxBuffer: 64 * 1024 * 1024 })
   if (git('status', '--porcelain').toString().trim())
-    throw new Error('The harness checkout must be clean before syncing diagrams')
+    throw new Error('The backpack checkout must be clean before syncing diagrams')
   if (!/^[0-9a-f]{7,40}$/.test(revision)) throw new Error('--ref must be an immutable commit SHA')
   const ref = git('rev-parse', '--verify', `${revision}^{commit}`).toString().trim()
   const path = 'docs/diagrams/diagrams.toml'
@@ -25,7 +25,7 @@ export function syncDiagrams(from: string, revision: string, destination = siteR
     for (const name of Object.values(names)) files.set(name, git('show', `${ref}:docs/diagrams/${name}`))
     snapshot.diagrams[slug] = { type: entry.type, question: entry.question, last_checked: entry.last_checked, ...names }
   }
-  const target = resolve(destination, 'src/assets/diagrams/vendored/ki-agentic-harness')
+  const target = resolve(destination, 'src/assets/diagrams/vendored/ki-agent-backpack')
   const temporary = `${target}.sync-${process.pid}`
   mkdirSync(temporary, { recursive: true })
   try {

@@ -44,9 +44,9 @@ An Activity records adopted behaviour: what it does, when it runs, why it was ad
 
 1. **Adopt the definition.** Agree its purpose, procedure, capabilities, authority, cost and evidence destination. Include Goal, Procedure, Successful-run evidence and Obsolescence sections. A scheduler registration alone does not adopt or activate an obligation.
 2. **Evaluate the schedule.** Active definitions are evaluated; paused definitions do not spawn. Calendar due is the last successful run plus cadence, and overdue adds grace. An optional commit threshold can make the work due from verified first-parent integration history. Due and overdue are calculated facts, not stored statuses.
-3. **Reserve one run.** `ki-next` re-reads the definition and checks its reservation before creating one linked ordinary draft at the declared horizon. Creating the record and setting `active-run` are one coherent operation. An existing active run is reused or reported, never duplicated.
+3. **Reserve one run.** `ki-work next` re-reads the definition and checks its reservation before creating one linked ordinary draft at the declared horizon. Creating the record and setting `active-run` are one coherent operation. An existing active run is reused or reported, never duplicated.
 4. **Run and retain evidence.** The occurrence passes through planning, delivery and review under [roadmap lifecycle](/docs/ways-of-working/roadmap-lifecycle/). Durable outcomes go to the agreed repository-owned destination, where a person or another execution environment can use them.
-5. **Review and reconcile.** Only approved closure through `ki-accept` marks the run done and updates the definition's evidenced completion date, reviewed revision where required and active-run link in one coherent commit. A failed or cancelled run never advances successful-run evidence.
+5. **Review and reconcile.** Only approved closure through `ki-work accept` marks the run done and updates the definition's evidenced completion date, reviewed revision where required and active-run link in one coherent commit. A failed or cancelled run never advances successful-run evidence.
 
 The admission policy is `manual`, `when-due` or `when-overdue`. Manual admission needs exact confirmation even when due. A definition with no successful-run date is due immediately; it does not get a fresh grace window at every evaluation. A reached commit threshold bypasses calendar grace, but never manual confirmation, a paused definition or an existing reservation.
 
@@ -56,7 +56,7 @@ Commit evidence starts at the exact revision covered by the last successful revi
 
 On fictional Tern Holm, Mara adopts a monthly harbour-catalogue review with a week's grace. Its Activity explains the checks, the time budget and where the review conclusions belong. She opts it into recurring work, leaving successful-run fields empty because no review has yet supplied that evidence.
 
-When Mara admits the initial run, `ki-next` creates one draft and reserves it in the Activity. Another caller sees that reservation and reports the existing occurrence instead of creating a second review. Ivo delivers the planned assessment and records the evidence. Mara's approval lets `ki-accept` close it, enter the actual successful completion date and clear the reservation. The scheduled date stays with the run and is not substituted for the completion date.
+When Mara admits the initial run, `ki-work next` creates one draft and reserves it in the Activity. Another caller sees that reservation and reports the existing occurrence instead of creating a second review. Ivo delivers the planned assessment and records the evidence. Mara's approval lets `ki-work accept` close it, enter the actual successful completion date and clear the reservation. The scheduled date stays with the run and is not substituted for the completion date.
 
 For an Activity, the scheduling fields use snake_case inside `housekeeping`, while `id`, `title` and `status` stay at the top level. There is one definition and one status, with no copied template in Streams. Its run lives in `Streams/Roadmap/` and links to the definition's stable identifier.
 

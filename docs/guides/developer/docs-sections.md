@@ -81,4 +81,4 @@ It runs inside `bun run ki:site:build`, and reads source rather than `dist/`, so
 
 ## Feeding the shape back
 
-`tools-ki` and `ki-agentic-harness` own their own `docs/guides/`, and the contract above is worth adopting there — particularly the opening claim and the no-deferral rule, which are not specific to a website. That is a handoff to those repositories, not something this repository changes on their behalf.
+`tools-ki` and `ki-agent-backpack` own their own `docs/guides/`, and the contract above is worth adopting there — particularly the opening claim and the no-deferral rule, which are not specific to a website. That is a handoff to those repositories, not something this repository changes on their behalf.

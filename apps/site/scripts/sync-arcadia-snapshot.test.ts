@@ -14,7 +14,7 @@ const url = (name: string): string => `https://github.com/knowledgeislands/${nam
 const toml = (members: string[], capital = url('ki-principal')): string =>
   [
     '[repo]',
-    'harnesses = ["knowledgeislands/ki-agentic-harness"]',
+    'harnesses = ["knowledgeislands/ki-agent-backpack"]',
     '',
     '[skills.ki-repo]',
     `capital = "${capital}"`,
