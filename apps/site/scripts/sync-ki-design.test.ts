@@ -72,8 +72,8 @@ describe('buildSymbolSnapshot', () => {
   test('records the source it was taken from', () => {
     const snapshot = buildSymbolSnapshot([entry({})], categories, ref)
     assert.deepEqual(snapshot.source, {
-      repository: 'knowledgeislands/ki-design',
-      path: 'packages/symbols/src/symbols.ts',
+      repository: 'knowledgeislands/packages-tessera',
+      path: 'packages/tessera-symbols/src/symbols.ts',
       ref
     })
   })
@@ -179,13 +179,13 @@ describe('archipelagoFromSnapshot', () => {
 describe('renderArchipelagoManifest', () => {
   test('is a generated JSON5 file naming the renderer, the snapshot and the ref', () => {
     const text = renderArchipelagoManifest({
-      source: { repository: 'knowledgeislands/ki-design', path: ARCHIPELAGO.renderer, ref },
+      source: { repository: 'knowledgeislands/packages-tessera', path: ARCHIPELAGO.renderer, ref },
       drawnFrom: { path: ARCHIPELAGO.snapshot, ref, charted: '2026-10-19', islands: ['a'] },
       glyphs: ISLAND_GLYPHS,
       files: { wide: ARCHIPELAGO.layouts.wide.file, tall: ARCHIPELAGO.layouts.tall.file }
     })
     assert.match(text, /GENERATED FILE/)
     assert.match(text, new RegExp(`Drawn at ${ref}\\.`))
-    assert.equal(JSON.parse(text.slice(text.indexOf('{'))).source.path, 'packages/hexmap/src/archipelago.ts')
+    assert.equal(JSON.parse(text.slice(text.indexOf('{'))).source.path, 'packages/tessera-hexmap/src/archipelago.ts')
   })
 })

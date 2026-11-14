@@ -1,16 +1,17 @@
 /**
- * Vendors the Knowledge Islands design system from a local `ki-design` checkout into the site.
+ * Vendors the Knowledge Islands design system from a local Tessera checkout (`packages-tessera`, formerly
+ * `ki-design`) into the site.
  *
- * `ki-design` owns the tokens, the line glyphs, the symbol library and the drawn Arcadia; the site carries
+ * Tessera owns the tokens, the line glyphs, the symbol library and the drawn Arcadia; the site carries
  * a copy of each, source-labelled with the commit it was taken from, so `apps/site/dist/` builds without
- * `ki-design` present (GDR-KI-WEBSITE-002, ADR-KI-WEBSITE-001). Nothing here runs during the build.
+ * Tessera present (GDR-KI-WEBSITE-002, ADR-KI-WEBSITE-001). Nothing here runs during the build.
  *
  * It reads a checkout rather than fetching from GitHub because the generated artefacts (the token CSS, the
- * glyph sprite) are build outputs of `ki-design`'s own TypeScript, which is imported here and rendered the
- * way `ki-design` renders them. The checkout must be clean, so the recorded commit is the content copied.
+ * glyph sprite) are build outputs of Tessera's own TypeScript, which is imported here and rendered the
+ * way Tessera renders them. The checkout must be clean, so the recorded commit is the content copied.
  *
  * Only `official` and `agreed` symbols are vendored (GDR-KI-DESIGN-002). A `proposed` entry is an open question in
- * `ki-design`, and the site must not publish a proposal beside official entries as if it were settled; leaving it out of the snapshot
+ * Tessera, and the site must not publish a proposal beside official entries as if it were settled; leaving it out of the snapshot
  * means no template can publish it by accident.
  *
  * The chosen Arcadia painting is the one vendored file not taken at the checkout's HEAD. It is chosen art rather
@@ -19,13 +20,13 @@
  * advancing the painting is a deliberate edit of that ref. Its manifest, `src/_data/arcadiaPainting.json5`,
  * records the source and every variant, and `verify:provenance` holds it to the ref /arcadia/ cites.
  *
- * The islands chart on /arcadia/ is the one vendored file drawn from this site's own data. `ki-design`'s archipelago
- * renderer (`packages/hexmap`) draws the committed dated snapshot, `src/_data/arcadiaSnapshot.json5`
- * (GDR-KI-DESIGN-031), here at sync time, so the build stays offline and needs no `ki-design`. Its manifest,
+ * The islands chart on /arcadia/ is the one vendored file drawn from this site's own data. Tessera's archipelago
+ * renderer (`packages/tessera-hexmap`) draws the committed dated snapshot, `src/_data/arcadiaSnapshot.json5`
+ * (GDR-KI-DESIGN-031), here at sync time, so the build stays offline and needs no Tessera. Its manifest,
  * `src/_data/arcadiaArchipelago.json5`, records the renderer's commit and the snapshot it drew, and
  * `verify:provenance` fails the build when the chart and the snapshot disagree. After `sync:arcadia`, re-run this.
  *
- * Usage: bun scripts/sync-ki-design.ts [--from <path-to-ki-design>]   (default: ../ki-design beside this repo)
+ * Usage: bun scripts/sync-ki-design.ts [--from <path-to-packages-tessera>]   (default: ../packages-tessera beside this repo)
  * See docs/guides/developer/page-provenance.md.
  */
 
@@ -37,8 +38,10 @@ import JSON5 from 'json5'
 import sharp from 'sharp'
 import type { ArcadiaSnapshot } from './lib/arcadia-snapshot.ts'
 
-export const SOURCE_REPOSITORY = 'knowledgeislands/ki-design'
-export const SYMBOLS_PATH = 'packages/symbols/src/symbols.ts'
+export const SOURCE_REPOSITORY = 'knowledgeislands/packages-tessera'
+/** The site preview Tessera's Storybook serves, which the hero, the plate and the logos come from. */
+export const PREVIEW = 'apps/storybook/site-preview'
+export const SYMBOLS_PATH = 'packages/tessera-symbols/src/symbols.ts'
 
 /** The statuses the site publishes. `proposed` is withheld by design; see the header. */
 export const PUBLISHED_STATUSES = ['official', 'agreed'] as const
@@ -50,8 +53,8 @@ export const PLATE_END = '<!-- arcadia:end -->'
 const commitPattern = /^[0-9a-f]{40}$/
 
 /**
- * The chosen Arcadia painting (ki-design docs/briefs/arcadia-handoff.md) and the commit it is taken from. It is
- * generated reference art whose licence ki-design has yet to record, and the manifest says so.
+ * The chosen Arcadia painting (Tessera docs/briefs/arcadia-handoff.md) and the commit it is taken from. It is
+ * generated reference art whose licence Tessera has yet to record, and the manifest says so.
  */
 export const PAINTING = {
   path: 'docs/briefs/references/arcadia.png',
@@ -177,7 +180,7 @@ export async function vendorPainting(from: string, out: (path: string) => string
   return manifest
 }
 
-/** One upstream symbol, as `@knowledgeislands/symbols` types it. */
+/** One upstream symbol, as `tessera-symbols` types it. */
 export interface UpstreamSymbol {
   id: string
   name: string
@@ -271,11 +274,11 @@ export function extractPlate(html: string): string {
 
 /**
  * The islands chart on /arcadia/: Arcadia's public islands drawn as an archipelago (GDR-KI-DESIGN-015) by
- * `ki-design`'s renderer, from the committed snapshot. Two layouts of one chart: a round cluster, and a tall one
+ * Tessera's renderer, from the committed snapshot. Two layouts of one chart: a round cluster, and a tall one
  * a phone can read. The page shows one by width; the list beside them is the text equivalent (GDR-KI-DESIGN-032).
  */
 export const ARCHIPELAGO = {
-  renderer: 'packages/hexmap/src/archipelago.ts',
+  renderer: 'packages/tessera-hexmap/src/archipelago.ts',
   snapshot: 'src/_data/arcadiaSnapshot.json5',
   manifest: 'src/_data/arcadiaArchipelago.json5',
   layouts: {
@@ -287,7 +290,7 @@ export const ARCHIPELAGO = {
 export type ArchipelagoLayoutName = keyof typeof ARCHIPELAGO.layouts
 
 /**
- * A single-purpose repository is a small isle typed by its dominant building (ki-design docs/spec/maps.md, "How
+ * A single-purpose repository is a small isle typed by its dominant building (Tessera docs/spec/maps.md, "How
  * islands are typed"): the Capital's own civic glyph, the Workshop for a tool, the Causeway for an MCP server. Every
  * other role keeps the island glyph.
  */
@@ -300,7 +303,7 @@ export const ISLAND_GLYPHS: Readonly<Record<string, string>> = {
 
 export const islandGlyph = (role: string): string => ISLAND_GLYPHS[role] ?? (ISLAND_GLYPHS.default as string)
 
-/** The renderer's input, as `@knowledgeislands/hexmap` types it. */
+/** The renderer's input, as `tessera-hexmap` types it. */
 export interface ArchipelagoInput {
   id: string
   name: string
@@ -401,7 +404,7 @@ export const provenance = (path: string, ref: string, note = 'unchanged below th
 
 const renderSnapshot = (snapshot: SymbolSnapshot): string =>
   [
-    '// Vendored snapshot of the ki-design symbol library: official and agreed entries, without their notes.',
+    '// Vendored snapshot of the Tessera symbol library: official and agreed entries, without their notes.',
     '//',
     '// GENERATED FILE — do not edit. Regenerate with:',
     '//   bun run --cwd apps/site sync:design',
@@ -423,25 +426,27 @@ const git = (cwd: string, ...args: string[]): string =>
 async function main(): Promise<void> {
   const siteRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..')
   const fromFlag = process.argv.indexOf('--from')
-  const from = resolve(fromFlag === -1 ? resolve(siteRoot, '../../../ki-design') : process.argv[fromFlag + 1])
+  const from = resolve(fromFlag === -1 ? resolve(siteRoot, '../../../packages-tessera') : process.argv[fromFlag + 1])
 
   const ref = git(from, 'rev-parse', 'HEAD')
-  // Tracked files only: build output such as packages/tokens/dist/ is ignored upstream and never read here.
-  const dirty = git(from, 'status', '--porcelain', '--untracked-files=no', '--', 'packages', 'examples/site-preview')
+  // Tracked files only: build output such as packages/tessera-tokens/dist/ is ignored upstream and never read here.
+  const dirty = git(from, 'status', '--porcelain', '--untracked-files=no', '--', 'packages', PREVIEW)
   if (dirty !== '') {
-    throw new Error(`${from} has uncommitted changes under packages/ or examples/site-preview/; commit them first`)
+    throw new Error(`${from} has uncommitted changes under packages/ or ${PREVIEW}/; commit them first`)
   }
 
   const load = async <T>(path: string): Promise<T> => (await import(pathToFileURL(resolve(from, path)).href)) as T
-  const css = await load<{ renderCss: () => string; renderTailwindTheme: () => string }>('packages/tokens/src/css.ts')
+  const css = await load<{ renderCss: () => string; renderTailwindTheme: () => string }>(
+    'packages/tessera-tokens/src/css.ts'
+  )
   const icons = await load<{
     sprite: () => string
     iconBodies: Record<string, string>
     isIconName: (id: string) => boolean
-  }>('packages/icons/src/index.ts')
-  const hexmap = await load<Hexmap>('packages/hexmap/src/index.ts')
+  }>('packages/tessera-icons/src/index.ts')
+  const hexmap = await load<Hexmap>('packages/tessera-hexmap/src/index.ts')
   const library = await load<{ symbols: readonly UpstreamSymbol[]; symbolCategories: readonly string[] }>(
-    'packages/symbols/src/index.ts'
+    'packages/tessera-symbols/src/index.ts'
   )
 
   const out = (path: string): string => resolve(siteRoot, path)
@@ -450,36 +455,33 @@ async function main(): Promise<void> {
   await mkdir(out('src/assets/images/ki-design'), { recursive: true })
 
   const cssHeader = (path: string): string =>
-    `/* ${provenance(path, ref, 'the build output of packages/tokens, unchanged below this comment')}\n   The site's own aliases live in ../tokens.css. */\n`
+    `/* ${provenance(path, ref, 'the build output of packages/tessera-tokens, unchanged below this comment')}\n   The site's own aliases live in ../tokens.css. */\n`
   const svgHeader = (path: string, note?: string): string => `<!-- ${provenance(path, ref, note)} -->\n`
-  const preview = await readFile(resolve(from, 'examples/site-preview/index.html'), 'utf-8')
+  const preview = await readFile(resolve(from, PREVIEW, 'index.html'), 'utf-8')
   const snapshot = buildSymbolSnapshot(library.symbols, library.symbolCategories, ref)
 
   await Promise.all([
     writeFile(
       out('src/assets/css/ki-design/tokens.css'),
-      cssHeader('packages/tokens/dist/tokens.css') + css.renderCss()
+      cssHeader('packages/tessera-tokens/dist/tokens.css') + css.renderCss()
     ),
     writeFile(
       out('src/assets/css/ki-design/theme.css'),
-      cssHeader('packages/tokens/dist/theme.css') + css.renderTailwindTheme()
+      cssHeader('packages/tessera-tokens/dist/theme.css') + css.renderTailwindTheme()
     ),
     writeFile(
       out('src/_includes/ki-design/glyphs.svg'),
-      `${svgHeader('packages/icons (sprite() of every glyph)', 'as rendered by the package')}${icons.sprite()}\n`
+      `${svgHeader('packages/tessera-icons (sprite() of every glyph)', 'as rendered by the package')}${icons.sprite()}\n`
     ),
-    readFile(resolve(from, 'examples/site-preview/hero-arcadia.svg'), 'utf-8').then((svg) =>
-      writeFile(
-        out('src/_includes/ki-design/hero-arcadia.svg'),
-        svgHeader('examples/site-preview/hero-arcadia.svg') + svg
-      )
+    readFile(resolve(from, PREVIEW, 'hero-arcadia.svg'), 'utf-8').then((svg) =>
+      writeFile(out('src/_includes/ki-design/hero-arcadia.svg'), svgHeader(`${PREVIEW}/hero-arcadia.svg`) + svg)
     ),
     writeFile(
       out('src/_includes/ki-design/arcadia-plate.svg'),
-      `${svgHeader('examples/site-preview/index.html', 'the block between its arcadia markers')}${extractPlate(preview)}\n`
+      `${svgHeader(`${PREVIEW}/index.html`, 'the block between its arcadia markers')}${extractPlate(preview)}\n`
     ),
     ...['logo-roundel.png', 'favicon.png'].map((image) =>
-      copyFile(resolve(from, 'examples/site-preview/assets', image), out(`src/assets/images/ki-design/${image}`))
+      copyFile(resolve(from, PREVIEW, 'assets', image), out(`src/assets/images/ki-design/${image}`))
     ),
     writeFile(out('src/_data/kiSymbols.json5'), renderSnapshot(snapshot))
   ])
@@ -500,7 +502,9 @@ async function main(): Promise<void> {
   console.log(
     `sync-ki-design: drew ${archipelago.drawnFrom.islands.length} islands charted ${archipelago.drawnFrom.charted} as ${Object.keys(archipelago.files).length} archipelago layouts`
   )
-  console.log('Advance the ki-design ref in src/field-guide/index.njk and src/arcadia/index.njk sources to match.')
+  console.log(
+    'Advance the packages-tessera ref in src/field-guide/index.njk and src/arcadia/index.njk sources to match.'
+  )
 }
 
 if (import.meta.main) {
