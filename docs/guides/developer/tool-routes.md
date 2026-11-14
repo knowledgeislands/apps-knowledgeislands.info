@@ -85,4 +85,4 @@ With `--network` it fetches each installer target — a failure means the declar
 
 The whole `/tooling/` section is gone as well. A tool is a project that ships a binary, so it is rendered by the project template like everything else in the directory (ADR-KI-WEBSITE-002). Those routes were published and were not a special case, so unlike the two above they redirect rather than disappear: `/tooling/<slug>` to `/projects/<slug>/`, `/tooling/` to `/projects/`, and the two task-guidance pages filed there to `/docs/ki-agent-backpack/installing-a-backpack/` and `/docs/ki-agent-backpack/repositories/`.
 
-`/harness/bootstrap` is unaffected. It is a repository-bootstrap script owned by the KI Agent Backpack rather than a tool installer, so it is not part of this contract and keeps its own route.
+`/harness/bootstrap` is unaffected. It opens the KI Agent Backpack's repository onboarding guide rather than a tool installer, so it is not part of this contract and keeps its own route.

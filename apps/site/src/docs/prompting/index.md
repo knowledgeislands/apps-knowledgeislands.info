@@ -20,7 +20,7 @@ Filenames carry the model version (`opus-4-8`, `gpt-5-5`, `glm-5-2`) so a new ge
 
 ## The guides
 
-### Anthropic — the tiers the harness runs
+### Anthropic — the tiers the backpack runs on
 
 | Model | Guide | When to reach for it |
 | --- | --- | --- |

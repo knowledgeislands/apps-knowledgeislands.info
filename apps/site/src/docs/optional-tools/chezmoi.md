@@ -9,7 +9,7 @@ sources: original
 
 A machine's configuration is state that outlives any one session and belongs in version control, but most of it sits in dotfiles scattered across a home directory where nothing tracks a change and nothing reverts one. chezmoi puts that configuration in a Git repository and applies it to the machine, which is what makes a machine-level change reviewable rather than remembered.
 
-[chezmoi](https://www.chezmoi.io) manages the dotfiles and machine-level config this guide references — the per-repo `CLAUDE.md` imports, the `headroom-ai` and `mcporter` LaunchAgent plists, and the harness-mode notes chezmoi templates into `CLAUDE.md`. Machine-specific state (which `headroom-ai` mode is active, OAuth client secrets resolved from 1Password) is chezmoi-templated rather than hand-edited, so `chezmoi diff` / `chezmoi apply` is the way to pick up drift rather than editing the rendered files directly.
+[chezmoi](https://www.chezmoi.io) manages the dotfiles and machine-level config this guide references — the per-repo `CLAUDE.md` imports and the `headroom-ai` and `mcporter` LaunchAgent plists. Machine-specific state (which `headroom-ai` mode is active, OAuth client secrets resolved from 1Password) is chezmoi-templated rather than hand-edited, so `chezmoi diff` / `chezmoi apply` is the way to pick up drift rather than editing the rendered files directly.
 
 ```bash
 brew install chezmoi

@@ -8,8 +8,9 @@ eleventyExcludeFromCollections: true
 # whose installer is published at an immutable release tag in its own repository.
 {% for tool in tools %}/install/{{ tool.slug }} {{ tool.installer }} 302
 {% endfor %}
-# Repository bootstrap, owned by the KI Agentic Harness.
-/harness/bootstrap https://raw.githubusercontent.com/knowledgeislands/ki-agentic-harness/main/skills/keystone/ki-bootstrap/scripts/repo-bootstrap.sh 302
+# Repository bootstrap, owned by the KI Agent Backpack. Its script was retired in favour of
+# `ki bootstrap` and `ki repo init`, so the route opens the repository onboarding guide.
+/harness/bootstrap /docs/ki-agent-backpack/onboarding/ 302
 
 # Retired sections.
 #

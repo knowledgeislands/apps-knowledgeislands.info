@@ -20,7 +20,7 @@ headroom-ai runs in one of two modes:
 - **Proxy mode** — `headroom proxy` starts a local proxy on port 8787; Claude Code is pointed at it via `ANTHROPIC_BASE_URL=http://127.0.0.1:8787`.
 - **Wrap mode** — `headroom claude` wraps the Claude CLI directly without a separate proxy process.
 
-The harness CLAUDE.md notes which mode is active in the current machine's chezmoi config.
+The current machine's chezmoi config records which mode is active.
 
 ## Coverage by runtime
 
