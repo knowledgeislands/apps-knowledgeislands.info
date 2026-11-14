@@ -10,7 +10,7 @@ Run the sync against a clean local harness checkout:
 bun run --cwd apps/site sync:diagrams -- --ref 8897008f
 ```
 
-The default checkout is `../ki-agentic-harness` beside this repository. Pass `--from <path>` for another checkout. The ref must be a commit SHA; the script resolves it to forty characters and reads every file with `git show`, independently of the checkout's current revision.
+The default checkout is `../ki-agent-backpack` beside this repository. Pass `--from <path>` for another checkout. The ref must be a commit SHA; the script resolves it to forty characters and reads every file with `git show`, independently of the checkout's current revision.
 
 For every manifest entry with `commit_html = true`, the sync copies its SVG, HTML and receipt byte for byte into `apps/site/src/assets/diagrams/vendored/ki-agentic-harness/`. It replaces the snapshot, removing files no longer selected. The generated `apps/site/src/_data/vendoredDiagrams.json5` records the repository, manifest path, full ref, sync date, and each diagram's type, question, last-checked revision and file names. The twelve diagrams at the pin above retain the harness's `dual` SVG form. These immutable generated assets are excluded from Biome, alongside the vendored design assets; their contents must remain identical to upstream.
 

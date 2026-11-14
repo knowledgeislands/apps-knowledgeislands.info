@@ -45,7 +45,7 @@ export function syncDiagrams(from: string, revision: string, destination = siteR
 
 if (import.meta.main) {
   const args = process.argv.slice(2).filter((arg) => arg !== '--')
-  let from = resolve(repositoryRoot, '../ki-agentic-harness')
+  let from = resolve(repositoryRoot, '../ki-agent-backpack')
   let ref = ''
   for (let i = 0; i < args.length; i++) {
     if (args[i] === '--from' && args[i + 1]) from = resolve(args[++i])

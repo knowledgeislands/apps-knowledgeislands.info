@@ -65,13 +65,13 @@ export const vendoredManifest = (root = siteRoot): VendoredDiagrams =>
 
 /** Installed harnesses work in CI too; generation may explicitly select another installation. */
 export function findDiagramSkill(): string | undefined {
-  const relative = 'skills/governance/ki-diagrams'
+  const relative = 'skills/authoring/ki-diagrams'
   const candidates = [
     process.env.KI_DIAGRAMS_HOME,
     resolve(homedir(), '.agents/skills/ki-diagrams'),
     resolve(homedir(), '.claude/skills/ki-diagrams'),
     resolve(homedir(), '.local/share/ki/harnesses', harnessRepository, relative),
-    resolve(repositoryRoot, '../ki-agentic-harness', relative)
+    resolve(repositoryRoot, '../ki-agent-backpack', relative)
   ]
   return candidates.find((path) => path && existsSync(resolve(path, 'scripts/build-html.ts')))
 }
