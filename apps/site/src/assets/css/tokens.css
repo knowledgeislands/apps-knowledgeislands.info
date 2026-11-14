@@ -1,6 +1,6 @@
 /* Knowledge Islands design tokens.
 
-   The values are the ki-design token build, vendored verbatim under ./ki-design/ (see the header of each
+   The values are the Tessera token build, vendored verbatim under ./ki-design/ (see the header of each
    file for the commit it came from). This file holds only the site's own aliases on top of them, so a token
    refresh replaces ./ki-design/ and never this file.
 

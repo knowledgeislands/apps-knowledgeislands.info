@@ -5,7 +5,7 @@ const site = {
   ogImage: '/assets/images/og-image.png',
   description:
     'Knowledge Islands is a model for building, governing, and evolving knowledge across individuals, teams, and generations — treating knowledge not as a filing problem but as a civilisation question.',
-  // Two groups, after the ki-design site structure: the Voyage is read once, in order; the Atlas is
+  // Two groups, after the Tessera site structure: the Voyage is read once, in order; the Atlas is
   // returned to, to look things up. The bar used to carry three entries (KI-WEBSITE-SITE-037), because
   // six of very unequal weight left a reader unable to tell destinations from bodies of material; the
   // grouping is what lets it carry more without reintroducing that problem.

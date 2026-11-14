@@ -476,7 +476,7 @@ checkStoaWorkbench()
 /**
  * Holds the islands chart on /arcadia/ to the snapshot it draws (GDR-KI-DESIGN-031).
  *
- * The chart is `ki-design`'s renderer run over this site's own snapshot at sync time, so it can fall behind
+ * The chart is Tessera's renderer run over this site's own snapshot at sync time, so it can fall behind
  * the snapshot it sits beside: `sync:arcadia` re-charts the islands and the chart still shows the old ones.
  * The manifest records what it drew, so a stale or hand-edited chart fails here rather than publishing a
  * different set of islands from the list under it.

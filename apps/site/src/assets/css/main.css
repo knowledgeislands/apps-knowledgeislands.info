@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @import "./tokens.css";
 
-/* The Chart dialect of the ki-design system (DESIGN.md 6, 7, 12.2): parchment, mist and navy surfaces
+/* The Chart dialect of the Tessera design system (DESIGN.md 6, 7, 12.2): parchment, mist and navy surfaces
    with hairlines rather than white cards and shadows; Cormorant Garamond at display sizes, Cormorant SC
    for labels, Inter for reading. Values come from tokens.css; this file only composes them.
 
@@ -208,7 +208,7 @@
     color: var(--color-navy);
   }
 
-  /* ─── Line glyphs (ki-design packages/icons, through the inlined sprite) ─── */
+  /* ─── Line glyphs (Tessera packages/tessera-icons, through the inlined sprite) ─── */
 
   .ki-glyph {
     display: inline-block;
@@ -1640,7 +1640,7 @@
     color: var(--night-muted);
   }
 
-  /* The islands chart above the list: ki-design's archipelago drawing of the same snapshot, in two layouts. Its
+  /* The islands chart above the list: Tessera's archipelago drawing of the same snapshot, in two layouts. Its
      colours follow this navy surface through its own token-keyed custom properties; the frame is left out so the
      section shows through. The round cluster is capped where its labels reach reading size, and a phone gets the
      tall layout instead of a shrunken round one. */
@@ -1978,7 +1978,7 @@
     padding-bottom: 0;
   }
 
-  /* The chart's cartouches are vendored from ki-design and drawn at the SVG's scale, so at laptop widths
+  /* The chart's cartouches are vendored from Tessera and drawn at the SVG's scale, so at laptop widths
      the subtitle renders near 10 px. Each line already clears AA (title 12.4:1, subtitle 6.8:1 at worst),
      but the grey subtitle and the translucent panel read faint over the terrain. The panel goes nearly
      opaque and the subtitle takes the stronger night text (about 10:1), on both pages that inline the chart. */
