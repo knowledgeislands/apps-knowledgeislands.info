@@ -42,6 +42,6 @@ Commits follow `ki-git`. If a unit cannot yet be verified, report the checkpoint
 
 ## Cross-repository choreography
 
-- Knowledge Islands Principal, the KI Agent Backpack, `tools-ki`, KI Specifications, the KI Website, the Techne Harness, and `tools-techne` may add a concrete handoff item to one another's Stream or roadmap. The receiving repository owns its priority, plan, and execution.
+- Knowledge Islands Principal, the KI Agent Backpack, `tools-ki`, KI Specifications, the KI Website, the Techne Harness, and `tools-techne` hand work and rollouts to one another as a line in the receiving work's `messages.md`, or State of play's where no work owns it, never as a record in one another's Stream, roadmap, or triage, as Kris set under HANDOFF-AS-MESSAGE on 2026-10-20: "Handoffs are not roadmap items ... A rollout that needs people to make those changes sooner rather than later must go as a message". The receiving repository owns its priority, plan, and execution, and only it captures a record, for work genuinely deferred that it owns.
 - State the need, and link only what may be linked, as `ki-work-roadmap` sets for work another repository must deliver.
 - Prefer independently executable, non-blocking work. Mark an item as blocking only when it is a genuine prerequisite; otherwise let the receiving repository schedule it in its own horizon.
