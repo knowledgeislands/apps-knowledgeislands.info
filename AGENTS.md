@@ -36,14 +36,12 @@ bun run --cwd apps/site verify:provenance -- --network  # report published pages
 
 `ki repo audit` checks this repository against the rubric of whichever backpack `ki` resolves, and a contributor's terminal and CI can resolve different ones. CI links `tools-ki` `main` from source and audits against its canonical backpack pin, `canonicalHarnessRelease` in `src/core/storage/registry.ts`; the job log prints the `KI source commit`, and its `ki bootstrap` step prints the canonical backpack archive digest. Locally, `ki diag --full` shows each backpack under `locals` with `mode: on` when it resolves a moving checkout and `off` when it resolves the verified archive. When CI fails a rule that passes locally, compare the two before changing the repository: a backpack rule newer than the `tools-ki` pin is checker drift, owed to `tools-ki` as a pin bump, not a defect to work around here (`KI-WEBSITE-SITE-041`).
 
-## Progress and commits
+## Commits
 
-- Give concise progress updates at meaningful checkpoints and at least every few minutes during sustained work.
-- Commit only a completed, verified unit of work. Stage explicit paths for that unit and do not combine it with unrelated working-tree changes.
-- If a unit cannot yet be verified, report the checkpoint and leave it uncommitted until its verification is complete.
+Commits follow `ki-git`. If a unit cannot yet be verified, report the checkpoint and leave it uncommitted until its verification is complete.
 
 ## Cross-repository choreography
 
 - Knowledge Islands Principal, the KI Agent Backpack, `tools-ki`, KI Specifications, the KI Website, the Techne Harness, and `tools-techne` may add a concrete handoff item to one another's Stream or roadmap. The receiving repository owns its priority, plan, and execution.
-- A handoff names the originating repository, states the need in plain terms, and says in plain words whether it blocks work there. Link only durable documentation, such as guides, specifications or manifests; never link to or cite another repository's roadmap record or its identifier, because records are pruned and such links break.
+- State the need, and link only what may be linked, as `ki-work-roadmap` sets for work another repository must deliver.
 - Prefer independently executable, non-blocking work. Mark an item as blocking only when it is a genuine prerequisite; otherwise let the receiving repository schedule it in its own horizon.
