@@ -4,51 +4,51 @@ description: Put rationale, accepted behaviour, procedures and future work in th
 permalink: /docs/standards/writing/
 order: 4
 sources:
-  - repository: knowledgeislands/ki-agentic-harness
-    path: skills/governance/ki-authoring/SKILL.md
-    ref: 8897008fcee7b2c71a22115735ed038efccf7f32
+  - repository: knowledgeislands/ki-agent-backpack
+    path: skills/keystone/ki-authoring/SKILL.md
+    ref: 42eeac357f5e953c80c0762397603e2a286672d7
     governs: 'Mechanical authoring tools and judgement-led conventions'
-    reviewed: '2026-10-25'
-  - repository: knowledgeislands/ki-agentic-harness
-    path: skills/governance/ki-authoring/references/standards-markdown.md
-    ref: 8897008fcee7b2c71a22115735ed038efccf7f32
+    reviewed: '2026-11-17'
+  - repository: knowledgeislands/ki-agent-backpack
+    path: skills/keystone/ki-authoring/references/standard-markdown.md
+    ref: 42eeac357f5e953c80c0762397603e2a286672d7
     governs: 'Paragraphs, descriptive links and readable table footnotes'
-    reviewed: '2026-10-25'
-  - repository: knowledgeislands/ki-agentic-harness
-    path: skills/governance/ki-authoring/references/standards-toml.md
-    ref: 8897008fcee7b2c71a22115735ed038efccf7f32
+    reviewed: '2026-11-17'
+  - repository: knowledgeislands/ki-agent-backpack
+    path: skills/keystone/ki-authoring/references/standard-toml.md
+    ref: 42eeac357f5e953c80c0762397603e2a286672d7
     governs: 'TOML presentation without changing configuration meaning'
-    reviewed: '2026-10-25'
-  - repository: knowledgeislands/ki-agentic-harness
-    path: skills/governance/ki-authoring/references/standards-readme.md
-    ref: 8897008fcee7b2c71a22115735ed038efccf7f32
+    reviewed: '2026-11-17'
+  - repository: knowledgeislands/ki-agent-backpack
+    path: skills/keystone/ki-authoring/references/standard-readme.md
+    ref: 42eeac357f5e953c80c0762397603e2a286672d7
     governs: 'Purpose-first entry points and proportional README navigation'
-    reviewed: '2026-10-25'
-  - repository: knowledgeislands/ki-agentic-harness
-    path: skills/governance/ki-authoring/references/standards-knowledge-promotion.md
-    ref: 8897008fcee7b2c71a22115735ed038efccf7f32
+    reviewed: '2026-11-17'
+  - repository: knowledgeislands/ki-agent-backpack
+    path: skills/keystone/ki-authoring/references/standard-knowledge-promotion.md
+    ref: 42eeac357f5e953c80c0762397603e2a286672d7
     governs: 'Placement of durable learning in its governing document'
-    reviewed: '2026-10-25'
-  - repository: knowledgeislands/ki-agentic-harness
-    path: skills/governance/ki-guides/SKILL.md
-    ref: 8897008fcee7b2c71a22115735ed038efccf7f32
+    reviewed: '2026-11-17'
+  - repository: knowledgeislands/ki-agent-backpack
+    path: skills/authoring/ki-guides/SKILL.md
+    ref: 42eeac357f5e953c80c0762397603e2a286672d7
     governs: 'Repository-local guides and their scope'
-    reviewed: '2026-10-25'
-  - repository: knowledgeislands/ki-agentic-harness
-    path: skills/governance/ki-guides/references/standards-guides.md
-    ref: 8897008fcee7b2c71a22115735ed038efccf7f32
+    reviewed: '2026-11-17'
+  - repository: knowledgeislands/ki-agent-backpack
+    path: skills/authoring/ki-guides/references/standards-guides.md
+    ref: 42eeac357f5e953c80c0762397603e2a286672d7
     governs: 'Audience folders, self-contained procedures and supplementary links'
-    reviewed: '2026-10-25'
-  - repository: knowledgeislands/ki-agentic-harness
-    path: skills/governance/ki-specs/SKILL.md
-    ref: 8897008fcee7b2c71a22115735ed038efccf7f32
+    reviewed: '2026-11-17'
+  - repository: knowledgeislands/ki-agent-backpack
+    path: skills/authoring/ki-specs/SKILL.md
+    ref: 42eeac357f5e953c80c0762397603e2a286672d7
     governs: 'Accepted behaviour, quality properties and truthful conformance'
-    reviewed: '2026-10-25'
-  - repository: knowledgeislands/ki-agentic-harness
-    path: skills/governance/ki-specs/references/standards-specs.md
-    ref: 8897008fcee7b2c71a22115735ed038efccf7f32
+    reviewed: '2026-11-17'
+  - repository: knowledgeislands/ki-agent-backpack
+    path: skills/authoring/ki-specs/references/standards-specs.md
+    ref: 42eeac357f5e953c80c0762397603e2a286672d7
     governs: 'Requirement identity, lifecycle fields, gaps and append-only numbering'
-    reviewed: '2026-10-25'
+    reviewed: '2026-11-17'
 ---
 
 # Writing
@@ -73,7 +73,7 @@ A README starts with purpose: what the repository is and what it lets its reader
 
 Repository-local guides live under `docs/guides/`, with a root README that explains the collection and gives readers a route. Each guide sits in an audience folder, such as `user`, `operator` or `developer`. Those names are local choices; the requirement is that the folder identifies its reader.
 
-A guide has one H1 and makes its task, outcome or operating context explicit. It carries the conditions, actions, verification and recovery needed to complete that outcome. Supporting material stays inside the guide collection; external links supplement an answer the prose already gives. A user-facing guide names commands and configuration the user can reach, rather than relying on internal work records for its explanation.
+A guide has one H1 and opens by saying what its reader will be able to do once they have read it, making its task, outcome or operating context explicit. It carries the conditions, actions, verification and recovery needed to complete that outcome. Supporting material stays inside the guide collection; external links supplement an answer the prose already gives. A user-facing guide names commands and configuration the user can reach, rather than relying on internal work records for its explanation.
 
 ### Specifications
 
