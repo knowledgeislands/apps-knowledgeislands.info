@@ -1,6 +1,6 @@
 {
   "$schema": "https://unpkg.com/knip@6/schema.json",
-  "ignore": [".ncurc.cjs", ".claude/skills/**", ".agents/skills/**"],
+  "ignore": [".ncurc.cjs"],
   "ignoreExportsUsedInFile": true,
   "workspaces": {
     ".": {
@@ -8,7 +8,7 @@
     },
     "apps/site": {
       "entry": ["eleventy.config.ts!", "src/_data/**/*.ts!", "scripts/**/*.ts!"],
-      "project": ["**/*.ts", "**/*.css"]
+      "project": ["**/*.ts", "**/*.css", "!vendor/**"]
     }
   },
   "husky": { "config": [".githooks/pre-commit", ".githooks/commit-msg"] }
