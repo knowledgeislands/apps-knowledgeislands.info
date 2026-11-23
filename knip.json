@@ -1,6 +1,6 @@
 {
   "$schema": "https://unpkg.com/knip@6/schema.json",
-  "ignore": [".ncurc.cjs"],
+  "ignore": [".ncurc.cjs", ".claude/skills/**", ".agents/skills/**"],
   "ignoreExportsUsedInFile": true,
   "workspaces": {
     ".": {
