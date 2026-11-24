@@ -5,11 +5,9 @@
   "compatibility_date": "2026-06-19",
   // Eleventy builds to dist/ inside this workspace; the Worker serves it directly.
   "assets": { "directory": "dist" },
-  // Custom domains — apex plus www (www → apex via a Cloudflare redirect rule).
-  "routes": [
-    { "pattern": "knowledgeislands.info", "custom_domain": true },
-    { "pattern": "www.knowledgeislands.info", "custom_domain": true }
-  ],
+  // Custom domain — the apex only. www is a proxied DNS record that a zone
+  // redirect rule sends to the apex; it never reaches the Worker.
+  "routes": [{ "pattern": "knowledgeislands.info", "custom_domain": true }],
   // The custom domains are the only addresses: no workers.dev or preview URL.
   // Both default to on.
   "workers_dev": false,

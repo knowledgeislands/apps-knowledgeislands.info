@@ -15,7 +15,7 @@ Do not configure a Pages deploy directory. The `assets.directory` field in `apps
 
 ## Domains
 
-The canonical domain is `knowledgeislands.info`. The Worker also receives `www.knowledgeislands.info`; configure a permanent Cloudflare redirect from `www` to the canonical apex while preserving the request path and query string.
+The canonical domain is `knowledgeislands.info`, the Worker's only custom domain. `www.knowledgeislands.info` is not a Worker route: a proxied `www` DNS record (`AAAA 100::`) gives it an address, and a zone Single Redirect rule sends it to the apex with a permanent (301) redirect that keeps the request path and query string. Both live in the dashboard, not in `wrangler.jsonc`; a deploy leaves them alone.
 
 Keep the `workers.dev` route disabled for the production service unless an operator explicitly decides to retain it as a diagnostic endpoint.
 
